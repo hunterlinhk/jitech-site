@@ -532,3 +532,101 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
 .hx-floor::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(180deg,transparent 0 22%,rgba(255,255,255,.045) 22% calc(22% + 1px))}
 .hx-floor svg{position:absolute;top:0;opacity:.6;filter:blur(1.2px);
   -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,1),rgba(0,0,0,.35) 55%,rgba(0,0,0,0) 85%);mask-image:linear-gradient(180deg,rgba(0,0,0,1),rgba(0,0,0,.35) 55%,rgba(0,0,0,0) 85%)}
+
+/* ----- v10: shared skies, window screens, glitch contents, perspective floor ----- */
+.hx-sky{position:absolute;overflow:hidden;pointer-events:none}
+.hx-sky .sky-base,.hx-sky .sky-word{position:absolute;inset:0;width:100%;height:100%;display:block}
+.sky-flow{position:absolute;inset:0}
+.sky-flow img{position:absolute;top:0;left:0;width:200%;height:100%;max-width:none;display:block;user-select:none}
+.sky-flow .flow-a{opacity:.6}
+.sky-flow .flow-b{opacity:.38}
+.sky-logo .sky-flow{opacity:.75}
+.sky-big{visibility:hidden;opacity:0}
+.hx.waves-logo .sky-logo .sky-flow img,.hx.waves-big .sky-big .sky-flow img{will-change:transform}
+/* a screen in window mode is just its bezel; the shared sky shows through */
+.mon.win .mon-scr{background:transparent}
+.mon.win .mon-frame{visibility:hidden}
+.hx .mon.win .mon-in::before,.hx.is-off .mon.win .mon-in::before{opacity:1;background:transparent;
+  box-shadow:inset 0 0 0 var(--bez) #0d0e10,inset 0 0 0 calc(var(--bez) + 1px) rgba(255,255,255,.05),0 0 0 calc(var(--gap) + 1.5px) #000}
+.hx.p2 .hx-ui{opacity:0}
+.mon.blk .m-shade{opacity:1!important;transition:opacity .12s}
+
+/* glitch contents: one shared look, a different screen on each monitor */
+.m-show{overflow:hidden;background:#000;font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;line-height:1.08}
+.s-err{display:flex;flex-direction:column;justify-content:space-between;padding:2% 3%;white-space:nowrap;font-weight:600;letter-spacing:.02em}
+.s-err span{display:block}
+.s-bars .bars-roll{position:absolute;left:0;right:0;top:-20%;height:220%}
+.s-bars .bars-top,.s-bars .bars-mid,.s-bars .bars-low{display:flex;width:100%}
+.s-bars .bars-top{height:30%}
+.s-bars .bars-mid{height:4%}
+.s-bars .bars-low{height:11%}
+.s-bars i{flex:1;display:block}
+.s-bars .tear{position:absolute;left:0;right:0;top:0;height:7%;background:linear-gradient(180deg,transparent,rgba(255,255,255,.75) 45%,rgba(0,0,0,.6) 55%,transparent);mix-blend-mode:difference}
+.hx.fx-run .s-bars .bars-roll{animation:barjit .9s steps(1) infinite}
+.hx.fx-run .s-bars .bars-roll.r1{animation-duration:1.15s;animation-delay:-.4s}
+.hx.fx-run .s-bars .bars-roll.r2{animation-duration:.75s;animation-delay:-.2s}
+.hx.fx-run .s-bars .tear{animation:sigband 1.3s linear infinite}
+@keyframes barjit{0%{transform:translateY(0)}12%{transform:translateY(-6%)}15%{transform:translateY(5%)}19%{transform:translateY(0)}
+  41%{transform:translateY(3%)}44%{transform:translateY(-9%)}47%{transform:translateY(0)}68%{transform:translateY(-14%)}71%{transform:translateY(-27%)}
+  74%{transform:translateY(-41%)}77%{transform:translateY(-45.4%)}82%{transform:translateY(-45.4%)}85%{transform:translateY(0)}93%{transform:translateY(4%)}96%{transform:translateY(-2%)}}
+.s-static .snow{position:absolute;inset:0;background:var(--snow,#333) 0 0/120px 75px}
+.s-static .snow::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.35) 0 1px,transparent 1px 3px)}
+.hx.fx-run .s-static .snow{animation:snowjit .25s steps(3) infinite}
+.s-bsod{background:#0000aa;color:#fff;display:flex;align-items:center;justify-content:center}
+.s-bsod .bs9{width:88%;font-size:1em}
+.s-bsod p{margin:0 0 .9em;font-size:.82em;line-height:1.25}
+.s-bsod .bs-h{text-align:center}
+.s-bsod .bs-h span{background:#aaa;color:#0000aa;font-weight:700}
+.s-bsod .bs-c{text-align:center;margin:0}
+.s-bsod2{background:#0078d7;color:#fff;font-family:"Hanken Grotesk Variable","Segoe UI",Arial,sans-serif;display:flex;align-items:center}
+.s-bsod2 .bs10{padding:0 9%}
+.s-bsod2 b{display:block;font-size:3.6em;font-weight:300;line-height:1;margin-bottom:.25em}
+.s-bsod2 p{margin:0 0 .6em;font-size:.78em;line-height:1.3;max-width:34em}
+.s-bsod2 .sc{font-size:.6em;opacity:.85}
+.s-virus{background:#050000}
+.s-virus .vx{position:absolute;inset:0;font-family:Tahoma,Verdana,Arial,sans-serif}
+.vx-banner{position:absolute;left:0;right:0;top:3%;text-align:center;color:#ff2a2a;font:900 1.1em/1 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.08em}
+.hx.fx-run .vx-banner{animation:vxblink .5s steps(1) infinite}
+.vx-d{position:absolute;width:52%;background:#c0c0c0;border:2px solid;border-color:#fff #404040 #404040 #fff;opacity:0;font-size:.7em;color:#000}
+.vx-d b{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(90deg,#000080,#1084d0);color:#fff;padding:.15em .4em;font-weight:700}
+.vx-d b i{font-style:normal;background:#c0c0c0;color:#000;padding:0 .35em;line-height:1.1}
+.vx-d p{display:flex;align-items:center;gap:.5em;margin:0;padding:.55em .5em}
+.vx-d s{flex:none;width:1.3em;height:1.3em;border-radius:50%;background:#e01010;position:relative}
+.vx-d s::before,.vx-d s::after{content:"";position:absolute;left:20%;right:20%;top:45%;height:12%;background:#fff;transform:rotate(45deg)}
+.vx-d s::after{transform:rotate(-45deg)}
+.hx.fx-run .vx-d{animation:vxpop .01s linear forwards;animation-delay:calc(var(--i) * .32s)}
+.vx-bar{position:absolute;left:8%;right:8%;bottom:6%;height:9%;border:1px solid #ff2a2a;color:#ff2a2a;font:700 .6em/1 ui-monospace,Menlo,monospace;display:flex;align-items:center;padding-left:.4em;overflow:hidden}
+.vx-bar span{position:relative;z-index:1}
+.vx-bar i{position:absolute;left:0;top:0;bottom:0;width:0;background:rgba(255,42,42,.35)}
+.hx.fx-run .vx-bar i{animation:vxfill 3.2s linear forwards}
+@keyframes vxpop{to{opacity:1}}
+@keyframes vxblink{50%{opacity:0}}
+@keyframes vxfill{to{width:100%}}
+.s-buffer .spin{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9%;background:#060708}
+.s-buffer .spin i{width:20%;max-width:54px;aspect-ratio:1;border-radius:50%;border:2px solid rgba(255,255,255,.14);border-top-color:rgba(236,241,248,.85)}
+.hx.fx-run .s-buffer .spin i{animation:spin .9s linear infinite}
+.s-buffer .spin b{font:600 clamp(6px,.48vw,9px)/1 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.22em;color:rgba(230,236,245,.5)}
+.s-track{background:#0b0c0f}
+.s-track .trk{position:absolute;left:0;right:0;top:-100%;height:200%;
+  background:repeating-linear-gradient(180deg,#1c1f25 0 3px,#0a0b0d 3px 7px,#2a2e36 7px 8px,#0c0d10 8px 16px,#33373f 16px 17px,#0b0c0e 17px 27px,#16181d 27px 31px,#0a0b0d 31px 44px)}
+.s-track .trk-band{position:absolute;left:0;right:0;top:-30%;height:22%;background:linear-gradient(180deg,rgba(200,210,230,0),rgba(200,210,230,.16) 45%,rgba(255,255,255,.28) 50%,rgba(200,210,230,.16) 55%,rgba(200,210,230,0))}
+.hx.fx-run .s-track .trk{animation:sigroll 1.7s linear infinite}
+.hx.fx-run .s-track .trk-band{animation:sigband 2.3s cubic-bezier(.4,0,.6,1) infinite}
+.s-boot{color:#c8c8c8;padding:4% 5%}
+.s-boot p{margin:0;white-space:nowrap;font-size:.8em;line-height:1.2}
+.s-bsod u,.s-boot u{text-decoration:none}
+.hx.fx-run .s-bsod u,.hx.fx-run .s-boot u{animation:vxblink .8s steps(1) infinite}
+
+/* the floor: tiles and the reflection lie on a plane seen in perspective */
+.hx-floor{background:linear-gradient(180deg,rgba(90,140,215,.2),rgba(90,140,215,0) 40%),linear-gradient(180deg,#0a1120,#020408 85%)}
+.hx-floor::after{display:none}
+.floor-plane,.floor-tiles{position:absolute;top:0;transform-origin:50% 0;transform:perspective(4400px) rotateX(67deg)}
+.floor-tiles{left:-40%;right:-40%;--tile:160px;
+  background:repeating-linear-gradient(90deg,rgba(255,255,255,.07) 0 1px,transparent 1px var(--tile)),
+             repeating-linear-gradient(180deg,rgba(255,255,255,.05) 0 1px,transparent 1px calc(var(--tile) * .7));
+  background-position:50% 0;
+  -webkit-mask-image:linear-gradient(180deg,#000,transparent 92%);mask-image:linear-gradient(180deg,#000,transparent 92%)}
+.floor-plane{-webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.95),rgba(0,0,0,.45) 55%,transparent 92%);mask-image:linear-gradient(180deg,rgba(0,0,0,.95),rgba(0,0,0,.45) 55%,transparent 92%)}
+.hx-floor .floor-plane svg{position:static;width:100%;height:100%;display:block;opacity:.6;filter:blur(1.8px);-webkit-mask-image:none;mask-image:none}
+@media (prefers-reduced-motion:reduce){.hx.fx-run .s-bars .bars-roll,.hx.fx-run .s-bars .tear,.hx.fx-run .s-static .snow,.hx.fx-run .s-track .trk,.hx.fx-run .s-track .trk-band{animation:none}}
+.m-show{isolation:isolate}

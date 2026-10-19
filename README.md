@@ -39,13 +39,20 @@ so a local server is the reliable way to preview.
 ## The homepage sequence
 
 1. **Enter Site:** the black wall spreads out from the button and switched-off monitors appear one by one.
-2. **Clicking a screen** (or waiting 5 s) ripples the monitors on into static, scrambled text, lost signal and buffering.
-3. **About 3 s later**, the screens switch ring by ring, from the outside in, to the logo wall's blue, each ring after an uneven flicker.
-4. **2 s after the wall is blue**, the JIEWEITECH letters slam in.
+2. **Clicking a screen** (or waiting 5 s) switches the monitors on, rippling out from the click. Every screen
+   comes on the same way (an uneven flicker), but each shows something different: full-screen error dumps,
+   90s color bars rolling up and down, static, two kinds of blue screen, an infected computer, a BIOS boot,
+   tracking lines and buffering.
+3. **About 3 s later** the whole wall flickers at once, each screen at its own rhythm. The logo wall settles
+   on the background blue first, then the screens around it settle too.
+4. **2 s after the wall is blue**, the logo wall comes on and the JIEWEITECH letters pop in.
 5. **5 s later**, the cases flip over into the websites, in a wave from the clicked screen (or from the top left).
-6. **Scrolling one step** flips every screen into the full-wall logo; the wall lifts and a glossy floor reflects it.
+6. **Scrolling one step** flips every screen into the full-wall logo. The wall lifts over a glossy floor that
+   reflects it in perspective. Hovering an outer screen there turns it black.
 
-The logo walls' sky drifts slowly. It is a single pre-drawn image moved with GPU transforms, and it pauses when it is off screen.
+Each logo wall's sky is one shared layer behind the monitors, so the picture runs continuously behind the
+bezels. Its water is a seamless strip of soft bands that slides sideways with a GPU transform, and it pauses
+when it is off screen.
 
 ## Accessibility
 

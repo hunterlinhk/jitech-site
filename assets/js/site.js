@@ -229,7 +229,7 @@ var WORK = [
 
   var hx = $("#top"), hxBox = $("#hxBox"), wallDefs = $("#wallDefs");
   var frameLoads = [];
-  var mons = [], grid = null, world = null, layoutKey = "";
+  var mons = [], grid = null, world = null, layoutKey = "", skyLogo = null, skyBig = null, p2Swapped = false;
   /* phase: off -> intro -> waveWait -> wave -> done */
   var phase = "off", introDone = false, lit = false, calm = reduce;
   var introTl = null, waveTl = null, autoTimer = 0, waveTimer = 0, origin = null;
@@ -261,15 +261,14 @@ var WORK = [
       el.setAttribute("tabindex", "0");
       el.setAttribute("aria-label", page.title + " (design concept)");
     } else {
-      content = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-      content.setAttribute("preserveAspectRatio", "none");
+      content = document.createElement("span");   /* logo screens are windows onto the shared sky behind them */
+      el.classList.add("win");
     }
-    if (kind === "logo") scr.insertAdjacentHTML("beforeend", '<div class="m-wave m-logowave"><img alt=""></div>');
     scr.appendChild(content);
     scr.insertAdjacentHTML("beforeend",
       (ui ? '<span class="hx-ui"><i></i><b></b><b></b><b></b></span>' : "") +
       '<span class="m m-static"></span><span class="m m-text"></span><span class="m m-dim"></span>' +
-      '<span class="m m-load"><i></i><b>BUFFERING</b></span><span class="m m-fill"></span>' +
+      '<span class="m m-load"><i></i><b>BUFFERING</b></span><div class="m m-show"></div><span class="m m-fill"></span>' +
       '<div class="m m-big"><div class="m-wave"><img alt=""></div><svg class="m-bigsvg" preserveAspectRatio="none"></svg></div>' +
       '<span class="m-shade"></span><span class="m-off"></span><span class="m-flash"></span><span class="m-glass"></span>');
     inner.appendChild(scr);
@@ -278,7 +277,7 @@ var WORK = [
     var m = { el: el, inner: inner, scr: scr, content: content, kind: kind, page: page, c: c, r: r,
       off: scr.querySelector(".m-off"), flash: scr.querySelector(".m-flash"), stat: scr.querySelector(".m-static"), text: scr.querySelector(".m-text"),
       dim: scr.querySelector(".m-dim"), load: scr.querySelector(".m-load"), fill: scr.querySelector(".m-fill"), big: scr.querySelector(".m-big"),
-      bigSvg: scr.querySelector(".m-bigsvg"), bigImg: scr.querySelector(".m-big img"), waveImg: kind === "logo" ? scr.querySelector(".m-logowave img") : null, mode: null };
+      bigSvg: scr.querySelector(".m-bigsvg"), bigImg: scr.querySelector(".m-big img"), show: scr.querySelector(".m-show"), mode: null };
     gsap.set(inner, { transformPerspective: 900 });
     var act = function () {
       if (phase === "off") powerOn(m, false);
@@ -314,6 +313,8 @@ var WORK = [
         grid.appendChild(m.el); mons.push(m);
       }
     }
+    skyLogo = makeSky("sky-logo"); skyBig = makeSky("sky-big");
+    world.appendChild(skyLogo); world.appendChild(skyBig);
     world.appendChild(grid);
     hxBox.appendChild(world);
     layoutGrid();
@@ -367,9 +368,10 @@ var WORK = [
     return { x0: x0, y0: y0, W: Math.max(1, x1 - x0), H: Math.max(1, y1 - y0), rects: rects };
   }
 
-  /* ---------- the moving sky behind the logo ----------
-     The waves are drawn once into an image; each screen shows its slice of that image and the slices
-     drift together with a GPU-only transform, so the movement costs almost nothing. */
+  /* ---------- the sky behind the logo ----------
+     Each logo wall is one shared layer sitting behind the monitors, and the screens are windows onto it,
+     so the picture runs continuously behind the bezels. The water is a seamless strip of soft bands that
+     slides sideways with a single GPU transform, so it flows without any jitter between screens. */
   var waveUrls = {};
   function waveUrl(kind) {
     if (waveUrls[kind]) return waveUrls[kind];
@@ -388,18 +390,61 @@ var WORK = [
     waveUrls[kind] = URL.createObjectURL(new Blob([svg], { type: "image/svg+xml" }));
     return waveUrls[kind];
   }
-  var WAVE_PAD = 0.05;   /* the image is a little larger than the wall so it can drift */
+  /* soft water bands, two identical periods wide, so sliding by one period loops seamlessly */
+  function flowUrl(kind, v) {
+    var key = "flow-" + kind + v;
+    if (waveUrls[key]) return waveUrls[key];
+    var seed = (kind === "big" ? 11 : 3) + v * 7;
+    var rnd = function () { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+    var path = function (y, amp, k, ph) {
+      var d = "";
+      for (var x = -200; x <= 1800; x += 20) {
+        var a = x / 800 * Math.PI * 2;
+        d += (x === -200 ? "M" : " L") + x + " " + (y + amp * Math.sin(a * k + ph) + amp * 0.35 * Math.sin(a * (k + 1) + ph * 1.7)).toFixed(1);
+      }
+      return d;
+    };
+    var out = "", n = kind === "big" ? 5 : 4;
+    for (var i = 0; i < n; i++) {
+      var y = 40 + (i + rnd() * 0.6) * (320 / n), amp = 14 + rnd() * 26, k = 1 + ((rnd() * 2) | 0), ph = rnd() * 6.28;
+      out += '<path d="' + path(y, amp, k, ph) + '" stroke="#fff" stroke-opacity="' + (0.2 + rnd() * 0.2).toFixed(2) + '" stroke-width="' + (18 + rnd() * 26).toFixed(0) + '" fill="none" filter="url(#fb)"/>';
+      out += '<path d="' + path(y + 6, amp, k, ph) + '" stroke="#fff" stroke-opacity="' + (0.4 + rnd() * 0.3).toFixed(2) + '" stroke-width="1.6" fill="none" filter="url(#fs)"/>';
+    }
+    var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 400" width="2400" height="600" preserveAspectRatio="none"><defs>' +
+      '<filter id="fb" x="-5%" y="-50%" width="110%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>' +
+      '<filter id="fs" x="-5%" y="-50%" width="110%" height="200%"><feGaussianBlur stdDeviation="1.2"/></filter></defs>' + out + "</svg>";
+    waveUrls[key] = URL.createObjectURL(new Blob([svg], { type: "image/svg+xml" }));
+    return waveUrls[key];
+  }
+  var WAVE_PAD = 0;
   function placeWave(img, b, U, kind) {
-    var px = U.W * WAVE_PAD, py = U.H * WAVE_PAD;
     img.src = waveUrl(kind);
-    img.style.width = (U.W + 2 * px) + "px"; img.style.height = (U.H + 2 * py) + "px";
-    img.style.left = (-(b.left - U.x0) - px) + "px"; img.style.top = (-(b.top - U.y0) - py) + "px";
+    img.style.width = U.W + "px"; img.style.height = U.H + "px";
+    img.style.left = (-(b.left - U.x0)) + "px"; img.style.top = (-(b.top - U.y0)) + "px";
+  }
+  function makeSky(cls) {
+    var d = document.createElement("div");
+    d.className = "hx-sky " + cls;
+    d.setAttribute("aria-hidden", "true");
+    d.innerHTML = '<img class="sky-base" alt=""><div class="sky-flow"><img class="flow-a" alt=""><img class="flow-b" alt=""></div><svg class="sky-word" preserveAspectRatio="none"></svg>';
+    return d;
+  }
+  function placeSky(el, R, G, kind, sym) {
+    el.style.left = (R.x0 - G.left) + "px"; el.style.top = (R.y0 - G.top) + "px";
+    el.style.width = R.W + "px"; el.style.height = R.H + "px";
+    el.querySelector(".sky-base").src = waveUrl(kind);
+    el.querySelector(".flow-a").src = flowUrl(kind, 1);
+    el.querySelector(".flow-b").src = flowUrl(kind, 2);
+    var svg = el.querySelector(".sky-word");
+    svg.setAttribute("viewBox", "0 0 " + R.W + " " + R.H);
+    svg.innerHTML = '<use href="#' + sym + '" width="' + R.W + '" height="' + R.H + '"/>';
   }
 
   function layoutGrid() {
     if (!grid) return;
     var savedBox = hxBox.style.transform; hxBox.style.transform = "none";
-    /* the logo wall's letters (the sky is the image layer underneath) */
+    var G = grid.getBoundingClientRect();
+    /* the logo wall's letters */
     var lg = logos(), U = union(lg), W = U.W, H = U.H;
     var cap = Math.min(0.395 * H, 0.2 * W), fs = cap / 0.727;
     var adv = measureAdvances(fs), N = adv.reduce(function (a, b) { return a + b; }, 0);
@@ -418,8 +463,8 @@ var WORK = [
       bigText = '<text x="' + (BW - tl1) / 2 + '" y="' + yA + '" textLength="' + tl1 + '" lengthAdjust="spacingAndGlyphs" ' + FONT_ATTR + ' font-size="' + tfs + '" fill="#050505">JIEWEI</text>' +
         '<text x="' + (BW - tl1) / 2 + '" y="' + yB + '" textLength="' + tl1 + '" lengthAdjust="spacingAndGlyphs" ' + FONT_ATTR + ' font-size="' + tfs + '" fill="#050505">TECH</text>';
     }
-    /* the reflection on the floor: the big wall upside down, with its bezels */
-    var G = grid.getBoundingClientRect(), bezels = "";
+    /* what the floor reflects: the big wall with its bezels */
+    var bezels = "";
     mons.forEach(function (m, i) {
       var b = A.rects[i];
       bezels += '<rect x="' + (b.left - G.left) + '" y="' + (b.top - G.top) + '" width="' + b.width + '" height="' + b.height + '"/>';
@@ -427,19 +472,16 @@ var WORK = [
     wallDefs.innerHTML =
       '<symbol id="wallArt2" viewBox="0 0 ' + W + " " + H + '" overflow="hidden">' + glyphs + "</symbol>" +
       '<symbol id="wallBig" viewBox="0 0 ' + BW + " " + BH + '" overflow="hidden">' + bigText + "</symbol>" +
-      '<symbol id="wallRefl" viewBox="0 0 ' + G.width + " " + G.height + '"><rect width="' + G.width + '" height="' + G.height + '" fill="#000"/>' +
+      '<symbol id="wallRefl" viewBox="0 0 ' + G.width + " " + G.height + '">' +
         '<clipPath id="reflClip">' + bezels + '</clipPath>' +
         '<g clip-path="url(#reflClip)"><image href="' + waveUrl("big") + '" x="' + (A.x0 - G.left) + '" y="' + (A.y0 - G.top) + '" width="' + BW + '" height="' + BH + '" preserveAspectRatio="none"/>' +
         '<g transform="translate(' + (A.x0 - G.left) + "," + (A.y0 - G.top) + ')">' + bigText + "</g></g></symbol>";
     writeLetters();
-    lg.forEach(function (m, i) {
-      var b = U.rects[i];
-      m.content.setAttribute("viewBox", (b.left - U.x0) + " " + (b.top - U.y0) + " " + b.width + " " + b.height);
-      m.content.innerHTML = '<use href="#wallArt2" width="' + W + '" height="' + H + '"/>';
-      placeWave(m.waveImg, b, U, "logo");
-    });
+    placeSky(skyLogo, U, G, "logo", "wallArt2");
+    placeSky(skyBig, A, G, "big", "wallBig");
     mons.forEach(function (m, i) {
       var b = A.rects[i];
+      /* each screen also keeps a still copy of its slice of the big wall, shown while it flips */
       m.bigSvg.setAttribute("viewBox", (b.left - A.x0) + " " + (b.top - A.y0) + " " + b.width + " " + b.height);
       m.bigSvg.innerHTML = '<use href="#wallBig" width="' + BW + '" height="' + BH + '"/>';
       placeWave(m.bigImg, b, A, "big");
@@ -454,44 +496,45 @@ var WORK = [
     hxBox.style.transform = savedBox;
   }
 
-  /* page 2: the wall lifts a little and a glossy floor appears underneath, like the reference */
-  var floor = $("#hxFloor"), P2_SCALE = 0.8;
+  /* page 2: the wall lifts and a glossy floor appears; the reflection lies on the floor in perspective */
+  var floor = $("#hxFloor"), P2_SCALE = 0.76;
+  floor.innerHTML = '<div class="floor-tiles"></div><div class="floor-plane"><svg preserveAspectRatio="none"></svg></div>';
   function layoutFloor() {
     if (!world || !world._G) return;
     var G = world._G, box = hxBox.getBoundingClientRect(), sticky = floor.parentNode.getBoundingClientRect();
     var top = (box.top - sticky.top) + box.height * P2_SCALE;
     floor.style.top = top + "px";
-    var svg = floor.querySelector("svg");
-    /* a floor reflection is foreshortened, so the mirrored wall is squashed to fit the floor */
-    var w = G.width * P2_SCALE, h = Math.max(40, (sticky.bottom - sticky.top - top)) * 1.25;
+    var w = G.width * P2_SCALE, h = G.height * P2_SCALE;
+    var plane = floor.querySelector(".floor-plane"), tiles = floor.querySelector(".floor-tiles"), svg = plane.querySelector("svg");
+    plane.style.width = w + "px"; plane.style.height = h + "px"; plane.style.left = ((sticky.width - w) / 2) + "px";
+    tiles.style.height = h + "px";
+    tiles.style.setProperty("--tile", (w / 8) + "px");
     svg.setAttribute("viewBox", "0 0 " + G.width + " " + G.height);
-    svg.style.width = w + "px"; svg.style.height = h + "px";
-    svg.style.left = ((sticky.width - w) / 2) + "px";
     svg.innerHTML = '<g transform="translate(0,' + G.height + ') scale(1,-1)"><use href="#wallRefl" width="' + G.width + '" height="' + G.height + '"/></g>';
   }
 
-  /* the drift: one slow tween per sky, running only while that sky can be seen */
-  var waveLogoTw = null, waveBigTw = null, heroVisible = true;
+  /* the flow: two strips per sky, sliding at different speeds; only the visible sky runs */
+  var flows = { logo: null, big: null }, heroVisible = true;
+  function makeFlow(sky) {
+    var a = sky.querySelector(".flow-a"), b = sky.querySelector(".flow-b");
+    return [
+      gsap.fromTo(a, { xPercent: 0 }, { xPercent: -50, duration: 18, ease: "none", repeat: -1, paused: true, force3D: true }),
+      gsap.fromTo(b, { xPercent: -50 }, { xPercent: 0, duration: 29, ease: "none", repeat: -1, paused: true, force3D: true })
+    ];
+  }
   function startWaves() {
-    if (reduce || waveLogoTw || !grid) return;
-    var lgImgs = logos().map(function (m) { return m.waveImg; }), bigImgs = mons.map(function (m) { return m.bigImg; });
-    var U = union(logos()), A = world._A || union(mons);
-    var mk = function (imgs, W, H) {
-      return gsap.timeline({ repeat: -1, yoyo: true, paused: true, defaults: { ease: "sine.inOut" } })
-        .fromTo(imgs, { x: W * WAVE_PAD * 0.8, y: -H * WAVE_PAD * 0.25 }, { x: -W * WAVE_PAD * 0.8, y: H * WAVE_PAD * 0.25, duration: 11, force3D: true });
-    };
-    waveLogoTw = mk(lgImgs, U.W, U.H);
-    waveBigTw = mk(bigImgs, A.W, A.H);
+    if (reduce || flows.logo || !grid) return;
+    flows.logo = makeFlow(skyLogo);
+    flows.big = makeFlow(skyBig);
     syncWaves();
   }
   function stopWaves() {
-    if (waveLogoTw) { waveLogoTw.kill(); waveLogoTw = null; }
-    if (waveBigTw) { waveBigTw.kill(); waveBigTw = null; }
+    ["logo", "big"].forEach(function (k) { if (flows[k]) { flows[k].forEach(function (t) { t.kill(); }); flows[k] = null; } });
   }
   function syncWaves() {
-    if (!waveLogoTw) return;
-    var showBig = onPage2 && heroVisible, showLogo = !onPage2 && heroVisible;
-    waveLogoTw.paused(!showLogo); waveBigTw.paused(!showBig);
+    var showBig = onPage2 && p2Swapped && heroVisible, showLogo = !onPage2 && heroVisible;
+    if (flows.logo) flows.logo.forEach(function (t) { t.paused(!showLogo); });
+    if (flows.big) flows.big.forEach(function (t) { t.paused(!showBig); });
     hx.classList.toggle("waves-big", showBig); hx.classList.toggle("waves-logo", showLogo);
   }
   if ("IntersectionObserver" in window) {
@@ -502,7 +545,7 @@ var WORK = [
 
   /* ---------- states ---------- */
   function setFramed(m, on) { m.el.classList.toggle("framed", on); }
-  function hideModes(m) { gsap.set([m.stat, m.text, m.dim, m.load, m.flash, m.fill, m.big], { opacity: 0 }); }
+  function hideModes(m) { gsap.set([m.stat, m.text, m.dim, m.load, m.show, m.flash, m.fill, m.big], { opacity: 0 }); }
   function resetOff(m, op) { m.off.classList.remove("mk-iris", "mk-blinds"); gsap.set(m.off, { opacity: op, clipPath: "none", "--r": "0%", "--b": "0px" }); gsap.set(m.scr, { x: 0 }); gsap.set(m.inner, { rotationY: 0, rotationX: 0, scale: 1 }); }
   function allOff() {
     hx.classList.add("is-off"); hx.classList.remove("is-lit");
@@ -517,80 +560,126 @@ var WORK = [
     lit = true;
   }
 
-  /* ---------- scrambled text ---------- */
+  /* ---------- what each screen shows while the wall wakes up ----------
+     Every screen switches on the same way (an uneven flicker), but each one shows something different. */
   var GLYPHS = "!<>-_\\/[]{}=+*^?#%&$@0123456789ABCDEFXZ";
-  var PHRASES = ["NO SIGNAL", "SIGNAL LOST", "JIEWEITECH", "SYNC 24 DISPLAYS", "LOADING PAGE", "RENDER://WALL", "0x7F3A 0x00C1",
-    "CHANNEL 03", "INPUT HDMI-1", "BUFFER 98%", "DESIGN // TECH", "REBOOTING", "TRACKING ERROR", "STANDBY", "CONNECTING", "RETRY 03"];
   function scramble(t, res) {
     var s = "";
     for (var i = 0; i < t.length; i++) s += (t[i] === " " || Math.random() < res) ? t[i] : GLYPHS[(Math.random() * GLYPHS.length) | 0];
     return s;
   }
+  function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = (Math.random() * (i + 1)) | 0, t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function pick(a) { return a[(Math.random() * a.length) | 0]; }
+  function hex(n) { var s = ""; for (var i = 0; i < n; i++) s += ("0" + ((Math.random() * 256) | 0).toString(16)).slice(-2).toUpperCase() + " "; return s; }
+
+  var ERRORS = ["FATAL ERROR 0x0000007B", "KERNEL PANIC - NOT SYNCING", "SEGMENTATION FAULT (CORE DUMPED)", "STACK OVERFLOW AT 0x7FFE0304",
+    "PAGE_FAULT_IN_NONPAGED_AREA", "*** STOP: 0x00000050", "DISK READ ERROR", "UNHANDLED EXCEPTION 0xC0000005", "MEMORY_MANAGEMENT",
+    "CHECKSUM MISMATCH IN SECTOR 0x3F", "I/O ERROR ON DEVICE 0", "SIGNAL 11 RECEIVED", "BUFFER OVERRUN DETECTED", "ACCESS VIOLATION",
+    "WATCHDOG TIMEOUT", "NULL POINTER DEREFERENCE", "DMA TRANSFER FAILED", "INVALID OPCODE AT 0028:C0011E36", "CRC ERROR", "BAD SYSTEM CONFIG"];
+  var TYPES = ["err", "bars", "static", "bsod", "bsod2", "virus", "buffer", "track", "boot"];
+
+  var SHOW = {
+    err: function (m, h) {
+      var n = 26, color = pick(["#e8edf5", "#ff4b3e", "#ffb000", "#7dff9a"]), lines = [];
+      for (var i = 0; i < n; i++) lines.push(i % 3 === 2 ? "0x" + ((Math.random() * 0xffffff) | 0).toString(16).toUpperCase() + "  " + hex(18) : pick(ERRORS) + "  " + pick(ERRORS) + "  " + hex(6));
+      m.show.style.fontSize = (h / (n + 1)) + "px";
+      m.show.style.color = color;
+      m.show.innerHTML = lines.map(function (l) { return "<span>" + l + "</span>"; }).join("");
+      m._lines = [].slice.call(m.show.children);
+      m._lines.forEach(function (s, i) { s._t = lines[i]; });
+    },
+    bars: function () {
+      var top = ["#fff", "#ff0", "#0ff", "#0f0", "#f0f", "#f00", "#00f"].map(function (c) { return '<i style="background:' + c + '"></i>'; }).join("");
+      var mid = ["#00f", "#111", "#f0f", "#111", "#0ff", "#111", "#fff"].map(function (c) { return '<i style="background:' + c + '"></i>'; }).join("");
+      m_bars_id = (m_bars_id + 1) % 3;
+      return '<div class="bars-roll r' + m_bars_id + '"><div class="bars-top">' + top + '</div><div class="bars-mid">' + mid + '</div>' +
+        '<div class="bars-low"><i style="background:#0a2a6e"></i><i style="background:#fff"></i><i style="background:#3a0a6e"></i><i style="background:#111"></i><i style="background:#000"></i><i style="background:#1a1a1a"></i></div>' +
+        '<div class="bars-top">' + top + '</div></div><b class="tear"></b>';
+    },
+    "static": function () { return '<span class="snow"></span>'; },
+    bsod: function (m, h) {
+      m.show.style.fontSize = (h / 15) + "px";
+      return '<div class="bs9"><p class="bs-h"><span>&nbsp;SYSTEM&nbsp;</span></p>' +
+        '<p>A fatal exception 0E has occurred at 0028:C0011E36 in VXD VMM(01) + 00010E36. The current application will be terminated.</p>' +
+        '<p>*&nbsp; Press any key to terminate the current application.<br>*&nbsp; Press CTRL+ALT+DEL again to restart your computer. You will lose any unsaved information in all applications.</p>' +
+        '<p class="bs-c">Press any key to continue <u>_</u></p></div>';
+    },
+    bsod2: function (m, h) {
+      m.show.style.fontSize = (h / 13) + "px";
+      m._pc0 = (Math.random() * 40) | 0;
+      return '<div class="bs10"><b>:(</b><p>Your system ran into a problem and needs to restart. We\'re collecting some error info, and then we\'ll restart for you.</p>' +
+        '<p><span class="pc">' + m._pc0 + '</span>% complete</p><p class="sc">Stop code: ' + pick(["CRITICAL_PROCESS_DIED", "SYSTEM_SERVICE_EXCEPTION", "IRQL_NOT_LESS_OR_EQUAL", "KERNEL_DATA_INPAGE_ERROR"]) + '</p></div>';
+    },
+    virus: function (m, h) {
+      m.show.style.fontSize = (h / 18) + "px";
+      var msgs = ["TROJAN.GEN detected", "Your files are being encrypted", "WORM.32 found in memory", "Access denied", "System32 corrupted", "Firewall disabled"];
+      var d = "";
+      for (var i = 0; i < 6; i++) {
+        d += '<div class="vx-d" style="--i:' + i + ';left:' + (6 + i * 7) + '%;top:' + (16 + i * 9) + '%"><b>Error<i>x</i></b><p><s></s>' + msgs[(i + ((Math.random() * 6) | 0)) % 6] + '</p></div>';
+      }
+      return '<div class="vx"><div class="vx-banner">!! SYSTEM INFECTED !!</div>' + d + '<div class="vx-bar"><span>DELETING FILES</span><i></i></div></div>';
+    },
+    buffer: function () { return '<span class="spin"><i></i><b>BUFFERING</b></span>'; },
+    track: function () { return '<span class="trk"></span><span class="trk-band"></span>'; },
+    boot: function (m, h) {
+      m.show.style.fontSize = (h / 14) + "px";
+      return '<div class="boot"><p>JW-BIOS v4.51 &nbsp;(C) 1994</p><p>CPU : 486DX2-66</p><p>Memory Test : <span class="mem">0K</span></p><p>&nbsp;</p>' +
+        '<p>Detecting Primary Master ... None</p><p>Detecting Primary Slave &nbsp;... None</p><p>&nbsp;</p><p>Boot failure.</p><p>Insert system disk and press Enter<u>_</u></p></div>';
+    }
+  };
+  var m_bars_id = 0;
+  function buildShow(m) {
+    var h = m.scr.clientHeight || 120;
+    m.show.removeAttribute("style");
+    m._lines = null; m._mem = null; m._pc = null;
+    m.show.className = "m m-show s-" + m.mode;
+    var html2 = SHOW[m.mode](m, h);
+    if (html2 !== undefined) m.show.innerHTML = html2;
+    m._mem = m.show.querySelector(".mem");
+    m._pc = m.show.querySelector(".pc");
+  }
+  function assignModes() {
+    var deck = [];
+    while (deck.length < mons.length) deck = deck.concat(shuffle(TYPES.slice()));
+    mons.forEach(function (m, i) { m.mode = deck[i]; buildShow(m); });
+  }
+  function modeEl(m) { return m.show; }
+
   var ticker = 0;
   function startTicker() {
-    var texts = mons.filter(function (m) { return m.mode === "text"; });
-    texts.forEach(function (m, i) {
-      m.text.innerHTML = ""; m._lines = [];
-      for (var k = 0; k < 7; k++) { var s = document.createElement("span"); s._t = PHRASES[(i * 3 + k) % PHRASES.length]; m.text.appendChild(s); m._lines.push(s); }
-    });
     stopTicker();
+    var t0 = performance.now();
     ticker = setInterval(function () {
-      texts.forEach(function (m) { m._lines.forEach(function (s) { s.textContent = scramble(s._t, Math.random() * 0.7); s.style.opacity = Math.random() < 0.12 ? 0.2 : 1; }); });
+      var el = (performance.now() - t0) / 1000;
+      mons.forEach(function (m) {
+        if (m._lines) m._lines.forEach(function (s) { if (Math.random() < 0.3) s.textContent = scramble(s._t, 0.25 + Math.random() * 0.6); });
+        if (m._mem) { var k = Math.min(16384, Math.round(el * 5200 / 64) * 64); m._mem.textContent = k + "K" + (k >= 16384 ? " OK" : ""); }
+        if (m._pc) m._pc.textContent = Math.min(100, Math.floor(m._pc0 + el * 9));
+      });
     }, 90);
   }
   function stopTicker() { if (ticker) { clearInterval(ticker); ticker = 0; } }
-  function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = (Math.random() * (i + 1)) | 0, t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
-  function assignModes() {
-    var kinds = ["static", "text", "dim", "load"], weights = [0.34, 0.26, 0.2, 0.2];
-    shuffle(mons.map(function (m, i) { return i; })).forEach(function (idx, k) {
-      var f = k / mons.length, acc = 0, pick = kinds[0];
-      for (var w = 0; w < kinds.length; w++) { acc += weights[w]; if (f < acc) { pick = kinds[w]; break; } }
-      mons[idx].mode = pick;
-    });
-  }
-  function modeEl(m) { return { "static": m.stat, text: m.text, dim: m.dim, load: m.load }[m.mode]; }
 
-  /* ---------- nine ways a screen can switch on ---------- */
-  var VARIANTS = ["crt", "wipeDown", "flicker", "iris", "fade", "wipeRight", "blinds", "glitch", "wipeUp"];
-  function variantDeck(n) { var d = []; while (d.length < n) d = d.concat(shuffle(VARIANTS.slice())); return d; }
-  function reveal(T, m, s, v) {
-    var off = m.off;
-    switch (v) {
-      case "crt":
-        T.set(m.flash, { opacity: 1, scaleY: 0.02, scaleX: 0.15 }, s);
-        T.to(m.flash, { scaleX: 1, duration: 0.12, ease: "power2.out" }, s);
-        T.set(off, { opacity: 0 }, s + 0.14);
-        T.to(m.flash, { scaleY: 1, opacity: 0, duration: 0.38, ease: "power2.out" }, s + 0.12);
-        return 0.5;
-      case "wipeDown":
-        T.fromTo(off, { clipPath: "inset(0% 0% 0% 0%)" }, { clipPath: "inset(100% 0% 0% 0%)", duration: 0.5, ease: "power2.inOut", immediateRender: false }, s);
-        T.set(off, { opacity: 0, clipPath: "none" }, s + 0.5); return 0.5;
-      case "wipeUp":
-        T.fromTo(off, { clipPath: "inset(0% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 100% 0%)", duration: 0.5, ease: "power2.inOut", immediateRender: false }, s);
-        T.set(off, { opacity: 0, clipPath: "none" }, s + 0.5); return 0.5;
-      case "wipeRight":
-        T.fromTo(off, { clipPath: "inset(0% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 100%)", duration: 0.45, ease: "power3.inOut", immediateRender: false }, s);
-        T.set(off, { opacity: 0, clipPath: "none" }, s + 0.45); return 0.45;
-      case "flicker":
-        T.to(off, { keyframes: [{ opacity: 0.4, duration: 0.07 }, { opacity: 0.85, duration: 0.09 }, { opacity: 0.25, duration: 0.07 }, { opacity: 0.6, duration: 0.1 }, { opacity: 0, duration: 0.25 }] }, s);
-        return 0.58;
-      case "iris":
-        T.call(function () { off.classList.add("mk-iris"); }, null, s);
-        T.fromTo(off, { "--r": "0%" }, { "--r": "85%", duration: 0.55, ease: "power2.out", immediateRender: false }, s);
-        T.call(function () { off.classList.remove("mk-iris"); }, null, s + 0.56);
-        T.set(off, { opacity: 0, "--r": "0%" }, s + 0.56); return 0.56;
-      case "blinds":
-        T.call(function () { off.classList.add("mk-blinds"); }, null, s);
-        T.fromTo(off, { "--b": "0px" }, { "--b": "10px", duration: 0.5, ease: "power1.inOut", immediateRender: false }, s);
-        T.call(function () { off.classList.remove("mk-blinds"); }, null, s + 0.51);
-        T.set(off, { opacity: 0, "--b": "0px" }, s + 0.51); return 0.51;
-      case "glitch":
-        T.to(off, { keyframes: [{ opacity: 0, duration: 0.04 }, { opacity: 0.75, duration: 0.05 }, { opacity: 0, duration: 0.05 }, { opacity: 0.4, duration: 0.04 }, { opacity: 0, duration: 0.06 }] }, s);
-        T.to(m.scr, { keyframes: [{ x: -6, duration: 0.04 }, { x: 5, duration: 0.04 }, { x: -3, duration: 0.05 }, { x: 0, duration: 0.07 }] }, s);
-        return 0.25;
-      default:
-        T.to(off, { opacity: 0, duration: 0.5, ease: "power1.out" }, s); return 0.5;
+  /* the one way every screen comes on: an uneven flicker, then on */
+  function flickerOn(T, m, s) {
+    var t = s, len = 0.3 + Math.random() * 0.35, j = 0;
+    while (t < s + len) {
+      T.set(m.off, { opacity: j % 2 ? 1 : pick([0, 0.15, 0.4, 0]) }, t);
+      t += 0.03 + Math.random() * 0.09; j++;
     }
+    T.set(m.off, { opacity: 0 }, t);
+    return t - s;
+  }
+  /* flicker at the screen's own rhythm until a given time, then settle on the logo wall's blue */
+  function flickerToBlue(T, m, from, until) {
+    var period = 0.09 + Math.random() * 0.22, duty = 0.3 + Math.random() * 0.4, t = from + Math.random() * 0.1, on = true;
+    while (t < until) {
+      T.set(m.fill, { opacity: on ? 1 : 0 }, t);
+      t += (on ? period * duty : period * (1 - duty)) * (0.7 + Math.random() * 0.6);
+      on = !on;
+    }
+    T.set(m.fill, { opacity: 1 }, until);
+    T.set(m.show, { opacity: 0 }, until);
   }
 
   /* a monitor flips over like a page: black on the way out, the new face on the way back */
@@ -665,73 +754,35 @@ var WORK = [
       return;
     }
 
-    /* 1. Every screen switches on in its own way, rippling out from the click, into its own state. */
+    /* 1. Every screen comes on the same way, with an uneven flicker, rippling out from the click,
+          and each one shows something different. */
     hx.classList.add("fx-run");
     assignModes();
     startTicker();
-    var deck = variantDeck(mons.length);
-    mons.forEach(function (x, i) {
-      var s = dist(x, m) * 0.11 + Math.random() * 0.06;
-      T.set(modeEl(x), { opacity: 1 }, Math.max(0, s - 0.01));
-      reveal(T, x, s, deck[i]);
+    mons.forEach(function (x) {
+      var s = dist(x, m) * 0.09 + Math.random() * 0.05;
+      T.set(x.show, { opacity: 1 }, Math.max(0, s - 0.01));
+      flickerOn(T, x, s);
     });
-    /* 2. From the outer edge in, one ring a second: each ring flickers unevenly, then switches
-          straight to the logo wall's blue. */
-    var rings = ringsOf(mons), tRing = 3.0, ringGap = 1.0, flickLen = 0.55;
-    rings.forEach(function (ring, k) {
-      var s0 = tRing + k * ringGap;
-      ring.forEach(function (x) {
-        var t = s0 + Math.random() * 0.12, steps = [], n = 4 + ((Math.random() * 4) | 0), used = 0;
-        for (var j = 0; j < n; j++) {
-          var d = 0.03 + Math.random() * 0.1;
-          if (used + d > flickLen - 0.04) break;
-          used += d;
-          steps.push({ opacity: j % 2 ? 0 : [1, 0.85, 0.55, 1][(Math.random() * 4) | 0], duration: d, ease: "none" });
-        }
-        steps.push({ opacity: 0, duration: 0.03, ease: "none" });
-        T.to(x.fill, { keyframes: steps }, t);
-        T.set(x.fill, { opacity: 1 }, s0 + flickLen + 0.06);
-        T.set([x.stat, x.text, x.dim, x.load, x.flash], { opacity: 0 }, s0 + flickLen + 0.06);
-      });
+    /* 2. Then the whole wall flickers together, every screen at its own rhythm. The logo wall settles
+          on the blue first, then the screens around it settle too. */
+    var tFlick = 3.0, logoSettle = tFlick + 1.3, edgeSettle = tFlick + 2.4, allBlue = 0;
+    mons.forEach(function (x) {
+      var until = x.kind === "logo" ? logoSettle + Math.random() * 0.12 : edgeSettle + Math.random() * 0.3;
+      flickerToBlue(T, x, tFlick, until);
+      allBlue = Math.max(allBlue, until);
     });
-    var allBlue = tRing + (rings.length - 1) * ringGap + flickLen + 0.06;
-    T.call(function () { stopTicker(); hx.classList.remove("fx-run"); mons.forEach(function (x) { gsap.set(x.scr, { x: 0 }); }); }, null, allBlue);
+    T.call(function () { stopTicker(); hx.classList.remove("fx-run"); }, null, allBlue + 0.05);
 
-    /* 3. Two seconds after the whole wall has turned blue, the logo arrives: the letters slam
-          into the wall one after another, each impact jolts the wall, and the last one lands
-          with a flash and a heavier shake. */
+    /* 3. Two seconds after the whole wall is blue, the logo wall comes on and the letters pop in. */
     var tLogo = allBlue + 2;
     T.call(armWave, null, tLogo);
     T.set(lg.map(function (x) { return x.fill; }), { opacity: 0 }, tLogo);
-    lg.forEach(function (x) { T.fromTo(x.flash, { opacity: 0, scaleX: 1, scaleY: 1 }, { keyframes: [{ opacity: 0.6, duration: 0.04 }, { opacity: 0, duration: 0.35 }] }, tLogo); });
-    T.set(letters, { o: 0, s: 3.2, dy: 0, sy: 1, onComplete: writeLetters }, tLogo);
-    var order = [4, 5, 3, 6, 2, 7, 1, 8, 0, 9];
-    var hit = 0;
-    order.forEach(function (i, k) {
-      var s = tLogo + 0.08 + k * 0.085;
-      T.to(letters[i], { s: 1, o: 1, duration: 0.26, ease: "power4.in", onUpdate: writeLetter, onUpdateParams: [i] }, s);
-      hit = s + 0.26;
+    lg.forEach(function (x) { T.fromTo(x.flash, { opacity: 0, scaleX: 1, scaleY: 1 }, { keyframes: [{ opacity: 0.5, duration: 0.04 }, { opacity: 0, duration: 0.35 }] }, tLogo); });
+    T.set(letters, { o: 0, s: 0.55, dy: 0, sy: 1, onComplete: writeLetters }, tLogo);
+    letters.forEach(function (L, i) {
+      T.to(L, { s: 1, o: 1, duration: 0.5, ease: "back.out(2.2)", onUpdate: writeLetter, onUpdateParams: [i] }, tLogo + 0.25 + i * 0.045);
     });
-    lg.forEach(function (x) { T.fromTo(x.flash, { opacity: 0, scaleX: 1, scaleY: 1 }, { keyframes: [{ opacity: 0.85, duration: 0.04 }, { opacity: 0, duration: 0.7, ease: "power2.out" }] }, hit); });
-    sites().forEach(function (x) { T.fromTo(x.flash, { opacity: 0, scaleX: 1, scaleY: 1 }, { keyframes: [{ opacity: 0.45, duration: 0.05 }, { opacity: 0, duration: 0.55, ease: "power2.out" }] }, hit + Math.random() * 0.08); });
-  }
-
-  /* rings of monitors from the outer edge in: cluster by normalised distance from the centre */
-  function ringsOf(list) {
-    var core = list.filter(function (m) { return m.kind === "logo"; });
-    var xs = core.map(function (m) { return m.cx; }), ys = core.map(function (m) { return m.cy; });
-    var cx = (Math.min.apply(null, xs) + Math.max.apply(null, xs)) / 2, cy = (Math.min.apply(null, ys) + Math.max.apply(null, ys)) / 2;
-    var hw = Math.max.apply(null, xs) - cx || 1, hh = Math.max.apply(null, ys) - cy || 1;
-    var withD = list.map(function (m) {
-      var d = m.kind === "site" ? 2 : Math.max(Math.abs(m.cx - cx) / hw, Math.abs(m.cy - cy) / hh);
-      return { m: m, d: d };
-    }).sort(function (a, b) { return b.d - a.d; });
-    var out = [], last = null;
-    withD.forEach(function (o) {
-      if (last === null || last - o.d > 0.12) out.push([]);
-      out[out.length - 1].push(o.m); last = o.d;
-    });
-    return out;
   }
 
   /* 4. Five seconds after the logo lights up, the cases flip on in a wave:
@@ -814,7 +865,9 @@ var WORK = [
     var hs = sites().map(function (m) {
       var tilt = function (y, x) { gsap.to(m.inner, { rotationY: y, rotationX: x, duration: 0.6, ease: "power3.out", overwrite: "auto" }); };
       var on = function () {
-        if (!lit || onPage2 || phase !== "done") return;
+        /* on page 2 an outer screen just goes black and still while the pointer is over it */
+        if (onPage2) { if (p2Swapped) m.el.classList.add("blk"); return; }
+        if (!lit || phase !== "done") return;
         hovered = m;
         m.el.classList.add("on"); grid.classList.add("hovering");
         gsap.to(m.inner, { scale: 1.05, duration: 0.45, ease: "power3.out", overwrite: "auto" });
@@ -825,6 +878,7 @@ var WORK = [
         tilt(((e.clientX - b.left) / b.width - 0.5) * 12, -((e.clientY - b.top) / b.height - 0.5) * 4);
       };
       var off = function () {
+        m.el.classList.remove("blk");
         if (hovered === m) hovered = null;
         m.el.classList.remove("on"); grid.classList.remove("hovering");
         gsap.to(m.inner, { scale: 1, rotationY: 0, rotationX: 0, duration: 0.45, ease: "power3.out", overwrite: "auto" });
@@ -844,14 +898,14 @@ var WORK = [
     if (!grid) return;
     grid.classList.remove("hovering");
     sites().forEach(function (m) {
-      m.el.classList.remove("on");
+      m.el.classList.remove("on", "blk");
       gsap.killTweensOf(m.inner);
       gsap.set(m.inner, { scale: 1, rotationX: 0, rotationY: 0 });
     });
     hovered = null;
   }
 
-  /* ---------- page 2: the outer screens lose power, the logo takes the whole wall ---------- */
+  /* ---------- page 2: every screen flips into the big logo wall ---------- */
   var onPage2 = false, p2 = null;
   function buildPage2() {
     var T = gsap.timeline({ paused: true });
@@ -865,8 +919,27 @@ var WORK = [
     /* the wall lifts and the glossy floor slides into view */
     T.to(hxBox, { scale: P2_SCALE, duration: 0.85, ease: "power3.inOut", transformOrigin: "50% 0%" }, 0.12);
     T.fromTo(floor, { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 0.7, ease: "power3.out", immediateRender: false }, 0.35);
-    T.call(syncWaves, null, 0.01);
     return T;
+  }
+  /* once the flips have landed, the screens become windows onto one continuous, flowing big wall */
+  function swapIn() {
+    if (!onPage2 || p2Swapped || !grid) return;
+    p2Swapped = true;
+    hx.classList.add("p2");
+    mons.forEach(function (m) { m.el.classList.add("win"); });
+    gsap.set(mons.map(function (m) { return m.big; }), { opacity: 0 });
+    gsap.set(skyBig, { autoAlpha: 1 }); gsap.set(skyLogo, { autoAlpha: 0 });
+    syncWaves();
+    if (!reduce) gsap.fromTo(skyBig.querySelector(".sky-flow"), { opacity: 0 }, { opacity: 1, duration: 1.2, ease: "power1.out" });
+  }
+  function swapOut() {
+    if (!p2Swapped || !grid) return;
+    p2Swapped = false;
+    hx.classList.remove("p2");
+    sites().forEach(function (m) { m.el.classList.remove("win", "blk"); });
+    gsap.set(mons.map(function (m) { return m.big; }), { opacity: 1 });
+    gsap.set(skyLogo, { autoAlpha: 1 }); gsap.set(skyBig, { autoAlpha: 0 });
+    syncWaves();
   }
   function page2(on, instant) {
     if (!grid || !introDone) return;
@@ -874,11 +947,18 @@ var WORK = [
     onPage2 = on;
     releaseHover();
     if (!p2) p2 = buildPage2();
+    if (on) {
+      if (instant || reduce) { p2.pause(); p2.progress(1); swapIn(); }
+      else { p2.eventCallback("onComplete", swapIn); p2.timeScale(1).play(); }
+    } else {
+      p2.eventCallback("onComplete", null);
+      swapOut();
+      if (instant || reduce) { p2.pause(); p2.progress(0); } else p2.timeScale(1.6).reverse();
+    }
     syncWaves();
-    if (instant || reduce) { p2.pause(); p2.progress(on ? 1 : 0); return; }
-    if (on) p2.timeScale(1).play(); else p2.timeScale(1.6).reverse();
   }
   function resetPage2() {
+    swapOut();
     if (p2) { p2.pause(); p2.progress(0); p2.kill(); p2 = null; }
     onPage2 = false;
     gsap.set(hxBox, { clearProps: "transform" });
