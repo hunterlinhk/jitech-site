@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JIEWEITECH | Websites built for your business</title>
+<meta name="description" content="We build business websites, optimize for AI-powered search, and create standalone website solutions that help companies establish their own presence online.">
+<meta property="og:title" content="JIEWEITECH | Websites built for your business">
+<meta property="og:description" content="We build business websites, optimize for AI-powered search, and create standalone website solutions that help companies establish their own presence online.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta name="theme-color" content="#d3dfef">
+<script>
+/* Runs before first paint: which view to show, whether the intro plays, and whether JS may hide starting states. */
+(function(){var d=document.documentElement;d.dataset.view=location.hash==='#home'?'home':'entrance';try{var r=matchMedia('(prefers-reduced-motion: reduce)').matches;if(d.dataset.view==='home'){d.dataset.intro='skip'}if(r){d.dataset.intro='skip';return}d.classList.add('js');if(sessionStorage.getItem('intro-seen')){d.dataset.intro='skip'}}catch(e){d.classList.add('js')}})();
+</script>
+<link rel="preload" href="assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
+
+</head>
+<body>
+
+<!-- ============ ENTRANCE ============ -->
+<div class="stage" id="stage">
+  <section class="entrance" aria-label="Welcome">
+    <div class="copy">
+      <p class="mark fade">JIEWEITECH</p>
+      <h1 class="headline" id="headline"><span class="s1">Websites built for your business.</span> <span class="s2">Designed for what's next.</span></h1>
+      <div class="foot">
+        <p class="desc fade">We build business websites, optimize for AI-powered search, and create standalone website solutions that help companies establish their own presence online.</p>
+        <button type="button" class="btn enter fade" id="enter" disabled><span class="btn-label">Enter Site</span></button>
+        <p class="ps-note fade" id="psNote"><strong>Photosensitivity warning:</strong> the homepage opens with flickering static and glitch effects. <button type="button" class="ps-btn" id="fxToggle" aria-pressed="false">Turn effects off</button></p>
+      </div>
+    </div>
+    <div class="wall" id="wall" role="group" aria-label="Design examples">
+      <p class="wall-caption fade">Design examples</p>
+    </div>
+  </section>
+
+  <div class="intro" aria-hidden="true">
+    <div class="lockup">
+      <div class="word" id="word"></div>
+      <span class="rule"></span>
+    </div>
+  </div>
+  <div class="veil" id="veil"></div>
+</div>
+
+<!-- ============ HOMEPAGE ============ -->
+<div class="home" id="home" inert>
+  <header class="nav on-top" id="nav">
+    <a class="logo" href="#top" data-top>JIEWEITECH</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#website-development" data-go="website-development">Website Development</a>
+      <a href="#geo-optimization" data-go="geo-optimization">GEO Optimization</a>
+      <a href="#standalone-websites" data-go="standalone-websites">Standalone Websites</a>
+      <a class="nav-cta" href="#contact" data-go="contact">Contact</a>
+    </nav>
+    <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menu">Menu</button>
+  </header>
+
+  <div class="menu" id="menu" inert>
+    <nav aria-label="Mobile">
+      <a href="#website-development" data-go="website-development">Website Development</a>
+      <a href="#geo-optimization" data-go="geo-optimization">GEO Optimization</a>
+      <a href="#standalone-websites" data-go="standalone-websites">Standalone Websites</a>
+      <a href="#contact" data-go="contact">Contact</a>
+    </nav>
+    <p>We build websites around the businesses behind them.</p>
+  </div>
+
+  <main id="main" tabindex="-1">
+
+    <section class="hx" id="top" aria-labelledby="hx-title">
+      <h1 class="sr-only" id="hx-title">JIEWEITECH. We build websites around the businesses behind them.</h1>
+      <div class="hx-sticky">
+        <div class="hx-box" id="hxBox"></div>
+        <div class="hx-floor" id="hxFloor" aria-hidden="true"><svg preserveAspectRatio="none"></svg></div>
+      </div>
+    </section>
+
+    <section class="services" aria-labelledby="services-t">
+      <h2 class="sec-title" id="services-t">What we do</h2>
+      <div class="index">
+        <article class="row" id="website-development">
+          <span class="num" aria-hidden="true">01</span>
+          <h3 class="name">Website Development</h3>
+          <p class="line">Professional business websites built around your goals, content, and identity.</p>
+        </article>
+        <article class="row" id="geo-optimization">
+          <span class="num" aria-hidden="true">02</span>
+          <h3 class="name">GEO Optimization</h3>
+          <p class="line">Content and structure improvements that support discoverability in AI-powered search.</p>
+        </article>
+        <article class="row" id="standalone-websites">
+          <span class="num" aria-hidden="true">03</span>
+          <h3 class="name">Standalone Websites</h3>
+          <p class="line">Independent branded websites that give your business its own dedicated destination online.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="work on-dark" id="work" aria-labelledby="work-t">
+      <div class="work-head">
+        <h2 id="work-t">Selected work</h2>
+        <p class="work-note">These are design examples, not client case studies.</p>
+      </div>
+      <div class="work-grid">
+        <figure class="frame w1" data-work="0"></figure>
+        <figure class="frame w2" data-work="1"></figure>
+        <figure class="frame w3" data-work="2"></figure>
+        <figure class="frame w4" data-work="3"></figure>
+      </div>
+    </section>
+
+    <section class="process" id="process" aria-labelledby="process-t">
+      <h2 id="process-t">From discovery to launch.</h2>
+      <div class="proc-rule"></div>
+      <ol class="steps">
+        <li class="step"><span class="snum" aria-hidden="true">01</span><h3>Discovery</h3><p>We learn about your business, goals, and website requirements.</p></li>
+        <li class="step"><span class="snum" aria-hidden="true">02</span><h3>Planning</h3><p>We define the site's structure, design direction, and scope.</p></li>
+        <li class="step"><span class="snum" aria-hidden="true">03</span><h3>Design &amp; Development</h3><p>We design and build the site, refining as we go.</p></li>
+        <li class="step"><span class="snum" aria-hidden="true">04</span><h3>Launch</h3><p>We test, finalize, and launch.</p></li>
+      </ol>
+    </section>
+
+    <section class="contact" id="contact" aria-labelledby="contact-t">
+      <h2 id="contact-t">Let's build something that works for your business.</h2>
+      <div class="contact-body">
+        <p>Tell us what you're looking for, and we'll talk through the next steps.</p>
+        <a class="btn on-dark" id="mailBtn" href="mailto:[Contact email]"><span class="btn-label">Get in Touch</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-foot">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a class="logo" href="#top" data-top>JIEWEITECH</a>
+        <p>We build websites around the businesses behind them.</p>
+      </div>
+      <nav class="foot-nav" aria-label="Footer">
+        <a href="#website-development" data-go="website-development">Website Development</a>
+        <a href="#geo-optimization" data-go="geo-optimization">GEO Optimization</a>
+        <a href="#standalone-websites" data-go="standalone-websites">Standalone Websites</a>
+        <a href="#contact" data-go="contact">Contact</a>
+      </nav>
+      <p class="foot-year">&copy; <span id="year">2026</span></p>
+    </div>
+    <span class="mega" aria-hidden="true">JIEWEITECH</span>
+  </footer>
+</div>
+
+<div class="pv" id="pv" hidden role="dialog" aria-modal="true" aria-labelledby="pvTitle">
+  <div class="pv-bar"><span class="pv-tag">Design concept</span><span class="pv-title" id="pvTitle"></span><button type="button" class="pv-close" id="pvClose">Close</button></div>
+</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="wbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#eef3fa"/><stop offset=".5" stop-color="#d3dfef"/><stop offset="1" stop-color="#b4c7e4"/></linearGradient>
+    <linearGradient id="wsilk" x1="0" y1="0" x2="1" y2=".3"><stop offset="0" stop-color="#ffffff" stop-opacity="0"/><stop offset=".45" stop-color="#ffffff" stop-opacity=".95"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></linearGradient>
+    <linearGradient id="wblue" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9db6de" stop-opacity="0"/><stop offset=".5" stop-color="#8eaad8" stop-opacity=".75"/><stop offset="1" stop-color="#b9cbe8" stop-opacity="0"/></linearGradient>
+    <filter id="wb8" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
+    <filter id="wb3" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="2.5"/></filter>
+    <symbol id="wallArt" viewBox="0 0 823 290" overflow="hidden">
+      <rect width="823" height="290" fill="url(#wbg)"/>
+      <path d="M-20 70 C160 10 360 120 560 60 C680 25 760 40 840 10 L840 -10 L-20 -10 Z" fill="url(#wsilk)" filter="url(#wb8)"/>
+      <path d="M-20 150 C180 70 380 210 600 110 C700 66 780 80 840 60" stroke="url(#wblue)" stroke-width="46" fill="none" filter="url(#wb8)"/><path d="M-20 40 C150 90 330 0 520 40 C640 66 740 10 840 30 L840 -10 L-20 -10 Z" fill="#a8bde0" fill-opacity=".55" filter="url(#wb8)"/><path d="M-20 300 C160 220 360 310 560 250 C680 214 760 240 840 220 L840 300 Z" fill="#9fb6dc" fill-opacity=".45" filter="url(#wb8)"/>
+      <path d="M-20 120 C200 60 420 180 640 90 C730 55 790 60 840 40" stroke="#ffffff" stroke-opacity=".9" stroke-width="2" fill="none" filter="url(#wb3)"/>
+      <path d="M-20 262 C200 190 430 296 660 214 C740 186 800 190 840 176 L840 236 C760 250 700 262 600 280 C420 300 200 230 -20 300 Z" fill="#ffffff" fill-opacity=".8" filter="url(#wb8)"/>
+      <path d="M-20 232 C210 160 440 270 670 188 C750 160 800 160 840 150" stroke="#a9bfe2" stroke-opacity=".9" stroke-width="1.5" fill="none" filter="url(#wb3)"/>
+      <text x="30" y="207" textLength="763" lengthAdjust="spacingAndGlyphs" font-family="'Inter Variable', Inter, 'Arial Black', sans-serif" font-weight="900" font-size="172" letter-spacing="-4" fill="#050505">JIEWEITECH</text>
+    </symbol>
+  </defs>
+</svg>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs id="wallDefs"></defs></svg>
+
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script src="assets/js/site.js"></script>
+</body>
+</html>
