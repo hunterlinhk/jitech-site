@@ -43,12 +43,15 @@ so a local server is the reliable way to preview.
    comes on the same way (an uneven flicker), but each shows something different: full-screen error dumps,
    90s color bars rolling up and down, static, two kinds of blue screen, an infected computer, a BIOS boot,
    tracking lines and buffering.
-3. **About 3 s later** the whole wall flickers at once, each screen at its own rhythm. The logo wall settles
-   on the background blue first, then the screens around it settle too.
-4. **2 s after the wall is blue**, the logo wall comes on and the JIEWEITECH letters pop in.
+3. **About 2.4 s later** the whole wall gives a short, dim flicker, like screens low on power. The logo wall
+   settles on the background blue first, then the screens around it settle too.
+4. **Half a second after the wall is blue**, the logo wall comes on and the JIEWEITECH letters pop in.
+   Until then the logo area stays fully black.
 5. **5 s later**, the cases flip over into the websites, in a wave from the clicked screen (or from the top left).
-6. **Scrolling one step** flips every screen into the full-wall logo. The wall lifts over a glossy floor that
-   reflects it in perspective. Hovering an outer screen there turns it black.
+6. **Scrolling one step** fades the cases away and enlarges the pure 4×3 logo wall. It stands on a polished
+   dark marble floor that reflects it in perspective, like the reference image.
+
+Hovering never blacks out a screen: on screen 1 the other cases only dim slightly.
 
 Each logo wall's sky is one shared layer behind the monitors, so the picture runs continuously behind the
 bezels. Its water is a seamless strip of soft bands that slides sideways with a GPU transform, and it pauses

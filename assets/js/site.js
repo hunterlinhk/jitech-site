@@ -313,8 +313,8 @@ var WORK = [
         grid.appendChild(m.el); mons.push(m);
       }
     }
-    skyLogo = makeSky("sky-logo"); skyBig = makeSky("sky-big");
-    world.appendChild(skyLogo); world.appendChild(skyBig);
+    skyLogo = makeSky("sky-logo");
+    world.appendChild(skyLogo);
     world.appendChild(grid);
     hxBox.appendChild(world);
     layoutGrid();
@@ -426,13 +426,14 @@ var WORK = [
     var d = document.createElement("div");
     d.className = "hx-sky " + cls;
     d.setAttribute("aria-hidden", "true");
-    d.innerHTML = '<img class="sky-base" alt=""><div class="sky-flow"><img class="flow-a" alt=""><img class="flow-b" alt=""></div><svg class="sky-word" preserveAspectRatio="none"></svg>';
+    d.innerHTML = '<img class="sky-base" alt=""><img class="sky-deep" alt=""><div class="sky-flow"><img class="flow-a" alt=""><img class="flow-b" alt=""></div><svg class="sky-word" preserveAspectRatio="none"></svg>';
     return d;
   }
   function placeSky(el, R, G, kind, sym) {
     el.style.left = (R.x0 - G.left) + "px"; el.style.top = (R.y0 - G.top) + "px";
     el.style.width = R.W + "px"; el.style.height = R.H + "px";
     el.querySelector(".sky-base").src = waveUrl(kind);
+    el.querySelector(".sky-deep").src = waveUrl("big");
     el.querySelector(".flow-a").src = flowUrl(kind, 1);
     el.querySelector(".flow-b").src = flowUrl(kind, 2);
     var svg = el.querySelector(".sky-word");
@@ -442,7 +443,8 @@ var WORK = [
 
   function layoutGrid() {
     if (!grid) return;
-    var savedBox = hxBox.style.transform; hxBox.style.transform = "none";
+    var savedBox = hxBox.style.transform, savedWorld = world.style.transform;
+    hxBox.style.transform = "none"; world.style.transform = "none";
     var G = grid.getBoundingClientRect();
     /* the logo wall's letters */
     var lg = logos(), U = union(lg), W = U.W, H = U.H;
@@ -463,22 +465,21 @@ var WORK = [
       bigText = '<text x="' + (BW - tl1) / 2 + '" y="' + yA + '" textLength="' + tl1 + '" lengthAdjust="spacingAndGlyphs" ' + FONT_ATTR + ' font-size="' + tfs + '" fill="#050505">JIEWEI</text>' +
         '<text x="' + (BW - tl1) / 2 + '" y="' + yB + '" textLength="' + tl1 + '" lengthAdjust="spacingAndGlyphs" ' + FONT_ATTR + ' font-size="' + tfs + '" fill="#050505">TECH</text>';
     }
-    /* what the floor reflects: the big wall with its bezels */
+    /* what the floor reflects on page 2: the logo wall, its deep sky, letters and bezels */
     var bezels = "";
-    mons.forEach(function (m, i) {
-      var b = A.rects[i];
-      bezels += '<rect x="' + (b.left - G.left) + '" y="' + (b.top - G.top) + '" width="' + b.width + '" height="' + b.height + '"/>';
+    lg.forEach(function (m, i) {
+      var b = U.rects[i];
+      bezels += '<rect x="' + (b.left - U.x0) + '" y="' + (b.top - U.y0) + '" width="' + b.width + '" height="' + b.height + '"/>';
     });
     wallDefs.innerHTML =
       '<symbol id="wallArt2" viewBox="0 0 ' + W + " " + H + '" overflow="hidden">' + glyphs + "</symbol>" +
       '<symbol id="wallBig" viewBox="0 0 ' + BW + " " + BH + '" overflow="hidden">' + bigText + "</symbol>" +
-      '<symbol id="wallRefl" viewBox="0 0 ' + G.width + " " + G.height + '">' +
+      '<symbol id="wallRefl" viewBox="0 0 ' + W + " " + H + '"><rect width="' + W + '" height="' + H + '" fill="#000"/>' +
         '<clipPath id="reflClip">' + bezels + '</clipPath>' +
-        '<g clip-path="url(#reflClip)"><image href="' + waveUrl("big") + '" x="' + (A.x0 - G.left) + '" y="' + (A.y0 - G.top) + '" width="' + BW + '" height="' + BH + '" preserveAspectRatio="none"/>' +
-        '<g transform="translate(' + (A.x0 - G.left) + "," + (A.y0 - G.top) + ')">' + bigText + "</g></g></symbol>";
+        '<g clip-path="url(#reflClip)"><image href="' + waveUrl("big") + '" width="' + W + '" height="' + H + '" preserveAspectRatio="none"/>' +
+        '<use href="#wallArt2" width="' + W + '" height="' + H + '"/></g></symbol>';
     writeLetters();
     placeSky(skyLogo, U, G, "logo", "wallArt2");
-    placeSky(skyBig, A, G, "big", "wallBig");
     mons.forEach(function (m, i) {
       var b = A.rects[i];
       /* each screen also keeps a still copy of its slice of the big wall, shown while it flips */
@@ -491,26 +492,52 @@ var WORK = [
         m.content.style.transform = "scale(" + (b.width / PAGE_BASE) + ")";
       }
     });
-    world._A = A; world._G = G;
+    world._A = A; world._G = G; world._U = U;
+    p2Geom = null;
     layoutFloor();
-    hxBox.style.transform = savedBox;
+    hxBox.style.transform = savedBox; world.style.transform = savedWorld;
   }
 
-  /* page 2: the wall lifts and a glossy floor appears; the reflection lies on the floor in perspective */
-  var floor = $("#hxFloor"), P2_SCALE = 0.76;
-  floor.innerHTML = '<div class="floor-tiles"></div><div class="floor-plane"><svg preserveAspectRatio="none"></svg></div>';
+  /* page 2: the logo wall alone grows to fill the screen and stands on a polished marble floor */
+  var floor = $("#hxFloor"), p2Geom = null;
+  floor.innerHTML = '<div class="floor-glow"></div><div class="floor-tiles"></div><div class="floor-plane"><svg preserveAspectRatio="none"></svg></div><div class="floor-spill"></div>';
+  function p2Target() {
+    if (p2Geom) return p2Geom;
+    var U = world._U, G = world._G, Bw = G.width, Bh = G.height;
+    var s = Math.min((Bw * 0.985) / U.W, (Bh * 0.74) / U.H);
+    var tx = (Bw - U.W * s) / 2, ty = Math.max(6, Bh * 0.015);
+    p2Geom = { s: s, x: tx - (U.x0 - G.left) * s, y: ty - (U.y0 - G.top) * s, top: ty, w: U.W * s, h: U.H * s, left: tx };
+    return p2Geom;
+  }
+  function marbleUrl() {
+    if (waveUrls.marble) return waveUrls.marble;
+    var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">' +
+      '<filter id="m" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.0035 0.03" numOctaves="5" seed="7" stitchTiles="stitch"/>' +
+      '<feColorMatrix type="matrix" values="0 0 0 0 0.62  0 0 0 0 0.7  0 0 0 0 0.84  0 0 0 3.2 -1.55"/></filter>' +
+      '<filter id="n" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="1" seed="2" stitchTiles="stitch"/>' +
+      '<feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .06 0"/></filter>' +
+      '<rect width="512" height="512" fill="#0a0f19"/><rect width="512" height="512" filter="url(#m)" opacity=".16"/><rect width="512" height="512" filter="url(#n)"/>' +
+      '<rect width="512" height="3" fill="#000" opacity=".85"/><rect width="3" height="512" fill="#000" opacity=".85"/>' +
+      '<rect y="3" width="512" height="1" fill="#9fc0ff" opacity=".08"/><rect x="3" width="1" height="512" fill="#9fc0ff" opacity=".08"/></svg>';
+    waveUrls.marble = URL.createObjectURL(new Blob([svg], { type: "image/svg+xml" }));
+    return waveUrls.marble;
+  }
   function layoutFloor() {
-    if (!world || !world._G) return;
-    var G = world._G, box = hxBox.getBoundingClientRect(), sticky = floor.parentNode.getBoundingClientRect();
-    var top = (box.top - sticky.top) + box.height * P2_SCALE;
+    if (!world || !world._U) return;
+    var U = world._U, g = p2Target(), box = hxBox.getBoundingClientRect(), sticky = floor.parentNode.getBoundingClientRect();
+    var top = (box.top - sticky.top) + g.top + g.h;
     floor.style.top = top + "px";
-    var w = G.width * P2_SCALE, h = G.height * P2_SCALE;
     var plane = floor.querySelector(".floor-plane"), tiles = floor.querySelector(".floor-tiles"), svg = plane.querySelector("svg");
-    plane.style.width = w + "px"; plane.style.height = h + "px"; plane.style.left = ((sticky.width - w) / 2) + "px";
-    tiles.style.height = h + "px";
-    tiles.style.setProperty("--tile", (w / 8) + "px");
-    svg.setAttribute("viewBox", "0 0 " + G.width + " " + G.height);
-    svg.innerHTML = '<g transform="translate(0,' + G.height + ') scale(1,-1)"><use href="#wallRefl" width="' + G.width + '" height="' + G.height + '"/></g>';
+    var left = (box.left - sticky.left) + g.left;
+    plane.style.width = g.w + "px"; plane.style.height = g.h + "px"; plane.style.left = left + "px";
+    tiles.style.height = (g.h * 1.4) + "px";
+    tiles.style.setProperty("--tile", (g.w / 8) + "px");
+    tiles.style.backgroundImage = "url(" + marbleUrl() + ")";
+    tiles.style.backgroundPosition = (left - (box.left - sticky.left) + (sticky.width * 0.5)) % (g.w / 8) + "px 0";
+    var spill = floor.querySelector(".floor-spill");
+    spill.style.left = left + "px"; spill.style.width = g.w + "px";
+    svg.setAttribute("viewBox", "0 0 " + U.W + " " + U.H);
+    svg.innerHTML = '<g transform="translate(0,' + U.H + ') scale(1,-1)"><use href="#wallRefl" width="' + U.W + '" height="' + U.H + '"/></g>';
   }
 
   /* the flow: two strips per sky, sliding at different speeds; only the visible sky runs */
@@ -525,14 +552,13 @@ var WORK = [
   function startWaves() {
     if (reduce || flows.logo || !grid) return;
     flows.logo = makeFlow(skyLogo);
-    flows.big = makeFlow(skyBig);
     syncWaves();
   }
   function stopWaves() {
     ["logo", "big"].forEach(function (k) { if (flows[k]) { flows[k].forEach(function (t) { t.kill(); }); flows[k] = null; } });
   }
   function syncWaves() {
-    var showBig = onPage2 && p2Swapped && heroVisible, showLogo = !onPage2 && heroVisible;
+    var showBig = false, showLogo = heroVisible && lit;
     if (flows.logo) flows.logo.forEach(function (t) { t.paused(!showLogo); });
     if (flows.big) flows.big.forEach(function (t) { t.paused(!showBig); });
     hx.classList.toggle("waves-big", showBig); hx.classList.toggle("waves-logo", showLogo);
@@ -550,12 +576,14 @@ var WORK = [
   function allOff() {
     hx.classList.add("is-off"); hx.classList.remove("is-lit");
     mons.forEach(function (m) { setFramed(m, true); resetOff(m, 1); hideModes(m); });
+    if (skyLogo) gsap.set(skyLogo, { autoAlpha: 0 });
     letters.forEach(function (L) { L.dy = 0.75; L.o = 0; L.sy = 1; L.s = 1; }); wordShift.x = 0; writeLetters();
     lit = false;
   }
   function allLit() {
     hx.classList.remove("is-off"); hx.classList.add("is-lit");
     mons.forEach(function (m) { setFramed(m, true); resetOff(m, 0); hideModes(m); });
+    if (skyLogo) gsap.set(skyLogo, { autoAlpha: 1 });
     letters.forEach(function (L) { L.dy = 0; L.o = 1; L.sy = 1; L.s = 1; }); wordShift.x = 0; writeLetters();
     lit = true;
   }
@@ -670,16 +698,17 @@ var WORK = [
     T.set(m.off, { opacity: 0 }, t);
     return t - s;
   }
-  /* flicker at the screen's own rhythm until a given time, then settle on the logo wall's blue */
+  /* a dim, uneven flicker, like a screen running low on power, then it settles on the logo wall's blue */
   function flickerToBlue(T, m, from, until) {
-    var period = 0.09 + Math.random() * 0.22, duty = 0.3 + Math.random() * 0.4, t = from + Math.random() * 0.1, on = true;
+    var t = from + Math.random() * 0.06;
     while (t < until) {
-      T.set(m.fill, { opacity: on ? 1 : 0 }, t);
-      t += (on ? period * duty : period * (1 - duty)) * (0.7 + Math.random() * 0.6);
-      on = !on;
+      T.set(m.off, { opacity: pick([0.25, 0.4, 0.55, 0.35, 0.6, 0.3]) }, t);
+      t += 0.05 + Math.random() * 0.11;
     }
-    T.set(m.fill, { opacity: 1 }, until);
+    T.to(m.off, { opacity: 0.85, duration: 0.12, ease: "power1.in" }, until - 0.12);
     T.set(m.show, { opacity: 0 }, until);
+    T.set(m.fill, { opacity: 1 }, until);
+    T.to(m.off, { opacity: 0, duration: 0.25, ease: "power1.out" }, until);
   }
 
   /* a monitor flips over like a page: black on the way out, the new face on the way back */
@@ -748,6 +777,7 @@ var WORK = [
 
     if (calm) {
       /* Effects off: no static, no flicker. The logo fades up, then the cases follow. */
+      T.set(skyLogo, { autoAlpha: 1 }, 0.3);
       lg.forEach(function (x) { T.to(x.off, { opacity: 0, duration: 1 }, 0.3); });
       T.to(letters, { o: 1, dy: 0, duration: 1, stagger: 0.05, onUpdate: writeLetters }, 1.3);
       T.call(armWave, null, 0.3);
@@ -766,17 +796,18 @@ var WORK = [
     });
     /* 2. Then the whole wall flickers together, every screen at its own rhythm. The logo wall settles
           on the blue first, then the screens around it settle too. */
-    var tFlick = 3.0, logoSettle = tFlick + 1.3, edgeSettle = tFlick + 2.4, allBlue = 0;
+    var tFlick = 2.4, logoSettle = tFlick + 0.55, edgeSettle = tFlick + 0.95, allBlue = 0;
     mons.forEach(function (x) {
-      var until = x.kind === "logo" ? logoSettle + Math.random() * 0.12 : edgeSettle + Math.random() * 0.3;
+      var until = x.kind === "logo" ? logoSettle + Math.random() * 0.08 : edgeSettle + Math.random() * 0.15;
       flickerToBlue(T, x, tFlick, until);
       allBlue = Math.max(allBlue, until);
     });
     T.call(function () { stopTicker(); hx.classList.remove("fx-run"); }, null, allBlue + 0.05);
 
     /* 3. Two seconds after the whole wall is blue, the logo wall comes on and the letters pop in. */
-    var tLogo = allBlue + 2;
+    var tLogo = allBlue + 0.5;
     T.call(armWave, null, tLogo);
+    T.set(skyLogo, { autoAlpha: 1 }, tLogo);
     T.set(lg.map(function (x) { return x.fill; }), { opacity: 0 }, tLogo);
     lg.forEach(function (x) { T.fromTo(x.flash, { opacity: 0, scaleX: 1, scaleY: 1 }, { keyframes: [{ opacity: 0.5, duration: 0.04 }, { opacity: 0, duration: 0.35 }] }, tLogo); });
     T.set(letters, { o: 0, s: 0.55, dy: 0, sy: 1, onComplete: writeLetters }, tLogo);
@@ -866,7 +897,7 @@ var WORK = [
       var tilt = function (y, x) { gsap.to(m.inner, { rotationY: y, rotationX: x, duration: 0.6, ease: "power3.out", overwrite: "auto" }); };
       var on = function () {
         /* on page 2 an outer screen just goes black and still while the pointer is over it */
-        if (onPage2) { if (p2Swapped) m.el.classList.add("blk"); return; }
+        if (onPage2) return;
         if (!lit || phase !== "done") return;
         hovered = m;
         m.el.classList.add("on"); grid.classList.add("hovering");
@@ -905,63 +936,35 @@ var WORK = [
     hovered = null;
   }
 
-  /* ---------- page 2: every screen flips into the big logo wall ---------- */
+  /* ---------- page 2: the cases step away and the logo wall alone grows to fill the screen ---------- */
   var onPage2 = false, p2 = null;
   function buildPage2() {
-    var T = gsap.timeline({ paused: true });
-    var lg = logos();
-    var c = lg.reduce(function (a, m) { a.cx += m.cx / lg.length; a.cy += m.cy / lg.length; return a; }, { cx: 0, cy: 0 });
-    /* every screen flips over once, from the logo outward, and lands on its slice of the big logo */
-    mons.slice().sort(function (a, b) { return dist(a, c) - dist(b, c); }).forEach(function (m) {
-      var s = dist(m, c) * 0.06, f = flipDir(m, c);
-      flip(T, m, s, f.axis, f.dir, function (t) { T.set(m.big, { opacity: 1 }, t); });
-    });
-    /* the wall lifts and the glossy floor slides into view */
-    T.to(hxBox, { scale: P2_SCALE, duration: 0.85, ease: "power3.inOut", transformOrigin: "50% 0%" }, 0.12);
-    T.fromTo(floor, { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 0.7, ease: "power3.out", immediateRender: false }, 0.35);
+    var T = gsap.timeline({ paused: true }), g = p2Target();
+    T.to(sites().map(function (m) { return m.el; }), { autoAlpha: 0, scale: 0.96, duration: 0.35, ease: "power2.in", stagger: { each: 0.012, from: "random" } }, 0);
+    T.to(world, { x: g.x, y: g.y, scale: g.s, transformOrigin: "0 0", duration: 0.95, ease: "power3.inOut" }, 0.12);
+    T.to(skyLogo.querySelector(".sky-deep"), { opacity: 1, duration: 0.8, ease: "power1.inOut" }, 0.3);
+    T.fromTo(floor, { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 0.7, ease: "power3.out", immediateRender: false }, 0.5);
     return T;
-  }
-  /* once the flips have landed, the screens become windows onto one continuous, flowing big wall */
-  function swapIn() {
-    if (!onPage2 || p2Swapped || !grid) return;
-    p2Swapped = true;
-    hx.classList.add("p2");
-    mons.forEach(function (m) { m.el.classList.add("win"); });
-    gsap.set(mons.map(function (m) { return m.big; }), { opacity: 0 });
-    gsap.set(skyBig, { autoAlpha: 1 }); gsap.set(skyLogo, { autoAlpha: 0 });
-    syncWaves();
-    if (!reduce) gsap.fromTo(skyBig.querySelector(".sky-flow"), { opacity: 0 }, { opacity: 1, duration: 1.2, ease: "power1.out" });
-  }
-  function swapOut() {
-    if (!p2Swapped || !grid) return;
-    p2Swapped = false;
-    hx.classList.remove("p2");
-    sites().forEach(function (m) { m.el.classList.remove("win", "blk"); });
-    gsap.set(mons.map(function (m) { return m.big; }), { opacity: 1 });
-    gsap.set(skyLogo, { autoAlpha: 1 }); gsap.set(skyBig, { autoAlpha: 0 });
-    syncWaves();
   }
   function page2(on, instant) {
     if (!grid || !introDone) return;
     if (on === onPage2 && !instant) return;
     onPage2 = on;
     releaseHover();
+    hx.classList.toggle("p2", on);
     if (!p2) p2 = buildPage2();
-    if (on) {
-      if (instant || reduce) { p2.pause(); p2.progress(1); swapIn(); }
-      else { p2.eventCallback("onComplete", swapIn); p2.timeScale(1).play(); }
-    } else {
-      p2.eventCallback("onComplete", null);
-      swapOut();
-      if (instant || reduce) { p2.pause(); p2.progress(0); } else p2.timeScale(1.6).reverse();
-    }
+    if (instant || reduce) { p2.pause(); p2.progress(on ? 1 : 0); }
+    else if (on) p2.timeScale(1).play();
+    else p2.timeScale(1.4).reverse();
     syncWaves();
   }
   function resetPage2() {
-    swapOut();
     if (p2) { p2.pause(); p2.progress(0); p2.kill(); p2 = null; }
     onPage2 = false;
-    gsap.set(hxBox, { clearProps: "transform" });
+    hx.classList.remove("p2");
+    if (world) gsap.set(world, { clearProps: "transform" });
+    if (skyLogo) gsap.set(skyLogo.querySelector(".sky-deep"), { opacity: 0 });
+    if (mons.length) gsap.set(sites().map(function (m) { return m.el; }), { clearProps: "opacity,visibility,transform" });
     gsap.set(floor, { autoAlpha: 0 });
   }
 
@@ -975,7 +978,10 @@ var WORK = [
     if (introDone) { allLit(); activated = false; activate(); if (wasP2) page2(true, true); }
     else allOff();
     var raf = 0;
-    var onResize = function () { cancelAnimationFrame(raf); raf = requestAnimationFrame(function () { layoutGrid(); }); };
+    var onResize = function () {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(function () { var on = onPage2; resetPage2(); layoutGrid(); if (on) page2(true, true); });
+    };
     addEventListener("resize", onResize);
     return function () {
       removeEventListener("resize", onResize);

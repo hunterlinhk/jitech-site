@@ -630,3 +630,17 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
 .hx-floor .floor-plane svg{position:static;width:100%;height:100%;display:block;opacity:.6;filter:blur(1.8px);-webkit-mask-image:none;mask-image:none}
 @media (prefers-reduced-motion:reduce){.hx.fx-run .s-bars .bars-roll,.hx.fx-run .s-bars .tear,.hx.fx-run .s-static .snow,.hx.fx-run .s-track .trk,.hx.fx-run .s-track .trk-band{animation:none}}
 .m-show{isolation:isolate}
+
+/* ----- v11: softer hover, deep sky on page 2, marble floor like the reference ----- */
+.hx-grid.hovering .mon-site:not(.on) .m-shade{opacity:.25}
+.hx-sky .sky-deep{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0}
+.hx-sky .sky-word{z-index:1}
+.hx.p2 .hx-world{will-change:transform}
+.hx-floor{background:#05080e;overflow:hidden}
+.hx-floor .floor-glow{position:absolute;inset:0;background:radial-gradient(70% 55% at 50% 0%,rgba(110,165,240,.28),rgba(110,165,240,0) 70%);z-index:2;pointer-events:none}
+.hx-floor .floor-tiles{left:-40%;right:-40%;--tile:160px;background-size:var(--tile) var(--tile);background-repeat:repeat;
+  -webkit-mask-image:linear-gradient(180deg,#000 30%,rgba(0,0,0,.55) 75%,rgba(0,0,0,.2));mask-image:linear-gradient(180deg,#000 30%,rgba(0,0,0,.55) 75%,rgba(0,0,0,.2))}
+.hx-floor .floor-plane{z-index:1;mix-blend-mode:screen;
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.75) 35%,rgba(0,0,0,.25) 75%,transparent 100%);mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.75) 35%,rgba(0,0,0,.25) 75%,transparent 100%)}
+.hx-floor .floor-plane svg{opacity:.85;filter:blur(1.4px) saturate(1.1)}
+.hx-floor .floor-spill{position:absolute;top:0;height:3px;z-index:3;background:linear-gradient(90deg,transparent,rgba(170,205,255,.55) 15%,rgba(200,225,255,.7) 50%,rgba(170,205,255,.55) 85%,transparent);filter:blur(2px)}
