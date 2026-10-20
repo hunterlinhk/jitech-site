@@ -257,6 +257,15 @@ var WORK = [
       logo: { c0: 1, r0: 3, cs: 1, rs: 1 } }
   };
   var PAGE_BASE = 960;
+  /* Each page on a monitor gets a desktop-sized window shaped like its screen (1440 wide, or 900 tall for
+     squarer screens), then fills the screen from the top. Extreme shapes are clamped and cropped instead. */
+  function frameFit(w, h) {
+    var a = w / h, fw, fh;
+    if (a >= 1.6) { fw = 1440; fh = Math.max(500, Math.round(1440 / a)); }
+    else { fh = 900; fw = Math.max(1024, Math.round(900 * a)); }
+    var sc = Math.max(w / fw, h / fh);
+    return { w: fw, h: fh, s: sc, x: (w - fw * sc) / 2 };
+  }
   var PAGE_BY_ID = {};
   PAGES.forEach(function (p) { PAGE_BY_ID[p.id] = p; });
 
@@ -510,8 +519,9 @@ var WORK = [
       var b = A.rects[i];
       m.cx = (b.left + b.width / 2 - A.x0) / (A.W / 6); m.cy = (b.top + b.height / 2 - A.y0) / (A.W / 6);
       if (m.kind === "site" && b.width) {
-        m.content.style.height = Math.round(PAGE_BASE * b.height / b.width) + "px";
-        m.content.style.transform = "scale(" + (b.width / PAGE_BASE) + ")";
+        var fit = m.fit = frameFit(b.width, b.height);
+        m.content.style.width = fit.w + "px"; m.content.style.height = fit.h + "px";
+        m.content.style.transform = "translateX(" + fit.x + "px) scale(" + fit.s + ")";
       }
     });
     world._A = A; world._G = G; world._U = U;
@@ -690,27 +700,34 @@ var WORK = [
   }
 
   /* ---------- the website examples: turned over one at a time, or all at once from the logo wall ---------- */
-  function flipCase(m, on, delay, f) {
+  function flipCase(m, on, delay, f, quick) {
     if (m.ftl) m.ftl.kill();
     var T = gsap.timeline({ delay: delay || 0, onStart: function () { m.flipping = true; }, onComplete: function () { m.flipping = false; m.ftl = null; } });
     m.ftl = T;
-    if (calm || reduce) { T.to(m.fill, { opacity: on ? 0 : 1, duration: reduce ? 0.01 : 0.5, ease: "power1.inOut" }); return; }
+    if (calm || reduce) { T.to(m.fill, { opacity: on ? 0 : 1, duration: reduce ? 0.01 : quick ? 0.3 : 0.5, ease: "power1.inOut" }); return; }
     gsap.killTweensOf(m.inner, "rotationX,rotationY");
-    flip(T, m, 0, f.axis, f.dir, function (t) { T.set(m.fill, { opacity: on ? 0 : 1 }, t); });
+    flip(T, m, 0, f.axis, f.dir, function (t) { T.set(m.fill, { opacity: on ? 0 : 1 }, t); }, quick ? 0.14 : 0, quick ? 0.26 : 0);
   }
   /* from the logo wall: show all, or hide all if they are all showing. From a screen: show all, from that screen. */
-  function toggleCases(from, force) {
+  function toggleCases(from, force, quick) {
     var list = sites(), on = force != null ? force : !list.every(function (m) { return m.revealed; }), c = from || logoCenter();
-    var each = from ? 0.035 : 0.06;
+    var each = quick ? 0.025 : from ? 0.035 : 0.06;
     list.sort(function (a, b) { return dist(a, c) - dist(b, c); }).forEach(function (m) {
       if (m.revealed === on) return;
       m.revealed = on;
       if (on) shownIds[m.page.id] = true; else delete shownIds[m.page.id];
       var f = m === from ? { axis: "y", dir: 1 } : flipDir(m, c);
       if (!on) f.dir = -f.dir;   /* they turn back toward the logo */
-      flipCase(m, on, dist(m, c) * each, f);
+      flipCase(m, on, dist(m, c) * each, f, quick);
     });
     syncLogoKey();
+  }
+  function anyRevealed() { return sites().some(function (m) { return m.revealed; }); }
+  /* leaving the first page: the website examples turn back into the plain blue wall first */
+  function hideCasesBeforeLeaving(go) {
+    toggleCases(null, false, true);
+    var wait = sites().reduce(function (a, m) { return m.ftl ? Math.max(a, m.ftl.delay() + m.ftl.duration()) : a; }, 0);
+    return gsap.delayedCall(wait + 0.02, go);
   }
   function syncLogoKey() {
     var k = grid && grid.querySelector(".logo-key");
@@ -938,18 +955,20 @@ var WORK = [
   var pvFrom = null, pvMon = null, pvTw = null, pvState = { p: 0 };
   function lerp(a, b, t) { return a + (b - a) * t; }
   /* p = 0 sits exactly on the monitor (the page laid out at the monitor's width), p = 1 fills the window */
-  function pvDrawer(r) {
-    var bh = pvBar.offsetHeight, ch0 = PAGE_BASE * r.height / r.width;
+  function pvDrawer(r, m) {
+    var bh = pvBar.offsetHeight, f0 = (m && m.fit) || frameFit(r.width, r.height);
     return function () {
       if (!pvFrame) return;
       var t = pvState.p, W = innerWidth, H = innerHeight;
       var bx = lerp(r.left, 0, t), by = lerp(r.top, bh, t), bw = lerp(r.width, W, t), bhh = lerp(r.height, H - bh, t);
-      var cw = lerp(PAGE_BASE, W, t), s = bw / cw;
-      pvFrame.style.width = cw + "px"; pvFrame.style.height = (bhh / s) + "px";
-      pvFrame.style.transform = "translate(" + bx + "px," + by + "px) scale(" + s + ")";
+      var cw = lerp(f0.w, W, t), ch = lerp(f0.h, H - bh, t), s = Math.max(bw / cw, bhh / ch);
+      pvFrame.style.width = cw + "px"; pvFrame.style.height = ch + "px";
+      pvFrame.style.transform = "translate(" + (bx + (bw - cw * s) / 2) + "px," + by + "px) scale(" + s + ")";
+      /* the growing screen keeps hard edges, like the monitor it came from */
+      pv.style.clipPath = t >= 1 ? "" : "inset(" + lerp(r.top, 0, t) + "px " + (W - bx - bw) + "px " + (H - by - bhh) + "px " + bx + "px)";
     };
   }
-  function pvSettle() { pv.classList.remove("pv-anim"); if (pvFrame) pvFrame.removeAttribute("style"); gsap.set(pvBar, { clearProps: "opacity,visibility" }); }
+  function pvSettle() { pv.classList.remove("pv-anim"); pv.style.clipPath = ""; if (pvFrame) pvFrame.removeAttribute("style"); gsap.set(pvBar, { clearProps: "opacity,visibility" }); }
   function openPage(p, from, m) {
     pvFrom = from; pvMon = m || null;
     pvTitle.textContent = p.title;
@@ -970,7 +989,7 @@ var WORK = [
     }
     pv.classList.add("pv-anim");
     gsap.set(pvBar, { autoAlpha: 0 });
-    var draw = pvDrawer(r), frame = pvFrame, started = false;
+    var draw = pvDrawer(r, m), frame = pvFrame, started = false;
     pvState.p = 0; draw();
     var go = function () {
       if (started || frame !== pvFrame) return;
@@ -997,7 +1016,7 @@ var WORK = [
     if (!r || !r.width || r.bottom < 0 || r.top > innerHeight) { gsap.to(pv, { opacity: 0, duration: 0.3, ease: "power1.in", onComplete: function () { gsap.set(pv, { clearProps: "opacity" }); done(); } }); return; }
     /* and shrinks back into its screen */
     pv.classList.add("pv-anim");
-    var draw = pvDrawer(r);
+    var draw = pvDrawer(r, pvMon);
     pvState.p = 1; draw();
     gsap.to(pvBar, { autoAlpha: 0, duration: 0.2 });
     pvTw = gsap.to(pvState, { p: 0, duration: 0.65, ease: "power3.inOut", onUpdate: draw, onComplete: done });
@@ -1032,20 +1051,35 @@ var WORK = [
   }
   /* The first page turns quickly; the others take about a second. Scrolling again the same way while a
      page is turning speeds it up, so two scrolls finish in about half a second. */
-  var snapTw = null, snapDir = 0, snapBoosts = 0, snapStart = 0;
+  var snapTw = null, snapDir = 0, snapBoosts = 0, snapStart = 0, leaveCall = null;
   function snapTo(y, done) {
     var from = window.pageYOffset, top = pageTop(hx);
-    snapping = true; snapTarget = y; snapDir = y > from ? 1 : -1; snapBoosts = 0; snapStart = performance.now();
-    snapProxy.y = from;
-    gsap.killTweensOf(snapProxy);
-    var first = Math.min(from, y) <= top + 2 && Math.abs(y - from) <= innerHeight * 1.05;
-    snapTw = gsap.to(snapProxy, {
-      y: y, duration: reduce ? 0.01 : first ? 0.55 : 1, ease: first ? "power3.out" : "power2.inOut",
-      onUpdate: function () { window.scrollTo(0, snapProxy.y); },
-      onComplete: function () { snapping = false; snapTarget = null; snapTw = null; if (done) done(); }
-    });
+    if (leaveCall) { leaveCall.kill(); leaveCall = null; }
+    snapping = true; snapTarget = y; snapDir = y > from ? 1 : -1; snapBoosts = 0;
+    var go = function () {
+      leaveCall = null;
+      snapStart = performance.now();
+      snapProxy.y = window.pageYOffset;
+      gsap.killTweensOf(snapProxy);
+      /* the first page and "What we do" switch almost instantly; the other pages take about a second */
+      var first = Math.min(from, y) <= top + 2 && Math.abs(y - from) <= innerHeight * 1.05;
+      snapTw = gsap.to(snapProxy, {
+        y: y, duration: reduce ? 0.01 : first ? 0.1 : 1, ease: first ? "power1.out" : "power2.inOut",
+        onUpdate: function () { window.scrollTo(0, snapProxy.y); },
+        onComplete: function () {
+          snapping = false; snapTarget = null; snapTw = null;
+          if (first) wh.holdUntil = performance.now() + 250;   /* a quick second wheel notch should not skip a page */
+          if (done) done();
+        }
+      });
+    };
+    snapTw = null;
+    if (from <= top + 2 && y > top + 2 && introDone && anyRevealed() && !reduce) leaveCall = hideCasesBeforeLeaving(go);
+    else go();
   }
   function boost() {
+    /* scrolling again while the examples turn back: finish them now and go */
+    if (leaveCall) { sites().forEach(function (m) { if (m.ftl) m.ftl.progress(1); }); var g = leaveCall; leaveCall = null; g.kill(); g.vars.onComplete(); return; }
     if (!snapTw) return;
     snapBoosts++;
     var left = (snapTw.duration() - snapTw.time()) / snapTw.timeScale();   /* real seconds still to go */
@@ -1055,7 +1089,7 @@ var WORK = [
   }
   function step(dir) {
     /* scrolling again the same way while a page turns hurries it along instead of skipping a page */
-    if (snapping && snapTw && dir === snapDir) { boost(); return; }
+    if (snapping && (snapTw || leaveCall) && dir === snapDir) { boost(); return; }
     var list = stops(), y = window.pageYOffset, j = -1;
     if (dir > 0) { for (var i = 0; i < list.length; i++) if (list[i] > y + 2) { j = i; break; } }
     else { for (var k = list.length - 1; k >= 0; k--) if (list[k] < y - 2) { j = k; break; } }

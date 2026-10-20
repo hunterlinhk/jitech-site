@@ -49,7 +49,11 @@ so a local server is the reliable way to preview.
 5. **Clicking any blue screen** turns every outer screen over to show its website, starting from that screen.
    **Clicking the logo wall** does the same from the logo, and clicking it again turns them back to plain blue.
 6. **Clicking a website on show** grows that screen until it fills the window; Close shrinks it back.
-7. **Scrolling down** goes straight to "What we do".
+7. **Scrolling down** goes straight to "What we do". If websites are showing, they first turn back into the
+   plain blue wall (about half a second), so the top of the page always comes back as the plain logo wall.
+
+Each monitor gives its page a desktop-sized window shaped like the screen (1440 px wide, or 900 px tall for
+squarer screens), then fills the screen from the top, so the page's first screen fits at any window size.
 
 Each logo wall's sky is one shared layer behind the monitors, so the picture runs continuously behind the
 bezels. Its water is a seamless strip of soft bands that slides sideways with a GPU transform, and it pauses
@@ -58,7 +62,7 @@ when it is off screen.
 ## Scrolling
 
 Every page below the hero fits the window. One wheel notch, trackpad swipe, key press or touch swipe moves
-one page: the step between the hero and "What we do" takes about 0.5 s, the others about 1 s. Scrolling
+one page: the step between the hero and "What we do" takes 0.1 s, the others about 1 s. Scrolling
 again the same way while a page is moving speeds it up, so two scrolls finish in about 0.5 s. Leftover
 trackpad momentum is ignored.
 
