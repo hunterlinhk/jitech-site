@@ -1,74 +1,116 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>JIEWEI | Redefine the Digital Era</title><script>if(location.search.indexOf("wall")>-1)document.documentElement.className+=" on-wall"</script><style>
-@font-face{font-family:"Inter Variable";font-style:normal;font-display:swap;font-weight:100 900;src:url("../assets/fonts/inter.woff2") format("woff2-variations")}
-html.on-wall{overflow:hidden;scrollbar-width:none}html.on-wall::-webkit-scrollbar{display:none}
-*,*::before,*::after{box-sizing:border-box}
-html,body{margin:0}
-body{font-family:"Inter Variable",Inter,"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;color:var(--fg);background:var(--bg);font-size:16px}
-:root{--fg:#0b0b0c;--muted:#5d6168;--bg:#fbfbfb;--line:rgba(0,0,0,.08);--accent:#1f5fff}
-body.dark{--fg:#f4f5f6;--muted:#a3a8ae;--bg:#030303;--line:rgba(255,255,255,.12)}
-body.sky{--bg:#f6f9fd}
-a{color:inherit;text-decoration:none}
-h1,h2,h3,p{margin:0}
-.nav{position:relative;z-index:5;display:flex;align-items:center;gap:2.4vw;height:72px;padding:0 3.4vw;background:var(--bg);border-bottom:1px solid var(--line)}
-.nav.light{--fg:#0b0b0c;--muted:#5d6168;--bg:#ffffff;--line:rgba(0,0,0,.08);color:#0b0b0c}
-.logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:18px;letter-spacing:.02em;margin-right:auto}
-.logo i{width:17px;height:17px;border-radius:50%;border:4.5px solid currentColor;display:block}
-.links{display:flex;gap:2.6vw;font-size:14px;color:var(--muted)}
-.links a:hover{color:var(--fg)}
-.icons{display:flex;gap:18px;align-items:center;margin-left:3vw}
-.hero{position:relative;min-height:calc(100vh - 72px);overflow:hidden;display:flex}
-.hero .copy{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:center;gap:1.6vw;padding:0 5.4vw 2vw;max-width:64%}
-.hero h1{font-size:5.6vw;line-height:1.06;font-weight:600;letter-spacing:-.025em}
-.hero h1 span{display:block;white-space:nowrap}
-.hero .sub{font-size:2.05vw;line-height:1.45;color:var(--muted)}
-.hero .sub span{display:block}
-.btn{align-self:flex-start;display:inline-flex;align-items:center;gap:.6em;padding:.85em 1.6em;border-radius:999px;font-size:max(12px,1.55vw);font-weight:600;background:var(--fg);color:var(--bg);margin-top:.6vw}
-.btn.outline{background:transparent;color:var(--fg);border:1.5px solid currentColor}
-.btn svg{width:1em;height:1em}
-.art{position:absolute;inset:0 0 0 36%;z-index:1}
-.art-svg{width:100%;height:100%;display:block}
-.full .art{inset:0}
-.full .copy{max-width:60%}
-.full::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(0,0,0,.75),rgba(0,0,0,0) 55%)}
-.side{display:grid;grid-template-columns:22% 1fr}
-.side .copy{max-width:none;gap:1.4vw;padding-top:3vw}
-.side .copy h1{font-size:2vw;font-weight:500;color:var(--muted)}
-.side .copy h1 span{margin-bottom:.9vw}
-.side .art{inset:0 0 0 46%}
-.side .pics{position:absolute;left:24%;top:12%;bottom:12%;width:21%;display:grid;grid-template-columns:1fr 1fr;gap:1.2vw;z-index:2}
-.side .pics div{background:#e5e6e8;position:relative;overflow:hidden}
-.compact .copy{max-width:72%;justify-content:flex-start;padding-top:14vw}
-.compact .copy h1{font-size:8.6vw}
-.compact .art{inset:0 0 40% 50%}
-.strip{position:absolute;left:0;right:0;bottom:0;z-index:3;display:grid;grid-template-columns:repeat(3,1fr);gap:1.4vw;padding:0 5.4vw 3vw}
-.strip .it{display:flex;align-items:center;gap:1vw;font-size:1.05vw;font-weight:600;line-height:1.25}
-.strip .ph svg,.strip.products svg,.strip.mini svg{width:100%;height:100%;display:block}
-.strip .it>svg.arr{width:1.6vw;height:1.6vw;flex:none}
-.strip.products{height:24%;right:38%;padding-bottom:2.4vw}
-.strip.products .it{background:#f1f2f3}
-.strip.products .it,.strip.products .ph{height:100%}
-.strip.services{position:absolute;bottom:2.4vw;left:5.4vw;right:3vw;padding:0;height:14%;gap:1vw}
-.strip.services .it{background:#fff;border:1px solid var(--line);padding:0 1.2vw;justify-content:space-between}
-.strip.services .ph{width:34%;height:80%}
-.strip.fashion{height:24%;background:#fff;border-top:1px solid var(--line);grid-template-columns:1fr 1fr 1.2fr;padding:2vw 5.4vw}
-.strip.fashion .ph{height:100%;aspect-ratio:1/1}
-.strip.fashion .list{font-size:1.1vw;color:var(--muted);line-height:1.8;display:flex;justify-content:space-between;align-items:center}
-.strip.mini{height:22%;padding:0 6vw 6vw;gap:3vw}
-.strip.mini .it{height:100%}
-.hero.with-strip .copy{padding-bottom:12vw}
-.hero.with-strip.fashion-strip .copy{padding-bottom:26vh}
-.hero.with-strip.products-strip .copy{padding-bottom:24vh}
-/* sections below the hero */
-section{padding:9vw 5.4vw}
-.intro h2{font-size:3.4vw;line-height:1.12;font-weight:560;letter-spacing:-.02em;max-width:18ch}
-.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:3vw;margin-top:5vw;border-top:1px solid var(--line);padding-top:2.4vw}
-.cols h3{font-size:1.4vw;font-weight:600;margin-bottom:.8vw}
-.cols p{font-size:1.1vw;line-height:1.55;color:var(--muted)}
-.panel{position:relative;height:42vw;overflow:hidden;background:var(--panel,#0b0b0c);margin:0 5.4vw;border-radius:6px}
-.panel .art{inset:0}
-.cap{display:flex;justify-content:space-between;gap:2vw;margin:1.4vw 5.4vw 0;font-size:1.05vw;color:var(--muted)}
-.cta{text-align:left}
-.cta h2{font-size:4.4vw;font-weight:560;letter-spacing:-.025em;line-height:1.05;max-width:16ch}
-.cta .btn{margin-top:2.4vw}
-footer{display:flex;justify-content:space-between;align-items:center;padding:2.6vw 5.4vw;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
-</style></head><body class="dark"><header class="nav"><a class="logo" href="#top"><i></i>JIEWEI</a><nav class="links"><a href="#top">Home</a><a href="#solutions">Solutions</a><a href="#about">About</a><a href="#work">Work</a><a href="#contact">Contact</a></nav><div class="icons"><svg viewBox="0 0 20 20" width="15" height="15"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M13 13 L17 17" stroke="currentColor" stroke-width="1.8"/></svg><svg viewBox="0 0 20 20" width="17" height="17"><path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" stroke-width="1.6"/></svg></div></header><main><section class="hero split" id="top" style="padding:0"><div class="copy"><h1><span>Redefine</span><span>the Digital Era</span></h1><p class="sub"><span>New experience.</span><span>New growth.</span></p><a class="btn" href="#contact">Explore <svg class="arr" viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" fill="none"/></svg></a></div><div class="art"><svg class="art-svg" viewBox="0 0 800 600" preserveAspectRatio="xMaxYMid slice" aria-hidden="true"><defs><linearGradient id="p" x1="0" y1="0" x2="1" y2="0.4"><stop offset="0" stop-color="#020202"/><stop offset="0.48" stop-color="#30343a"/><stop offset="0.52" stop-color="#0b0c0e"/><stop offset="1" stop-color="#020202"/></linearGradient><linearGradient id="q" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0a0a0b"/><stop offset="1" stop-color="#26292e"/></linearGradient><linearGradient id="edge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity="0"/><stop offset="0.4" stop-color="#e8eef6" stop-opacity="0.95"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></linearGradient><linearGradient id="blue" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0a1a44" stop-opacity="0"/><stop offset="0.45" stop-color="#4f8dff" stop-opacity="1"/><stop offset="1" stop-color="#9cc2ff" stop-opacity="0"/></linearGradient><filter id="g" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3"/></filter><filter id="G" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter></defs><rect width="800" height="600" fill="#030303"/><path d="M430 0 L800 0 L800 600 L600 600 Z" fill="url(#p)"/><path d="M560 70 L720 0 L800 0 L800 600 L700 600 Z" fill="url(#q)" opacity=".9"/><path d="M430 0 L600 600" stroke="url(#edge)" stroke-width="2.5" filter="url(#g)"/><path d="M560 70 L700 600" stroke="url(#edge)" stroke-width="1.5" opacity=".6"/><ellipse cx="640" cy="420" rx="40" ry="90" fill="#fff" opacity=".07" filter="url(#G)"/></svg></div></section><section class="intro" id="solutions"><h2>Redefine the Digital Era. New experience. New growth.</h2><div class="cols"><div><h3>Strategy</h3><p>We shape direction before anything is built.</p></div><div><h3>Design</h3><p>Clear, considered work made to last.</p></div><div><h3>Technology</h3><p>Built on tools that grow with you.</p></div></div></section><div id="work"><div class="panel" style="--panel:#050505"><div class="art"><svg class="art-svg" viewBox="0 0 800 600" preserveAspectRatio="xMaxYMid slice" aria-hidden="true"><defs><linearGradient id="p" x1="0" y1="0" x2="1" y2="0.4"><stop offset="0" stop-color="#020202"/><stop offset="0.48" stop-color="#30343a"/><stop offset="0.52" stop-color="#0b0c0e"/><stop offset="1" stop-color="#020202"/></linearGradient><linearGradient id="q" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0a0a0b"/><stop offset="1" stop-color="#26292e"/></linearGradient><linearGradient id="edge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity="0"/><stop offset="0.4" stop-color="#e8eef6" stop-opacity="0.95"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></linearGradient><linearGradient id="blue" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0a1a44" stop-opacity="0"/><stop offset="0.45" stop-color="#4f8dff" stop-opacity="1"/><stop offset="1" stop-color="#9cc2ff" stop-opacity="0"/></linearGradient><filter id="g" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3"/></filter><filter id="G" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter></defs><rect width="800" height="600" fill="#030303"/><path d="M430 0 L800 0 L800 600 L600 600 Z" fill="url(#p)"/><path d="M560 70 L720 0 L800 0 L800 600 L700 600 Z" fill="url(#q)" opacity=".9"/><path d="M430 0 L600 600" stroke="url(#edge)" stroke-width="2.5" filter="url(#g)"/><path d="M560 70 L700 600" stroke="url(#edge)" stroke-width="1.5" opacity=".6"/><ellipse cx="640" cy="420" rx="40" ry="90" fill="#fff" opacity=".07" filter="url(#G)"/></svg></div></div><div class="cap"><span>Redefine</span><span>Design concept</span></div></div><section class="cta" id="contact"><h2>Let's create what comes next.</h2><a class="btn" href="#top">Get in touch <svg class="arr" viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" fill="none"/></svg></a></section></main><footer id="about"><span>JIEWEI</span><span>Design concept page</span></footer></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aurora | The quiet layer that runs your operations</title>
+<script src="assets/base.js"></script>
+<link rel="stylesheet" href="assets/base.css">
+<style>
+:root{--bg:#05060b;--tx:#eef0ff;--mut:#8f93ad;--line:rgba(255,255,255,.09);--a1:#7c5cff;--a2:#22d3ee;--a3:#ff5fa2}
+body{background:var(--bg);color:var(--tx);font-family:"Space Grotesk V",Arial,sans-serif;font-size:15px}
+.wrap{width:min(1200px,100% - 48px);margin:0 auto}
+.nav{position:relative;z-index:3;height:72px;display:flex;align-items:center;gap:30px;font-size:14px;color:var(--mut)}
+.logo{display:flex;align-items:center;gap:10px;color:var(--tx);font-weight:700;font-size:19px;margin-right:auto}
+.logo i{width:22px;height:22px;border-radius:7px;background:conic-gradient(from 200deg,var(--a1),var(--a2),var(--a3),var(--a1))}
+.nav .b{color:var(--tx);border:1px solid var(--line);border-radius:10px;padding:9px 14px;background:rgba(255,255,255,.04)}
+.hero{position:relative;height:100vh;min-height:520px;overflow:hidden;display:flex;flex-direction:column}
+.sky{position:absolute;inset:-20%;z-index:0;filter:blur(70px) saturate(1.3);opacity:.9}
+.sky i{position:absolute;border-radius:50%;mix-blend-mode:screen}
+.sky i:nth-child(1){width:46%;height:52%;left:18%;top:8%;background:var(--a1);animation:f1 14s ease-in-out infinite alternate}
+.sky i:nth-child(2){width:40%;height:44%;left:46%;top:2%;background:var(--a2);opacity:.75;animation:f2 17s ease-in-out infinite alternate}
+.sky i:nth-child(3){width:30%;height:36%;left:34%;top:26%;background:var(--a3);opacity:.6;animation:f3 12s ease-in-out infinite alternate}
+@keyframes f1{to{transform:translate(12%,10%) scale(1.15)}}
+@keyframes f2{to{transform:translate(-14%,12%) scale(.9)}}
+@keyframes f3{to{transform:translate(10%,-8%) scale(1.25)}}
+.grain{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(5,6,11,0) 30%,var(--bg) 78%),radial-gradient(rgba(255,255,255,.06) 1px,transparent 1px) 0 0/3px 3px}
+.hero .wrap{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;align-items:center;text-align:center}
+.pill{display:inline-flex;align-items:center;gap:10px;margin-top:clamp(18px,6vh,64px);padding:6px 6px 6px 14px;border:1px solid var(--line);border-radius:999px;font-size:13px;background:rgba(255,255,255,.04);backdrop-filter:blur(8px)}
+.pill b{background:var(--tx);color:var(--bg);border-radius:999px;padding:4px 10px;font-size:11px}
+.hero h1{font-size:clamp(46px,min(6.6vw,12vh),104px);line-height:.98;letter-spacing:-.045em;font-weight:600;margin:clamp(16px,3vh,28px) 0 clamp(14px,2.6vh,22px);max-width:13em}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,#c9bcff,#8ff0ff 50%,#ffb3d2);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--mut);font-size:clamp(15px,1.3vw,18px);max-width:34em;line-height:1.55}
+.form{display:flex;gap:8px;margin-top:clamp(18px,3.4vh,32px);padding:6px;border:1px solid var(--line);border-radius:14px;background:rgba(10,12,22,.7);backdrop-filter:blur(10px)}
+.form span{width:min(280px,40vw);text-align:left;padding:12px;color:#6c7090;font-size:14px}
+.form a{background:var(--tx);color:var(--bg);border-radius:10px;padding:12px 18px;font-weight:600;font-size:14px}
+.app{position:relative;width:min(1020px,92%);margin-top:clamp(28px,6vh,64px);border:1px solid rgba(255,255,255,.14);border-radius:18px 18px 0 0;background:rgba(12,14,26,.75);backdrop-filter:blur(14px);box-shadow:0 -20px 80px rgba(124,92,255,.25);display:grid;grid-template-columns:190px 1fr 260px;min-height:300px;text-align:left;overflow:hidden}
+.app .bar{grid-column:1/-1;height:38px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:7px;padding:0 14px}
+.app .bar i{width:10px;height:10px;border-radius:50%;background:#2a2e44}
+.app aside{border-right:1px solid var(--line);padding:16px;font-size:12.5px;color:var(--mut);display:flex;flex-direction:column;gap:12px}
+.app aside b{color:var(--tx);font-weight:500}
+.app .main{padding:18px 22px}
+.app .main h4{font-weight:500;font-size:14px;margin-bottom:14px}
+.msg{display:flex;gap:10px;margin-bottom:14px;font-size:13px;line-height:1.5;color:#c9cce0}
+.msg i{flex:none;width:24px;height:24px;border-radius:8px;background:#20243a}
+.msg.ai i{background:conic-gradient(from 200deg,var(--a1),var(--a2),var(--a3),var(--a1))}
+.typing{display:inline-block;width:8px;height:14px;background:var(--a2);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.app .right{border-left:1px solid var(--line);padding:16px}
+.app .right small{color:var(--mut);font-size:11px}
+.app .right b{display:block;font-size:26px;font-weight:600;margin:4px 0 12px}
+.bars{display:flex;align-items:flex-end;gap:6px;height:90px}
+.bars span{flex:1;border-radius:4px 4px 0 0;background:linear-gradient(180deg,var(--a2),var(--a1));opacity:.85;animation:grow 2.4s ease-in-out infinite alternate}
+.bars span:nth-child(2n){animation-delay:-.8s}.bars span:nth-child(3n){animation-delay:-1.4s}
+@keyframes grow{from{transform:scaleY(.6);transform-origin:bottom}to{transform:scaleY(1);transform-origin:bottom}}
+/* sections */
+section{padding:clamp(80px,10vw,130px) 0}
+.logos{display:flex;justify-content:space-between;align-items:center;color:#5b5f78;font-weight:700;font-size:20px;letter-spacing:-.02em;padding:34px 0;border-block:1px solid var(--line)}
+.sec-h{font-size:clamp(36px,4vw,60px);letter-spacing:-.04em;line-height:1;font-weight:600;max-width:12em}
+.bento{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:220px;gap:14px;margin-top:48px}
+.cell{border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));padding:24px;position:relative;overflow:hidden}
+.cell h3{font-weight:600;font-size:18px;margin-bottom:8px}
+.cell p{color:var(--mut);font-size:14px;line-height:1.55;max-width:24em}
+.cell.w2{grid-column:span 2}.cell.h2{grid-row:span 2}
+.cell .glow{position:absolute;right:-40px;bottom:-60px;width:220px;height:220px;border-radius:50%;background:var(--c);filter:blur(60px);opacity:.45}
+.nums{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+.nums div{border:1px solid var(--line);border-radius:18px;padding:26px}
+.nums b{display:block;font-size:46px;font-weight:600;letter-spacing:-.04em}
+.nums span{color:var(--mut);font-size:13px}
+.end{text-align:center}
+.end h2{margin:0 auto}
+.end a{display:inline-block;margin-top:28px;background:var(--tx);color:var(--bg);padding:14px 22px;border-radius:12px;font-weight:600}
+.foot{border-top:1px solid var(--line);padding:30px 0;color:var(--mut);font-size:13px}
+.foot .wrap{display:flex;justify-content:space-between}
+@media (max-width:900px){.nav a:not(.logo):not(.b){display:none}.app{grid-template-columns:1fr}.app aside,.app .right{display:none}.bento,.nums{grid-template-columns:1fr}.cell.w2{grid-column:auto}}
+</style>
+</head>
+<body>
+<section class="hero" style="padding:0">
+  <div class="sky" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="wrap">
+    <header class="nav" style="width:100%"><a class="logo" href="#"><i></i>Aurora</a><a href="#">Product</a><a href="#">Agents</a><a href="#">Pricing</a><a href="#">Changelog</a><a class="b" href="#">Sign in</a></header>
+    <a class="pill" href="#" data-in>Aurora 3 is here: agents that finish the job <b>Read →</b></a>
+    <h1 data-in style="--d:1">The quiet layer that <em>runs your operations.</em></h1>
+    <p data-in style="--d:2">Aurora reads your docs, tickets and dashboards, then drafts the reply, files the fix and flags what matters before Monday.</p>
+    <div class="form" data-in style="--d:3"><span>you@company.com</span><a href="#">Start free</a></div>
+    <div class="app" data-in style="--d:4">
+      <div class="bar"><i></i><i></i><i></i></div>
+      <aside><b>Workspace</b><span>Inbox · 12</span><span>Agents</span><span>Reports</span><span>Knowledge</span><span>Settings</span></aside>
+      <div class="main"><h4>Weekly ops review</h4>
+        <div class="msg"><i></i><div>Why did refund requests jump on Thursday?</div></div>
+        <div class="msg ai"><i></i><div>A pricing banner shipped with the wrong currency in the EU. 214 tickets trace back to it. I've drafted a fix and a customer note for review<span class="typing"></span></div></div>
+      </div>
+      <div class="right"><small>Tickets resolved by agents</small><b>78.4%</b><div class="bars"><span style="height:40%"></span><span style="height:55%"></span><span style="height:48%"></span><span style="height:70%"></span><span style="height:64%"></span><span style="height:82%"></span><span style="height:95%"></span></div></div>
+    </div>
+  </div>
+</section>
+<main>
+  <div class="wrap logos" aria-label="Customers"><span>Northwind</span><span>Halcyon</span><span>Parallel</span><span>Quanta</span><span>Lumen&amp;Co</span><span>Vertex</span></div>
+  <section>
+    <div class="wrap">
+      <h2 class="sec-h">Everything your ops team does twice, done once.</h2>
+      <div class="bento">
+        <div class="cell w2" style="--c:var(--a1)"><h3>Agents that close the loop</h3><p>From the first alert to the merged fix, Aurora keeps working until the ticket is actually solved.</p><span class="glow"></span></div>
+        <div class="cell h2" style="--c:var(--a3)"><h3>One search, every tool</h3><p>Slack, Notion, Linear, Zendesk and your warehouse, answered in one place with sources.</p><span class="glow"></span></div>
+        <div class="cell" style="--c:var(--a2)"><h3>Reports that write themselves</h3><p>Monday's review, ready Sunday night.</p><span class="glow"></span></div>
+        <div class="cell" style="--c:var(--a1)"><h3>Private by design</h3><p>SOC 2 Type II, EU hosting and zero training on your data.</p><span class="glow"></span></div>
+      </div>
+      <div class="nums"><div><b>11 h</b><span>saved per person, per week</span></div><div><b>3.2×</b><span>faster ticket resolution</span></div><div><b>40+</b><span>native integrations</span></div></div>
+    </div>
+  </section>
+  <section class="end" style="padding-top:0"><div class="wrap"><h2 class="sec-h">Let Aurora take the night shift.</h2><a href="#">Start free for 14 days</a></div></section>
+</main>
+<footer class="foot"><div class="wrap"><span>© Aurora Labs</span><span>Privacy · Terms · Status</span></div></footer>
+</body>
+</html>

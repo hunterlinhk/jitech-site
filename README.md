@@ -22,18 +22,19 @@ so a local server is the reliable way to preview.
 | `index.html` | Entrance screen and homepage (one route, two layers) |
 | `assets/css/site.css` | All styles |
 | `assets/js/site.js` | Everything that moves: entrance, monitor wall, intro sequence, screen 2, full-page scrolling |
-| `pages/*.html` | The 20 concept websites shown on the monitors. Each is a complete page and opens full screen when a monitor is clicked |
+| `pages/*.html` | The 13 concept websites shown on the monitors. Each is a complete, original page and opens full screen when a monitor is clicked |
+| `pages/assets/` | What the concept pages share: fonts, reset, entrance motion, photo fallbacks |
+| `assets/fonts/pages/` | Fonts used by the concept pages (all SIL Open Font License; licenses alongside) |
 | `assets/img/shots/*.jpg` | Screenshots of those pages, used on the entrance wall and in "Selected work" |
 | `assets/fonts/` | Inter, Bricolage Grotesque, Hanken Grotesk (all SIL Open Font License) |
 | `assets/vendor/` | GSAP and ScrollTrigger |
-| `tools/make_pages.py` | Regenerates `/pages` (copy, layouts and the drawn artwork live here) |
 | `tools/make_shots.py` | Regenerates the screenshots after the pages change |
 
 ## Common edits
 
 - **Brand name / contact email:** the "Edit here" block at the top of `assets/js/site.js`, plus the text in `index.html`.
 - **Which website sits on which monitor:** `LAYOUTS` in `assets/js/site.js` (`wide` for landscape screens, `tall` for portrait).
-- **A concept page's text or artwork:** edit the `P` list in `tools/make_pages.py`, run it, then run `tools/make_shots.py`.
+- **A concept page's text or design:** edit its file in `/pages` directly, then run `tools/make_shots.py` for that page.
 - **Colors:** CSS variables at the top of `assets/css/site.css`.
 - **"What we do" pictures:** `SERVICE_IMAGES` in `assets/js/site.js`.
 
@@ -62,7 +63,7 @@ when it is off screen.
 ## Scrolling
 
 Every page below the hero fits the window. One wheel notch, trackpad swipe, key press or touch swipe moves
-one page: the step between the hero and "What we do" takes 0.1 s, the others about 1 s. Scrolling
+one page, and every step takes about 1 s. Scrolling
 again the same way while a page is moving speeds it up, so two scrolls finish in about 0.5 s. Leftover
 trackpad momentum is ignored.
 
@@ -78,6 +79,29 @@ On computers with a mouse or trackpad, the pointer is a small round cursor that 
 The services sit on the left and a picture sits on the right. Hovering a service (or tapping it on a phone)
 swaps the picture. The pictures are listed in `SERVICE_IMAGES` at the top of `assets/js/site.js`; they are
 stand-ins from the concept pages until you add your own.
+
+## The concept pages
+
+| Monitor | Page | Look |
+| --- | --- | --- |
+| L1 | Casa Ondina, a hotel on the Amalfi Coast | Full-bleed pool photo, serif title, booking bar |
+| T1 | Noon, home solar | Striped poster sun rising over a panel field |
+| T2 | Nocturne, a watchmaker | A live watch drawn in code, gold on forest green |
+| R3 | Volta, electric cars | Night car photo under huge condensed type |
+| L2 | Aurora, an AI ops tool | Moving aurora glow over a product window |
+| L3 | Halden & Co., architects | Editorial serif masthead over a framed building |
+| R4 | Kiln, a coffee roaster | Playful type, a drawn coffee bag, spinning badge |
+| T4 | Atlas, mountain gear | Dawn summit photo with ALTITUDE across it |
+| B3 | Ledger, business banking | Floating 3D cards and payment notes |
+| B2 | Maison Sable, skincare | Soft split hero with product photo |
+| B5 | Sonic Field, a festival | Stretching giant type, equalizer, lineup ticker |
+| B6 | Orbital, a launch company | A planet with a satellite in orbit |
+| L4 | Verde, grocery delivery | Rotating salad plate with stickers |
+
+Photos come from [Unsplash](https://unsplash.com/license) (free to use, no attribution required, credited anyway)
+and load straight from images.unsplash.com. If one can't load, its block keeps a matching colour tone.
+The entrance wall and "Selected work" use screenshots of the pages drawn entirely in code; after changing a
+page, or to add the photo pages to those, run `tools/make_shots.py` on a machine with internet access.
 
 ## Accessibility
 

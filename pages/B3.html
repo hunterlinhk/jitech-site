@@ -1,74 +1,107 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>JIEWEI | Future-Ready Digital Products</title><script>if(location.search.indexOf("wall")>-1)document.documentElement.className+=" on-wall"</script><style>
-@font-face{font-family:"Inter Variable";font-style:normal;font-display:swap;font-weight:100 900;src:url("../assets/fonts/inter.woff2") format("woff2-variations")}
-html.on-wall{overflow:hidden;scrollbar-width:none}html.on-wall::-webkit-scrollbar{display:none}
-*,*::before,*::after{box-sizing:border-box}
-html,body{margin:0}
-body{font-family:"Inter Variable",Inter,"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;color:var(--fg);background:var(--bg);font-size:16px}
-:root{--fg:#0b0b0c;--muted:#5d6168;--bg:#fbfbfb;--line:rgba(0,0,0,.08);--accent:#1f5fff}
-body.dark{--fg:#f4f5f6;--muted:#a3a8ae;--bg:#030303;--line:rgba(255,255,255,.12)}
-body.sky{--bg:#f6f9fd}
-a{color:inherit;text-decoration:none}
-h1,h2,h3,p{margin:0}
-.nav{position:relative;z-index:5;display:flex;align-items:center;gap:2.4vw;height:72px;padding:0 3.4vw;background:var(--bg);border-bottom:1px solid var(--line)}
-.nav.light{--fg:#0b0b0c;--muted:#5d6168;--bg:#ffffff;--line:rgba(0,0,0,.08);color:#0b0b0c}
-.logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:18px;letter-spacing:.02em;margin-right:auto}
-.logo i{width:17px;height:17px;border-radius:50%;border:4.5px solid currentColor;display:block}
-.links{display:flex;gap:2.6vw;font-size:14px;color:var(--muted)}
-.links a:hover{color:var(--fg)}
-.icons{display:flex;gap:18px;align-items:center;margin-left:3vw}
-.hero{position:relative;min-height:calc(100vh - 72px);overflow:hidden;display:flex}
-.hero .copy{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:center;gap:1.6vw;padding:0 5.4vw 2vw;max-width:64%}
-.hero h1{font-size:5.6vw;line-height:1.06;font-weight:600;letter-spacing:-.025em}
-.hero h1 span{display:block;white-space:nowrap}
-.hero .sub{font-size:2.05vw;line-height:1.45;color:var(--muted)}
-.hero .sub span{display:block}
-.btn{align-self:flex-start;display:inline-flex;align-items:center;gap:.6em;padding:.85em 1.6em;border-radius:999px;font-size:max(12px,1.55vw);font-weight:600;background:var(--fg);color:var(--bg);margin-top:.6vw}
-.btn.outline{background:transparent;color:var(--fg);border:1.5px solid currentColor}
-.btn svg{width:1em;height:1em}
-.art{position:absolute;inset:0 0 0 36%;z-index:1}
-.art-svg{width:100%;height:100%;display:block}
-.full .art{inset:0}
-.full .copy{max-width:60%}
-.full::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(0,0,0,.75),rgba(0,0,0,0) 55%)}
-.side{display:grid;grid-template-columns:22% 1fr}
-.side .copy{max-width:none;gap:1.4vw;padding-top:3vw}
-.side .copy h1{font-size:2vw;font-weight:500;color:var(--muted)}
-.side .copy h1 span{margin-bottom:.9vw}
-.side .art{inset:0 0 0 46%}
-.side .pics{position:absolute;left:24%;top:12%;bottom:12%;width:21%;display:grid;grid-template-columns:1fr 1fr;gap:1.2vw;z-index:2}
-.side .pics div{background:#e5e6e8;position:relative;overflow:hidden}
-.compact .copy{max-width:72%;justify-content:flex-start;padding-top:14vw}
-.compact .copy h1{font-size:8.6vw}
-.compact .art{inset:0 0 40% 50%}
-.strip{position:absolute;left:0;right:0;bottom:0;z-index:3;display:grid;grid-template-columns:repeat(3,1fr);gap:1.4vw;padding:0 5.4vw 3vw}
-.strip .it{display:flex;align-items:center;gap:1vw;font-size:1.05vw;font-weight:600;line-height:1.25}
-.strip .ph svg,.strip.products svg,.strip.mini svg{width:100%;height:100%;display:block}
-.strip .it>svg.arr{width:1.6vw;height:1.6vw;flex:none}
-.strip.products{height:24%;right:38%;padding-bottom:2.4vw}
-.strip.products .it{background:#f1f2f3}
-.strip.products .it,.strip.products .ph{height:100%}
-.strip.services{position:absolute;bottom:2.4vw;left:5.4vw;right:3vw;padding:0;height:14%;gap:1vw}
-.strip.services .it{background:#fff;border:1px solid var(--line);padding:0 1.2vw;justify-content:space-between}
-.strip.services .ph{width:34%;height:80%}
-.strip.fashion{height:24%;background:#fff;border-top:1px solid var(--line);grid-template-columns:1fr 1fr 1.2fr;padding:2vw 5.4vw}
-.strip.fashion .ph{height:100%;aspect-ratio:1/1}
-.strip.fashion .list{font-size:1.1vw;color:var(--muted);line-height:1.8;display:flex;justify-content:space-between;align-items:center}
-.strip.mini{height:22%;padding:0 6vw 6vw;gap:3vw}
-.strip.mini .it{height:100%}
-.hero.with-strip .copy{padding-bottom:12vw}
-.hero.with-strip.fashion-strip .copy{padding-bottom:26vh}
-.hero.with-strip.products-strip .copy{padding-bottom:24vh}
-/* sections below the hero */
-section{padding:9vw 5.4vw}
-.intro h2{font-size:3.4vw;line-height:1.12;font-weight:560;letter-spacing:-.02em;max-width:18ch}
-.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:3vw;margin-top:5vw;border-top:1px solid var(--line);padding-top:2.4vw}
-.cols h3{font-size:1.4vw;font-weight:600;margin-bottom:.8vw}
-.cols p{font-size:1.1vw;line-height:1.55;color:var(--muted)}
-.panel{position:relative;height:42vw;overflow:hidden;background:var(--panel,#0b0b0c);margin:0 5.4vw;border-radius:6px}
-.panel .art{inset:0}
-.cap{display:flex;justify-content:space-between;gap:2vw;margin:1.4vw 5.4vw 0;font-size:1.05vw;color:var(--muted)}
-.cta{text-align:left}
-.cta h2{font-size:4.4vw;font-weight:560;letter-spacing:-.025em;line-height:1.05;max-width:16ch}
-.cta .btn{margin-top:2.4vw}
-footer{display:flex;justify-content:space-between;align-items:center;padding:2.6vw 5.4vw;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
-</style></head><body class="dark"><header class="nav light"><a class="logo" href="#top"><i></i>JIEWEI</a><nav class="links"><a href="#top">Home</a><a href="#solutions">Solutions</a><a href="#about">About</a><a href="#work">Work</a><a href="#contact">Contact</a></nav><div class="icons"><svg viewBox="0 0 20 20" width="15" height="15"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M13 13 L17 17" stroke="currentColor" stroke-width="1.8"/></svg><svg viewBox="0 0 20 20" width="17" height="17"><path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" stroke-width="1.6"/></svg></div></header><main><section class="hero split" id="top" style="padding:0"><div class="copy"><h1><span>Future-Ready</span><span>Digital Products</span></h1><p class="sub"><span>Turn ideas into real products.</span></p><a class="btn outline" href="#contact">Explore <svg class="arr" viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" fill="none"/></svg></a></div><div class="art"><svg class="art-svg" viewBox="0 0 800 600" preserveAspectRatio="xMaxYMid slice" aria-hidden="true"><defs><linearGradient id="p" x1="0" y1="0" x2="1" y2="0.4"><stop offset="0" stop-color="#020202"/><stop offset="0.48" stop-color="#30343a"/><stop offset="0.52" stop-color="#0b0c0e"/><stop offset="1" stop-color="#020202"/></linearGradient><linearGradient id="q" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0a0a0b"/><stop offset="1" stop-color="#26292e"/></linearGradient><linearGradient id="edge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity="0"/><stop offset="0.4" stop-color="#e8eef6" stop-opacity="0.95"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></linearGradient><linearGradient id="blue" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0a1a44" stop-opacity="0"/><stop offset="0.45" stop-color="#4f8dff" stop-opacity="1"/><stop offset="1" stop-color="#9cc2ff" stop-opacity="0"/></linearGradient><filter id="g" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3"/></filter><filter id="G" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter></defs><rect width="800" height="600" fill="#030303"/><path d="M300 620 C360 420 520 290 820 250 L820 620 Z" fill="url(#q)"/><path d="M300 620 C360 420 520 290 820 250" stroke="url(#blue)" stroke-width="7" fill="none" filter="url(#g)"/><path d="M300 620 C360 420 520 290 820 250" stroke="#bcd6ff" stroke-width="1.5" fill="none" opacity=".8"/><path d="M420 620 C470 470 600 380 820 350" stroke="#4f8dff" stroke-opacity=".25" stroke-width="20" fill="none" filter="url(#G)"/></svg></div></section><section class="intro" id="solutions"><h2>Future-Ready Digital Products. Turn ideas into real products.</h2><div class="cols"><div><h3>Strategy</h3><p>We shape direction before anything is built.</p></div><div><h3>Design</h3><p>Clear, considered work made to last.</p></div><div><h3>Technology</h3><p>Built on tools that grow with you.</p></div></div></section><div id="work"><div class="panel" style="--panel:#050505"><div class="art"><svg class="art-svg" viewBox="0 0 800 600" preserveAspectRatio="xMaxYMid slice" aria-hidden="true"><defs><linearGradient id="p" x1="0" y1="0" x2="1" y2="0.4"><stop offset="0" stop-color="#020202"/><stop offset="0.48" stop-color="#30343a"/><stop offset="0.52" stop-color="#0b0c0e"/><stop offset="1" stop-color="#020202"/></linearGradient><linearGradient id="q" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0a0a0b"/><stop offset="1" stop-color="#26292e"/></linearGradient><linearGradient id="edge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity="0"/><stop offset="0.4" stop-color="#e8eef6" stop-opacity="0.95"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></linearGradient><linearGradient id="blue" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0a1a44" stop-opacity="0"/><stop offset="0.45" stop-color="#4f8dff" stop-opacity="1"/><stop offset="1" stop-color="#9cc2ff" stop-opacity="0"/></linearGradient><filter id="g" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3"/></filter><filter id="G" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter></defs><rect width="800" height="600" fill="#030303"/><path d="M300 620 C360 420 520 290 820 250 L820 620 Z" fill="url(#q)"/><path d="M300 620 C360 420 520 290 820 250" stroke="url(#blue)" stroke-width="7" fill="none" filter="url(#g)"/><path d="M300 620 C360 420 520 290 820 250" stroke="#bcd6ff" stroke-width="1.5" fill="none" opacity=".8"/><path d="M420 620 C470 470 600 380 820 350" stroke="#4f8dff" stroke-opacity=".25" stroke-width="20" fill="none" filter="url(#G)"/></svg></div></div><div class="cap"><span>Future-Ready</span><span>Design concept</span></div></div><section class="cta" id="contact"><h2>Let's create what comes next.</h2><a class="btn" href="#top">Get in touch <svg class="arr" viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" fill="none"/></svg></a></section></main><footer id="about"><span>JIEWEI</span><span>Design concept page</span></footer></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ledger | Business banking that keeps up</title>
+<script src="assets/base.js"></script>
+<link rel="stylesheet" href="assets/base.css">
+<style>
+:root{--bg:#f4f2ff;--ink:#120f2b;--mut:#6c6890;--v:#5b3df5;--v2:#8f7bff;--lime:#c6f432;--line:rgba(18,15,43,.1)}
+body{background:var(--bg);color:var(--ink);font-family:"Manrope V",Arial,sans-serif;font-size:15px}
+.wrap{width:min(1260px,100% - 56px);margin:0 auto}
+.hero{position:relative;height:100vh;min-height:520px;overflow:hidden;display:flex;flex-direction:column;background:radial-gradient(50% 60% at 78% 50%,#dcd5ff 0%,rgba(244,242,255,0) 70%),var(--bg)}
+.nav{height:76px;display:flex;align-items:center;gap:30px;font-weight:600;font-size:14px;color:var(--mut)}
+.logo{display:flex;align-items:center;gap:9px;font-weight:800;font-size:21px;color:var(--ink);margin-right:auto;letter-spacing:-.03em}
+.logo i{width:24px;height:24px;border-radius:8px;background:var(--ink);position:relative}
+.logo i::after{content:"";position:absolute;inset:7px 6px;border-radius:3px;background:var(--lime)}
+.nav .o{color:var(--ink)}
+.nav .b{background:var(--ink);color:#fff;border-radius:12px;padding:12px 18px}
+.stage{flex:1;display:grid;grid-template-columns:1.05fr 1fr;align-items:center;gap:30px;min-height:0}
+.tag{display:inline-flex;gap:8px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 14px 7px 8px;font-size:13px;font-weight:600}
+.tag b{background:var(--lime);border-radius:999px;padding:3px 9px;font-size:11px}
+h1{font-size:clamp(46px,min(6vw,11vh),98px);line-height:.98;letter-spacing:-.05em;font-weight:800;margin:clamp(14px,2.6vh,24px) 0}
+h1 span{color:var(--v)}
+.lede{color:var(--mut);font-size:clamp(15px,1.3vw,18px);line-height:1.55;max-width:28em}
+.ctas{display:flex;gap:12px;margin-top:clamp(20px,3.6vh,34px);align-items:center}
+.ctas a:first-child{background:var(--v);color:#fff;border-radius:14px;padding:17px 24px;font-weight:700;box-shadow:0 14px 30px rgba(91,61,245,.35)}
+.ctas a:last-child{font-weight:700}
+.trust{display:flex;gap:22px;margin-top:clamp(20px,4vh,40px);color:var(--mut);font-size:13px;font-weight:600}
+.trust span::before{content:"✓ ";color:var(--v)}
+/* the card */
+.scene{position:relative;height:min(70vh,560px);perspective:1400px}
+.card{position:absolute;left:12%;top:16%;width:min(30vw,52vh,440px);aspect-ratio:1.586;border-radius:22px;transform-style:preserve-3d;animation:float 7s ease-in-out infinite alternate;
+  background:radial-gradient(120% 140% at 0% 0%,#a594ff 0%,#5b3df5 40%,#1d1460 100%);box-shadow:0 40px 80px rgba(48,25,160,.45),inset 0 1px 0 rgba(255,255,255,.4);color:#fff;padding:7%}
+@keyframes float{from{transform:rotateX(18deg) rotateY(-24deg) rotateZ(6deg) translateY(0)}to{transform:rotateX(10deg) rotateY(-12deg) rotateZ(2deg) translateY(-16px)}}
+.card::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.35) 45%,transparent 60%);background-size:250% 100%;animation:sheen 4s ease-in-out infinite}
+@keyframes sheen{from{background-position:120% 0}to{background-position:-60% 0}}
+.card .chip{width:16%;aspect-ratio:1.3;border-radius:6px;background:linear-gradient(135deg,#f6e6a8,#c9a94e);margin-top:6%}
+.card .num{position:absolute;left:7%;bottom:22%;font-family:"JetBrains Mono V",monospace;letter-spacing:.14em;font-size:clamp(12px,1.25vw,18px)}
+.card .name{position:absolute;left:7%;bottom:9%;font-size:12px;letter-spacing:.14em;opacity:.8}
+.card .brand{position:absolute;right:7%;top:9%;font-weight:800;font-size:clamp(14px,1.5vw,20px)}
+.card.back{left:28%;top:34%;background:radial-gradient(120% 140% at 0% 0%,#efffb0 0%,#c6f432 45%,#7aa50e 100%);color:var(--ink);animation-delay:-3s;z-index:-1;opacity:.95}
+.note{position:absolute;background:#fff;border-radius:16px;padding:12px 16px;box-shadow:0 18px 40px rgba(18,15,43,.12);display:flex;gap:12px;align-items:center;font-size:13px;animation:bob 5s ease-in-out infinite alternate}
+@keyframes bob{to{transform:translateY(-10px)}}
+.note i{width:34px;height:34px;border-radius:10px;background:var(--lime);display:grid;place-items:center;font-style:normal;font-weight:800}
+.note b{display:block;font-size:15px}
+.note small{color:var(--mut)}
+.n1{right:2%;top:8%}.n2{left:0;bottom:6%;animation-delay:-2s}
+section{padding:clamp(80px,9vw,130px) 0}
+.h2{font-size:clamp(38px,4.4vw,70px);line-height:1;letter-spacing:-.05em;font-weight:800;max-width:13em}
+.h2 span{color:var(--v)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:50px}
+.f{background:#fff;border:1px solid var(--line);border-radius:22px;padding:24px;min-height:220px;display:flex;flex-direction:column;justify-content:space-between}
+.f .ic{width:44px;height:44px;border-radius:14px;background:var(--bg);display:grid;place-items:center;font-weight:800;color:var(--v)}
+.f h3{font-size:18px;margin-bottom:6px}
+.f p{color:var(--mut);font-size:14px;line-height:1.5}
+.dark{background:var(--ink);color:#fff;border-radius:36px;padding:clamp(36px,5vw,70px);display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.dark .h2 span{color:var(--lime)}
+.dark .big{font-size:clamp(70px,9vw,150px);font-weight:800;letter-spacing:-.06em;line-height:.9;color:var(--lime)}
+.dark p{color:#b3aed6;line-height:1.6;margin-top:10px}
+.foot{padding:36px 0;color:var(--mut);font-size:13px;display:flex;justify-content:space-between}
+@media (max-width:900px){.nav a:not(.logo):not(.b){display:none}.stage,.dark{grid-template-columns:1fr}.scene{display:none}.grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<section class="hero" style="padding:0">
+  <div class="wrap" style="height:100%;display:flex;flex-direction:column">
+    <header class="nav"><a class="logo" href="#"><i></i>Ledger</a><a href="#">Accounts</a><a href="#">Cards</a><a href="#">Payments</a><a href="#">Pricing</a><a class="o" href="#">Log in</a><a class="b" href="#">Open an account</a></header>
+    <div class="stage">
+      <div>
+        <span class="tag" data-in><b>NEW</b> 4.2% on idle cash, paid daily</span>
+        <h1 data-in style="--d:1">Banking that keeps up with <span>your business.</span></h1>
+        <p class="lede" data-in style="--d:2">Accounts, cards, invoices and payroll in one place, with no monthly fees and approval in about ten minutes.</p>
+        <div class="ctas" data-in style="--d:3"><a href="#">Open a free account</a><a href="#">Talk to sales →</a></div>
+        <div class="trust" data-in style="--d:4"><span>FDIC insured to $5M</span><span>No monthly fees</span><span>4.9 · App Store</span></div>
+      </div>
+      <div class="scene" aria-hidden="true">
+        <div class="card back"><div class="brand">Ledger</div><div class="chip"></div><div class="num">5381 •••• •••• 2207</div><div class="name">TEAM CARD</div></div>
+        <div class="card"><div class="brand">Ledger</div><div class="chip"></div><div class="num">4716 •••• •••• 9042</div><div class="name">MARA OKAFOR</div></div>
+        <div class="note n1"><i>$</i><div><b>+ $12,480.00</b><small>Invoice #1042 paid</small></div></div>
+        <div class="note n2"><i>%</i><div><b>$318.22</b><small>Interest this month</small></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+<main>
+  <section>
+    <div class="wrap">
+      <h2 class="h2">Everything finance does, <span>minus the spreadsheets.</span></h2>
+      <div class="grid">
+        <div class="f"><span class="ic">01</span><div><h3>Smart cards</h3><p>Unlimited virtual cards with limits per team and per vendor.</p></div></div>
+        <div class="f"><span class="ic">02</span><div><h3>Bill pay</h3><p>Forward an invoice by email; we read it, schedule it and pay it.</p></div></div>
+        <div class="f"><span class="ic">03</span><div><h3>Payroll</h3><p>Run payroll in 50 states with taxes filed automatically.</p></div></div>
+        <div class="f"><span class="ic">04</span><div><h3>Reports</h3><p>Real-time cash flow that syncs to QuickBooks and Xero.</p></div></div>
+      </div>
+    </div>
+  </section>
+  <section style="padding-top:0">
+    <div class="wrap dark">
+      <div><h2 class="h2">Your cash should <span>work weekends.</span></h2><p>Idle balances earn interest daily through our partner banks, with same-day access whenever you need it.</p></div>
+      <div class="big">4.2%</div>
+    </div>
+  </section>
+</main>
+<footer class="wrap foot"><span>© Ledger Financial, Inc. Banking services by partner banks, Member FDIC.</span><span>Privacy · Terms</span></footer>
+</body>
+</html>

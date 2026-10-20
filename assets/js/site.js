@@ -3,7 +3,7 @@ var BRAND = "JIEWEITECH";
 var CONTACT_EMAIL = "[Contact email]";
 // Images for the "Selected work" section. Missing files show a labeled placeholder.
 var SCREEN_DIR = "assets/img/shots/";
-var SCREENS = ["L1","T1","T2","R3","L4","B2","R4","B5","L2","T4","B6","L3","R1","B3","L5","R5"];
+var SCREENS = ["T1","B5","L2","R4","B3","T2","B6","L2","T1","R4","B5","B6","T2","B3"];
 // Screenshots of the concept pages for the entrance wall (tools/make_shots.py regenerates them).
 var SHOT_DIR = "assets/img/shots/";
 // Entrance wall tile width / height, cycled in order. All landscape.
@@ -11,7 +11,7 @@ var RATIOS = [1.6, 1.5, 1.6, 1.45, 1.6, 1.55, 1.5, 1.6];
 // The 20 concept pages around the wall (generated; each one is a complete standalone document).
 // Each one is a real page in /pages (tools/make_pages.py regenerates them).
 var PAGE_DIR = "pages/";
-var PAGES = [{"id": "L1", "rect": [20, 58, 335, 232], "title": "Design Drives Business Value"}, {"id": "L2", "rect": [20, 244, 308, 373], "title": "Redefine the Digital Era"}, {"id": "L3", "rect": [20, 385, 304, 527], "title": "Creating Brands for a Better Tomorrow"}, {"id": "L4", "rect": [20, 541, 305, 688], "title": "A New Perspective"}, {"id": "L5", "rect": [20, 706, 304, 868], "title": "From Product to Possibility"}, {"id": "T1", "rect": [354, 102, 656, 254], "title": "Explore New Possibilities"}, {"id": "T2", "rect": [689, 68, 1017, 256], "title": "Crafting Memorable Brands"}, {"id": "T3", "rect": [1036, 96, 1318, 256], "title": "A Simpler Digital World"}, {"id": "T4", "rect": [1336, 62, 1654, 195], "title": "Technology and Humanity"}, {"id": "R1", "rect": [1336, 208, 1531, 355], "title": "Enterprise Digital Partner"}, {"id": "R2", "rect": [1538, 208, 1654, 355], "title": "Design for What's Next"}, {"id": "R3", "rect": [1349, 372, 1654, 518], "title": "Connect the World, Create Innovation"}, {"id": "R4", "rect": [1336, 531, 1654, 645], "title": "Drive Industry Progress"}, {"id": "R5", "rect": [1336, 661, 1654, 880], "title": "Style Never Fades"}, {"id": "B1", "rect": [322, 606, 586, 726], "title": "Building the Future"}, {"id": "B2", "rect": [322, 738, 586, 874], "title": "Premium Web Experiences"}, {"id": "B3", "rect": [601, 634, 925, 785], "title": "Future-Ready Digital Products"}, {"id": "B4", "rect": [612, 801, 935, 903], "title": "Strategy Design Technology"}, {"id": "B5", "rect": [944, 622, 1303, 777], "title": "High-Quality Digital Solutions"}, {"id": "B6", "rect": [950, 793, 1317, 904], "title": "Design Bridges Business and People"}];
+var PAGES = [{"id": "L1", "rect": [20, 58, 335, 232], "title": "Casa Ondina · Above the bay"}, {"id": "L2", "rect": [20, 244, 308, 373], "title": "Aurora · The quiet layer for operations"}, {"id": "L3", "rect": [20, 385, 304, 527], "title": "Halden & Co. · Architecture"}, {"id": "L4", "rect": [20, 541, 305, 688], "title": "Verde · Groceries grown nearby"}, {"id": "T1", "rect": [354, 102, 656, 254], "title": "Noon · Run your home on daylight"}, {"id": "T2", "rect": [689, 68, 1017, 256], "title": "Nocturne · Time, kept in the dark"}, {"id": "T4", "rect": [1336, 62, 1654, 195], "title": "Atlas · Built for altitude"}, {"id": "R3", "rect": [1349, 372, 1654, 518], "title": "Volta · Electric, unhurried"}, {"id": "R4", "rect": [1336, 531, 1654, 645], "title": "Kiln · Roasted slow, poured loud"}, {"id": "B2", "rect": [322, 738, 586, 874], "title": "Maison Sable · Skin, simplified"}, {"id": "B3", "rect": [601, 634, 925, 785], "title": "Ledger · Banking that keeps up"}, {"id": "B5", "rect": [944, 622, 1303, 777], "title": "Sonic Field · Lisbon festival"}, {"id": "B6", "rect": [950, 793, 1317, 904], "title": "Orbital · Small things in high places"}];
 // Selected-work frames. "crop" zooms into a detail (scale, and the origin in % of the frame).
 var HERO = [
   {file:"screen-01.jpg", variant:0, ratio:1.6,  caption:"Design example"},
@@ -22,15 +22,15 @@ var HERO = [
 // "What we do": the image shown on the right while each service is hovered (in the same order as the services).
 // These are stand-ins taken from the concept pages; put your own images in assets/img/services/ and list them here.
 var SERVICE_IMAGES = [
-  {src:"assets/img/shots/T2.jpg", alt:"Website development example"},
-  {src:"assets/img/shots/R3.jpg", alt:"GEO optimization example"},
-  {src:"assets/img/shots/B5.jpg", alt:"Standalone website example"}
+  {src:"assets/img/shots/L2.jpg", alt:"Website development example"},
+  {src:"assets/img/shots/B3.jpg", alt:"GEO optimization example"},
+  {src:"assets/img/shots/R4.jpg", alt:"Standalone website example"}
 ];
 var WORK = [
-  {file:"T1.jpg", variant:3, ratio:1.6, caption:"Design concept"},
-  {file:"R3.jpg", variant:5, ratio:1.6, caption:"Design concept"},
-  {file:"T2.jpg", variant:2, ratio:1.6, caption:"Design concept"},
-  {file:"B2.jpg", variant:1, ratio:1.6, caption:"Design concept"}
+  {file:"T1.jpg", variant:3, ratio:1.6, caption:"Design concept · Noon"},
+  {file:"B5.jpg", variant:5, ratio:1.6, caption:"Design concept · Sonic Field"},
+  {file:"T2.jpg", variant:2, ratio:1.6, caption:"Design concept · Nocturne"},
+  {file:"B3.jpg", variant:1, ratio:1.6, caption:"Design concept · Ledger"}
 ];
 /* ===================== */
 
@@ -1049,8 +1049,8 @@ var WORK = [
     list.forEach(function (s, i) { if (Math.abs(s - y) < Math.abs(list[best] - y)) best = i; });
     return best;
   }
-  /* The first page turns quickly; the others take about a second. Scrolling again the same way while a
-     page is turning speeds it up, so two scrolls finish in about half a second. */
+  /* Every page takes about a second. Scrolling again the same way while a page is turning speeds it up,
+     so two scrolls finish in about half a second. */
   var snapTw = null, snapDir = 0, snapBoosts = 0, snapStart = 0, leaveCall = null;
   function snapTo(y, done) {
     var from = window.pageYOffset, top = pageTop(hx);
@@ -1061,16 +1061,11 @@ var WORK = [
       snapStart = performance.now();
       snapProxy.y = window.pageYOffset;
       gsap.killTweensOf(snapProxy);
-      /* the first page and "What we do" switch almost instantly; the other pages take about a second */
-      var first = Math.min(from, y) <= top + 2 && Math.abs(y - from) <= innerHeight * 1.05;
+      /* every page takes about a second; scrolling again the same way hurries it along (see boost) */
       snapTw = gsap.to(snapProxy, {
-        y: y, duration: reduce ? 0.01 : first ? 0.1 : 1, ease: first ? "power1.out" : "power2.inOut",
+        y: y, duration: reduce ? 0.01 : 1, ease: "power2.inOut",
         onUpdate: function () { window.scrollTo(0, snapProxy.y); },
-        onComplete: function () {
-          snapping = false; snapTarget = null; snapTw = null;
-          if (first) wh.holdUntil = performance.now() + 250;   /* a quick second wheel notch should not skip a page */
-          if (done) done();
-        }
+        onComplete: function () { snapping = false; snapTarget = null; snapTw = null; if (done) done(); }
       });
     };
     snapTw = null;

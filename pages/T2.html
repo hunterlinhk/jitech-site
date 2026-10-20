@@ -1,74 +1,133 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>JIEWEI | Crafting Memorable Brands</title><script>if(location.search.indexOf("wall")>-1)document.documentElement.className+=" on-wall"</script><style>
-@font-face{font-family:"Inter Variable";font-style:normal;font-display:swap;font-weight:100 900;src:url("../assets/fonts/inter.woff2") format("woff2-variations")}
-html.on-wall{overflow:hidden;scrollbar-width:none}html.on-wall::-webkit-scrollbar{display:none}
-*,*::before,*::after{box-sizing:border-box}
-html,body{margin:0}
-body{font-family:"Inter Variable",Inter,"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;color:var(--fg);background:var(--bg);font-size:16px}
-:root{--fg:#0b0b0c;--muted:#5d6168;--bg:#fbfbfb;--line:rgba(0,0,0,.08);--accent:#1f5fff}
-body.dark{--fg:#f4f5f6;--muted:#a3a8ae;--bg:#030303;--line:rgba(255,255,255,.12)}
-body.sky{--bg:#f6f9fd}
-a{color:inherit;text-decoration:none}
-h1,h2,h3,p{margin:0}
-.nav{position:relative;z-index:5;display:flex;align-items:center;gap:2.4vw;height:72px;padding:0 3.4vw;background:var(--bg);border-bottom:1px solid var(--line)}
-.nav.light{--fg:#0b0b0c;--muted:#5d6168;--bg:#ffffff;--line:rgba(0,0,0,.08);color:#0b0b0c}
-.logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:18px;letter-spacing:.02em;margin-right:auto}
-.logo i{width:17px;height:17px;border-radius:50%;border:4.5px solid currentColor;display:block}
-.links{display:flex;gap:2.6vw;font-size:14px;color:var(--muted)}
-.links a:hover{color:var(--fg)}
-.icons{display:flex;gap:18px;align-items:center;margin-left:3vw}
-.hero{position:relative;min-height:calc(100vh - 72px);overflow:hidden;display:flex}
-.hero .copy{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:center;gap:1.6vw;padding:0 5.4vw 2vw;max-width:64%}
-.hero h1{font-size:5.6vw;line-height:1.06;font-weight:600;letter-spacing:-.025em}
-.hero h1 span{display:block;white-space:nowrap}
-.hero .sub{font-size:2.05vw;line-height:1.45;color:var(--muted)}
-.hero .sub span{display:block}
-.btn{align-self:flex-start;display:inline-flex;align-items:center;gap:.6em;padding:.85em 1.6em;border-radius:999px;font-size:max(12px,1.55vw);font-weight:600;background:var(--fg);color:var(--bg);margin-top:.6vw}
-.btn.outline{background:transparent;color:var(--fg);border:1.5px solid currentColor}
-.btn svg{width:1em;height:1em}
-.art{position:absolute;inset:0 0 0 36%;z-index:1}
-.art-svg{width:100%;height:100%;display:block}
-.full .art{inset:0}
-.full .copy{max-width:60%}
-.full::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(0,0,0,.75),rgba(0,0,0,0) 55%)}
-.side{display:grid;grid-template-columns:22% 1fr}
-.side .copy{max-width:none;gap:1.4vw;padding-top:3vw}
-.side .copy h1{font-size:2vw;font-weight:500;color:var(--muted)}
-.side .copy h1 span{margin-bottom:.9vw}
-.side .art{inset:0 0 0 46%}
-.side .pics{position:absolute;left:24%;top:12%;bottom:12%;width:21%;display:grid;grid-template-columns:1fr 1fr;gap:1.2vw;z-index:2}
-.side .pics div{background:#e5e6e8;position:relative;overflow:hidden}
-.compact .copy{max-width:72%;justify-content:flex-start;padding-top:14vw}
-.compact .copy h1{font-size:8.6vw}
-.compact .art{inset:0 0 40% 50%}
-.strip{position:absolute;left:0;right:0;bottom:0;z-index:3;display:grid;grid-template-columns:repeat(3,1fr);gap:1.4vw;padding:0 5.4vw 3vw}
-.strip .it{display:flex;align-items:center;gap:1vw;font-size:1.05vw;font-weight:600;line-height:1.25}
-.strip .ph svg,.strip.products svg,.strip.mini svg{width:100%;height:100%;display:block}
-.strip .it>svg.arr{width:1.6vw;height:1.6vw;flex:none}
-.strip.products{height:24%;right:38%;padding-bottom:2.4vw}
-.strip.products .it{background:#f1f2f3}
-.strip.products .it,.strip.products .ph{height:100%}
-.strip.services{position:absolute;bottom:2.4vw;left:5.4vw;right:3vw;padding:0;height:14%;gap:1vw}
-.strip.services .it{background:#fff;border:1px solid var(--line);padding:0 1.2vw;justify-content:space-between}
-.strip.services .ph{width:34%;height:80%}
-.strip.fashion{height:24%;background:#fff;border-top:1px solid var(--line);grid-template-columns:1fr 1fr 1.2fr;padding:2vw 5.4vw}
-.strip.fashion .ph{height:100%;aspect-ratio:1/1}
-.strip.fashion .list{font-size:1.1vw;color:var(--muted);line-height:1.8;display:flex;justify-content:space-between;align-items:center}
-.strip.mini{height:22%;padding:0 6vw 6vw;gap:3vw}
-.strip.mini .it{height:100%}
-.hero.with-strip .copy{padding-bottom:12vw}
-.hero.with-strip.fashion-strip .copy{padding-bottom:26vh}
-.hero.with-strip.products-strip .copy{padding-bottom:24vh}
-/* sections below the hero */
-section{padding:9vw 5.4vw}
-.intro h2{font-size:3.4vw;line-height:1.12;font-weight:560;letter-spacing:-.02em;max-width:18ch}
-.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:3vw;margin-top:5vw;border-top:1px solid var(--line);padding-top:2.4vw}
-.cols h3{font-size:1.4vw;font-weight:600;margin-bottom:.8vw}
-.cols p{font-size:1.1vw;line-height:1.55;color:var(--muted)}
-.panel{position:relative;height:42vw;overflow:hidden;background:var(--panel,#0b0b0c);margin:0 5.4vw;border-radius:6px}
-.panel .art{inset:0}
-.cap{display:flex;justify-content:space-between;gap:2vw;margin:1.4vw 5.4vw 0;font-size:1.05vw;color:var(--muted)}
-.cta{text-align:left}
-.cta h2{font-size:4.4vw;font-weight:560;letter-spacing:-.025em;line-height:1.05;max-width:16ch}
-.cta .btn{margin-top:2.4vw}
-footer{display:flex;justify-content:space-between;align-items:center;padding:2.6vw 5.4vw;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
-</style></head><body class=""><header class="nav"><a class="logo" href="#top"><i></i>JIEWEI</a><nav class="links"><a href="#top">Home</a><a href="#solutions">Solutions</a><a href="#about">About</a><a href="#work">Work</a><a href="#contact">Contact</a></nav><div class="icons"><svg viewBox="0 0 20 20" width="15" height="15"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M13 13 L17 17" stroke="currentColor" stroke-width="1.8"/></svg><svg viewBox="0 0 20 20" width="17" height="17"><path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" stroke-width="1.6"/></svg></div></header><main><section class="hero split with-strip services-strip" id="top" style="padding:0"><div class="copy"><h1><span>Crafting</span><span>Memorable Brands</span></h1><p class="sub"><span>Focus on brand experience</span><span>and long-term value.</span></p><a class="btn outline" href="#contact">Explore <svg class="arr" viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" fill="none"/></svg></a></div><div class="art"><svg class="art-svg" viewBox="190 0 630 600" preserveAspectRatio="xMaxYMid slice" aria-hidden="true"><defs><radialGradient id="cup" cx="38%" cy="32%" r="70%"><stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#c9ccd0"/><stop offset="0.85" stop-color="#8a8f96"/><stop offset="1" stop-color="#5d6168"/></radialGradient><linearGradient id="band" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f4f5f6"/><stop offset="0.5" stop-color="#a9aeb5"/><stop offset="1" stop-color="#3f434a"/></linearGradient><radialGradient id="pad" cx="45%" cy="40%" r="60%"><stop offset="0" stop-color="#3a3a3a"/><stop offset="1" stop-color="#050505"/></radialGradient><filter id="s" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="18"/></filter><filter id="h" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="1.5"/></filter></defs><ellipse cx="600" cy="560" rx="240" ry="26" fill="#000" opacity=".14" filter="url(#s)"/><path d="M450 400 C430 160 560 30 700 40 C800 48 840 160 820 300" stroke="url(#band)" stroke-width="42" fill="none" stroke-linecap="round"/><path d="M450 400 C430 160 560 30 700 40" stroke="#fff" stroke-opacity=".8" stroke-width="3" fill="none" transform="translate(-14,-6)" filter="url(#h)"/><circle cx="745" cy="360" r="120" fill="#6f747b"/><circle cx="560" cy="390" r="150" fill="url(#cup)"/><circle cx="560" cy="390" r="104" fill="url(#pad)"/><circle cx="560" cy="390" r="74" fill="none" stroke="#2a2a2a" stroke-width="6"/><ellipse cx="520" cy="345" rx="34" ry="16" fill="#fff" opacity=".14"/><circle cx="560" cy="390" r="150" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="2"/></svg></div><div class="strip services"><div class="it"><span>Brand<br>Strategy</span><svg class="arr" viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" fill="none"/></svg></div><div class="it"><span>Product<br>Design</span><span class="ph"><svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet"><rect width="100" height="100" fill="#f1f2f3"/><path d="M20 80 C30 30 60 20 84 40 L84 80 Z" fill="#0d0d0d"/></svg></span></div><div class="it"><span>Digital<br>Experience</span><span class="ph"><svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet"><rect width="100" height="100" fill="#f1f2f3"/><rect x="36" y="16" width="28" height="68" rx="6" fill="#0d0d0d"/></svg></span></div></div></section><section class="intro" id="solutions"><h2>Crafting Memorable Brands. Focus on brand experience and long-term value.</h2><div class="cols"><div><h3>Discover</h3><p>We start by listening closely.</p></div><div><h3>Create</h3><p>Ideas become working prototypes.</p></div><div><h3>Deliver</h3><p>Launched, measured, refined.</p></div></div></section><div id="work"><div class="panel" style="--panel:#eceef0"><div class="art"><svg class="art-svg" viewBox="190 0 630 600" preserveAspectRatio="xMaxYMid slice" aria-hidden="true"><defs><radialGradient id="cup" cx="38%" cy="32%" r="70%"><stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#c9ccd0"/><stop offset="0.85" stop-color="#8a8f96"/><stop offset="1" stop-color="#5d6168"/></radialGradient><linearGradient id="band" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f4f5f6"/><stop offset="0.5" stop-color="#a9aeb5"/><stop offset="1" stop-color="#3f434a"/></linearGradient><radialGradient id="pad" cx="45%" cy="40%" r="60%"><stop offset="0" stop-color="#3a3a3a"/><stop offset="1" stop-color="#050505"/></radialGradient><filter id="s" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="18"/></filter><filter id="h" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="1.5"/></filter></defs><ellipse cx="600" cy="560" rx="240" ry="26" fill="#000" opacity=".14" filter="url(#s)"/><path d="M450 400 C430 160 560 30 700 40 C800 48 840 160 820 300" stroke="url(#band)" stroke-width="42" fill="none" stroke-linecap="round"/><path d="M450 400 C430 160 560 30 700 40" stroke="#fff" stroke-opacity=".8" stroke-width="3" fill="none" transform="translate(-14,-6)" filter="url(#h)"/><circle cx="745" cy="360" r="120" fill="#6f747b"/><circle cx="560" cy="390" r="150" fill="url(#cup)"/><circle cx="560" cy="390" r="104" fill="url(#pad)"/><circle cx="560" cy="390" r="74" fill="none" stroke="#2a2a2a" stroke-width="6"/><ellipse cx="520" cy="345" rx="34" ry="16" fill="#fff" opacity=".14"/><circle cx="560" cy="390" r="150" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="2"/></svg></div></div><div class="cap"><span>Crafting</span><span>Design concept</span></div></div><section class="cta" id="contact"><h2>Let's create what comes next.</h2><a class="btn" href="#top">Get in touch <svg class="arr" viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" fill="none"/></svg></a></section></main><footer id="about"><span>JIEWEI</span><span>Design concept page</span></footer></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NOCTURNE | Time, kept in the dark</title>
+<script src="assets/base.js"></script>
+<link rel="stylesheet" href="assets/base.css">
+<style>
+:root{--bg:#07090a;--g:#c9a96a;--g2:#efd9a7;--tx:#ece6da;--mut:#8d877c;--line:rgba(236,230,218,.12)}
+body{background:var(--bg);color:var(--tx);font-family:"Manrope V",Arial,sans-serif;font-size:15px}
+.serif{font-family:"Cormorant V",Georgia,serif}
+.wrap{width:min(1280px,100% - 64px);margin:0 auto}
+.nav{position:absolute;inset:0 0 auto;z-index:4;height:84px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 max(32px,calc((100% - 1280px)/2));font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--mut)}
+.nav .l{display:flex;gap:30px}
+.nav .r{display:flex;gap:30px;justify-content:flex-end}
+.logo{font-family:"Cormorant V",serif;font-size:26px;letter-spacing:.42em;color:var(--tx);text-indent:.42em;font-weight:500}
+.hero{position:relative;min-height:100vh;overflow:hidden;display:flex;align-items:center;background:radial-gradient(55% 75% at 66% 52%,#163027 0%,#0b1512 38%,var(--bg) 72%)}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(30% 40% at 68% 30%,rgba(239,217,167,.10),transparent 70%)}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1fr 1.05fr;align-items:center;gap:40px;padding-top:60px}
+.eb{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--g)}
+.hero h1{font-weight:400;font-size:clamp(54px,min(7vw,13vh),118px);line-height:.9;letter-spacing:-.01em;margin:22px 0 26px}
+.hero h1 i{color:var(--g2);font-weight:300}
+.hero p{max-width:27em;color:var(--mut);line-height:1.75}
+.btn{display:inline-flex;align-items:center;gap:14px;margin-top:clamp(24px,4.5vh,44px);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--tx)}
+.btn::after{content:"";width:56px;height:1px;background:var(--g)}
+.num{position:absolute;right:-1vw;bottom:-6vh;font-family:"Cormorant V",serif;font-size:min(34vw,62vh);line-height:.8;color:rgba(239,217,167,.035);font-weight:300;pointer-events:none}
+/* the watch */
+.watch{position:relative;width:min(40vw,74vh);aspect-ratio:1;margin-left:auto;filter:drop-shadow(0 50px 70px rgba(0,0,0,.65))}
+.watch .lug{position:absolute;left:50%;width:34%;height:16%;transform:translateX(-50%);background:linear-gradient(90deg,#3a352c,#bfae86 30%,#f4e6c2 50%,#a8946a 70%,#2e2a23);border-radius:6px}
+.watch .lug.t{top:-9%}.watch .lug.b{bottom:-9%}
+.watch .case{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 210deg,#6e6047,#f6e7c3,#9b8762,#3d362a,#c9b386,#f6e7c3,#6e6047)}
+.watch .crown{position:absolute;right:-4%;top:46%;width:6%;height:8%;border-radius:3px;background:repeating-linear-gradient(0deg,#c2ad80 0 2px,#7a6a4a 2px 4px)}
+.watch .bez{position:absolute;inset:4.5%;border-radius:50%;background:#0d100e;box-shadow:inset 0 0 0 2px rgba(0,0,0,.6)}
+.watch .dial{position:absolute;inset:7%;border-radius:50%;
+  background:radial-gradient(circle at 38% 30%,rgba(255,255,255,.16),transparent 45%),repeating-conic-gradient(from 0deg,#0e2b22 0 1.2deg,#143a2e 1.2deg 2.4deg);
+  box-shadow:inset 0 0 40px rgba(0,0,0,.7)}
+.watch svg{position:absolute;inset:7%;width:86%;height:86%;overflow:visible}
+.hand{transform-origin:200px 200px;transition:transform .2s cubic-bezier(.4,2.2,.6,1)}
+.glass{position:absolute;inset:7%;border-radius:50%;background:linear-gradient(130deg,rgba(255,255,255,.16),rgba(255,255,255,0) 40%);pointer-events:none}
+/* sections */
+section{padding:clamp(90px,11vw,150px) 0}
+.intro{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;border-top:1px solid var(--line);padding-top:56px}
+.intro h2{font-size:clamp(40px,4.4vw,68px);font-weight:300;line-height:1}
+.intro p{color:var(--mut);line-height:1.8;max-width:34em}
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:70px}
+.trio article{border:1px solid var(--line);padding:40px 28px 30px;text-align:center}
+.mini{width:62%;aspect-ratio:1;margin:0 auto 30px;border-radius:50%;padding:6%;background:conic-gradient(from 210deg,#6e6047,#f6e7c3,#9b8762,#3d362a,#c9b386,#f6e7c3,#6e6047)}
+.mini div{width:100%;height:100%;border-radius:50%;background:var(--d);box-shadow:inset 0 0 22px rgba(0,0,0,.6);position:relative}
+.mini div::before,.mini div::after{content:"";position:absolute;left:50%;bottom:50%;width:3px;border-radius:2px;background:var(--g2);transform-origin:50% 100%}
+.mini div::before{height:34%;transform:translateX(-50%) rotate(-40deg)}
+.mini div::after{height:24%;transform:translateX(-50%) rotate(65deg)}
+.trio h3{font-family:"Cormorant V",serif;font-weight:400;font-size:30px}
+.trio small{display:block;margin-top:8px;color:var(--mut);letter-spacing:.2em;font-size:10px;text-transform:uppercase}
+.quote{text-align:center;max-width:15em;margin:0 auto;font-size:clamp(36px,4.6vw,72px);font-weight:300;line-height:1.08}
+.quote i{color:var(--g2)}
+.specs{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);margin-top:80px}
+.specs div{padding:28px 0;border-bottom:1px solid var(--line)}
+.specs b{display:block;font-family:"Cormorant V",serif;font-size:40px;font-weight:400;color:var(--g2)}
+.specs span{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}
+.foot{padding:50px 0;border-top:1px solid var(--line);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}
+.foot .wrap{display:flex;justify-content:space-between}
+@media (max-width:900px){.nav .l,.nav .r{display:none}.nav{grid-template-columns:1fr}.hero .wrap,.intro{grid-template-columns:1fr}.watch{width:80vw;margin:0 auto}.trio,.specs{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<header class="nav">
+  <nav class="l"><a href="#">Collections</a><a href="#">Calibres</a></nav>
+  <a class="logo" href="#">NOCTURNE</a>
+  <nav class="r"><a href="#">Maison</a><a href="#">Boutiques</a></nav>
+</header>
+<main>
+  <section class="hero" style="padding:0">
+    <span class="num" aria-hidden="true">N°01</span>
+    <div class="wrap">
+      <div>
+        <p class="eb" data-in>Calibre N.01 · Geneva</p>
+        <h1 class="serif" data-in style="--d:1">Time, kept<br><i>in the dark.</i></h1>
+        <p data-in style="--d:2">A hand-wound movement beneath a forest-green sunburst dial. Grade-A luminova, a 72-hour reserve, and only 300 pieces each year.</p>
+        <a class="btn" href="#" data-in style="--d:3">Discover the collection</a>
+      </div>
+      <div class="watch" data-fade style="--d:1" aria-hidden="true">
+        <span class="lug t"></span><span class="lug b"></span><span class="case"></span><span class="crown"></span><span class="bez"></span><span class="dial"></span>
+        <svg viewBox="0 0 400 400">
+          <g id="ticks"></g>
+          <text x="200" y="128" text-anchor="middle" font-family="Cormorant V, serif" font-size="22" letter-spacing="7" fill="#efd9a7">NOCTURNE</text>
+          <text x="200" y="292" text-anchor="middle" font-family="Manrope V, sans-serif" font-size="8.5" letter-spacing="3.5" fill="#b9a982">AUTOMATIQUE · 72H</text>
+          <g class="hand" id="hh"><path d="M196 205 L198 108 L200 98 L202 108 L204 205Z" fill="#efd9a7"/><path d="M198.6 160 L200 112 L201.4 160Z" fill="#dff3e4"/></g>
+          <g class="hand" id="mh"><path d="M197 208 L198.6 60 L200 48 L201.4 60 L203 208Z" fill="#efd9a7"/><path d="M199.2 150 L200 64 L200.8 150Z" fill="#dff3e4"/></g>
+          <g class="hand" id="sh"><path d="M199.4 240 L199.6 44 L200.4 44 L200.6 240Z" fill="#e2b257"/><circle cx="200" cy="225" r="5" fill="none" stroke="#e2b257" stroke-width="1.6"/></g>
+          <circle cx="200" cy="200" r="7" fill="#efd9a7"/><circle cx="200" cy="200" r="2.4" fill="#0e2b22"/>
+        </svg>
+        <span class="glass"></span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="intro"><h2 class="serif">Three dials,<br>one quiet obsession.</h2><p>Each Nocturne is finished by a single watchmaker in our Plainpalais atelier, from the côtes de Genève on the bridges to the hand-applied lume on every index.</p></div>
+      <div class="trio">
+        <article><div class="mini"><div style="--d:repeating-conic-gradient(#0e2b22 0 1.2deg,#143a2e 1.2deg 2.4deg)"></div></div><h3>Forêt</h3><small>Green sunburst · 39 mm</small></article>
+        <article><div class="mini"><div style="--d:repeating-conic-gradient(#14161b 0 1.2deg,#1d2028 1.2deg 2.4deg)"></div></div><h3>Minuit</h3><small>Midnight black · 39 mm</small></article>
+        <article><div class="mini"><div style="--d:repeating-conic-gradient(#d9cdb6 0 1.2deg,#e8dfcb 1.2deg 2.4deg)"></div></div><h3>Ivoire</h3><small>Grained ivory · 36 mm</small></article>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <p class="quote serif">“We make a few watches, <i>slowly</i>, for people who notice.”</p>
+      <div class="specs"><div><b>300</b><span>Pieces a year</span></div><div><b>72 h</b><span>Power reserve</span></div><div><b>21,600</b><span>Vibrations / hour</span></div><div><b>1 · 1</b><span>Watchmaker · watch</span></div></div>
+    </div>
+  </section>
+</main>
+<footer class="foot"><div class="wrap"><span>Nocturne Genève</span><span>Rue de Carouge 12</span><span>© Nocturne</span></div></footer>
+<script>
+(function(){
+  var g=document.getElementById("ticks"),s="";
+  for(var i=0;i<60;i++){var a=i*6,big=i%5===0;
+    s+=big?'<rect x="196" y="22" width="8" height="'+(i%15===0?30:22)+'" rx="1.5" fill="#efd9a7" transform="rotate('+a+' 200 200)"/><rect x="198" y="25" width="4" height="'+(i%15===0?24:16)+'" rx="1" fill="#dff3e4" transform="rotate('+a+' 200 200)"/>'
+          :'<rect x="199.4" y="22" width="1.2" height="7" fill="#9c8e6c" transform="rotate('+a+' 200 200)"/>';}
+  g.innerHTML=s;
+  var hh=document.getElementById("hh"),mh=document.getElementById("mh"),sh=document.getElementById("sh");
+  var t0=Date.now(),base=null;
+  function tick(){var d=new Date(),sec=d.getSeconds(),m=d.getMinutes()+sec/60,h=(d.getHours()%12)+m/60;
+    if(base===null)base=sec;var run=base+Math.round((Date.now()-t0)/1000);   /* keeps counting up, so the hand never sweeps backwards */
+    hh.style.transform="rotate("+h*30+"deg)";mh.style.transform="rotate("+m*6+"deg)";sh.style.transform="rotate("+run*6+"deg)";}
+  tick();setInterval(tick,1000);
+})();
+</script>
+</body>
+</html>

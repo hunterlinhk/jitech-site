@@ -1,74 +1,104 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>JIEWEI | Explore New Possibilities</title><script>if(location.search.indexOf("wall")>-1)document.documentElement.className+=" on-wall"</script><style>
-@font-face{font-family:"Inter Variable";font-style:normal;font-display:swap;font-weight:100 900;src:url("../assets/fonts/inter.woff2") format("woff2-variations")}
-html.on-wall{overflow:hidden;scrollbar-width:none}html.on-wall::-webkit-scrollbar{display:none}
-*,*::before,*::after{box-sizing:border-box}
-html,body{margin:0}
-body{font-family:"Inter Variable",Inter,"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;color:var(--fg);background:var(--bg);font-size:16px}
-:root{--fg:#0b0b0c;--muted:#5d6168;--bg:#fbfbfb;--line:rgba(0,0,0,.08);--accent:#1f5fff}
-body.dark{--fg:#f4f5f6;--muted:#a3a8ae;--bg:#030303;--line:rgba(255,255,255,.12)}
-body.sky{--bg:#f6f9fd}
-a{color:inherit;text-decoration:none}
-h1,h2,h3,p{margin:0}
-.nav{position:relative;z-index:5;display:flex;align-items:center;gap:2.4vw;height:72px;padding:0 3.4vw;background:var(--bg);border-bottom:1px solid var(--line)}
-.nav.light{--fg:#0b0b0c;--muted:#5d6168;--bg:#ffffff;--line:rgba(0,0,0,.08);color:#0b0b0c}
-.logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:18px;letter-spacing:.02em;margin-right:auto}
-.logo i{width:17px;height:17px;border-radius:50%;border:4.5px solid currentColor;display:block}
-.links{display:flex;gap:2.6vw;font-size:14px;color:var(--muted)}
-.links a:hover{color:var(--fg)}
-.icons{display:flex;gap:18px;align-items:center;margin-left:3vw}
-.hero{position:relative;min-height:calc(100vh - 72px);overflow:hidden;display:flex}
-.hero .copy{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:center;gap:1.6vw;padding:0 5.4vw 2vw;max-width:64%}
-.hero h1{font-size:5.6vw;line-height:1.06;font-weight:600;letter-spacing:-.025em}
-.hero h1 span{display:block;white-space:nowrap}
-.hero .sub{font-size:2.05vw;line-height:1.45;color:var(--muted)}
-.hero .sub span{display:block}
-.btn{align-self:flex-start;display:inline-flex;align-items:center;gap:.6em;padding:.85em 1.6em;border-radius:999px;font-size:max(12px,1.55vw);font-weight:600;background:var(--fg);color:var(--bg);margin-top:.6vw}
-.btn.outline{background:transparent;color:var(--fg);border:1.5px solid currentColor}
-.btn svg{width:1em;height:1em}
-.art{position:absolute;inset:0 0 0 36%;z-index:1}
-.art-svg{width:100%;height:100%;display:block}
-.full .art{inset:0}
-.full .copy{max-width:60%}
-.full::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(0,0,0,.75),rgba(0,0,0,0) 55%)}
-.side{display:grid;grid-template-columns:22% 1fr}
-.side .copy{max-width:none;gap:1.4vw;padding-top:3vw}
-.side .copy h1{font-size:2vw;font-weight:500;color:var(--muted)}
-.side .copy h1 span{margin-bottom:.9vw}
-.side .art{inset:0 0 0 46%}
-.side .pics{position:absolute;left:24%;top:12%;bottom:12%;width:21%;display:grid;grid-template-columns:1fr 1fr;gap:1.2vw;z-index:2}
-.side .pics div{background:#e5e6e8;position:relative;overflow:hidden}
-.compact .copy{max-width:72%;justify-content:flex-start;padding-top:14vw}
-.compact .copy h1{font-size:8.6vw}
-.compact .art{inset:0 0 40% 50%}
-.strip{position:absolute;left:0;right:0;bottom:0;z-index:3;display:grid;grid-template-columns:repeat(3,1fr);gap:1.4vw;padding:0 5.4vw 3vw}
-.strip .it{display:flex;align-items:center;gap:1vw;font-size:1.05vw;font-weight:600;line-height:1.25}
-.strip .ph svg,.strip.products svg,.strip.mini svg{width:100%;height:100%;display:block}
-.strip .it>svg.arr{width:1.6vw;height:1.6vw;flex:none}
-.strip.products{height:24%;right:38%;padding-bottom:2.4vw}
-.strip.products .it{background:#f1f2f3}
-.strip.products .it,.strip.products .ph{height:100%}
-.strip.services{position:absolute;bottom:2.4vw;left:5.4vw;right:3vw;padding:0;height:14%;gap:1vw}
-.strip.services .it{background:#fff;border:1px solid var(--line);padding:0 1.2vw;justify-content:space-between}
-.strip.services .ph{width:34%;height:80%}
-.strip.fashion{height:24%;background:#fff;border-top:1px solid var(--line);grid-template-columns:1fr 1fr 1.2fr;padding:2vw 5.4vw}
-.strip.fashion .ph{height:100%;aspect-ratio:1/1}
-.strip.fashion .list{font-size:1.1vw;color:var(--muted);line-height:1.8;display:flex;justify-content:space-between;align-items:center}
-.strip.mini{height:22%;padding:0 6vw 6vw;gap:3vw}
-.strip.mini .it{height:100%}
-.hero.with-strip .copy{padding-bottom:12vw}
-.hero.with-strip.fashion-strip .copy{padding-bottom:26vh}
-.hero.with-strip.products-strip .copy{padding-bottom:24vh}
-/* sections below the hero */
-section{padding:9vw 5.4vw}
-.intro h2{font-size:3.4vw;line-height:1.12;font-weight:560;letter-spacing:-.02em;max-width:18ch}
-.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:3vw;margin-top:5vw;border-top:1px solid var(--line);padding-top:2.4vw}
-.cols h3{font-size:1.4vw;font-weight:600;margin-bottom:.8vw}
-.cols p{font-size:1.1vw;line-height:1.55;color:var(--muted)}
-.panel{position:relative;height:42vw;overflow:hidden;background:var(--panel,#0b0b0c);margin:0 5.4vw;border-radius:6px}
-.panel .art{inset:0}
-.cap{display:flex;justify-content:space-between;gap:2vw;margin:1.4vw 5.4vw 0;font-size:1.05vw;color:var(--muted)}
-.cta{text-align:left}
-.cta h2{font-size:4.4vw;font-weight:560;letter-spacing:-.025em;line-height:1.05;max-width:16ch}
-.cta .btn{margin-top:2.4vw}
-footer{display:flex;justify-content:space-between;align-items:center;padding:2.6vw 5.4vw;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
-</style></head><body class="dark"><header class="nav"><a class="logo" href="#top"><i></i>JIEWEI</a><nav class="links"><a href="#top">Home</a><a href="#solutions">Solutions</a><a href="#about">About</a><a href="#work">Work</a><a href="#contact">Contact</a></nav><div class="icons"><svg viewBox="0 0 20 20" width="15" height="15"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M13 13 L17 17" stroke="currentColor" stroke-width="1.8"/></svg><svg viewBox="0 0 20 20" width="17" height="17"><path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" stroke-width="1.6"/></svg></div></header><main><section class="hero full" id="top" style="padding:0"><div class="copy"><h1><span>Explore</span><span>New Possibilities</span></h1><p class="sub"><span>Technology opens a broader world.</span></p><a class="btn outline" href="#contact">Explore <svg class="arr" viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" fill="none"/></svg></a></div><div class="art"><svg class="art-svg" viewBox="0 0 800 600" preserveAspectRatio="xMaxYMax slice" aria-hidden="true"><defs><radialGradient id="sph" cx="38%" cy="22%" r="80%"><stop offset="0" stop-color="#2b63c4"/><stop offset="0.35" stop-color="#0d2b66"/><stop offset="0.75" stop-color="#04122e"/><stop offset="1" stop-color="#01040c"/></radialGradient><filter id="b4" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4"/></filter><filter id="b24" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="26"/></filter><filter id="b1" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="1.2"/></filter><clipPath id="cl"><circle cx="790" cy="880" r="600"/></clipPath><filter id="tex" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.009 0.014" numOctaves="4" seed="4"/><feColorMatrix type="matrix" values="0 0 0 0 0.18  0 0 0 0 0.36  0 0 0 0 0.72  0 0 0 2.2 -1.05"/></filter></defs><rect width="800" height="600" fill="#000"/><circle cx="259" cy="91" r="0.9" fill="#fff" opacity="0.18"/><circle cx="429" cy="219" r="0.4" fill="#fff" opacity="0.38"/><circle cx="30" cy="260" r="0.4" fill="#fff" opacity="0.19"/><circle cx="340" cy="496" r="0.5" fill="#fff" opacity="0.25"/><circle cx="502" cy="569" r="0.8" fill="#fff" opacity="0.33"/><circle cx="781" cy="28" r="1.0" fill="#fff" opacity="0.28"/><circle cx="115" cy="71" r="0.6" fill="#fff" opacity="0.52"/><circle cx="145" cy="349" r="0.8" fill="#fff" opacity="0.32"/><circle cx="438" cy="38" r="0.4" fill="#fff" opacity="0.24"/><circle cx="544" cy="257" r="0.6" fill="#fff" opacity="0.41"/><circle cx="363" cy="180" r="1.0" fill="#fff" opacity="0.46"/><circle cx="195" cy="345" r="0.8" fill="#fff" opacity="0.54"/><circle cx="584" cy="173" r="1.1" fill="#fff" opacity="0.20"/><circle cx="334" cy="454" r="0.5" fill="#fff" opacity="0.37"/><circle cx="31" cy="401" r="0.9" fill="#fff" opacity="0.41"/><circle cx="700" cy="188" r="0.9" fill="#fff" opacity="0.42"/><circle cx="464" cy="274" r="1.0" fill="#fff" opacity="0.58"/><circle cx="379" cy="398" r="0.4" fill="#fff" opacity="0.47"/><circle cx="518" cy="596" r="1.0" fill="#fff" opacity="0.28"/><circle cx="309" cy="401" r="0.4" fill="#fff" opacity="0.36"/><circle cx="134" cy="70" r="0.4" fill="#fff" opacity="0.50"/><circle cx="103" cy="149" r="0.7" fill="#fff" opacity="0.54"/><circle cx="64" cy="270" r="0.8" fill="#fff" opacity="0.55"/><circle cx="655" cy="518" r="0.6" fill="#fff" opacity="0.34"/><circle cx="287" cy="531" r="1.1" fill="#fff" opacity="0.22"/><circle cx="141" cy="139" r="0.6" fill="#fff" opacity="0.37"/><circle cx="471" cy="158" r="0.4" fill="#fff" opacity="0.34"/><circle cx="295" cy="340" r="1.1" fill="#fff" opacity="0.46"/><circle cx="412" cy="371" r="0.9" fill="#fff" opacity="0.17"/><circle cx="720" cy="468" r="1.0" fill="#fff" opacity="0.51"/><circle cx="314" cy="239" r="0.5" fill="#fff" opacity="0.44"/><circle cx="50" cy="40" r="0.5" fill="#fff" opacity="0.22"/><circle cx="272" cy="32" r="0.4" fill="#fff" opacity="0.22"/><circle cx="81" cy="218" r="0.4" fill="#fff" opacity="0.54"/><circle cx="491" cy="89" r="0.6" fill="#fff" opacity="0.31"/><circle cx="291" cy="74" r="1.0" fill="#fff" opacity="0.60"/><circle cx="373" cy="290" r="0.5" fill="#fff" opacity="0.20"/><circle cx="274" cy="159" r="1.0" fill="#fff" opacity="0.22"/><circle cx="18" cy="571" r="0.8" fill="#fff" opacity="0.22"/><circle cx="435" cy="16" r="0.8" fill="#fff" opacity="0.59"/><circle cx="691" cy="418" r="0.6" fill="#fff" opacity="0.32"/><circle cx="134" cy="463" r="0.8" fill="#fff" opacity="0.50"/><circle cx="264" cy="134" r="1.0" fill="#fff" opacity="0.59"/><circle cx="682" cy="484" r="1.0" fill="#fff" opacity="0.48"/><circle cx="181" cy="311" r="0.6" fill="#fff" opacity="0.16"/><circle cx="22" cy="168" r="0.6" fill="#fff" opacity="0.46"/><circle cx="765" cy="268" r="1.1" fill="#fff" opacity="0.59"/><circle cx="764" cy="219" r="0.6" fill="#fff" opacity="0.25"/><circle cx="157" cy="123" r="0.8" fill="#fff" opacity="0.56"/><circle cx="672" cy="288" r="0.9" fill="#fff" opacity="0.51"/><circle cx="68" cy="396" r="1.0" fill="#fff" opacity="0.50"/><circle cx="600" cy="287" r="0.5" fill="#fff" opacity="0.51"/><circle cx="266" cy="480" r="1.1" fill="#fff" opacity="0.33"/><circle cx="321" cy="568" r="0.9" fill="#fff" opacity="0.23"/><circle cx="102" cy="91" r="1.0" fill="#fff" opacity="0.51"/><circle cx="117" cy="496" r="1.1" fill="#fff" opacity="0.45"/><circle cx="280" cy="329" r="0.5" fill="#fff" opacity="0.16"/><circle cx="777" cy="390" r="0.8" fill="#fff" opacity="0.57"/><circle cx="347" cy="523" r="1.0" fill="#fff" opacity="0.24"/><circle cx="201" cy="176" r="0.6" fill="#fff" opacity="0.41"/><circle cx="207" cy="251" r="0.5" fill="#fff" opacity="0.56"/><circle cx="283" cy="275" r="0.8" fill="#fff" opacity="0.56"/><circle cx="337" cy="551" r="0.8" fill="#fff" opacity="0.39"/><circle cx="419" cy="11" r="0.7" fill="#fff" opacity="0.23"/><circle cx="3" cy="480" r="0.5" fill="#fff" opacity="0.36"/><circle cx="580" cy="334" r="0.6" fill="#fff" opacity="0.38"/><circle cx="444" cy="471" r="0.5" fill="#fff" opacity="0.40"/><circle cx="199" cy="166" r="0.9" fill="#fff" opacity="0.38"/><circle cx="449" cy="456" r="1.0" fill="#fff" opacity="0.35"/><circle cx="490" cy="303" r="0.8" fill="#fff" opacity="0.46"/><circle cx="790" cy="880" r="620" fill="none" stroke="#2f7bff" stroke-width="44" opacity=".38" filter="url(#b24)"/><circle cx="790" cy="880" r="600" fill="url(#sph)"/><g clip-path="url(#cl)"><rect x="190" y="280" width="1200" height="1200" filter="url(#tex)" opacity=".45"/></g><path d="M513 390L597 454M513 390L614 510M672 345L757 321M672 345L655 469M655 469L650 519M655 469L655 523M543 603L563 599M543 603L598 594M757 321L793 311M757 321L672 345M598 594L563 599M598 594L543 603M563 599L543 603M563 599L598 594M655 523L650 519M655 523L614 510M480 566L543 603M480 566L563 599M614 510L650 519M614 510L655 523M787 569L655 523M787 569L650 519M597 454L614 510M597 454L655 469M650 519L655 523M650 519L614 510M793 311L757 321M793 311L672 345" stroke="#8fc0ff" stroke-opacity=".35" stroke-width=".8" fill="none"/><circle cx="513" cy="390" r="1.6" fill="#cfe2ff" opacity="0.55"/><circle cx="672" cy="345" r="1.7" fill="#cfe2ff" opacity="0.58"/><circle cx="655" cy="469" r="2.1" fill="#cfe2ff" opacity="0.74"/><circle cx="543" cy="603" r="2.3" fill="#cfe2ff" opacity="0.79"/><circle cx="757" cy="321" r="1.6" fill="#cfe2ff" opacity="0.55"/><circle cx="598" cy="594" r="2.3" fill="#cfe2ff" opacity="0.81"/><circle cx="563" cy="599" r="2.3" fill="#cfe2ff" opacity="0.80"/><circle cx="655" cy="523" r="2.3" fill="#cfe2ff" opacity="0.78"/><circle cx="480" cy="566" r="2.1" fill="#cfe2ff" opacity="0.73"/><circle cx="614" cy="510" r="2.2" fill="#cfe2ff" opacity="0.76"/><circle cx="787" cy="569" r="2.4" fill="#cfe2ff" opacity="0.82"/><circle cx="597" cy="454" r="2.1" fill="#cfe2ff" opacity="0.70"/><circle cx="650" cy="519" r="2.3" fill="#cfe2ff" opacity="0.78"/><circle cx="793" cy="311" r="1.6" fill="#cfe2ff" opacity="0.53"/><circle cx="790" cy="880" r="600" fill="none" stroke="#9cc8ff" stroke-width="3" filter="url(#b4)"/><circle cx="790" cy="880" r="600" fill="none" stroke="#e3f0ff" stroke-width=".8" opacity=".8"/></svg></div></section><section class="intro" id="solutions"><h2>Explore New Possibilities. Technology opens a broader world.</h2><div class="cols"><div><h3>Brand</h3><p>Identity systems with a point of view.</p></div><div><h3>Product</h3><p>Interfaces that feel simple to use.</p></div><div><h3>Experience</h3><p>Every touchpoint working together.</p></div></div></section><div id="work"><div class="panel" style="--panel:#050505"><div class="art"><svg class="art-svg" viewBox="0 0 800 600" preserveAspectRatio="xMaxYMax slice" aria-hidden="true"><defs><radialGradient id="sph" cx="38%" cy="22%" r="80%"><stop offset="0" stop-color="#2b63c4"/><stop offset="0.35" stop-color="#0d2b66"/><stop offset="0.75" stop-color="#04122e"/><stop offset="1" stop-color="#01040c"/></radialGradient><filter id="b4" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4"/></filter><filter id="b24" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="26"/></filter><filter id="b1" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="1.2"/></filter><clipPath id="cl"><circle cx="790" cy="880" r="600"/></clipPath><filter id="tex" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.009 0.014" numOctaves="4" seed="4"/><feColorMatrix type="matrix" values="0 0 0 0 0.18  0 0 0 0 0.36  0 0 0 0 0.72  0 0 0 2.2 -1.05"/></filter></defs><rect width="800" height="600" fill="#000"/><circle cx="259" cy="91" r="0.9" fill="#fff" opacity="0.18"/><circle cx="429" cy="219" r="0.4" fill="#fff" opacity="0.38"/><circle cx="30" cy="260" r="0.4" fill="#fff" opacity="0.19"/><circle cx="340" cy="496" r="0.5" fill="#fff" opacity="0.25"/><circle cx="502" cy="569" r="0.8" fill="#fff" opacity="0.33"/><circle cx="781" cy="28" r="1.0" fill="#fff" opacity="0.28"/><circle cx="115" cy="71" r="0.6" fill="#fff" opacity="0.52"/><circle cx="145" cy="349" r="0.8" fill="#fff" opacity="0.32"/><circle cx="438" cy="38" r="0.4" fill="#fff" opacity="0.24"/><circle cx="544" cy="257" r="0.6" fill="#fff" opacity="0.41"/><circle cx="363" cy="180" r="1.0" fill="#fff" opacity="0.46"/><circle cx="195" cy="345" r="0.8" fill="#fff" opacity="0.54"/><circle cx="584" cy="173" r="1.1" fill="#fff" opacity="0.20"/><circle cx="334" cy="454" r="0.5" fill="#fff" opacity="0.37"/><circle cx="31" cy="401" r="0.9" fill="#fff" opacity="0.41"/><circle cx="700" cy="188" r="0.9" fill="#fff" opacity="0.42"/><circle cx="464" cy="274" r="1.0" fill="#fff" opacity="0.58"/><circle cx="379" cy="398" r="0.4" fill="#fff" opacity="0.47"/><circle cx="518" cy="596" r="1.0" fill="#fff" opacity="0.28"/><circle cx="309" cy="401" r="0.4" fill="#fff" opacity="0.36"/><circle cx="134" cy="70" r="0.4" fill="#fff" opacity="0.50"/><circle cx="103" cy="149" r="0.7" fill="#fff" opacity="0.54"/><circle cx="64" cy="270" r="0.8" fill="#fff" opacity="0.55"/><circle cx="655" cy="518" r="0.6" fill="#fff" opacity="0.34"/><circle cx="287" cy="531" r="1.1" fill="#fff" opacity="0.22"/><circle cx="141" cy="139" r="0.6" fill="#fff" opacity="0.37"/><circle cx="471" cy="158" r="0.4" fill="#fff" opacity="0.34"/><circle cx="295" cy="340" r="1.1" fill="#fff" opacity="0.46"/><circle cx="412" cy="371" r="0.9" fill="#fff" opacity="0.17"/><circle cx="720" cy="468" r="1.0" fill="#fff" opacity="0.51"/><circle cx="314" cy="239" r="0.5" fill="#fff" opacity="0.44"/><circle cx="50" cy="40" r="0.5" fill="#fff" opacity="0.22"/><circle cx="272" cy="32" r="0.4" fill="#fff" opacity="0.22"/><circle cx="81" cy="218" r="0.4" fill="#fff" opacity="0.54"/><circle cx="491" cy="89" r="0.6" fill="#fff" opacity="0.31"/><circle cx="291" cy="74" r="1.0" fill="#fff" opacity="0.60"/><circle cx="373" cy="290" r="0.5" fill="#fff" opacity="0.20"/><circle cx="274" cy="159" r="1.0" fill="#fff" opacity="0.22"/><circle cx="18" cy="571" r="0.8" fill="#fff" opacity="0.22"/><circle cx="435" cy="16" r="0.8" fill="#fff" opacity="0.59"/><circle cx="691" cy="418" r="0.6" fill="#fff" opacity="0.32"/><circle cx="134" cy="463" r="0.8" fill="#fff" opacity="0.50"/><circle cx="264" cy="134" r="1.0" fill="#fff" opacity="0.59"/><circle cx="682" cy="484" r="1.0" fill="#fff" opacity="0.48"/><circle cx="181" cy="311" r="0.6" fill="#fff" opacity="0.16"/><circle cx="22" cy="168" r="0.6" fill="#fff" opacity="0.46"/><circle cx="765" cy="268" r="1.1" fill="#fff" opacity="0.59"/><circle cx="764" cy="219" r="0.6" fill="#fff" opacity="0.25"/><circle cx="157" cy="123" r="0.8" fill="#fff" opacity="0.56"/><circle cx="672" cy="288" r="0.9" fill="#fff" opacity="0.51"/><circle cx="68" cy="396" r="1.0" fill="#fff" opacity="0.50"/><circle cx="600" cy="287" r="0.5" fill="#fff" opacity="0.51"/><circle cx="266" cy="480" r="1.1" fill="#fff" opacity="0.33"/><circle cx="321" cy="568" r="0.9" fill="#fff" opacity="0.23"/><circle cx="102" cy="91" r="1.0" fill="#fff" opacity="0.51"/><circle cx="117" cy="496" r="1.1" fill="#fff" opacity="0.45"/><circle cx="280" cy="329" r="0.5" fill="#fff" opacity="0.16"/><circle cx="777" cy="390" r="0.8" fill="#fff" opacity="0.57"/><circle cx="347" cy="523" r="1.0" fill="#fff" opacity="0.24"/><circle cx="201" cy="176" r="0.6" fill="#fff" opacity="0.41"/><circle cx="207" cy="251" r="0.5" fill="#fff" opacity="0.56"/><circle cx="283" cy="275" r="0.8" fill="#fff" opacity="0.56"/><circle cx="337" cy="551" r="0.8" fill="#fff" opacity="0.39"/><circle cx="419" cy="11" r="0.7" fill="#fff" opacity="0.23"/><circle cx="3" cy="480" r="0.5" fill="#fff" opacity="0.36"/><circle cx="580" cy="334" r="0.6" fill="#fff" opacity="0.38"/><circle cx="444" cy="471" r="0.5" fill="#fff" opacity="0.40"/><circle cx="199" cy="166" r="0.9" fill="#fff" opacity="0.38"/><circle cx="449" cy="456" r="1.0" fill="#fff" opacity="0.35"/><circle cx="490" cy="303" r="0.8" fill="#fff" opacity="0.46"/><circle cx="790" cy="880" r="620" fill="none" stroke="#2f7bff" stroke-width="44" opacity=".38" filter="url(#b24)"/><circle cx="790" cy="880" r="600" fill="url(#sph)"/><g clip-path="url(#cl)"><rect x="190" y="280" width="1200" height="1200" filter="url(#tex)" opacity=".45"/></g><path d="M513 390L597 454M513 390L614 510M672 345L757 321M672 345L655 469M655 469L650 519M655 469L655 523M543 603L563 599M543 603L598 594M757 321L793 311M757 321L672 345M598 594L563 599M598 594L543 603M563 599L543 603M563 599L598 594M655 523L650 519M655 523L614 510M480 566L543 603M480 566L563 599M614 510L650 519M614 510L655 523M787 569L655 523M787 569L650 519M597 454L614 510M597 454L655 469M650 519L655 523M650 519L614 510M793 311L757 321M793 311L672 345" stroke="#8fc0ff" stroke-opacity=".35" stroke-width=".8" fill="none"/><circle cx="513" cy="390" r="1.6" fill="#cfe2ff" opacity="0.55"/><circle cx="672" cy="345" r="1.7" fill="#cfe2ff" opacity="0.58"/><circle cx="655" cy="469" r="2.1" fill="#cfe2ff" opacity="0.74"/><circle cx="543" cy="603" r="2.3" fill="#cfe2ff" opacity="0.79"/><circle cx="757" cy="321" r="1.6" fill="#cfe2ff" opacity="0.55"/><circle cx="598" cy="594" r="2.3" fill="#cfe2ff" opacity="0.81"/><circle cx="563" cy="599" r="2.3" fill="#cfe2ff" opacity="0.80"/><circle cx="655" cy="523" r="2.3" fill="#cfe2ff" opacity="0.78"/><circle cx="480" cy="566" r="2.1" fill="#cfe2ff" opacity="0.73"/><circle cx="614" cy="510" r="2.2" fill="#cfe2ff" opacity="0.76"/><circle cx="787" cy="569" r="2.4" fill="#cfe2ff" opacity="0.82"/><circle cx="597" cy="454" r="2.1" fill="#cfe2ff" opacity="0.70"/><circle cx="650" cy="519" r="2.3" fill="#cfe2ff" opacity="0.78"/><circle cx="793" cy="311" r="1.6" fill="#cfe2ff" opacity="0.53"/><circle cx="790" cy="880" r="600" fill="none" stroke="#9cc8ff" stroke-width="3" filter="url(#b4)"/><circle cx="790" cy="880" r="600" fill="none" stroke="#e3f0ff" stroke-width=".8" opacity=".8"/></svg></div></div><div class="cap"><span>Explore</span><span>Design concept</span></div></div><section class="cta" id="contact"><h2>Let's create what comes next.</h2><a class="btn" href="#top">Get in touch <svg class="arr" viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" fill="none"/></svg></a></section></main><footer id="about"><span>JIEWEI</span><span>Design concept page</span></footer></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NOON | Run your home on daylight</title>
+<script src="assets/base.js"></script>
+<link rel="stylesheet" href="assets/base.css">
+<style>
+:root{--bg:#140b06;--tx:#fff4e6;--mut:#c6a68a;--sun1:#ffd36b;--sun2:#ff7a2f;--sun3:#e2365b;--line:rgba(255,244,230,.14)}
+body{background:var(--bg);color:var(--tx);font-family:"Manrope V",Arial,sans-serif;font-size:15px}
+.ub{font-family:"Unbounded V",Arial,sans-serif}
+.wrap{width:min(1300px,100% - 56px);margin:0 auto}
+.hero{position:relative;height:100vh;min-height:500px;overflow:hidden;background:linear-gradient(180deg,#1a0d14 0%,#4a1726 30%,#b8452f 58%,#f39a4a 72%,#2a140c 72.2%,#140b06 100%)}
+.nav{position:absolute;inset:0 0 auto;z-index:4;height:76px;display:flex;align-items:center;gap:30px;padding:0 max(28px,calc((100% - 1300px)/2));font-size:14px;font-weight:600}
+.logo{font-family:"Unbounded V",sans-serif;font-weight:800;font-size:22px;letter-spacing:-.02em;margin-right:auto;display:flex;align-items:center;gap:10px}
+.logo i{width:20px;height:20px;border-radius:50%;background:linear-gradient(180deg,var(--sun1),var(--sun2))}
+.nav .q{background:var(--tx);color:var(--bg);border-radius:999px;padding:11px 18px}
+/* the sun, sliced like an old poster, slowly rising */
+.sun{position:absolute;left:50%;top:72%;width:min(48vw,78vh);aspect-ratio:1;border-radius:50%;transform:translate(-50%,-38%);
+  background:linear-gradient(180deg,var(--sun1) 0%,var(--sun2) 55%,var(--sun3) 100%);
+  -webkit-mask:linear-gradient(180deg,#000 0 46%,transparent 46% 48%,#000 48% 55%,transparent 55% 58%,#000 58% 63%,transparent 63% 67.5%,#000 67.5% 71%,transparent 71% 76.5%,#000 76.5% 79%,transparent 79% 86%,#000 86%);
+  mask:linear-gradient(180deg,#000 0 46%,transparent 46% 48%,#000 48% 55%,transparent 55% 58%,#000 58% 63%,transparent 63% 67.5%,#000 67.5% 71%,transparent 71% 76.5%,#000 76.5% 79%,transparent 79% 86%,#000 86%);
+  box-shadow:0 0 120px rgba(255,140,60,.55);animation:sunrise 3.2s cubic-bezier(.16,1,.3,1) both}
+@keyframes sunrise{from{transform:translate(-50%,-6%)}to{transform:translate(-50%,-38%)}}
+.glow{position:absolute;left:50%;top:60%;width:120vw;height:60vh;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(255,170,90,.45),transparent);pointer-events:none}
+/* a field of panels in perspective */
+.field{position:absolute;left:-30%;right:-30%;top:72%;bottom:-40%;z-index:2;transform-origin:50% 0;transform:perspective(600px) rotateX(62deg);
+  background:linear-gradient(90deg,rgba(255,200,140,.35) 0 2px,transparent 2px) 0 0/80px 100%,linear-gradient(0deg,rgba(255,200,140,.35) 0 2px,transparent 2px) 0 0/100% 56px,linear-gradient(180deg,#2a1a33,#0d0a14);
+  animation:scroll 6s linear infinite}
+@keyframes scroll{to{background-position:0 56px,0 56px,0 0}}
+.field::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,170,90,.35),transparent 30%)}
+.in{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;padding-top:clamp(96px,17vh,170px)}
+.in small{font-size:12px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--sun1)}
+.in h1{font-size:clamp(46px,min(6.8vw,12vh),112px);line-height:.95;letter-spacing:-.04em;font-weight:800;margin:clamp(12px,2.4vh,22px) 0;max-width:11em;text-shadow:0 10px 40px rgba(60,10,20,.4)}
+.in p{max-width:30em;line-height:1.55;font-size:clamp(15px,1.25vw,17px);color:#ffe2c6;text-shadow:0 2px 14px rgba(60,10,20,.6)}
+.counter{position:absolute;left:max(28px,calc((100% - 1300px)/2));bottom:clamp(18px,4vh,40px);z-index:4;background:rgba(20,11,6,.55);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:16px;padding:14px 18px}
+.counter small{font-size:11px;color:var(--mut);letter-spacing:.1em;text-transform:uppercase}
+.counter b{display:block;font-family:"Unbounded V",sans-serif;font-size:clamp(20px,2vw,28px);font-variant-numeric:tabular-nums}
+.cta{position:absolute;right:max(28px,calc((100% - 1300px)/2));bottom:clamp(18px,4vh,40px);z-index:4;display:flex;gap:10px}
+.cta a{border-radius:999px;padding:16px 24px;font-weight:700}
+.cta .p{background:linear-gradient(90deg,var(--sun1),var(--sun2));color:#2a0f06}
+.cta .s{border:1px solid rgba(255,244,230,.4)}
+section{padding:clamp(80px,9vw,130px) 0}
+.h2{font-family:"Unbounded V",sans-serif;font-weight:800;font-size:clamp(36px,4.2vw,68px);line-height:1;letter-spacing:-.04em}
+.h2 span{color:var(--sun2)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:56px}
+.step{border:1px solid var(--line);border-radius:24px;padding:28px;min-height:300px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(180deg,rgba(255,122,47,.08),transparent)}
+.step b{font-family:"Unbounded V",sans-serif;font-size:64px;color:var(--sun2);line-height:1}
+.step h3{font-size:22px;margin-bottom:8px}
+.step p{color:var(--mut);line-height:1.6}
+.save{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.meter{border:1px solid var(--line);border-radius:28px;padding:34px}
+.meter .row{display:flex;justify-content:space-between;margin-bottom:10px;font-weight:600}
+.meter .track{height:14px;border-radius:999px;background:rgba(255,244,230,.08);margin-bottom:26px;overflow:hidden}
+.meter .track i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--sun1),var(--sun2),var(--sun3))}
+.save p{color:var(--mut);line-height:1.7;margin-top:18px}
+.foot{border-top:1px solid var(--line);padding:30px 0;color:var(--mut);font-size:13px}
+.foot .wrap{display:flex;justify-content:space-between}
+@media (max-width:900px){.nav a:not(.logo):not(.q){display:none}.steps,.save{grid-template-columns:1fr}.counter{display:none}.cta{left:28px;right:28px}}
+</style>
+</head>
+<body>
+<section class="hero" style="padding:0">
+  <header class="nav"><a class="logo" href="#"><i></i>noon</a><a href="#">How it works</a><a href="#">Batteries</a><a href="#">Pricing</a><a href="#">Reviews</a><a class="q" href="#">Get a quote</a></header>
+  <div class="glow" aria-hidden="true"></div>
+  <div class="sun" aria-hidden="true"></div>
+  <div class="field" aria-hidden="true"></div>
+  <div class="in">
+    <small data-in>Solar + storage for homes</small>
+    <h1 class="ub" data-in style="--d:1">Run your home on daylight.</h1>
+    <p data-in style="--d:2">Panels, battery and app, designed and installed by one team. Most homes cut their power bill by 80% in the first year.</p>
+  </div>
+  <div class="counter" data-in style="--d:3"><small>Generated by Noon homes today</small><b id="kwh">1,284,602 kWh</b></div>
+  <div class="cta" data-in style="--d:3"><a class="s" href="#">See how it works</a><a class="p" href="#">Check my roof →</a></div>
+</section>
+<main>
+  <section>
+    <div class="wrap">
+      <h2 class="h2">From roof to <span>running</span><br>in three weeks.</h2>
+      <div class="steps">
+        <div class="step"><b>01</b><div><h3>We map your roof</h3><p>Satellite and shade data give you an exact quote in two minutes, no visit needed.</p></div></div>
+        <div class="step"><b>02</b><div><h3>We install in a day</h3><p>Our own crews, not subcontractors, fit panels, battery and inverter in a single visit.</p></div></div>
+        <div class="step"><b>03</b><div><h3>You watch it work</h3><p>The Noon app shows every kilowatt, and sells the surplus back to the grid for you.</p></div></div>
+      </div>
+    </div>
+  </section>
+  <section style="padding-top:0">
+    <div class="wrap save">
+      <div><h2 class="h2">The sun sends<br><span>no invoices.</span></h2><p>A typical 6 kW Noon system pays for itself in under seven years and is guaranteed for twenty-five.</p></div>
+      <div class="meter">
+        <div class="row"><span>Grid power before Noon</span><span>$212 / mo</span></div><div class="track"><i style="width:100%"></i></div>
+        <div class="row"><span>Grid power with Noon</span><span>$38 / mo</span></div><div class="track"><i style="width:18%"></i></div>
+        <div class="row"><span>Battery backup</span><span>31 hours</span></div><div class="track"><i style="width:72%"></i></div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="foot"><div class="wrap"><span>© Noon Energy</span><span>Licensed in CA, AZ, NV, TX</span></div></footer>
+<script>
+(function(){var el=document.getElementById("kwh"),v=1284602;setInterval(function(){v+=Math.round(3+Math.random()*9);el.textContent=v.toLocaleString("en-US")+" kWh";},700);})();
+</script>
+</body>
+</html>

@@ -1,74 +1,88 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>JIEWEI | Technology and Humanity</title><script>if(location.search.indexOf("wall")>-1)document.documentElement.className+=" on-wall"</script><style>
-@font-face{font-family:"Inter Variable";font-style:normal;font-display:swap;font-weight:100 900;src:url("../assets/fonts/inter.woff2") format("woff2-variations")}
-html.on-wall{overflow:hidden;scrollbar-width:none}html.on-wall::-webkit-scrollbar{display:none}
-*,*::before,*::after{box-sizing:border-box}
-html,body{margin:0}
-body{font-family:"Inter Variable",Inter,"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;color:var(--fg);background:var(--bg);font-size:16px}
-:root{--fg:#0b0b0c;--muted:#5d6168;--bg:#fbfbfb;--line:rgba(0,0,0,.08);--accent:#1f5fff}
-body.dark{--fg:#f4f5f6;--muted:#a3a8ae;--bg:#030303;--line:rgba(255,255,255,.12)}
-body.sky{--bg:#f6f9fd}
-a{color:inherit;text-decoration:none}
-h1,h2,h3,p{margin:0}
-.nav{position:relative;z-index:5;display:flex;align-items:center;gap:2.4vw;height:72px;padding:0 3.4vw;background:var(--bg);border-bottom:1px solid var(--line)}
-.nav.light{--fg:#0b0b0c;--muted:#5d6168;--bg:#ffffff;--line:rgba(0,0,0,.08);color:#0b0b0c}
-.logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:18px;letter-spacing:.02em;margin-right:auto}
-.logo i{width:17px;height:17px;border-radius:50%;border:4.5px solid currentColor;display:block}
-.links{display:flex;gap:2.6vw;font-size:14px;color:var(--muted)}
-.links a:hover{color:var(--fg)}
-.icons{display:flex;gap:18px;align-items:center;margin-left:3vw}
-.hero{position:relative;min-height:calc(100vh - 72px);overflow:hidden;display:flex}
-.hero .copy{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:center;gap:1.6vw;padding:0 5.4vw 2vw;max-width:64%}
-.hero h1{font-size:5.6vw;line-height:1.06;font-weight:600;letter-spacing:-.025em}
-.hero h1 span{display:block;white-space:nowrap}
-.hero .sub{font-size:2.05vw;line-height:1.45;color:var(--muted)}
-.hero .sub span{display:block}
-.btn{align-self:flex-start;display:inline-flex;align-items:center;gap:.6em;padding:.85em 1.6em;border-radius:999px;font-size:max(12px,1.55vw);font-weight:600;background:var(--fg);color:var(--bg);margin-top:.6vw}
-.btn.outline{background:transparent;color:var(--fg);border:1.5px solid currentColor}
-.btn svg{width:1em;height:1em}
-.art{position:absolute;inset:0 0 0 36%;z-index:1}
-.art-svg{width:100%;height:100%;display:block}
-.full .art{inset:0}
-.full .copy{max-width:60%}
-.full::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(0,0,0,.75),rgba(0,0,0,0) 55%)}
-.side{display:grid;grid-template-columns:22% 1fr}
-.side .copy{max-width:none;gap:1.4vw;padding-top:3vw}
-.side .copy h1{font-size:2vw;font-weight:500;color:var(--muted)}
-.side .copy h1 span{margin-bottom:.9vw}
-.side .art{inset:0 0 0 46%}
-.side .pics{position:absolute;left:24%;top:12%;bottom:12%;width:21%;display:grid;grid-template-columns:1fr 1fr;gap:1.2vw;z-index:2}
-.side .pics div{background:#e5e6e8;position:relative;overflow:hidden}
-.compact .copy{max-width:72%;justify-content:flex-start;padding-top:14vw}
-.compact .copy h1{font-size:8.6vw}
-.compact .art{inset:0 0 40% 50%}
-.strip{position:absolute;left:0;right:0;bottom:0;z-index:3;display:grid;grid-template-columns:repeat(3,1fr);gap:1.4vw;padding:0 5.4vw 3vw}
-.strip .it{display:flex;align-items:center;gap:1vw;font-size:1.05vw;font-weight:600;line-height:1.25}
-.strip .ph svg,.strip.products svg,.strip.mini svg{width:100%;height:100%;display:block}
-.strip .it>svg.arr{width:1.6vw;height:1.6vw;flex:none}
-.strip.products{height:24%;right:38%;padding-bottom:2.4vw}
-.strip.products .it{background:#f1f2f3}
-.strip.products .it,.strip.products .ph{height:100%}
-.strip.services{position:absolute;bottom:2.4vw;left:5.4vw;right:3vw;padding:0;height:14%;gap:1vw}
-.strip.services .it{background:#fff;border:1px solid var(--line);padding:0 1.2vw;justify-content:space-between}
-.strip.services .ph{width:34%;height:80%}
-.strip.fashion{height:24%;background:#fff;border-top:1px solid var(--line);grid-template-columns:1fr 1fr 1.2fr;padding:2vw 5.4vw}
-.strip.fashion .ph{height:100%;aspect-ratio:1/1}
-.strip.fashion .list{font-size:1.1vw;color:var(--muted);line-height:1.8;display:flex;justify-content:space-between;align-items:center}
-.strip.mini{height:22%;padding:0 6vw 6vw;gap:3vw}
-.strip.mini .it{height:100%}
-.hero.with-strip .copy{padding-bottom:12vw}
-.hero.with-strip.fashion-strip .copy{padding-bottom:26vh}
-.hero.with-strip.products-strip .copy{padding-bottom:24vh}
-/* sections below the hero */
-section{padding:9vw 5.4vw}
-.intro h2{font-size:3.4vw;line-height:1.12;font-weight:560;letter-spacing:-.02em;max-width:18ch}
-.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:3vw;margin-top:5vw;border-top:1px solid var(--line);padding-top:2.4vw}
-.cols h3{font-size:1.4vw;font-weight:600;margin-bottom:.8vw}
-.cols p{font-size:1.1vw;line-height:1.55;color:var(--muted)}
-.panel{position:relative;height:42vw;overflow:hidden;background:var(--panel,#0b0b0c);margin:0 5.4vw;border-radius:6px}
-.panel .art{inset:0}
-.cap{display:flex;justify-content:space-between;gap:2vw;margin:1.4vw 5.4vw 0;font-size:1.05vw;color:var(--muted)}
-.cta{text-align:left}
-.cta h2{font-size:4.4vw;font-weight:560;letter-spacing:-.025em;line-height:1.05;max-width:16ch}
-.cta .btn{margin-top:2.4vw}
-footer{display:flex;justify-content:space-between;align-items:center;padding:2.6vw 5.4vw;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
-</style></head><body class="dark"><header class="nav"><a class="logo" href="#top"><i></i>JIEWEI</a><nav class="links"><a href="#top">Home</a><a href="#solutions">Solutions</a><a href="#about">About</a><a href="#work">Work</a><a href="#contact">Contact</a></nav><div class="icons"><svg viewBox="0 0 20 20" width="15" height="15"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M13 13 L17 17" stroke="currentColor" stroke-width="1.8"/></svg><svg viewBox="0 0 20 20" width="17" height="17"><path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" stroke-width="1.6"/></svg></div></header><main><section class="hero split" id="top" style="padding:0"><div class="copy"><h1><span>Technology</span><span>and Humanity</span></h1><p class="sub"><span>Reimagine everyday life</span><span>through innovation.</span></p><a class="btn" href="#contact">Explore <svg class="arr" viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" fill="none"/></svg></a></div><div class="art"><svg class="art-svg" viewBox="0 0 800 600" preserveAspectRatio="xMaxYMid slice" aria-hidden="true"><defs><linearGradient id="p" x1="0" y1="0" x2="1" y2="0.4"><stop offset="0" stop-color="#020202"/><stop offset="0.48" stop-color="#30343a"/><stop offset="0.52" stop-color="#0b0c0e"/><stop offset="1" stop-color="#020202"/></linearGradient><linearGradient id="q" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0a0a0b"/><stop offset="1" stop-color="#26292e"/></linearGradient><linearGradient id="edge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity="0"/><stop offset="0.4" stop-color="#e8eef6" stop-opacity="0.95"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></linearGradient><linearGradient id="blue" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0a1a44" stop-opacity="0"/><stop offset="0.45" stop-color="#4f8dff" stop-opacity="1"/><stop offset="1" stop-color="#9cc2ff" stop-opacity="0"/></linearGradient><filter id="g" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3"/></filter><filter id="G" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter></defs><rect width="800" height="600" fill="#030303"/><path d="M470 600 C500 380 540 120 620 30 C650 0 700 -10 800 -10 L800 600 Z" fill="url(#p)"/><path d="M470 600 C500 380 540 120 620 30 C650 0 700 -10 800 -10" stroke="url(#edge)" stroke-width="3" fill="none" filter="url(#g)"/><path d="M640 600 C650 420 680 220 760 120" stroke="#fff" stroke-opacity=".18" stroke-width="2" fill="none"/><ellipse cx="700" cy="300" rx="60" ry="200" fill="#9fb4d6" opacity=".08" filter="url(#G)"/></svg></div></section><section class="intro" id="solutions"><h2>Technology and Humanity. Reimagine everyday life through innovation.</h2><div class="cols"><div><h3>Brand</h3><p>Identity systems with a point of view.</p></div><div><h3>Product</h3><p>Interfaces that feel simple to use.</p></div><div><h3>Experience</h3><p>Every touchpoint working together.</p></div></div></section><div id="work"><div class="panel" style="--panel:#050505"><div class="art"><svg class="art-svg" viewBox="0 0 800 600" preserveAspectRatio="xMaxYMid slice" aria-hidden="true"><defs><linearGradient id="p" x1="0" y1="0" x2="1" y2="0.4"><stop offset="0" stop-color="#020202"/><stop offset="0.48" stop-color="#30343a"/><stop offset="0.52" stop-color="#0b0c0e"/><stop offset="1" stop-color="#020202"/></linearGradient><linearGradient id="q" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0a0a0b"/><stop offset="1" stop-color="#26292e"/></linearGradient><linearGradient id="edge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity="0"/><stop offset="0.4" stop-color="#e8eef6" stop-opacity="0.95"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></linearGradient><linearGradient id="blue" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0a1a44" stop-opacity="0"/><stop offset="0.45" stop-color="#4f8dff" stop-opacity="1"/><stop offset="1" stop-color="#9cc2ff" stop-opacity="0"/></linearGradient><filter id="g" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3"/></filter><filter id="G" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter></defs><rect width="800" height="600" fill="#030303"/><path d="M470 600 C500 380 540 120 620 30 C650 0 700 -10 800 -10 L800 600 Z" fill="url(#p)"/><path d="M470 600 C500 380 540 120 620 30 C650 0 700 -10 800 -10" stroke="url(#edge)" stroke-width="3" fill="none" filter="url(#g)"/><path d="M640 600 C650 420 680 220 760 120" stroke="#fff" stroke-opacity=".18" stroke-width="2" fill="none"/><ellipse cx="700" cy="300" rx="60" ry="200" fill="#9fb4d6" opacity=".08" filter="url(#G)"/></svg></div></div><div class="cap"><span>Technology</span><span>Design concept</span></div></div><section class="cta" id="contact"><h2>Let's create what comes next.</h2><a class="btn" href="#top">Get in touch <svg class="arr" viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" fill="none"/></svg></a></section></main><footer id="about"><span>JIEWEI</span><span>Design concept page</span></footer></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ATLAS | Built for altitude</title>
+<script src="assets/base.js"></script>
+<link rel="stylesheet" href="assets/base.css">
+<style>
+:root{--bg:#0d0f10;--tx:#f3f1ec;--mut:#9a9890;--acc:#ff6b2c;--line:rgba(255,255,255,.18)}
+body{background:var(--bg);color:var(--tx);font-family:"Archivo V",Arial,sans-serif;font-size:15px}
+.wide{font-family:"Archivo V",sans-serif;font-stretch:125%;font-weight:900;text-transform:uppercase;letter-spacing:-.02em}
+.wrap{width:min(1380px,100% - 56px);margin:0 auto}
+.hero{position:relative;height:100vh;min-height:500px;overflow:hidden;--ph:linear-gradient(180deg,#1b2b44 0%,#c26b3c 55%,#1b1410 100%)}
+.hero>img{animation:slow 24s ease-in-out infinite alternate}
+@keyframes slow{from{transform:scale(1.04)}to{transform:scale(1.13) translateY(-1.5%)}}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,10,12,.55) 0%,rgba(8,10,12,0) 30%,rgba(8,10,12,0) 55%,rgba(8,10,12,.85) 100%)}
+.nav{position:absolute;inset:0 0 auto;z-index:3;height:74px;display:flex;align-items:center;gap:30px;padding:0 max(28px,calc((100% - 1380px)/2));font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.logo{font-family:"Archivo V",sans-serif;font-stretch:125%;font-weight:900;font-size:22px;letter-spacing:.02em;margin-right:auto;display:flex;align-items:center;gap:10px}
+.logo svg{width:26px}
+.nav .bag{border:1.5px solid var(--tx);border-radius:999px;padding:9px 16px}
+.word{position:absolute;left:0;right:0;top:clamp(84px,15vh,150px);z-index:2;text-align:center;font-size:clamp(84px,min(15.6vw,27vh),270px);line-height:.8;mix-blend-mode:overlay;color:#fff;opacity:.95}
+.word2{position:absolute;left:0;right:0;top:clamp(84px,15vh,150px);z-index:2;text-align:center;font-size:clamp(84px,min(15.6vw,27vh),270px);line-height:.8;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.55)}
+.coords{position:absolute;left:max(28px,calc((100% - 1380px)/2));top:calc(clamp(84px,15vh,150px) + clamp(84px,min(15.6vw,27vh),270px)*.86);z-index:3;font-size:11px;letter-spacing:.2em;text-transform:uppercase;display:flex;gap:28px;opacity:.9}
+.coords span::before{content:"+ ";color:var(--acc)}
+.bar{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:0 max(28px,calc((100% - 1380px)/2)) clamp(22px,4.5vh,44px);display:grid;grid-template-columns:1.2fr 1fr auto;align-items:end;gap:30px}
+.bar h1{font-size:clamp(30px,min(3.4vw,6.4vh),56px);line-height:.95;max-width:12em}
+.bar p{color:#d6d3cb;line-height:1.55;max-width:26em}
+.shop{display:flex;align-items:center;gap:16px;background:var(--tx);color:#111;border-radius:999px;padding:8px 8px 8px 22px;font-weight:700;white-space:nowrap}
+.shop span{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--acc);color:#fff}
+section{padding:clamp(80px,9vw,130px) 0}
+.sh{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px}
+.sh h2{font-size:clamp(40px,5vw,84px);line-height:.88}
+.sh a{border-bottom:2px solid var(--acc);padding-bottom:4px;font-weight:700}
+.gear{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.g{background:#191c1e;border-radius:6px;overflow:hidden}
+.g .im{aspect-ratio:1/1;background:var(--c);display:grid;place-items:center;position:relative}
+.g .im svg{width:56%}
+.g .im em{position:absolute;left:14px;top:14px;font-style:normal;font-size:11px;font-weight:700;letter-spacing:.14em;background:#111;color:#fff;padding:5px 8px}
+.g .t{display:flex;justify-content:space-between;padding:18px}
+.g h3{font-size:18px;font-weight:700}
+.g small{color:var(--mut);display:block;margin-top:4px}
+.exp{position:relative;border-radius:8px;overflow:hidden;min-height:540px;--ph:linear-gradient(180deg,#5c86a8,#dfe9f0)}
+.exp::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,10,12,.75),rgba(8,10,12,0) 60%)}
+.exp .in{position:absolute;inset:0;z-index:1;padding:clamp(28px,4vw,60px);display:flex;flex-direction:column;justify-content:space-between;max-width:620px}
+.exp h2{font-size:clamp(40px,4.6vw,76px);line-height:.9}
+.exp ul li{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line);font-weight:600}
+.foot{display:flex;justify-content:space-between;padding:40px 0;color:var(--mut);font-size:13px}
+@media (max-width:900px){.nav a:not(.logo):not(.bag){display:none}.bar{grid-template-columns:1fr}.bar p{display:none}.gear{grid-template-columns:1fr}.coords{display:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="jacket" viewBox="0 0 200 200"><path d="M70 30 L100 22 L130 30 L170 50 L188 120 L166 126 L156 92 L156 180 L44 180 L44 92 L34 126 L12 120 L30 50Z" fill="currentColor"/><path d="M100 22 V180" stroke="rgba(0,0,0,.35)" stroke-width="3"/><path d="M84 26 Q100 50 116 26" fill="none" stroke="rgba(0,0,0,.3)" stroke-width="4"/><rect x="60" y="110" width="26" height="4" rx="2" fill="rgba(0,0,0,.25)"/><rect x="114" y="110" width="26" height="4" rx="2" fill="rgba(0,0,0,.25)"/></symbol>
+</defs></svg>
+<section class="hero ph" style="padding:0">
+  <img src="https://images.unsplash.com/photo-1780042426982-cb794203ea1d?auto=format&fit=crop&w=2200&q=72" alt="A snow-covered mountain peak glowing orange at dawn under a dark sky">
+  <header class="nav"><a class="logo" href="#"><svg viewBox="0 0 26 22"><path d="M1 21 L9 5 L13 12 L17 1 L25 21Z" fill="currentColor"/></svg>ATLAS</a><a href="#">Men</a><a href="#">Women</a><a href="#">Expeditions</a><a href="#">Journal</a><a class="bag" href="#">Bag · 0</a></header>
+  <div class="word wide" aria-hidden="true">Altitude</div>
+  <div class="word2 wide" aria-hidden="true">Altitude</div>
+  <div class="coords"><span>47°14′57″N 9°20′36″E</span><span>2,502 m</span><span>−14 °C</span></div>
+  <div class="bar">
+    <h1 class="wide" data-in>Built for the last hour before the summit.</h1>
+    <p data-in style="--d:1">The Summit Shell weighs 340 g, packs into its own pocket and shrugs off 40 mm of rain an hour. Field-tested on 61 peaks.</p>
+    <a class="shop" href="#" data-in style="--d:2">Shop the Summit Shell <span>→</span></a>
+  </div>
+</section>
+<main>
+  <section>
+    <div class="wrap">
+      <div class="sh"><h2 class="wide">The kit,<br>pared back.</h2><a href="#">All gear</a></div>
+      <div class="gear">
+        <article class="g"><div class="im" style="--c:#ff6b2c;color:#1b1b1b"><em>NEW</em><svg><use href="#jacket"/></svg></div><div class="t"><div><h3>Summit Shell</h3><small>3-layer · 340 g</small></div><b>$420</b></div></article>
+        <article class="g"><div class="im" style="--c:#c9cfc8;color:#2c3a33"><svg><use href="#jacket"/></svg></div><div class="t"><div><h3>Ridge Fleece</h3><small>Grid fleece · 280 g</small></div><b>$180</b></div></article>
+        <article class="g"><div class="im" style="--c:#24343f;color:#e9e4d8"><svg><use href="#jacket"/></svg></div><div class="t"><div><h3>Bivouac Down</h3><small>900 fill · 410 g</small></div><b>$520</b></div></article>
+      </div>
+    </div>
+  </section>
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="exp ph"><img src="https://images.unsplash.com/photo-1768185595034-69de2bfe7848?auto=format&fit=crop&w=1800&q=70" alt="A snow-capped peak rising above clouds" loading="lazy">
+        <div class="in"><h2 class="wide">Expeditions<br>2027</h2><ul><li><span>Mont Blanc traverse</span><span>Jun · 6 days</span></li><li><span>Lofoten ski touring</span><span>Mar · 8 days</span></li><li><span>Patagonia ice field</span><span>Nov · 14 days</span></li></ul></div></div>
+    </div>
+  </section>
+</main>
+<footer class="wrap foot"><span>ATLAS Mountain Equipment</span><span>Photos: Unsplash</span><span>© Atlas</span></footer>
+</body>
+</html>
