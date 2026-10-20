@@ -361,7 +361,6 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
 .mon-site.on .mon-in{transform:none}
 .mon-site.on .mon-in{box-shadow:0 26px 54px rgba(0,0,0,.75)}
 .m-fill{background:var(--sky)}
-.m-big{width:100%;height:100%;display:block}
 .hx-cap{position:absolute;left:0;right:0;bottom:0;z-index:5;padding:clamp(18px,3.2vh,34px) var(--pad);background:#050505;visibility:hidden;
   border-top:1px solid rgb(211 223 239 / .14)}
 .hx-cap p{max-width:1100px;margin:0 auto;text-align:center;color:var(--sky);font:600 clamp(1.05rem,2.1vw,2.1rem)/1.25 "Inter Variable",Inter,Arial,sans-serif;letter-spacing:-.015em}
@@ -520,9 +519,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
 /* ----- v9: moving sky, big wall like the reference ----- */
 .m-wave{position:absolute;inset:0;overflow:hidden;pointer-events:none}
 .m-wave img{position:absolute;max-width:none;display:block;user-select:none}
-.hx.waves-logo .m-logowave img,.hx.waves-big .m-big img{will-change:transform}
 .mon-logo svg{z-index:0}
-.m-big .m-bigsvg{position:absolute;inset:0;width:100%;height:100%;display:block}
 .hx-box{transform-origin:50% 0%;z-index:1}
 
 /* ----- v10: shared skies, window screens, glitch contents, perspective floor ----- */
@@ -533,8 +530,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
 .sky-flow .flow-a{opacity:.6}
 .sky-flow .flow-b{opacity:.38}
 .sky-logo .sky-flow{opacity:.75}
-.sky-big{visibility:hidden;opacity:0}
-.hx.waves-logo .sky-logo .sky-flow img,.hx.waves-big .sky-big .sky-flow img{will-change:transform}
+.hx.waves-logo .sky-logo .sky-flow img{will-change:transform}
 /* a screen in window mode is just its bezel; the shared sky shows through */
 .mon.win .mon-scr{background:transparent}
 .mon.win .mon-frame{visibility:hidden}
@@ -585,7 +581,6 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
 
 /* ----- v11: softer hover ----- */
 .hx-grid.hovering .mon-site:not(.on) .m-shade{opacity:.25}
-.hx-sky .sky-deep{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0}
 .hx-sky .sky-word{z-index:1}
 
 /* ----- v12: black-and-white power-up, hard blackout, clickable logo wall ----- */
@@ -700,3 +695,24 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
   .foot-nav{display:grid;grid-template-columns:1fr 1fr;margin-top:1rem}
   .foot-year{margin-top:1rem}
 }
+
+/* ----- v13: one hero page, the logo mark, growing previews, round cursor ----- */
+.hx{height:100vh;height:100svh}
+.mk{display:block;flex:none;height:1.45em;width:auto;aspect-ratio:331.5/392.5}
+.logo,.mark{display:inline-flex;align-items:center;gap:.5em}
+.nav .logo,.site-foot .logo{--mark-accent:#3d7bff}
+.mark{--mark-accent:#0b5fff}
+.foot-brand .logo{display:inline-flex}
+/* the clicked screen grows into the full-window preview */
+.pv-bar{position:relative;z-index:1;background:#0b0b0c}
+.pv.pv-anim{background:transparent}
+.pv.pv-anim .pv-frame{position:absolute;left:0;top:0;flex:none;transform-origin:0 0;will-change:transform;box-shadow:0 30px 90px rgba(0,0,0,.55)}
+/* a small round cursor that inverts what it passes over */
+html.has-cursor:not(.pv-open),html.has-cursor:not(.pv-open) *{cursor:none!important}
+.cursor{position:fixed;left:0;top:0;z-index:200;pointer-events:none;opacity:0;mix-blend-mode:difference;transition:opacity .25s}
+.cursor.on{opacity:1}
+html.pv-open .cursor{opacity:0}
+.cursor i{position:absolute;left:-6px;top:-6px;width:12px;height:12px;border-radius:50%;background:#fff;transition:transform .35s var(--ease)}
+.cursor.hot i{transform:scale(2.5)}
+.cursor.down i{transform:scale(.7)}
+.cursor.hot.down i{transform:scale(2.1)}

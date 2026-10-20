@@ -46,10 +46,10 @@ so a local server is the reliable way to preview.
    whole wall cuts to complete black at once.
 4. **After 2 s of black**, the logo wall's screens come on one by one and the JIEWEITECH letters pop in.
    Then the screens around it fade together from black into the logo wall's blue.
-5. **Clicking the logo wall** turns every outer screen over to show its website, from the logo outward.
-   Clicking it again turns them back to the plain blue.
-6. **Clicking a single blue screen** turns just that one over. Clicking it again opens that website.
-7. **Scrolling one step** turns every screen over, from the logo outward, into one full-screen logo wall.
+5. **Clicking any blue screen** turns every outer screen over to show its website, starting from that screen.
+   **Clicking the logo wall** does the same from the logo, and clicking it again turns them back to plain blue.
+6. **Clicking a website on show** grows that screen until it fills the window; Close shrinks it back.
+7. **Scrolling down** goes straight to "What we do".
 
 Each logo wall's sky is one shared layer behind the monitors, so the picture runs continuously behind the
 bezels. Its water is a seamless strip of soft bands that slides sideways with a GPU transform, and it pauses
@@ -58,7 +58,16 @@ when it is off screen.
 ## Scrolling
 
 Every page below the hero fits the window. One wheel notch, trackpad swipe, key press or touch swipe moves
-one page. A quick second scroll carries on to the next page at once, and leftover trackpad momentum is ignored.
+one page: the step between the hero and "What we do" takes about 0.5 s, the others about 1 s. Scrolling
+again the same way while a page is moving speeds it up, so two scrolls finish in about 0.5 s. Leftover
+trackpad momentum is ignored.
+
+## Logo and cursor
+
+The JIEWEITECH mark is traced from the original artwork, so its shape is exact. It lives once in
+`index.html` as the `jwMark` symbol: the main shapes take the surrounding text color and the bar takes
+`--mark-accent`. `assets/img/logo.svg` is the original-color version and `assets/img/favicon.svg` the tab icon.
+On computers with a mouse or trackpad, the pointer is a small round cursor that grows over anything clickable.
 
 ## What we do
 

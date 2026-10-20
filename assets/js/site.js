@@ -272,7 +272,7 @@ var WORK = [
 
   var hx = $("#top"), hxBox = $("#hxBox"), wallDefs = $("#wallDefs");
   var frameLoads = [];
-  var mons = [], grid = null, world = null, layoutKey = "", skyLogo = null, skyBig = null, p2Swapped = false;
+  var mons = [], grid = null, world = null, layoutKey = "", skyLogo = null;
   var shownIds = {};   /* which website examples are turned over (kept across layout changes) */
   /* phase: off -> intro -> done */
   var phase = "off", introDone = false, lit = false, calm = reduce;
@@ -321,7 +321,6 @@ var WORK = [
       (ui ? '<span class="hx-ui"><i></i><b></b><b></b><b></b></span>' : "") +
       '<span class="m m-static"></span><span class="m m-text"></span><span class="m m-dim"></span>' +
       '<span class="m m-load"><i></i><b>BUFFERING</b></span><div class="m m-show"></div><span class="m m-fill"></span>' +
-      '<div class="m m-big"><div class="m-wave"><img alt=""></div><svg class="m-bigsvg" preserveAspectRatio="none"></svg></div>' +
       '<span class="m-shade"></span><span class="m-off"></span><span class="m-flash"></span><span class="m-glass"></span>');
     inner.appendChild(scr);
     inner.insertAdjacentHTML("beforeend", '<span class="m-led"></span>');
@@ -329,15 +328,15 @@ var WORK = [
     var m = { el: el, inner: inner, scr: scr, content: content, kind: kind, page: page, c: c, r: r,
       off: scr.querySelector(".m-off"), flash: scr.querySelector(".m-flash"), stat: scr.querySelector(".m-static"), text: scr.querySelector(".m-text"),
       dim: scr.querySelector(".m-dim"), load: scr.querySelector(".m-load"), fill: scr.querySelector(".m-fill"), big: scr.querySelector(".m-big"),
-      bigSvg: scr.querySelector(".m-bigsvg"), bigImg: scr.querySelector(".m-big img"), show: scr.querySelector(".m-show"), mode: null,
+      show: scr.querySelector(".m-show"), mode: null,
       revealed: kind === "site" && !!shownIds[page.id], ftl: null, flipping: false };
     gsap.set(inner, { transformPerspective: 900 });
     var act = function () {
       if (phase === "off") { powerOn(m, false); return; }
-      if (phase !== "done" || !lit || onPage2) return;
+      if (phase !== "done" || !lit) return;
       if (kind === "logo") toggleCases();          /* the logo wall shows or hides every website example */
-      else if (!m.revealed) revealOne(m);          /* a plain screen turns over to show its website */
-      else openPage(page, el);                     /* and a second click opens that website */
+      else if (!m.revealed) toggleCases(m, true);  /* any plain screen turns them all over, starting from itself */
+      else openPage(page, el, m);                  /* a website on show opens, growing to fill the window */
     };
     el.addEventListener("click", act);
     el.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); act(); } });
@@ -368,8 +367,8 @@ var WORK = [
         grid.appendChild(m.el); mons.push(m);
       }
     }
-    skyLogo = makeSky("sky-logo"); skyBig = makeSky("sky-big");
-    world.appendChild(skyLogo); world.appendChild(skyBig);
+    skyLogo = makeSky("sky-logo");
+    world.appendChild(skyLogo);
     world.appendChild(grid);
     hxBox.appendChild(world);
     layoutGrid();
@@ -471,24 +470,17 @@ var WORK = [
     waveUrls[key] = URL.createObjectURL(new Blob([svg], { type: "image/svg+xml" }));
     return waveUrls[key];
   }
-  var WAVE_PAD = 0;
-  function placeWave(img, b, U, kind) {
-    img.src = waveUrl(kind);
-    img.style.width = U.W + "px"; img.style.height = U.H + "px";
-    img.style.left = (-(b.left - U.x0)) + "px"; img.style.top = (-(b.top - U.y0)) + "px";
-  }
   function makeSky(cls) {
     var d = document.createElement("div");
     d.className = "hx-sky " + cls;
     d.setAttribute("aria-hidden", "true");
-    d.innerHTML = '<img class="sky-base" alt=""><img class="sky-deep" alt=""><div class="sky-flow"><img class="flow-a" alt=""><img class="flow-b" alt=""></div><svg class="sky-word" preserveAspectRatio="none"></svg>';
+    d.innerHTML = '<img class="sky-base" alt=""><div class="sky-flow"><img class="flow-a" alt=""><img class="flow-b" alt=""></div><svg class="sky-word" preserveAspectRatio="none"></svg>';
     return d;
   }
   function placeSky(el, R, G, kind, sym) {
     el.style.left = (R.x0 - G.left) + "px"; el.style.top = (R.y0 - G.top) + "px";
     el.style.width = R.W + "px"; el.style.height = R.H + "px";
     el.querySelector(".sky-base").src = waveUrl(kind);
-    el.querySelector(".sky-deep").src = waveUrl("big");
     el.querySelector(".flow-a").src = flowUrl(kind, 1);
     el.querySelector(".flow-b").src = flowUrl(kind, 2);
     var svg = el.querySelector(".sky-word");
@@ -509,30 +501,14 @@ var WORK = [
     adv.forEach(function (a) { xs.push(acc); acc += a * k; });
     LG = { xs: xs, base: H * 0.645, k: k, H: H, W: W, adv: adv, cap: cap };
     var glyphs = WORD.split("").map(function (ch, i) { return '<text id="wl' + i + '" x="0" y="0" ' + FONT_ATTR + ' font-size="' + fs + '" fill="#050505">' + ch + "</text>"; }).join("");
-    /* the whole wall as one giant logo, for page 2 (laid out like the reference wall) */
-    var A = union(mons), BW = A.W, BH = A.H, bigText;
-    if (BH <= BW) {
-      var bcap = Math.min(0.34 * BH, 0.19 * BW), bfs = bcap / 0.727, btl = 0.86 * BW;
-      bigText = '<text x="' + (BW - btl) / 2 + '" y="' + (BH * 0.42 + bcap / 2) + '" textLength="' + btl + '" lengthAdjust="spacingAndGlyphs" ' + FONT_ATTR + ' font-size="' + bfs + '" fill="#050505">' + WORD + "</text>";
-    } else {
-      var tcap = Math.min(0.2 * BH, 0.3 * BW), tfs = tcap / 0.727, tl1 = 0.88 * BW, gapY = tcap * 0.28;
-      var yA = BH * 0.44 - gapY / 2, yB = yA + tcap + gapY;
-      bigText = '<text x="' + (BW - tl1) / 2 + '" y="' + yA + '" textLength="' + tl1 + '" lengthAdjust="spacingAndGlyphs" ' + FONT_ATTR + ' font-size="' + tfs + '" fill="#050505">JIEWEI</text>' +
-        '<text x="' + (BW - tl1) / 2 + '" y="' + yB + '" textLength="' + tl1 + '" lengthAdjust="spacingAndGlyphs" ' + FONT_ATTR + ' font-size="' + tfs + '" fill="#050505">TECH</text>';
-    }
+    var A = union(mons);
     wallDefs.innerHTML =
-      '<symbol id="wallArt2" viewBox="0 0 ' + W + " " + H + '" overflow="hidden">' + glyphs + "</symbol>" +
-      '<symbol id="wallBig" viewBox="0 0 ' + BW + " " + BH + '" overflow="hidden">' + bigText + "</symbol>";
+      '<symbol id="wallArt2" viewBox="0 0 ' + W + " " + H + '" overflow="hidden">' + glyphs + "</symbol>";
     writeLetters();
     placeSky(skyLogo, U, G, "logo", "wallArt2");
-    placeSky(skyBig, A, G, "big", "wallBig");
     mons.forEach(function (m, i) {
       var b = A.rects[i];
-      /* each screen also keeps a still copy of its slice of the big wall, shown while it flips */
-      m.bigSvg.setAttribute("viewBox", (b.left - A.x0) + " " + (b.top - A.y0) + " " + b.width + " " + b.height);
-      m.bigSvg.innerHTML = '<use href="#wallBig" width="' + BW + '" height="' + BH + '"/>';
-      placeWave(m.bigImg, b, A, "big");
-      m.cx = (b.left + b.width / 2 - A.x0) / (BW / 6); m.cy = (b.top + b.height / 2 - A.y0) / (BW / 6);
+      m.cx = (b.left + b.width / 2 - A.x0) / (A.W / 6); m.cy = (b.top + b.height / 2 - A.y0) / (A.W / 6);
       if (m.kind === "site" && b.width) {
         m.content.style.height = Math.round(PAGE_BASE * b.height / b.width) + "px";
         m.content.style.transform = "scale(" + (b.width / PAGE_BASE) + ")";
@@ -554,27 +530,26 @@ var WORK = [
   function startWaves() {
     if (reduce || flows.logo || !grid) return;
     flows.logo = makeFlow(skyLogo);
-    flows.big = makeFlow(skyBig);
     syncWaves();
   }
   function stopWaves() {
     ["logo", "big"].forEach(function (k) { if (flows[k]) { flows[k].forEach(function (t) { t.kill(); }); flows[k] = null; } });
   }
   function syncWaves() {
-    var showBig = onPage2 && p2Swapped && heroVisible, showLogo = heroVisible && lit && !p2Swapped;
+    var showBig = false, showLogo = heroVisible && lit;
     if (flows.logo) flows.logo.forEach(function (t) { t.paused(!showLogo); });
     if (flows.big) flows.big.forEach(function (t) { t.paused(!showBig); });
     hx.classList.toggle("waves-big", showBig); hx.classList.toggle("waves-logo", showLogo);
   }
   if ("IntersectionObserver" in window) {
-    new IntersectionObserver(function (es) { heroVisible = es[0].isIntersecting; syncWaves(); }).observe(hx.querySelector(".hx-sticky"));
+    new IntersectionObserver(function (es) { heroVisible = es[0].isIntersecting && es[0].intersectionRatio > 0.01; syncWaves(); }, { threshold: [0, 0.02] }).observe(hx.querySelector(".hx-sticky"));
   }
 
-  if (document.fonts && document.fonts.load) Promise.all([document.fonts.load('900 100px "Inter Variable"')]).then(function () { layoutGrid(); if (p2) { var on = onPage2; resetPage2(); if (on) page2(true, true); } stopWaves(); if (activated) startWaves(); });
+  if (document.fonts && document.fonts.load) Promise.all([document.fonts.load('900 100px "Inter Variable"')]).then(function () { layoutGrid(); stopWaves(); if (activated) startWaves(); });
 
   /* ---------- states ---------- */
   function setFramed(m, on) { m.el.classList.toggle("framed", on); }
-  function hideModes(m) { gsap.set([m.stat, m.text, m.dim, m.load, m.show, m.flash, m.fill, m.big], { opacity: 0 }); }
+  function hideModes(m) { gsap.set([m.stat, m.text, m.dim, m.load, m.show, m.flash, m.fill], { opacity: 0 }); }
   function resetOff(m, op) { m.off.classList.remove("mk-iris", "mk-blinds"); gsap.set(m.off, { opacity: op, clipPath: "none", "--r": "0%", "--b": "0px" }); gsap.set(m.scr, { x: 0 }); gsap.set(m.inner, { rotationY: 0, rotationX: 0, scale: 1 }); }
   function allOff() {
     hx.classList.add("is-off"); hx.classList.remove("is-lit", "blackout");
@@ -723,21 +698,17 @@ var WORK = [
     gsap.killTweensOf(m.inner, "rotationX,rotationY");
     flip(T, m, 0, f.axis, f.dir, function (t) { T.set(m.fill, { opacity: on ? 0 : 1 }, t); });
   }
-  function revealOne(m) {
-    if (m.revealed) return;
-    m.revealed = true; shownIds[m.page.id] = true;
-    flipCase(m, true, 0, flipDir(m, logoCenter()));
-    syncLogoKey();
-  }
-  function toggleCases() {
-    var list = sites(), on = !list.every(function (m) { return m.revealed; }), c = logoCenter();
+  /* from the logo wall: show all, or hide all if they are all showing. From a screen: show all, from that screen. */
+  function toggleCases(from, force) {
+    var list = sites(), on = force != null ? force : !list.every(function (m) { return m.revealed; }), c = from || logoCenter();
+    var each = from ? 0.035 : 0.06;
     list.sort(function (a, b) { return dist(a, c) - dist(b, c); }).forEach(function (m) {
       if (m.revealed === on) return;
       m.revealed = on;
       if (on) shownIds[m.page.id] = true; else delete shownIds[m.page.id];
-      var f = flipDir(m, c);
+      var f = m === from ? { axis: "y", dir: 1 } : flipDir(m, c);
       if (!on) f.dir = -f.dir;   /* they turn back toward the logo */
-      flipCase(m, on, dist(m, c) * 0.06, f);
+      flipCase(m, on, dist(m, c) * each, f);
     });
     syncLogoKey();
   }
@@ -884,7 +855,7 @@ var WORK = [
   function startGlitches() {
     var next = function () {
       var list = sites().filter(function (m) { return m.revealed && !m.flipping; });
-      if (!onPage2 && list.length) {
+      if (heroVisible && list.length) {
         var m = list[(Math.random() * list.length) | 0];
         idle.push(gsap.timeline().to(m.stat, { opacity: 0.8, duration: 0.05 }).to(m.stat, { opacity: 0, duration: 0.3, ease: "power1.out" }, 0.2));
       }
@@ -900,7 +871,7 @@ var WORK = [
     var hs = sites().map(function (m) {
       var tilt = function (y, x) { if (!m.flipping) gsap.to(m.inner, { rotationY: y, rotationX: x, duration: 0.6, ease: "power3.out", overwrite: "auto" }); };
       var on = function () {
-        if (onPage2 || !lit || phase !== "done") return;
+        if (!lit || phase !== "done") return;
         hovered = m;
         m.el.classList.add("on"); grid.classList.add("hovering");
         gsap.to(m.inner, { scale: 1.05, duration: 0.45, ease: "power3.out", overwrite: "auto" });
@@ -938,73 +909,17 @@ var WORK = [
     hovered = null;
   }
 
-  /* ---------- page 2: every screen turns over, from the logo outward, into one full-screen logo wall ---------- */
-  var onPage2 = false, p2 = null;
-  function buildPage2() {
-    var T = gsap.timeline({ paused: true }), c = logoCenter();
-    mons.slice().sort(function (a, b) { return dist(a, c) - dist(b, c); }).forEach(function (m) {
-      var f = flipDir(m, c);
-      flip(T, m, dist(m, c) * 0.045, f.axis, f.dir, function (t) { T.set(m.big, { opacity: 1 }, t); }, 0.18, 0.38);
-    });
-    return T;
-  }
-  /* once the flips have landed, the screens become windows onto one continuous, flowing big wall */
-  function swapIn() {
-    if (!onPage2 || p2Swapped || !grid) return;
-    p2Swapped = true;
-    hx.classList.add("p2-on");
-    mons.forEach(function (m) { m.el.classList.add("win"); gsap.set([m.fill, m.off], { opacity: 0 }); });
-    gsap.set(mons.map(function (m) { return m.big; }), { opacity: 0 });
-    gsap.set(skyBig, { autoAlpha: 1 }); gsap.set(skyLogo, { autoAlpha: 0 });
-    syncWaves();
-    if (!reduce) gsap.fromTo(skyBig.querySelector(".sky-flow"), { opacity: 0 }, { opacity: 1, duration: 1, ease: "power1.out" });
-  }
-  function swapOut() {
-    if (!p2Swapped || !grid) return;
-    p2Swapped = false;
-    hx.classList.remove("p2-on");
-    sites().forEach(function (m) { m.el.classList.remove("win"); gsap.set(m.fill, { opacity: m.revealed ? 0 : 1 }); });
-    gsap.set(mons.map(function (m) { return m.big; }), { opacity: 1 });
-    gsap.set(skyLogo, { autoAlpha: 1 }); gsap.set(skyBig, { autoAlpha: 0 });
-    syncWaves();
-  }
-  function page2(on, instant) {
-    if (!grid || !introDone) return;
-    if (on === onPage2 && !instant) return;
-    onPage2 = on;
-    releaseHover();
-    hx.classList.toggle("p2", on);
-    if (!p2) p2 = buildPage2();
-    if (on) {
-      if (instant || reduce) { p2.pause(); p2.progress(1); swapIn(); }
-      else { p2.eventCallback("onComplete", swapIn); p2.timeScale(1).play(); }
-    } else {
-      p2.eventCallback("onComplete", null);
-      swapOut();
-      if (instant || reduce) { p2.pause(); p2.progress(0); } else p2.timeScale(1.5).reverse();
-    }
-    syncWaves();
-  }
-  function resetPage2() {
-    swapOut();
-    if (p2) { p2.pause(); p2.progress(0); p2.kill(); p2 = null; }
-    onPage2 = false;
-    hx.classList.remove("p2");
-  }
-
   var heroMM = gsap.matchMedia();
   heroMM.add({ wide: "(min-aspect-ratio: 1/1)", tall: "(max-aspect-ratio: 1/1)" }, function (ctx) {
     var key = ctx.conditions.wide ? "wide" : "tall";
     if (grid && layoutKey === key) return;
-    var wasP2 = onPage2;
-    resetPage2();
     buildGrid(key);
-    if (introDone) { allLit(); activated = false; activate(); if (wasP2) page2(true, true); }
+    if (introDone) { allLit(); activated = false; activate(); }
     else allOff();
     var raf = 0;
     var onResize = function () {
       cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(function () { var on = onPage2; resetPage2(); layoutGrid(); if (on) page2(true, true); });
+      raf = requestAnimationFrame(function () { releaseHover(); layoutGrid(); });
     };
     addEventListener("resize", onResize);
     return function () {
@@ -1018,11 +933,27 @@ var WORK = [
     };
   });
 
-  /* ---------- page preview ---------- */
-  var pv = $("#pv"), pvFrame = null, pvTitle = $("#pvTitle"), pvClose = $("#pvClose"), pvFrom = null;
-  function openPage(p, from) {
-    pvFrom = from;
+  /* ---------- page preview: the screen that was clicked grows until it fills the window ---------- */
+  var pv = $("#pv"), pvBar = pv.querySelector(".pv-bar"), pvFrame = null, pvTitle = $("#pvTitle"), pvClose = $("#pvClose");
+  var pvFrom = null, pvMon = null, pvTw = null, pvState = { p: 0 };
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  /* p = 0 sits exactly on the monitor (the page laid out at the monitor's width), p = 1 fills the window */
+  function pvDrawer(r) {
+    var bh = pvBar.offsetHeight, ch0 = PAGE_BASE * r.height / r.width;
+    return function () {
+      if (!pvFrame) return;
+      var t = pvState.p, W = innerWidth, H = innerHeight;
+      var bx = lerp(r.left, 0, t), by = lerp(r.top, bh, t), bw = lerp(r.width, W, t), bhh = lerp(r.height, H - bh, t);
+      var cw = lerp(PAGE_BASE, W, t), s = bw / cw;
+      pvFrame.style.width = cw + "px"; pvFrame.style.height = (bhh / s) + "px";
+      pvFrame.style.transform = "translate(" + bx + "px," + by + "px) scale(" + s + ")";
+    };
+  }
+  function pvSettle() { pv.classList.remove("pv-anim"); if (pvFrame) pvFrame.removeAttribute("style"); gsap.set(pvBar, { clearProps: "opacity,visibility" }); }
+  function openPage(p, from, m) {
+    pvFrom = from; pvMon = m || null;
     pvTitle.textContent = p.title;
+    if (pvTw) { pvTw.kill(); pvTw = null; }
     if (pvFrame) pvFrame.remove();
     pvFrame = document.createElement("iframe");
     pvFrame.className = "pv-frame";
@@ -1031,13 +962,45 @@ var WORK = [
     pv.appendChild(pvFrame);
     pv.hidden = false;
     html.classList.add("pv-open");
-    if (!reduce) gsap.fromTo(pv, { opacity: 0, scale: 0.97 }, { opacity: 1, scale: 1, duration: 0.6, ease: "expo.out" });
-    pvClose.focus();
+    var r = m && m.scr.getBoundingClientRect();
+    if (reduce || !r || !r.width) {
+      if (!reduce) gsap.fromTo(pv, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.out" });
+      pvClose.focus();
+      return;
+    }
+    pv.classList.add("pv-anim");
+    gsap.set(pvBar, { autoAlpha: 0 });
+    var draw = pvDrawer(r), frame = pvFrame, started = false;
+    pvState.p = 0; draw();
+    var go = function () {
+      if (started || frame !== pvFrame) return;
+      started = true;
+      pvTw = gsap.to(pvState, { p: 1, duration: 0.9, ease: "power3.inOut", onUpdate: draw,
+        onComplete: function () { pvTw = null; pvSettle(); pvClose.focus({ preventScroll: true }); } });
+      gsap.to(pvBar, { autoAlpha: 1, duration: 0.35, delay: 0.62, ease: "power1.out" });
+    };
+    /* start once the page has loaded (it is local, so this is almost instant) */
+    frame.addEventListener("load", go, { once: true });
+    setTimeout(go, 450);
   }
   function closePage() {
     if (pv.hidden) return;
-    var done = function () { pv.hidden = true; if (pvFrame) { pvFrame.remove(); pvFrame = null; } html.classList.remove("pv-open"); if (pvFrom) pvFrom.focus({ preventScroll: true }); };
-    if (reduce) done(); else gsap.to(pv, { opacity: 0, scale: 0.98, duration: 0.35, ease: "power2.in", onComplete: done });
+    var done = function () {
+      pvTw = null; pv.hidden = true; pvSettle();
+      if (pvFrame) { pvFrame.remove(); pvFrame = null; }
+      html.classList.remove("pv-open");
+      if (pvFrom) pvFrom.focus({ preventScroll: true });
+    };
+    if (pvTw) { pvTw.kill(); pvTw = null; }
+    var r = pvMon && pvMon.el.isConnected && pvMon.scr.getBoundingClientRect();
+    if (reduce) { done(); return; }
+    if (!r || !r.width || r.bottom < 0 || r.top > innerHeight) { gsap.to(pv, { opacity: 0, duration: 0.3, ease: "power1.in", onComplete: function () { gsap.set(pv, { clearProps: "opacity" }); done(); } }); return; }
+    /* and shrinks back into its screen */
+    pv.classList.add("pv-anim");
+    var draw = pvDrawer(r);
+    pvState.p = 1; draw();
+    gsap.to(pvBar, { autoAlpha: 0, duration: 0.2 });
+    pvTw = gsap.to(pvState, { p: 0, duration: 0.65, ease: "power3.inOut", onUpdate: draw, onComplete: done });
   }
   pvClose.addEventListener("click", closePage);
   addEventListener("keydown", function (e) { if (e.key === "Escape") closePage(); });
@@ -1052,7 +1015,7 @@ var WORK = [
   function pageTop(el) { return el.getBoundingClientRect().top + window.pageYOffset; }
   function stops() {
     var vh = innerHeight, max = document.documentElement.scrollHeight - vh;
-    var list = [pageTop(hx), pageTop(hx) + vh];
+    var list = [pageTop(hx)];
     q("main > section:not(.hx), .site-foot", home).forEach(function (sec) {
       var top = pageTop(sec), bottom = top + sec.offsetHeight;
       for (var y = top; y < bottom - vh * 0.3; y += vh) list.push(y);
@@ -1067,25 +1030,36 @@ var WORK = [
     list.forEach(function (s, i) { if (Math.abs(s - y) < Math.abs(list[best] - y)) best = i; });
     return best;
   }
-  /* the big logo wall stays up anywhere below the first page */
-  function onStop(y) { page2(y >= pageTop(hx) + innerHeight - 10); }
+  /* The first page turns quickly; the others take about a second. Scrolling again the same way while a
+     page is turning speeds it up, so two scrolls finish in about half a second. */
+  var snapTw = null, snapDir = 0, snapBoosts = 0, snapStart = 0;
   function snapTo(y, done) {
-    snapping = true; snapTarget = y;
-    onStop(y);
-    snapProxy.y = window.pageYOffset;
+    var from = window.pageYOffset, top = pageTop(hx);
+    snapping = true; snapTarget = y; snapDir = y > from ? 1 : -1; snapBoosts = 0; snapStart = performance.now();
+    snapProxy.y = from;
     gsap.killTweensOf(snapProxy);
-    var d = Math.abs(y - snapProxy.y) / Math.max(1, innerHeight);
-    gsap.to(snapProxy, {
-      y: y, duration: reduce ? 0.01 : Math.min(0.8, 0.5 + d * 0.08), ease: "power3.out",
+    var first = Math.min(from, y) <= top + 2 && Math.abs(y - from) <= innerHeight * 1.05;
+    snapTw = gsap.to(snapProxy, {
+      y: y, duration: reduce ? 0.01 : first ? 0.55 : 1, ease: first ? "power3.out" : "power2.inOut",
       onUpdate: function () { window.scrollTo(0, snapProxy.y); },
-      onComplete: function () { snapping = false; snapTarget = null; if (done) done(); }
+      onComplete: function () { snapping = false; snapTarget = null; snapTw = null; if (done) done(); }
     });
   }
-  /* steps count from where the page is heading, so a quick second scroll goes on to the next page at once */
+  function boost() {
+    if (!snapTw) return;
+    snapBoosts++;
+    var left = (snapTw.duration() - snapTw.time()) / snapTw.timeScale();   /* real seconds still to go */
+    var spent = (performance.now() - snapStart) / 1000;
+    var want = snapBoosts === 1 ? Math.max(0.1, 0.5 - spent) : Math.max(0.08, left / 2);
+    if (want < left) snapTw.timeScale(snapTw.timeScale() * left / want);
+  }
   function step(dir) {
-    var list = stops(), from = snapping && snapTarget != null ? snapTarget : window.pageYOffset;
-    var i = nearest(list, from), j = Math.max(0, Math.min(list.length - 1, i + dir));
-    if (j !== i) snapTo(list[j]);
+    /* scrolling again the same way while a page turns hurries it along instead of skipping a page */
+    if (snapping && snapTw && dir === snapDir) { boost(); return; }
+    var list = stops(), y = window.pageYOffset, j = -1;
+    if (dir > 0) { for (var i = 0; i < list.length; i++) if (list[i] > y + 2) { j = i; break; } }
+    else { for (var k = list.length - 1; k >= 0; k--) if (list[k] < y - 2) { j = k; break; } }
+    if (j >= 0) snapTo(list[j]);
   }
   function snapActive() {
     return view === "home" && !busy && !html.classList.contains("intro-lock") && pv.hidden && !menuOpen;
@@ -1096,7 +1070,7 @@ var WORK = [
     var now = performance.now(), gap = now - wh.last;
     var dy = e.deltaY * (e.deltaMode === 1 ? 32 : e.deltaMode === 2 ? innerHeight : 1), abs = Math.abs(dy);
     wh.last = now;
-    if (gap > 160) { wh.armed = true; wh.acc = 0; }
+    if (gap > 160 || (gap > 70 && abs >= 50)) { wh.armed = true; wh.acc = 0; }   /* a pause, or a separate wheel notch */
     else if (!wh.armed && abs > 18 && abs > wh.lastAbs * 1.7 && now - wh.lastStep > 240) { wh.armed = true; wh.acc = 0; }
     wh.lastAbs = abs;
     if (!wh.armed || now < wh.holdUntil) return;
@@ -1132,6 +1106,26 @@ var WORK = [
     if (view !== "home" || snapping) return;
     var list = stops(); window.scrollTo(0, list[nearest(list, window.pageYOffset)]);
   });
+
+  /* ---------- a small round cursor (mouse and trackpad only) ---------- */
+  if (matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    var cur = document.createElement("div");
+    cur.className = "cursor"; cur.setAttribute("aria-hidden", "true"); cur.innerHTML = "<i></i>";
+    document.body.appendChild(cur);
+    html.classList.add("has-cursor");
+    var curX = gsap.quickTo(cur, "x", { duration: 0.16, ease: "power3.out" }), curY = gsap.quickTo(cur, "y", { duration: 0.16, ease: "power3.out" });
+    var HOT = "a, button, [role=button], .row, .hx.is-off .mon";
+    addEventListener("pointermove", function (e) {
+      if (e.pointerType && e.pointerType !== "mouse") return;
+      if (!cur.classList.contains("on")) { gsap.set(cur, { x: e.clientX, y: e.clientY }); cur.classList.add("on"); }
+      curX(e.clientX); curY(e.clientY);
+      var t = e.target;
+      cur.classList.toggle("hot", !!(t && t.closest && t.closest(HOT) && !(t.closest(".hx") && !t.closest(".hx.is-lit, .hx.is-off"))));
+    }, { passive: true });
+    document.documentElement.addEventListener("mouseleave", function () { cur.classList.remove("on"); });
+    addEventListener("pointerdown", function () { cur.classList.add("down"); });
+    addEventListener("pointerup", function () { cur.classList.remove("down"); });
+  }
 
   Promise.race([Promise.all(frameLoads), new Promise(function (res) { setTimeout(res, 4000); })])
     .then(function () { enterBtn.disabled = false; });
@@ -1198,7 +1192,6 @@ var WORK = [
     pauseDrift(true);
     stage.inert = true; home.inert = false;
     window.scrollTo(0, 0);
-    page2(false, true);
     lastY = 0; nav.classList.remove("is-hidden"); nav.classList.add("on-top");
     main.focus({ preventScroll: true });
     initScroll();
