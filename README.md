@@ -35,27 +35,36 @@ so a local server is the reliable way to preview.
 - **Which website sits on which monitor:** `LAYOUTS` in `assets/js/site.js` (`wide` for landscape screens, `tall` for portrait).
 - **A concept page's text or artwork:** edit the `P` list in `tools/make_pages.py`, run it, then run `tools/make_shots.py`.
 - **Colors:** CSS variables at the top of `assets/css/site.css`.
+- **"What we do" pictures:** `SERVICE_IMAGES` in `assets/js/site.js`.
 
 ## The homepage sequence
 
 1. **Enter Site:** the black wall spreads out from the button and switched-off monitors appear one by one.
-2. **Clicking a screen** (or waiting 5 s) switches the monitors on, rippling out from the click. Every screen
-   comes on the same way (an uneven flicker), but each shows something different: full-screen error dumps,
-   90s color bars rolling up and down, static, two kinds of blue screen, an infected computer, a BIOS boot,
-   tracking lines and buffering.
-3. **About 2.4 s later** the whole wall gives a short, dim flicker, like screens low on power. The logo wall
-   settles on the background blue first, then the screens around it settle too.
-4. **Half a second after the wall is blue**, the logo wall comes on and the JIEWEITECH letters pop in.
-   Until then the logo area stays fully black.
-5. **5 s later**, the cases flip over into the websites, in a wave from the clicked screen (or from the top left).
-6. **Scrolling one step** fades the cases away and enlarges the pure 4×3 logo wall. It stands on a polished
-   dark marble floor that reflects it in perspective, like the reference image.
-
-Hovering never blacks out a screen: on screen 1 the other cases only dim slightly.
+2. **Clicking a screen** (or waiting 5 s) powers every screen up quickly from dim to bright, in black and white
+   only: static, NO SIGNAL, grey test bars, tracking lines, a rolling picture and text dumps.
+3. **Each screen starts cutting out at its own moment**: black, on, black, faster and faster, and then the
+   whole wall cuts to complete black at once.
+4. **After 2 s of black**, the logo wall's screens come on one by one and the JIEWEITECH letters pop in.
+   Then the screens around it fade together from black into the logo wall's blue.
+5. **Clicking the logo wall** turns every outer screen over to show its website, from the logo outward.
+   Clicking it again turns them back to the plain blue.
+6. **Clicking a single blue screen** turns just that one over. Clicking it again opens that website.
+7. **Scrolling one step** turns every screen over, from the logo outward, into one full-screen logo wall.
 
 Each logo wall's sky is one shared layer behind the monitors, so the picture runs continuously behind the
 bezels. Its water is a seamless strip of soft bands that slides sideways with a GPU transform, and it pauses
 when it is off screen.
+
+## Scrolling
+
+Every page below the hero fits the window. One wheel notch, trackpad swipe, key press or touch swipe moves
+one page. A quick second scroll carries on to the next page at once, and leftover trackpad momentum is ignored.
+
+## What we do
+
+The services sit on the left and a picture sits on the right. Hovering a service (or tapping it on a phone)
+swaps the picture. The pictures are listed in `SERVICE_IMAGES` at the top of `assets/js/site.js`; they are
+stand-ins from the concept pages until you add your own.
 
 ## Accessibility
 

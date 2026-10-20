@@ -19,6 +19,13 @@ var HERO = [
   {file:"screen-02.jpg", variant:2, ratio:1.78, caption:"Design example"},
   {file:"screen-06.jpg", variant:5, ratio:1.5,  caption:"Design example, detail", crop:{s:2, ox:0, oy:0}, deco:true}
 ];
+// "What we do": the image shown on the right while each service is hovered (in the same order as the services).
+// These are stand-ins taken from the concept pages; put your own images in assets/img/services/ and list them here.
+var SERVICE_IMAGES = [
+  {src:"assets/img/shots/T2.jpg", alt:"Website development example"},
+  {src:"assets/img/shots/R3.jpg", alt:"GEO optimization example"},
+  {src:"assets/img/shots/B5.jpg", alt:"Standalone website example"}
+];
 var WORK = [
   {file:"T1.jpg", variant:3, ratio:1.6, caption:"Design concept"},
   {file:"R3.jpg", variant:5, ratio:1.6, caption:"Design concept"},
@@ -90,6 +97,42 @@ var WORK = [
     fig.appendChild(cap);
   }
   q("[data-work]").forEach(function (f) { makeShotFrame(f, WORK[+f.dataset.work]); });
+
+  /* ---------- "What we do": a picture for each service, swapped as the services are hovered ---------- */
+  var svcRows = q(".services .row"), svcFrame = $("#svcFrame"), svcNum = $("#svcNum"), svcName = $("#svcName");
+  var svcImgs = SERVICE_IMAGES.map(function (o, i) {
+    var w = document.createElement("div"); w.className = "svc-img" + (i === 0 ? " is-on" : "");
+    var img = new Image(); img.alt = ""; img.decoding = "async"; img.src = o.src;
+    img.onerror = function () { w.classList.add("missing"); w.setAttribute("data-file", o.src); };
+    w.appendChild(img); svcFrame.appendChild(w);
+    return w;
+  });
+  var svcCur = 0, svcZ = 2;
+  function setService(i, instant) {
+    if (i < 0 || i >= svcRows.length || i === svcCur) return;
+    var prev = svcCur; svcCur = i;
+    svcRows.forEach(function (r, k) { r.classList.toggle("is-active", k === i); });
+    svcNum.textContent = svcRows[i].querySelector(".num").textContent;
+    svcName.textContent = svcRows[i].querySelector(".name").textContent;
+    var w = svcImgs[i % svcImgs.length], img = w && w.querySelector("img");
+    if (!w || svcImgs[prev % svcImgs.length] === w) return;
+    gsap.killTweensOf([w, img]);
+    w.style.zIndex = ++svcZ;
+    w.classList.add("is-on");
+    if (reduce || instant) { gsap.set(w, { clipPath: "inset(0% 0% 0% 0%)" }); gsap.set(img, { scale: 1 }); }
+    else {
+      /* the new picture wipes up over the old one and settles from a slight zoom */
+      gsap.fromTo(w, { clipPath: "inset(100% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.75, ease: "expo.out" });
+      gsap.fromTo(img, { scale: 1.16 }, { scale: 1, duration: 1.1, ease: "expo.out" });
+      gsap.fromTo([svcNum, svcName], { yPercent: 60, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.5, ease: "expo.out", stagger: 0.04 });
+    }
+  }
+  svcRows.forEach(function (r, i) {
+    r.addEventListener("pointerenter", function (e) { if (e.pointerType === "mouse" || e.pointerType === "pen") setService(i); });
+    r.addEventListener("click", function () { setService(i); });
+    r.addEventListener("focusin", function () { setService(i); });
+  });
+  if (svcRows[0]) svcRows[0].classList.add("is-active");
 
   /* ---------- Headline word masks ---------- */
   function splitWords(el, cls) {
@@ -230,9 +273,10 @@ var WORK = [
   var hx = $("#top"), hxBox = $("#hxBox"), wallDefs = $("#wallDefs");
   var frameLoads = [];
   var mons = [], grid = null, world = null, layoutKey = "", skyLogo = null, skyBig = null, p2Swapped = false;
-  /* phase: off -> intro -> waveWait -> wave -> done */
+  var shownIds = {};   /* which website examples are turned over (kept across layout changes) */
+  /* phase: off -> intro -> done */
   var phase = "off", introDone = false, lit = false, calm = reduce;
-  var introTl = null, waveTl = null, autoTimer = 0, waveTimer = 0, origin = null;
+  var introTl = null, autoTimer = 0;
   try { if (sessionStorage.getItem("fx-off") === "1") calm = true; } catch (e) {}
 
   function makeFrame(p) {
@@ -263,6 +307,14 @@ var WORK = [
     } else {
       content = document.createElement("span");   /* logo screens are windows onto the shared sky behind them */
       el.classList.add("win");
+      if (c === 1 && r === 1) {
+        /* one keyboard stop for the whole logo wall */
+        el.setAttribute("role", "button");
+        el.setAttribute("tabindex", "0");
+        el.setAttribute("aria-pressed", "false");
+        el.setAttribute("aria-label", "JIEWEITECH logo wall: show or hide the website examples");
+        el.classList.add("logo-key");
+      }
     }
     scr.appendChild(content);
     scr.insertAdjacentHTML("beforeend",
@@ -277,12 +329,15 @@ var WORK = [
     var m = { el: el, inner: inner, scr: scr, content: content, kind: kind, page: page, c: c, r: r,
       off: scr.querySelector(".m-off"), flash: scr.querySelector(".m-flash"), stat: scr.querySelector(".m-static"), text: scr.querySelector(".m-text"),
       dim: scr.querySelector(".m-dim"), load: scr.querySelector(".m-load"), fill: scr.querySelector(".m-fill"), big: scr.querySelector(".m-big"),
-      bigSvg: scr.querySelector(".m-bigsvg"), bigImg: scr.querySelector(".m-big img"), show: scr.querySelector(".m-show"), mode: null };
+      bigSvg: scr.querySelector(".m-bigsvg"), bigImg: scr.querySelector(".m-big img"), show: scr.querySelector(".m-show"), mode: null,
+      revealed: kind === "site" && !!shownIds[page.id], ftl: null, flipping: false };
     gsap.set(inner, { transformPerspective: 900 });
     var act = function () {
-      if (phase === "off") powerOn(m, false);
-      else if (phase === "waveWait") startWave(m);
-      else if (lit && !onPage2 && kind === "site") openPage(page, el);
+      if (phase === "off") { powerOn(m, false); return; }
+      if (phase !== "done" || !lit || onPage2) return;
+      if (kind === "logo") toggleCases();          /* the logo wall shows or hides every website example */
+      else if (!m.revealed) revealOne(m);          /* a plain screen turns over to show its website */
+      else openPage(page, el);                     /* and a second click opens that website */
     };
     el.addEventListener("click", act);
     el.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); act(); } });
@@ -313,8 +368,8 @@ var WORK = [
         grid.appendChild(m.el); mons.push(m);
       }
     }
-    skyLogo = makeSky("sky-logo");
-    world.appendChild(skyLogo);
+    skyLogo = makeSky("sky-logo"); skyBig = makeSky("sky-big");
+    world.appendChild(skyLogo); world.appendChild(skyBig);
     world.appendChild(grid);
     hxBox.appendChild(world);
     layoutGrid();
@@ -465,21 +520,12 @@ var WORK = [
       bigText = '<text x="' + (BW - tl1) / 2 + '" y="' + yA + '" textLength="' + tl1 + '" lengthAdjust="spacingAndGlyphs" ' + FONT_ATTR + ' font-size="' + tfs + '" fill="#050505">JIEWEI</text>' +
         '<text x="' + (BW - tl1) / 2 + '" y="' + yB + '" textLength="' + tl1 + '" lengthAdjust="spacingAndGlyphs" ' + FONT_ATTR + ' font-size="' + tfs + '" fill="#050505">TECH</text>';
     }
-    /* what the floor reflects on page 2: the logo wall, its deep sky, letters and bezels */
-    var bezels = "";
-    lg.forEach(function (m, i) {
-      var b = U.rects[i];
-      bezels += '<rect x="' + (b.left - U.x0) + '" y="' + (b.top - U.y0) + '" width="' + b.width + '" height="' + b.height + '"/>';
-    });
     wallDefs.innerHTML =
       '<symbol id="wallArt2" viewBox="0 0 ' + W + " " + H + '" overflow="hidden">' + glyphs + "</symbol>" +
-      '<symbol id="wallBig" viewBox="0 0 ' + BW + " " + BH + '" overflow="hidden">' + bigText + "</symbol>" +
-      '<symbol id="wallRefl" viewBox="0 0 ' + W + " " + H + '"><rect width="' + W + '" height="' + H + '" fill="#000"/>' +
-        '<clipPath id="reflClip">' + bezels + '</clipPath>' +
-        '<g clip-path="url(#reflClip)"><image href="' + waveUrl("big") + '" width="' + W + '" height="' + H + '" preserveAspectRatio="none"/>' +
-        '<use href="#wallArt2" width="' + W + '" height="' + H + '"/></g></symbol>';
+      '<symbol id="wallBig" viewBox="0 0 ' + BW + " " + BH + '" overflow="hidden">' + bigText + "</symbol>";
     writeLetters();
     placeSky(skyLogo, U, G, "logo", "wallArt2");
+    placeSky(skyBig, A, G, "big", "wallBig");
     mons.forEach(function (m, i) {
       var b = A.rects[i];
       /* each screen also keeps a still copy of its slice of the big wall, shown while it flips */
@@ -493,51 +539,7 @@ var WORK = [
       }
     });
     world._A = A; world._G = G; world._U = U;
-    p2Geom = null;
-    layoutFloor();
     hxBox.style.transform = savedBox; world.style.transform = savedWorld;
-  }
-
-  /* page 2: the logo wall alone grows to fill the screen and stands on a polished marble floor */
-  var floor = $("#hxFloor"), p2Geom = null;
-  floor.innerHTML = '<div class="floor-glow"></div><div class="floor-tiles"></div><div class="floor-plane"><svg preserveAspectRatio="none"></svg></div><div class="floor-spill"></div>';
-  function p2Target() {
-    if (p2Geom) return p2Geom;
-    var U = world._U, G = world._G, Bw = G.width, Bh = G.height;
-    var s = Math.min((Bw * 0.985) / U.W, (Bh * 0.74) / U.H);
-    var tx = (Bw - U.W * s) / 2, ty = Math.max(6, Bh * 0.015);
-    p2Geom = { s: s, x: tx - (U.x0 - G.left) * s, y: ty - (U.y0 - G.top) * s, top: ty, w: U.W * s, h: U.H * s, left: tx };
-    return p2Geom;
-  }
-  function marbleUrl() {
-    if (waveUrls.marble) return waveUrls.marble;
-    var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">' +
-      '<filter id="m" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.0035 0.03" numOctaves="5" seed="7" stitchTiles="stitch"/>' +
-      '<feColorMatrix type="matrix" values="0 0 0 0 0.62  0 0 0 0 0.7  0 0 0 0 0.84  0 0 0 3.2 -1.55"/></filter>' +
-      '<filter id="n" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="1" seed="2" stitchTiles="stitch"/>' +
-      '<feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .06 0"/></filter>' +
-      '<rect width="512" height="512" fill="#0a0f19"/><rect width="512" height="512" filter="url(#m)" opacity=".16"/><rect width="512" height="512" filter="url(#n)"/>' +
-      '<rect width="512" height="3" fill="#000" opacity=".85"/><rect width="3" height="512" fill="#000" opacity=".85"/>' +
-      '<rect y="3" width="512" height="1" fill="#9fc0ff" opacity=".08"/><rect x="3" width="1" height="512" fill="#9fc0ff" opacity=".08"/></svg>';
-    waveUrls.marble = URL.createObjectURL(new Blob([svg], { type: "image/svg+xml" }));
-    return waveUrls.marble;
-  }
-  function layoutFloor() {
-    if (!world || !world._U) return;
-    var U = world._U, g = p2Target(), box = hxBox.getBoundingClientRect(), sticky = floor.parentNode.getBoundingClientRect();
-    var top = (box.top - sticky.top) + g.top + g.h;
-    floor.style.top = top + "px";
-    var plane = floor.querySelector(".floor-plane"), tiles = floor.querySelector(".floor-tiles"), svg = plane.querySelector("svg");
-    var left = (box.left - sticky.left) + g.left;
-    plane.style.width = g.w + "px"; plane.style.height = g.h + "px"; plane.style.left = left + "px";
-    tiles.style.height = (g.h * 1.4) + "px";
-    tiles.style.setProperty("--tile", (g.w / 8) + "px");
-    tiles.style.backgroundImage = "url(" + marbleUrl() + ")";
-    tiles.style.backgroundPosition = (left - (box.left - sticky.left) + (sticky.width * 0.5)) % (g.w / 8) + "px 0";
-    var spill = floor.querySelector(".floor-spill");
-    spill.style.left = left + "px"; spill.style.width = g.w + "px";
-    svg.setAttribute("viewBox", "0 0 " + U.W + " " + U.H);
-    svg.innerHTML = '<g transform="translate(0,' + U.H + ') scale(1,-1)"><use href="#wallRefl" width="' + U.W + '" height="' + U.H + '"/></g>';
   }
 
   /* the flow: two strips per sky, sliding at different speeds; only the visible sky runs */
@@ -552,13 +554,14 @@ var WORK = [
   function startWaves() {
     if (reduce || flows.logo || !grid) return;
     flows.logo = makeFlow(skyLogo);
+    flows.big = makeFlow(skyBig);
     syncWaves();
   }
   function stopWaves() {
     ["logo", "big"].forEach(function (k) { if (flows[k]) { flows[k].forEach(function (t) { t.kill(); }); flows[k] = null; } });
   }
   function syncWaves() {
-    var showBig = false, showLogo = heroVisible && lit;
+    var showBig = onPage2 && p2Swapped && heroVisible, showLogo = heroVisible && lit && !p2Swapped;
     if (flows.logo) flows.logo.forEach(function (t) { t.paused(!showLogo); });
     if (flows.big) flows.big.forEach(function (t) { t.paused(!showBig); });
     hx.classList.toggle("waves-big", showBig); hx.classList.toggle("waves-logo", showLogo);
@@ -574,18 +577,24 @@ var WORK = [
   function hideModes(m) { gsap.set([m.stat, m.text, m.dim, m.load, m.show, m.flash, m.fill, m.big], { opacity: 0 }); }
   function resetOff(m, op) { m.off.classList.remove("mk-iris", "mk-blinds"); gsap.set(m.off, { opacity: op, clipPath: "none", "--r": "0%", "--b": "0px" }); gsap.set(m.scr, { x: 0 }); gsap.set(m.inner, { rotationY: 0, rotationX: 0, scale: 1 }); }
   function allOff() {
-    hx.classList.add("is-off"); hx.classList.remove("is-lit");
+    hx.classList.add("is-off"); hx.classList.remove("is-lit", "blackout");
     mons.forEach(function (m) { setFramed(m, true); resetOff(m, 1); hideModes(m); });
     if (skyLogo) gsap.set(skyLogo, { autoAlpha: 0 });
     letters.forEach(function (L) { L.dy = 0.75; L.o = 0; L.sy = 1; L.s = 1; }); wordShift.x = 0; writeLetters();
     lit = false;
   }
+  /* lit: the logo wall shows its sky; each outer screen is either the plain blue or its website */
   function allLit() {
-    hx.classList.remove("is-off"); hx.classList.add("is-lit");
-    mons.forEach(function (m) { setFramed(m, true); resetOff(m, 0); hideModes(m); });
+    hx.classList.remove("is-off", "blackout"); hx.classList.add("is-lit");
+    mons.forEach(function (m) {
+      if (m.ftl) { m.ftl.kill(); m.ftl = null; } m.flipping = false;
+      setFramed(m, true); resetOff(m, 0); hideModes(m);
+      if (m.kind === "site" && !m.revealed) gsap.set(m.fill, { opacity: 1 });
+    });
     if (skyLogo) gsap.set(skyLogo, { autoAlpha: 1 });
     letters.forEach(function (L) { L.dy = 0; L.o = 1; L.sy = 1; L.s = 1; }); wordShift.x = 0; writeLetters();
     lit = true;
+    syncLogoKey();
   }
 
   /* ---------- what each screen shows while the wall wakes up ----------
@@ -604,50 +613,32 @@ var WORK = [
     "PAGE_FAULT_IN_NONPAGED_AREA", "*** STOP: 0x00000050", "DISK READ ERROR", "UNHANDLED EXCEPTION 0xC0000005", "MEMORY_MANAGEMENT",
     "CHECKSUM MISMATCH IN SECTOR 0x3F", "I/O ERROR ON DEVICE 0", "SIGNAL 11 RECEIVED", "BUFFER OVERRUN DETECTED", "ACCESS VIOLATION",
     "WATCHDOG TIMEOUT", "NULL POINTER DEREFERENCE", "DMA TRANSFER FAILED", "INVALID OPCODE AT 0028:C0011E36", "CRC ERROR", "BAD SYSTEM CONFIG"];
-  var TYPES = ["err", "bars", "static", "bsod", "bsod2", "virus", "buffer", "track", "boot"];
+  /* black and white only: snow, lost signal, grey test bars, tracking lines, rolling picture, text dumps */
+  var TYPES = ["static", "nosig", "gbars", "track", "vhold", "static", "err", "nosig", "boot"];
 
   var SHOW = {
     err: function (m, h) {
-      var n = 26, color = pick(["#e8edf5", "#ff4b3e", "#ffb000", "#7dff9a"]), lines = [];
+      var n = 26, lines = [];
       for (var i = 0; i < n; i++) lines.push(i % 3 === 2 ? "0x" + ((Math.random() * 0xffffff) | 0).toString(16).toUpperCase() + "  " + hex(18) : pick(ERRORS) + "  " + pick(ERRORS) + "  " + hex(6));
       m.show.style.fontSize = (h / (n + 1)) + "px";
-      m.show.style.color = color;
       m.show.innerHTML = lines.map(function (l) { return "<span>" + l + "</span>"; }).join("");
       m._lines = [].slice.call(m.show.children);
       m._lines.forEach(function (s, i) { s._t = lines[i]; });
     },
-    bars: function () {
-      var top = ["#fff", "#ff0", "#0ff", "#0f0", "#f0f", "#f00", "#00f"].map(function (c) { return '<i style="background:' + c + '"></i>'; }).join("");
-      var mid = ["#00f", "#111", "#f0f", "#111", "#0ff", "#111", "#fff"].map(function (c) { return '<i style="background:' + c + '"></i>'; }).join("");
+    gbars: function () {
+      var top = ["#ececec", "#c4c4c4", "#9d9d9d", "#787878", "#545454", "#323232", "#141414"].map(function (c) { return '<i style="background:' + c + '"></i>'; }).join("");
+      var mid = ["#141414", "#0a0a0a", "#545454", "#0a0a0a", "#9d9d9d", "#0a0a0a", "#ececec"].map(function (c) { return '<i style="background:' + c + '"></i>'; }).join("");
       m_bars_id = (m_bars_id + 1) % 3;
       return '<div class="bars-roll r' + m_bars_id + '"><div class="bars-top">' + top + '</div><div class="bars-mid">' + mid + '</div>' +
-        '<div class="bars-low"><i style="background:#0a2a6e"></i><i style="background:#fff"></i><i style="background:#3a0a6e"></i><i style="background:#111"></i><i style="background:#000"></i><i style="background:#1a1a1a"></i></div>' +
+        '<div class="bars-low"><i style="background:#262626"></i><i style="background:#fff"></i><i style="background:#262626"></i><i style="background:#111"></i><i style="background:#000"></i><i style="background:#1a1a1a"></i></div>' +
         '<div class="bars-top">' + top + '</div></div><b class="tear"></b>';
     },
     "static": function () { return '<span class="snow"></span>'; },
-    bsod: function (m, h) {
-      m.show.style.fontSize = (h / 15) + "px";
-      return '<div class="bs9"><p class="bs-h"><span>&nbsp;SYSTEM&nbsp;</span></p>' +
-        '<p>A fatal exception 0E has occurred at 0028:C0011E36 in VXD VMM(01) + 00010E36. The current application will be terminated.</p>' +
-        '<p>*&nbsp; Press any key to terminate the current application.<br>*&nbsp; Press CTRL+ALT+DEL again to restart your computer. You will lose any unsaved information in all applications.</p>' +
-        '<p class="bs-c">Press any key to continue <u>_</u></p></div>';
+    nosig: function (m, h) {
+      m.show.style.fontSize = Math.max(7, h / 11) + "px";
+      return '<span class="snow faint"></span><span class="ns-osd">AV' + (1 + ((Math.random() * 3) | 0)) + '</span><span class="ns-box">NO SIGNAL</span>';
     },
-    bsod2: function (m, h) {
-      m.show.style.fontSize = (h / 13) + "px";
-      m._pc0 = (Math.random() * 40) | 0;
-      return '<div class="bs10"><b>:(</b><p>Your system ran into a problem and needs to restart. We\'re collecting some error info, and then we\'ll restart for you.</p>' +
-        '<p><span class="pc">' + m._pc0 + '</span>% complete</p><p class="sc">Stop code: ' + pick(["CRITICAL_PROCESS_DIED", "SYSTEM_SERVICE_EXCEPTION", "IRQL_NOT_LESS_OR_EQUAL", "KERNEL_DATA_INPAGE_ERROR"]) + '</p></div>';
-    },
-    virus: function (m, h) {
-      m.show.style.fontSize = (h / 18) + "px";
-      var msgs = ["TROJAN.GEN detected", "Your files are being encrypted", "WORM.32 found in memory", "Access denied", "System32 corrupted", "Firewall disabled"];
-      var d = "";
-      for (var i = 0; i < 6; i++) {
-        d += '<div class="vx-d" style="--i:' + i + ';left:' + (6 + i * 7) + '%;top:' + (16 + i * 9) + '%"><b>Error<i>x</i></b><p><s></s>' + msgs[(i + ((Math.random() * 6) | 0)) % 6] + '</p></div>';
-      }
-      return '<div class="vx"><div class="vx-banner">!! SYSTEM INFECTED !!</div>' + d + '<div class="vx-bar"><span>DELETING FILES</span><i></i></div></div>';
-    },
-    buffer: function () { return '<span class="spin"><i></i><b>BUFFERING</b></span>'; },
+    vhold: function () { return '<span class="snow roll"></span><span class="vh-bar"></span>'; },
     track: function () { return '<span class="trk"></span><span class="trk-band"></span>'; },
     boot: function (m, h) {
       m.show.style.fontSize = (h / 14) + "px";
@@ -688,38 +679,29 @@ var WORK = [
   }
   function stopTicker() { if (ticker) { clearInterval(ticker); ticker = 0; } }
 
-  /* the one way every screen comes on: an uneven flicker, then on */
-  function flickerOn(T, m, s) {
-    var t = s, len = 0.3 + Math.random() * 0.35, j = 0;
-    while (t < s + len) {
-      T.set(m.off, { opacity: j % 2 ? 1 : pick([0, 0.15, 0.4, 0]) }, t);
-      t += 0.03 + Math.random() * 0.09; j++;
+  /* a screen loses power and comes back, again and again, faster and faster, until the hard cut */
+  function flickerOut(T, m, from, cut) {
+    var t = from, on = false;
+    while (t < cut - 0.02) {
+      T.set(m.off, { opacity: on ? 0 : 1 }, t);
+      var left = cut - t;
+      /* each gap is a share of the time that is left, so the rhythm keeps speeding up */
+      t += Math.max(0.022, left * (on ? 0.3 : 0.2) * (0.75 + Math.random() * 0.5));
+      on = !on;
     }
-    T.set(m.off, { opacity: 0 }, t);
-    return t - s;
-  }
-  /* a dim, uneven flicker, like a screen running low on power, then it settles on the logo wall's blue */
-  function flickerToBlue(T, m, from, until) {
-    var t = from + Math.random() * 0.06;
-    while (t < until) {
-      T.set(m.off, { opacity: pick([0.25, 0.4, 0.55, 0.35, 0.6, 0.3]) }, t);
-      t += 0.05 + Math.random() * 0.11;
-    }
-    T.to(m.off, { opacity: 0.85, duration: 0.12, ease: "power1.in" }, until - 0.12);
-    T.set(m.show, { opacity: 0 }, until);
-    T.set(m.fill, { opacity: 1 }, until);
-    T.to(m.off, { opacity: 0, duration: 0.25, ease: "power1.out" }, until);
+    T.set(m.off, { opacity: 0 }, Math.max(from, cut - 0.03));
   }
 
-  /* a monitor flips over like a page: black on the way out, the new face on the way back */
-  function flip(T, m, s, axis, dir, mid) {
+  /* a monitor turns over like a page: the new face lands on the way back */
+  function flip(T, m, s, axis, dir, mid, d1, d2) {
+    d1 = d1 || 0.24; d2 = d2 || 0.46;
     var p = axis === "x" ? "rotationX" : "rotationY", a = {}, b = {}, c = {};
-    a[p] = 90 * dir; a.duration = 0.26; a.ease = "power2.in";
-    b[p] = -90 * dir; c[p] = 0; c.duration = 0.5; c.ease = "back.out(1.4)"; c.immediateRender = false;
+    a[p] = 90 * dir; a.duration = d1; a.ease = "power2.in";
+    b[p] = -90 * dir; c[p] = 0; c.duration = d2; c.ease = "back.out(1.4)"; c.immediateRender = false;
     T.to(m.inner, a, s);
-    mid(s + 0.26);
-    T.fromTo(m.inner, b, c, s + 0.26);
-    return 0.76;
+    mid(s + d1);
+    T.fromTo(m.inner, b, c, s + d1);
+    return d1 + d2;
   }
   function flipDir(m, o) {
     var dx = m.cx - o.cx, dy = m.cy - o.cy;
@@ -727,6 +709,42 @@ var WORK = [
   }
   function dist(a, b) { return Math.hypot(a.cx - b.cx, a.cy - b.cy); }
   function topLeft(list) { return list.slice().sort(function (a, b) { return (a.cx + a.cy) - (b.cx + b.cy); })[0]; }
+  function logoCenter() {
+    var lg = logos();
+    return lg.reduce(function (a, m) { a.cx += m.cx / lg.length; a.cy += m.cy / lg.length; return a; }, { cx: 0, cy: 0 });
+  }
+
+  /* ---------- the website examples: turned over one at a time, or all at once from the logo wall ---------- */
+  function flipCase(m, on, delay, f) {
+    if (m.ftl) m.ftl.kill();
+    var T = gsap.timeline({ delay: delay || 0, onStart: function () { m.flipping = true; }, onComplete: function () { m.flipping = false; m.ftl = null; } });
+    m.ftl = T;
+    if (calm || reduce) { T.to(m.fill, { opacity: on ? 0 : 1, duration: reduce ? 0.01 : 0.5, ease: "power1.inOut" }); return; }
+    gsap.killTweensOf(m.inner, "rotationX,rotationY");
+    flip(T, m, 0, f.axis, f.dir, function (t) { T.set(m.fill, { opacity: on ? 0 : 1 }, t); });
+  }
+  function revealOne(m) {
+    if (m.revealed) return;
+    m.revealed = true; shownIds[m.page.id] = true;
+    flipCase(m, true, 0, flipDir(m, logoCenter()));
+    syncLogoKey();
+  }
+  function toggleCases() {
+    var list = sites(), on = !list.every(function (m) { return m.revealed; }), c = logoCenter();
+    list.sort(function (a, b) { return dist(a, c) - dist(b, c); }).forEach(function (m) {
+      if (m.revealed === on) return;
+      m.revealed = on;
+      if (on) shownIds[m.page.id] = true; else delete shownIds[m.page.id];
+      var f = flipDir(m, c);
+      if (!on) f.dir = -f.dir;   /* they turn back toward the logo */
+      flipCase(m, on, dist(m, c) * 0.06, f);
+    });
+    syncLogoKey();
+  }
+  function syncLogoKey() {
+    var k = grid && grid.querySelector(".logo-key");
+    if (k) k.setAttribute("aria-pressed", String(sites().length > 0 && sites().every(function (m) { return m.revealed; })));
+  }
 
   /* ---------- the intro ---------- */
   function lockIntro(on) { html.classList.toggle("intro-lock", on); }
@@ -744,7 +762,7 @@ var WORK = [
       emergeTw = gsap.fromTo(mons.map(function (m) { return m.inner; }), { opacity: 0 }, { opacity: 1, duration: 0.7, ease: "power1.out", delay: 0.9, stagger: { each: 0.06, from: "random" } });
     }
     clearTimeout(autoTimer);
-    /* nobody clicked: it wakes by itself, from the top left */
+    /* nobody clicked: it wakes by itself */
     autoTimer = setTimeout(function () { if (phase === "off" && view === "home") powerOn(topLeft(mons), true); }, 5000);
     addEventListener("keydown", onSkipInput);
     addEventListener("wheel", onSkipInput, { passive: true });
@@ -759,106 +777,92 @@ var WORK = [
   }
   function skipIntroSeq() {
     if (introTl) { introTl.kill(); introTl = null; }
-    if (waveTl) { waveTl.kill(); waveTl = null; }
     if (!introDone) endIntro();
   }
 
   function powerOn(m, auto) {
     if (phase !== "off") return;
     phase = "intro";
-    origin = auto ? null : m;
     if (emergeTw) { emergeTw.kill(); emergeTw = null; }
     gsap.set(mons.map(function (x) { return x.inner; }), { opacity: 1 });
     clearTimeout(autoTimer);
     hx.classList.remove("is-off");
-    var lg = logos();
-    var T = gsap.timeline();
+    var lg = logos(), st = sites();
+    var T = gsap.timeline({ onComplete: endIntro });
     introTl = T;
 
     if (calm) {
-      /* Effects off: no static, no flicker. The logo fades up, then the cases follow. */
+      /* Effects off: no static and no flicker. The logo wall fades up, then the screens around it turn blue. */
       T.set(skyLogo, { autoAlpha: 1 }, 0.3);
       lg.forEach(function (x) { T.to(x.off, { opacity: 0, duration: 1 }, 0.3); });
-      T.to(letters, { o: 1, dy: 0, duration: 1, stagger: 0.05, onUpdate: writeLetters }, 1.3);
-      T.call(armWave, null, 0.3);
+      T.to(letters, { o: 1, dy: 0, duration: 1, stagger: 0.05, onUpdate: writeLetters }, 1.1);
+      T.set(st.map(function (x) { return x.fill; }), { opacity: 1 }, 2.2);
+      T.to(st.map(function (x) { return x.off; }), { opacity: 0, duration: 1.2, ease: "power1.inOut" }, 2.2);
+      T.to(nav, { autoAlpha: 1, duration: 0.6 }, 2.8);
       return;
     }
 
-    /* 1. Every screen comes on the same way, with an uneven flicker, rippling out from the click,
-          and each one shows something different. */
+    /* 1. Every screen powers up quickly, from dim to bright, into black-and-white static or a lost signal. */
     hx.classList.add("fx-run");
     assignModes();
     startTicker();
     mons.forEach(function (x) {
-      var s = dist(x, m) * 0.09 + Math.random() * 0.05;
-      T.set(x.show, { opacity: 1 }, Math.max(0, s - 0.01));
-      flickerOn(T, x, s);
+      var s = (m ? dist(x, m) * 0.035 : 0) + Math.random() * 0.06;
+      T.set(x.show, { opacity: 1, filter: "brightness(.35)" }, s);
+      T.fromTo(x.off, { opacity: 0.9 }, { opacity: 0, duration: 0.32, ease: "power2.in", immediateRender: false }, s);
+      T.to(x.show, { keyframes: [{ filter: "brightness(1.5)", duration: 0.3, ease: "power2.in" }, { filter: "brightness(1)", duration: 0.35, ease: "power1.out" }] }, s);
     });
-    /* 2. Then the whole wall flickers together, every screen at its own rhythm. The logo wall settles
-          on the blue first, then the screens around it settle too. */
-    var tFlick = 2.4, logoSettle = tFlick + 0.55, edgeSettle = tFlick + 0.95, allBlue = 0;
-    mons.forEach(function (x) {
-      var until = x.kind === "logo" ? logoSettle + Math.random() * 0.08 : edgeSettle + Math.random() * 0.15;
-      flickerToBlue(T, x, tFlick, until);
-      allBlue = Math.max(allBlue, until);
-    });
-    T.call(function () { stopTicker(); hx.classList.remove("fx-run"); }, null, allBlue + 0.05);
 
-    /* 3. Two seconds after the whole wall is blue, the logo wall comes on and the letters pop in. */
-    var tLogo = allBlue + 0.5;
-    T.call(armWave, null, tLogo);
+    /* 2. Each screen starts cutting out at its own moment, black, on, black, faster and faster ... */
+    var tCut = 3.3;
+    mons.forEach(function (x) { flickerOut(T, x, 1.15 + Math.random() * 1.1, tCut); });
+
+    /* 3. ... then everything cuts to black at once. */
+    T.call(function () { hx.classList.add("blackout"); stopTicker(); hx.classList.remove("fx-run"); }, null, tCut);
+    T.set(mons.map(function (x) { return x.off; }), { opacity: 1 }, tCut);
+    T.set(mons.map(function (x) { return x.show; }), { opacity: 0 }, tCut);
+
+    /* 4. After two seconds of black, the logo wall's screens come on one by one, and the letters pop in. */
+    var tLogo = tCut + 2;
+    T.call(function () { hx.classList.remove("blackout"); }, null, tLogo - 0.35);
     T.set(skyLogo, { autoAlpha: 1 }, tLogo);
-    T.set(lg.map(function (x) { return x.fill; }), { opacity: 0 }, tLogo);
-    lg.forEach(function (x) { T.fromTo(x.flash, { opacity: 0, scaleX: 1, scaleY: 1 }, { keyframes: [{ opacity: 0.5, duration: 0.04 }, { opacity: 0, duration: 0.35 }] }, tLogo); });
+    var lastOn = tLogo;
+    shuffle(lg.slice()).forEach(function (x, i) {
+      var s = tLogo + i * 0.05 + Math.random() * 0.12;
+      T.fromTo(x.flash, { opacity: 0 }, { keyframes: [{ opacity: 0.55, duration: 0.04 }, { opacity: 0, duration: 0.3 }], immediateRender: false }, s);
+      T.to(x.off, { opacity: 0, duration: 0.06 }, s);
+      lastOn = Math.max(lastOn, s);
+    });
+    var tWord = lastOn + 0.3;
     T.set(letters, { o: 0, s: 0.55, dy: 0, sy: 1, onComplete: writeLetters }, tLogo);
     letters.forEach(function (L, i) {
-      T.to(L, { s: 1, o: 1, duration: 0.5, ease: "back.out(2.2)", onUpdate: writeLetter, onUpdateParams: [i] }, tLogo + 0.25 + i * 0.045);
+      T.to(L, { s: 1, o: 1, duration: 0.5, ease: "back.out(2.2)", onUpdate: writeLetter, onUpdateParams: [i] }, tWord + i * 0.045);
     });
-  }
 
-  /* 4. Five seconds after the logo lights up, the cases flip on in a wave:
-        from the screen that was clicked, or from the top left if nobody clicked.
-        Clicking a dark screen during the wait starts the wave right there. */
-  function armWave() {
-    if (phase !== "intro") return;
-    phase = "waveWait";
-    clearTimeout(waveTimer);
-    waveTimer = setTimeout(function () { startWave(origin || topLeft(sites())); }, 5000);
-  }
-  function startWave(o) {
-    if (phase !== "waveWait") return;
-    phase = "wave";
-    clearTimeout(waveTimer);
-    var list = sites().sort(function (a, b) { return dist(a, o) - dist(b, o); });
-    var W = gsap.timeline({ onComplete: endIntro });
-    waveTl = W;
-    var end = 0;
-    list.forEach(function (m) {
-      var s = dist(m, o) * 0.13;
-      if (calm) { W.to([m.off, m.fill], { opacity: 0, duration: 0.8 }, s); end = Math.max(end, s + 0.8); return; }
-      var f = flipDir(m, o);
-      end = Math.max(end, s + flip(W, m, s, f.axis, f.dir, function (t) { W.set([m.off, m.fill], { opacity: 0 }, t); }));
-    });
-    W.to(nav, { autoAlpha: 1, duration: 0.6 }, Math.max(0, end - 0.4));
+    /* 5. Then the screens around it fade together from black into the logo wall's blue. */
+    var tFade = tWord + 0.45 + WORD.length * 0.045;
+    T.set(st.map(function (x) { return x.fill; }), { opacity: 1 }, tFade);
+    T.to(st.map(function (x) { return x.off; }), { opacity: 0, duration: 1.4, ease: "power1.inOut" }, tFade);
+    T.to(nav, { autoAlpha: 1, duration: 0.6 }, tFade + 0.6);
   }
 
   var activated = false;
   function endIntro() {
     if (introTl) { introTl.kill(); introTl = null; }
-    if (waveTl) { waveTl.kill(); waveTl = null; }
-    clearTimeout(autoTimer); clearTimeout(waveTimer);
+    clearTimeout(autoTimer);
     stopTicker();
-    hx.classList.remove("fx-run");
+    hx.classList.remove("fx-run", "blackout");
     removeEventListener("keydown", onSkipInput);
     removeEventListener("wheel", onSkipInput);
     if (emergeTw) { emergeTw.kill(); emergeTw = null; }
     allLit();
     gsap.set(mons.map(function (x) { return x.inner; }), { opacity: 1 });
+    gsap.set(mons.map(function (x) { return x.show; }), { clearProps: "filter" });
     gsap.set(nav, { autoAlpha: 1 });
     phase = "done";
     lockIntro(false);
     introDone = true;
-    wheelGate = true; lastWheel = performance.now();   /* momentum from a skipping scroll should not flip the page */
+    wh.armed = false; wh.last = performance.now(); wh.holdUntil = wh.last + 450;   /* the scroll that skipped the intro should not also turn the page */
     activate();
     ScrollTrigger.refresh();
   }
@@ -878,9 +882,9 @@ var WORK = [
     if (!reduce) { unbindHover = bindHover(); startGlitches(); startWaves(); }
   }
   function startGlitches() {
-    var list = sites();
     var next = function () {
-      if (!onPage2) {
+      var list = sites().filter(function (m) { return m.revealed && !m.flipping; });
+      if (!onPage2 && list.length) {
         var m = list[(Math.random() * list.length) | 0];
         idle.push(gsap.timeline().to(m.stat, { opacity: 0.8, duration: 0.05 }).to(m.stat, { opacity: 0, duration: 0.3, ease: "power1.out" }, 0.2));
       }
@@ -889,16 +893,14 @@ var WORK = [
     idle.push(gsap.delayedCall(3, next));
   }
 
-  /* hover: the case comes forward a little and wobbles with the pointer; the others dim */
+  /* hover: the screen comes forward a little and wobbles with the pointer; the others dim slightly */
   var hovered = null;
   function bindHover() {
     if (!matchMedia("(hover: hover) and (pointer: fine)").matches) return function () {};
     var hs = sites().map(function (m) {
-      var tilt = function (y, x) { gsap.to(m.inner, { rotationY: y, rotationX: x, duration: 0.6, ease: "power3.out", overwrite: "auto" }); };
+      var tilt = function (y, x) { if (!m.flipping) gsap.to(m.inner, { rotationY: y, rotationX: x, duration: 0.6, ease: "power3.out", overwrite: "auto" }); };
       var on = function () {
-        /* on page 2 an outer screen just goes black and still while the pointer is over it */
-        if (onPage2) return;
-        if (!lit || phase !== "done") return;
+        if (onPage2 || !lit || phase !== "done") return;
         hovered = m;
         m.el.classList.add("on"); grid.classList.add("hovering");
         gsap.to(m.inner, { scale: 1.05, duration: 0.45, ease: "power3.out", overwrite: "auto" });
@@ -909,10 +911,9 @@ var WORK = [
         tilt(((e.clientX - b.left) / b.width - 0.5) * 12, -((e.clientY - b.top) / b.height - 0.5) * 4);
       };
       var off = function () {
-        m.el.classList.remove("blk");
         if (hovered === m) hovered = null;
         m.el.classList.remove("on"); grid.classList.remove("hovering");
-        gsap.to(m.inner, { scale: 1, rotationY: 0, rotationX: 0, duration: 0.45, ease: "power3.out", overwrite: "auto" });
+        gsap.to(m.inner, m.flipping ? { scale: 1, duration: 0.45, ease: "power3.out" } : { scale: 1, rotationY: 0, rotationX: 0, duration: 0.45, ease: "power3.out", overwrite: "auto" });
       };
       m.el.addEventListener("pointerenter", on); m.el.addEventListener("pointermove", move); m.el.addEventListener("pointerleave", off);
       m.el.addEventListener("focus", on); m.el.addEventListener("blur", off);
@@ -929,22 +930,43 @@ var WORK = [
     if (!grid) return;
     grid.classList.remove("hovering");
     sites().forEach(function (m) {
-      m.el.classList.remove("on", "blk");
+      if (m.ftl) m.ftl.progress(1);
+      m.el.classList.remove("on");
       gsap.killTweensOf(m.inner);
       gsap.set(m.inner, { scale: 1, rotationX: 0, rotationY: 0 });
     });
     hovered = null;
   }
 
-  /* ---------- page 2: the cases step away and the logo wall alone grows to fill the screen ---------- */
+  /* ---------- page 2: every screen turns over, from the logo outward, into one full-screen logo wall ---------- */
   var onPage2 = false, p2 = null;
   function buildPage2() {
-    var T = gsap.timeline({ paused: true }), g = p2Target();
-    T.to(sites().map(function (m) { return m.el; }), { autoAlpha: 0, scale: 0.96, duration: 0.35, ease: "power2.in", stagger: { each: 0.012, from: "random" } }, 0);
-    T.to(world, { x: g.x, y: g.y, scale: g.s, transformOrigin: "0 0", duration: 0.95, ease: "power3.inOut" }, 0.12);
-    T.to(skyLogo.querySelector(".sky-deep"), { opacity: 1, duration: 0.8, ease: "power1.inOut" }, 0.3);
-    T.fromTo(floor, { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 0.7, ease: "power3.out", immediateRender: false }, 0.5);
+    var T = gsap.timeline({ paused: true }), c = logoCenter();
+    mons.slice().sort(function (a, b) { return dist(a, c) - dist(b, c); }).forEach(function (m) {
+      var f = flipDir(m, c);
+      flip(T, m, dist(m, c) * 0.045, f.axis, f.dir, function (t) { T.set(m.big, { opacity: 1 }, t); }, 0.18, 0.38);
+    });
     return T;
+  }
+  /* once the flips have landed, the screens become windows onto one continuous, flowing big wall */
+  function swapIn() {
+    if (!onPage2 || p2Swapped || !grid) return;
+    p2Swapped = true;
+    hx.classList.add("p2-on");
+    mons.forEach(function (m) { m.el.classList.add("win"); gsap.set([m.fill, m.off], { opacity: 0 }); });
+    gsap.set(mons.map(function (m) { return m.big; }), { opacity: 0 });
+    gsap.set(skyBig, { autoAlpha: 1 }); gsap.set(skyLogo, { autoAlpha: 0 });
+    syncWaves();
+    if (!reduce) gsap.fromTo(skyBig.querySelector(".sky-flow"), { opacity: 0 }, { opacity: 1, duration: 1, ease: "power1.out" });
+  }
+  function swapOut() {
+    if (!p2Swapped || !grid) return;
+    p2Swapped = false;
+    hx.classList.remove("p2-on");
+    sites().forEach(function (m) { m.el.classList.remove("win"); gsap.set(m.fill, { opacity: m.revealed ? 0 : 1 }); });
+    gsap.set(mons.map(function (m) { return m.big; }), { opacity: 1 });
+    gsap.set(skyLogo, { autoAlpha: 1 }); gsap.set(skyBig, { autoAlpha: 0 });
+    syncWaves();
   }
   function page2(on, instant) {
     if (!grid || !introDone) return;
@@ -953,19 +975,21 @@ var WORK = [
     releaseHover();
     hx.classList.toggle("p2", on);
     if (!p2) p2 = buildPage2();
-    if (instant || reduce) { p2.pause(); p2.progress(on ? 1 : 0); }
-    else if (on) p2.timeScale(1).play();
-    else p2.timeScale(1.4).reverse();
+    if (on) {
+      if (instant || reduce) { p2.pause(); p2.progress(1); swapIn(); }
+      else { p2.eventCallback("onComplete", swapIn); p2.timeScale(1).play(); }
+    } else {
+      p2.eventCallback("onComplete", null);
+      swapOut();
+      if (instant || reduce) { p2.pause(); p2.progress(0); } else p2.timeScale(1.5).reverse();
+    }
     syncWaves();
   }
   function resetPage2() {
+    swapOut();
     if (p2) { p2.pause(); p2.progress(0); p2.kill(); p2 = null; }
     onPage2 = false;
     hx.classList.remove("p2");
-    if (world) gsap.set(world, { clearProps: "transform" });
-    if (skyLogo) gsap.set(skyLogo.querySelector(".sky-deep"), { opacity: 0 });
-    if (mons.length) gsap.set(sites().map(function (m) { return m.el; }), { clearProps: "opacity,visibility,transform" });
-    gsap.set(floor, { autoAlpha: 0 });
   }
 
   var heroMM = gsap.matchMedia();
@@ -988,7 +1012,7 @@ var WORK = [
       unbindHover(); unbindHover = function () {};
       idle.forEach(function (t) { t.kill(); }); idle = [];
       stopWaves();
-      if (introTl || waveTl || (!introDone && phase !== "off")) { skipIntroSeq(); }
+      if (introTl || (!introDone && phase !== "off")) { skipIntroSeq(); }
       activated = false;
       if (world) { world.remove(); world = null; grid = null; mons = []; }
     };
@@ -1021,7 +1045,10 @@ var WORK = [
   /* =====================================================
      FULL-PAGE SCROLLING: one step = one full page
      ===================================================== */
-  var snapping = false, wheelGate = false, lastWheel = 0, snapProxy = { y: 0 }, touchY = null;
+  var snapping = false, snapTarget = null, snapProxy = { y: 0 }, touchY = null;
+  /* one wheel or trackpad gesture = one page. A gesture ends after a short pause, or when a fresh swipe
+     cuts through the trackpad's momentum; the leftover momentum itself is ignored. */
+  var wh = { last: 0, lastAbs: 0, armed: true, acc: 0, lastStep: 0, holdUntil: 0 };
   function pageTop(el) { return el.getBoundingClientRect().top + window.pageYOffset; }
   function stops() {
     var vh = innerHeight, max = document.documentElement.scrollHeight - vh;
@@ -1040,20 +1067,24 @@ var WORK = [
     list.forEach(function (s, i) { if (Math.abs(s - y) < Math.abs(list[best] - y)) best = i; });
     return best;
   }
-  function onStop(y) { page2(Math.abs(y - (pageTop(hx) + innerHeight)) < 10); }
+  /* the big logo wall stays up anywhere below the first page */
+  function onStop(y) { page2(y >= pageTop(hx) + innerHeight - 10); }
   function snapTo(y, done) {
-    snapping = true;
+    snapping = true; snapTarget = y;
     onStop(y);
     snapProxy.y = window.pageYOffset;
     gsap.killTweensOf(snapProxy);
+    var d = Math.abs(y - snapProxy.y) / Math.max(1, innerHeight);
     gsap.to(snapProxy, {
-      y: y, duration: reduce ? 0.01 : 0.95, ease: "power3.inOut",
+      y: y, duration: reduce ? 0.01 : Math.min(0.8, 0.5 + d * 0.08), ease: "power3.out",
       onUpdate: function () { window.scrollTo(0, snapProxy.y); },
-      onComplete: function () { snapping = false; wheelGate = true; if (done) done(); }
+      onComplete: function () { snapping = false; snapTarget = null; if (done) done(); }
     });
   }
+  /* steps count from where the page is heading, so a quick second scroll goes on to the next page at once */
   function step(dir) {
-    var list = stops(), i = nearest(list, window.pageYOffset), j = Math.max(0, Math.min(list.length - 1, i + dir));
+    var list = stops(), from = snapping && snapTarget != null ? snapTarget : window.pageYOffset;
+    var i = nearest(list, from), j = Math.max(0, Math.min(list.length - 1, i + dir));
     if (j !== i) snapTo(list[j]);
   }
   function snapActive() {
@@ -1062,12 +1093,18 @@ var WORK = [
   addEventListener("wheel", function (e) {
     if (!snapActive()) return;
     e.preventDefault();
-    var now = performance.now(), gap = now - lastWheel;
-    lastWheel = now;
-    if (snapping) return;
-    if (wheelGate) { if (gap < 220) return; wheelGate = false; }   /* let trackpad momentum die out */
-    if (Math.abs(e.deltaY) < 3) return;
-    step(e.deltaY > 0 ? 1 : -1);
+    var now = performance.now(), gap = now - wh.last;
+    var dy = e.deltaY * (e.deltaMode === 1 ? 32 : e.deltaMode === 2 ? innerHeight : 1), abs = Math.abs(dy);
+    wh.last = now;
+    if (gap > 160) { wh.armed = true; wh.acc = 0; }
+    else if (!wh.armed && abs > 18 && abs > wh.lastAbs * 1.7 && now - wh.lastStep > 240) { wh.armed = true; wh.acc = 0; }
+    wh.lastAbs = abs;
+    if (!wh.armed || now < wh.holdUntil) return;
+    wh.acc += dy;
+    if (Math.abs(wh.acc) < 24) return;
+    var dir = wh.acc > 0 ? 1 : -1;
+    wh.armed = false; wh.acc = 0; wh.lastStep = now;
+    step(dir);
   }, { passive: false });
   addEventListener("keydown", function (e) {
     if (!snapActive() || e.defaultPrevented) return;
@@ -1076,11 +1113,11 @@ var WORK = [
     var k = e.key, dir = 0;
     if (k === "ArrowDown" || k === "PageDown" || (k === " " && !e.shiftKey && !(t.closest && t.closest(".mon, button, a")))) dir = 1;
     else if (k === "ArrowUp" || k === "PageUp" || (k === " " && e.shiftKey)) dir = -1;
-    else if (k === "Home") { e.preventDefault(); if (!snapping) snapTo(stops()[0]); return; }
-    else if (k === "End") { e.preventDefault(); var l = stops(); if (!snapping) snapTo(l[l.length - 1]); return; }
+    else if (k === "Home") { e.preventDefault(); snapTo(stops()[0]); return; }
+    else if (k === "End") { e.preventDefault(); var l = stops(); snapTo(l[l.length - 1]); return; }
     if (!dir) return;
     e.preventDefault();
-    if (!snapping) step(dir);
+    step(dir);
   });
   addEventListener("touchstart", function (e) { touchY = e.touches[0].clientY; }, { passive: true });
   addEventListener("touchmove", function (e) { if (snapActive()) e.preventDefault(); }, { passive: false });
@@ -1088,9 +1125,10 @@ var WORK = [
     if (!snapActive() || touchY == null) return;
     var dy = touchY - e.changedTouches[0].clientY;
     touchY = null;
-    if (Math.abs(dy) > 40 && !snapping) step(dy > 0 ? 1 : -1);
+    if (Math.abs(dy) > 36) step(dy > 0 ? 1 : -1);
   });
   addEventListener("resize", function () {
+    fitFoot();
     if (view !== "home" || snapping) return;
     var list = stops(); window.scrollTo(0, list[nearest(list, window.pageYOffset)]);
   });
@@ -1134,9 +1172,16 @@ var WORK = [
   function goTo(id) {
     var t = id === "top" ? $("#top") : document.getElementById(id);
     if (!t) return;
-    var y = Math.max(0, pageTop(t) - (t.classList.contains("row") ? nav.offsetHeight : 0));
-    snapTo(y, function () { t.setAttribute("tabindex", "-1"); t.focus({ preventScroll: true }); });
+    /* a service is shown by going to the "What we do" page with that service picked */
+    var sec = t.classList.contains("row") ? t.closest("section") : t;
+    if (t.classList.contains("row")) setService(svcRows.indexOf(t), true);
+    snapTo(Math.max(0, pageTop(sec)), function () { t.setAttribute("tabindex", "-1"); t.focus({ preventScroll: true }); });
   }
+  /* the contact page and the footer share the last screen */
+  var foot = $(".site-foot");
+  function fitFoot() { html.style.setProperty("--foot-h", foot.offsetHeight + "px"); }
+  fitFoot();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitFoot);
   q("[data-go]", home).forEach(function (a) {
     a.addEventListener("click", function (e) { e.preventDefault(); if (menuOpen) setMenu(false); goTo(a.dataset.go); });
   });
