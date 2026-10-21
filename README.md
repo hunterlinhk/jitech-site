@@ -100,8 +100,10 @@ stand-ins from the concept pages until you add your own.
 
 Photos come from [Unsplash](https://unsplash.com/license) (free to use, no attribution required, credited anyway)
 and load straight from images.unsplash.com. If one can't load, its block keeps a matching colour tone.
-The entrance wall and "Selected work" use screenshots of the pages drawn entirely in code; after changing a
-page, or to add the photo pages to those, run `tools/make_shots.py` on a machine with internet access.
+The entrance wall has two separate groups of designs (`SCREENS.left` and `SCREENS.right` in `assets/js/site.js`),
+so the columns never repeat each other. A tile shows the page's screenshot from `assets/img/shots/` when one
+exists, and otherwise the live page scaled down. Running `tools/make_shots.py` on a machine with internet
+access adds screenshots for the photo pages, and their tiles switch to those automatically.
 
 ## Accessibility
 

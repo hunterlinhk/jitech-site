@@ -716,3 +716,6 @@ html.pv-open .cursor{opacity:0}
 .cursor.hot i{transform:scale(2.5)}
 .cursor.down i{transform:scale(.7)}
 .cursor.hot.down i{transform:scale(2.1)}
+
+/* ----- v14: entrance tiles that show a live page until a screenshot exists ----- */
+.tile-live{position:absolute;left:0;top:0;border:0;transform-origin:0 0;pointer-events:none;background:#141416}

@@ -3,7 +3,12 @@ var BRAND = "JIEWEITECH";
 var CONTACT_EMAIL = "[Contact email]";
 // Images for the "Selected work" section. Missing files show a labeled placeholder.
 var SCREEN_DIR = "assets/img/shots/";
-var SCREENS = ["T1","B5","L2","R4","B3","T2","B6","L2","T1","R4","B5","B6","T2","B3"];
+// Two separate groups, so the two columns never show the same design.
+// A design with a screenshot in assets/img/shots shows that; one without shows its live page instead.
+var SCREENS = {
+  left:  ["T1","L1","B3","R3","B5","L3","T2"],
+  right: ["L2","T4","R4","B2","B6","L4"]
+};
 // Screenshots of the concept pages for the entrance wall (tools/make_shots.py regenerates them).
 var SHOT_DIR = "assets/img/shots/";
 // Entrance wall tile width / height, cycled in order. All landscape.
@@ -38,7 +43,7 @@ var WORK = [
   "use strict";
   gsap.registerPlugin(ScrollTrigger);
 
-  var REPS = 3, COLUMNS = 2;
+  var REPS = 2, COLUMNS = 2;
   var html = document.documentElement;
   var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   var $ = function (s) { return document.querySelector(s); };
@@ -159,6 +164,7 @@ var WORK = [
 
   /* ---------- Entrance image wall ---------- */
   var wall = $("#wall"), caption = wall.querySelector(".wall-caption");
+  var liveTiles = [];
   function tile(id, i, dup) {
     var t = document.createElement("div");
     t.className = "tile";
@@ -167,20 +173,40 @@ var WORK = [
     var img = new Image();
     img.alt = dup ? "" : "Website design concept";
     img.decoding = "async";
+    /* no screenshot yet: show the page itself, laid out at desktop size and scaled into the tile */
+    img.onerror = function () {
+      img.remove();
+      var f = document.createElement("iframe");
+      f.className = "tile-live";
+      f.setAttribute("tabindex", "-1"); f.setAttribute("aria-hidden", "true"); f.setAttribute("scrolling", "no");
+      f.title = "";
+      f.src = PAGE_DIR + id + ".html?wall";
+      t.appendChild(f);
+      liveTiles.push(t);
+      fitLive(t);
+    };
     img.src = SHOT_DIR + id + ".jpg";
     t.appendChild(img);
     return t;
   }
-  for (var c = 0; c < COLUMNS; c++) {
+  function fitLive(t) {
+    var f = t.querySelector(".tile-live"), w = t.clientWidth, h = t.clientHeight;
+    if (!f || !w) return;
+    var s = w / 1440;
+    f.style.width = "1440px"; f.style.height = Math.ceil(h / s) + "px";
+    f.style.transform = "scale(" + s + ")";
+  }
+  addEventListener("resize", function () { liveTiles.forEach(fitLive); });
+  ["left", "right"].forEach(function (side) {
     var col = document.createElement("div"); col.className = "col";
     var track = document.createElement("div"); track.className = "track";
     for (var rep = 0; rep < REPS; rep++) {
       var set = document.createElement("div"); set.className = "set";
-      SCREENS.forEach(function (file, i) { if (i % COLUMNS === c) set.appendChild(tile(file, i, rep > 0)); });
+      SCREENS[side].forEach(function (id, i) { set.appendChild(tile(id, i + (side === "right" ? 3 : 0), rep > 0)); });
       track.appendChild(set);
     }
     col.appendChild(track); wall.insertBefore(col, caption);
-  }
+  });
 
   /* Slow endless drift of the wall */
   if (!reduce) {
