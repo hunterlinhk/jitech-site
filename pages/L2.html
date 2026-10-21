@@ -15,8 +15,8 @@ body{background:var(--bg);color:var(--tx);font-family:"Space Grotesk V",Arial,sa
 .logo i{width:22px;height:22px;border-radius:7px;background:conic-gradient(from 200deg,var(--a1),var(--a2),var(--a3),var(--a1))}
 .nav .b{color:var(--tx);border:1px solid var(--line);border-radius:10px;padding:9px 14px;background:rgba(255,255,255,.04)}
 .hero{position:relative;height:100vh;min-height:520px;overflow:hidden;display:flex;flex-direction:column}
-.sky{position:absolute;inset:-20%;z-index:0;filter:blur(70px) saturate(1.3);opacity:.9}
-.sky i{position:absolute;border-radius:50%;mix-blend-mode:screen}
+.sky{position:absolute;inset:-20%;z-index:0;opacity:.9}
+.sky i{position:absolute;border-radius:50%;mix-blend-mode:screen;filter:blur(70px) saturate(1.3);will-change:transform}
 .sky i:nth-child(1){width:46%;height:52%;left:18%;top:8%;background:var(--a1);animation:f1 14s ease-in-out infinite alternate}
 .sky i:nth-child(2){width:40%;height:44%;left:46%;top:2%;background:var(--a2);opacity:.75;animation:f2 17s ease-in-out infinite alternate}
 .sky i:nth-child(3){width:30%;height:36%;left:34%;top:26%;background:var(--a3);opacity:.6;animation:f3 12s ease-in-out infinite alternate}

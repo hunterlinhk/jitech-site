@@ -105,6 +105,22 @@ so the columns never repeat each other. A tile shows the page's screenshot from 
 exists, and otherwise the live page scaled down. Running `tools/make_shots.py` on a machine with internet
 access adds screenshots for the photo pages, and their tiles switch to those automatically.
 
+## Performance
+
+The live websites on the wall are the heaviest part of the site, so:
+
+- The 12 wall pages load only once Enter Site is clicked.
+- A page animates only while its website is showing and the wall can be seen. It pauses (holds its frame)
+  while the screen is plain blue, when the page is scrolled down, while a preview is open, and when the
+  browser tab is in the background. Screens showing plain blue aren't painted at all.
+- Page animations only move and fade things (transforms and opacity), which the graphics card handles.
+- **Lite mode** for slower computers: only 4 screens animate at a time, two new ones taking over every
+  3 seconds, and the screen under the pointer always plays. It switches on from the start when the browser
+  reports 4 or fewer processor cores, 4 GB or less memory, data saver, or no graphics acceleration, and
+  later if the wall measures below 45 frames per second (or more than 1 in 10 frames over 50 ms) for two
+  3-second windows in a row. The choice lasts for the visit.
+- Add `?lite` or `?full` to the address (for example `index.html?full`) to force either mode, e.g. for a demo.
+
 ## Accessibility
 
 - A photosensitivity warning with a "Turn effects off" switch sits under Enter Site.

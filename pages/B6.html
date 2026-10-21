@@ -18,8 +18,9 @@ body{background:var(--bg);color:var(--tx);font-family:"Syne V",Arial,sans-serif;
 .planet{position:absolute;right:-14vw;bottom:-58vh;width:min(96vw,150vh);aspect-ratio:1;border-radius:50%;
   background:radial-gradient(circle at 34% 28%,#3d6bd6 0%,#1b3a8c 24%,#0b1640 50%,#030614 72%);
   box-shadow:inset -60px -40px 120px rgba(0,0,0,.85),0 0 90px rgba(90,150,255,.35),0 0 2px 2px rgba(127,227,255,.4)}
-.planet::before{content:"";position:absolute;inset:0;border-radius:50%;background:repeating-linear-gradient(-18deg,rgba(255,255,255,.05) 0 14px,transparent 14px 46px);mix-blend-mode:screen;animation:clouds 60s linear infinite;-webkit-mask:radial-gradient(circle at 40% 35%,#000 40%,transparent 70%);mask:radial-gradient(circle at 40% 35%,#000 40%,transparent 70%)}
-@keyframes clouds{to{background-position:600px 0}}
+.planet .cl{position:absolute;inset:0;border-radius:50%;overflow:hidden;mix-blend-mode:screen;-webkit-mask:radial-gradient(circle at 40% 35%,#000 40%,transparent 70%);mask:radial-gradient(circle at 40% 35%,#000 40%,transparent 70%)}
+.planet .cl i{position:absolute;top:0;bottom:0;left:-200px;right:-200px;background:repeating-linear-gradient(-18deg,rgba(255,255,255,.05) 0 14px,transparent 14px 46px);will-change:transform;animation:clouds 15s linear infinite}
+@keyframes clouds{to{transform:translateX(148.86px)}}
 .orbit{position:absolute;right:4vw;bottom:-30vh;width:min(110vw,170vh);aspect-ratio:2.6;border:1px dashed rgba(127,227,255,.35);border-radius:50%;transform:rotate(-14deg)}
 .sat{position:absolute;left:50%;top:50%;width:0;height:0;animation:orb 14s linear infinite}
 .sat i{position:absolute;width:14px;height:14px;margin:-7px;background:var(--tx);box-shadow:-16px 0 0 -3px var(--cy),16px 0 0 -3px var(--cy),0 0 18px var(--cy)}
@@ -59,7 +60,7 @@ section{padding:clamp(80px,9vw,130px) 0}
 <body>
 <section class="hero" style="padding:0">
   <div class="stars" aria-hidden="true"></div><div class="stars2" aria-hidden="true"></div>
-  <div class="planet" aria-hidden="true"></div>
+  <div class="planet" aria-hidden="true"><div class="cl"><i></i></div></div>
   <div class="orbit" aria-hidden="true"><span class="sat"><i></i></span></div>
   <header class="nav"><a class="logo" href="#"><i></i>Orbital</a><a href="#">Launch</a><a href="#">Spacecraft</a><a href="#">Missions</a><a href="#">Careers</a><a class="m" href="#">Book a payload</a></header>
   <div class="in">

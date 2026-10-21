@@ -33,8 +33,9 @@ h1 span{color:var(--v)}
 .card{position:absolute;left:12%;top:16%;width:min(30vw,52vh,440px);aspect-ratio:1.586;border-radius:22px;transform-style:preserve-3d;animation:float 7s ease-in-out infinite alternate;
   background:radial-gradient(120% 140% at 0% 0%,#a594ff 0%,#5b3df5 40%,#1d1460 100%);box-shadow:0 40px 80px rgba(48,25,160,.45),inset 0 1px 0 rgba(255,255,255,.4);color:#fff;padding:7%}
 @keyframes float{from{transform:rotateX(18deg) rotateY(-24deg) rotateZ(6deg) translateY(0)}to{transform:rotateX(10deg) rotateY(-12deg) rotateZ(2deg) translateY(-16px)}}
-.card::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.35) 45%,transparent 60%);background-size:250% 100%;animation:sheen 4s ease-in-out infinite}
-@keyframes sheen{from{background-position:120% 0}to{background-position:-60% 0}}
+.card .shine{position:absolute;inset:0;border-radius:inherit;overflow:hidden;pointer-events:none}
+.card .shine::before{content:"";position:absolute;top:0;bottom:0;left:-60%;width:60%;background:linear-gradient(115deg,transparent 20%,rgba(255,255,255,.35) 50%,transparent 80%);animation:sheen 4s ease-in-out infinite}
+@keyframes sheen{from{transform:translateX(0)}to{transform:translateX(370%)}}
 .card .chip{width:16%;aspect-ratio:1.3;border-radius:6px;background:linear-gradient(135deg,#f6e6a8,#c9a94e);margin-top:6%}
 .card .num{position:absolute;left:7%;bottom:22%;font-family:"JetBrains Mono V",monospace;letter-spacing:.14em;font-size:clamp(12px,1.25vw,18px)}
 .card .name{position:absolute;left:7%;bottom:9%;font-size:12px;letter-spacing:.14em;opacity:.8}
@@ -75,8 +76,8 @@ section{padding:clamp(80px,9vw,130px) 0}
         <div class="trust" data-in style="--d:4"><span>FDIC insured to $5M</span><span>No monthly fees</span><span>4.9 · App Store</span></div>
       </div>
       <div class="scene" aria-hidden="true">
-        <div class="card back"><div class="brand">Ledger</div><div class="chip"></div><div class="num">5381 •••• •••• 2207</div><div class="name">TEAM CARD</div></div>
-        <div class="card"><div class="brand">Ledger</div><div class="chip"></div><div class="num">4716 •••• •••• 9042</div><div class="name">MARA OKAFOR</div></div>
+        <div class="card back"><span class="shine"></span><div class="brand">Ledger</div><div class="chip"></div><div class="num">5381 •••• •••• 2207</div><div class="name">TEAM CARD</div></div>
+        <div class="card"><span class="shine"></span><div class="brand">Ledger</div><div class="chip"></div><div class="num">4716 •••• •••• 9042</div><div class="name">MARA OKAFOR</div></div>
         <div class="note n1"><i>$</i><div><b>+ $12,480.00</b><small>Invoice #1042 paid</small></div></div>
         <div class="note n2"><i>%</i><div><b>$318.22</b><small>Interest this month</small></div></div>
       </div>

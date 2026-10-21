@@ -306,7 +306,6 @@ var WORK = [
   })();
 
   var hx = $("#top"), hxBox = $("#hxBox"), wallDefs = $("#wallDefs");
-  var frameLoads = [];
   var mons = [], grid = null, world = null, layoutKey = "", skyLogo = null;
   var shownIds = {};   /* which website examples are turned over (kept across layout changes) */
   /* phase: off -> intro -> done */
@@ -322,10 +321,97 @@ var WORK = [
     f.setAttribute("scrolling", "no");
     f.setAttribute("title", p.title);
     f.style.width = PAGE_BASE + "px"; f.style.height = Math.round(PAGE_BASE * 0.6) + "px";
-    frameLoads.push(new Promise(function (res) { f.addEventListener("load", res, { once: true }); setTimeout(res, 5000); }));
-    setTimeout(function () { f.src = PAGE_DIR + p.id + ".html?wall"; }, 0);   /* after it is in the page, so it loads once */
+    f.style.visibility = "hidden";
+    f.dataset.src = PAGE_DIR + p.id + ".html?wall";   /* loaded once the homepage is opened, see loadFrames */
+    f.addEventListener("load", function () { if (f.getAttribute("src")) { f._play = null; syncFrames(); } });
     return f;
   }
+
+  /* ---------- keeping the wall light ----------
+     The pages on the monitors load only once the homepage is opened, and a page animates only while its
+     website is showing and the wall can be seen. On slower computers ("lite"), only a few screens animate
+     at a time, taking turns, and the one under the pointer always plays. */
+  var framesWanted = false;
+  function loadFrames() {
+    framesWanted = true;
+    sites().forEach(function (m) { if (!m.content.getAttribute("src")) m.content.src = m.content.dataset.src; });
+  }
+  var lite = false, liteForced = null, SPOT_N = 4, spot = [], spotTimer = 0, syncing = false;
+  (function () {
+    var qs = location.search;
+    if (/[?&]lite\b/.test(qs)) liteForced = true; else if (/[?&]full\b/.test(qs)) liteForced = false;
+    if (liteForced !== null) { lite = liteForced; return; }
+    try { if (sessionStorage.getItem("wall-lite") === "1") { lite = true; return; } } catch (e) {}
+    /* early hints: few processor cores, little memory, data saver, or no graphics acceleration */
+    var cores = navigator.hardwareConcurrency || 8, mem = navigator.deviceMemory || 8, conn = navigator.connection;
+    if (cores <= 4 || mem <= 4 || (conn && conn.saveData) || softwareGL()) lite = true;
+  })();
+  function softwareGL() {
+    try {
+      var gl = document.createElement("canvas").getContext("webgl");
+      if (!gl) return true;
+      var ext = gl.getExtension("WEBGL_debug_renderer_info");
+      var r = ext ? String(gl.getParameter(ext.UNMASKED_RENDERER_WEBGL)) : "";
+      var lose = gl.getExtension("WEBGL_lose_context"); if (lose) lose.loseContext();
+      return /swiftshader|llvmpipe|softpipe|software|basic render/i.test(r);
+    } catch (e) { return false; }
+  }
+  function wallWatched() { return view === "home" && heroVisible && lit && !!pv && pv.hidden && !document.hidden; }
+  function syncFrames() {
+    if (syncing || !grid) return;
+    syncing = true;
+    var list = sites(), watched = wallWatched();
+    if (lite && watched && !spot.length && list.some(function (m) { return m.revealed; })) rotateSpot(true);
+    list.forEach(function (m) {
+      var f = m.content, show = m.revealed || m.flipping;
+      f.style.visibility = show ? "" : "hidden";   /* covered screens are not painted at all */
+      var play = !!(show && watched && (!lite || m === hovered || spot.indexOf(m) > -1));
+      if (f._play === play || !f.contentWindow) return;
+      f._play = play;
+      try { f.contentWindow.postMessage({ wallPlay: play }, "*"); } catch (e) {}
+    });
+    syncing = false;
+    watchPerf();
+  }
+  /* the spotlight: every three seconds the two screens that have played longest rest, and two others start */
+  function rotateSpot(fill) {
+    var pool = sites().filter(function (m) { return m.revealed; });
+    spot = spot.filter(function (m) { return pool.indexOf(m) > -1; });
+    if (!fill && spot.length >= SPOT_N) spot = spot.slice(2);
+    var fresh = shuffle(pool.filter(function (m) { return spot.indexOf(m) < 0; }));
+    while (spot.length < Math.min(SPOT_N, pool.length) && fresh.length) spot.push(fresh.shift());
+    if (!fill) syncFrames();
+  }
+  function setLite(on) {
+    lite = on;
+    try { sessionStorage.setItem("wall-lite", on ? "1" : "0"); } catch (e) {}
+    hx.classList.toggle("lite", on);
+    if (on && !spotTimer) spotTimer = setInterval(function () { if (wallWatched()) rotateSpot(false); }, 3000);
+    syncFrames();
+  }
+  /* measuring: while the websites are playing, frames per second are counted in 3-second windows.
+     Two slow windows in a row (under 45 fps, or more than 1 in 10 frames taking over 50 ms) switch to lite. */
+  var perf = { on: false, t0: 0, n: 0, long: 0, last: 0, bad: 0, quietUntil: 0 };
+  function measuring() { return !lite && liteForced === null && wallWatched() && sites().some(function (m) { return m.revealed && !m.flipping; }); }
+  function watchPerf() {
+    if (perf.on || !measuring()) return;
+    perf.on = true; perf.bad = 0; perf.quietUntil = performance.now() + 1200;   /* let the flips settle first */
+    perf.t0 = perf.last = 0;
+    requestAnimationFrame(perfLoop);
+  }
+  function perfLoop(t) {
+    if (!measuring()) { perf.on = false; return; }
+    if (t < perf.quietUntil || !perf.t0) { perf.t0 = perf.last = t; perf.n = perf.long = 0; requestAnimationFrame(perfLoop); return; }
+    perf.n++; if (t - perf.last > 50) perf.long++; perf.last = t;
+    if (t - perf.t0 >= 3000) {
+      var fps = perf.n * 1000 / (t - perf.t0), slow = fps < 45 || perf.long > perf.n * 0.1;
+      perf.bad = slow ? perf.bad + 1 : 0;
+      perf.t0 = t; perf.n = perf.long = 0;
+      if (perf.bad >= 2) { perf.on = false; setLite(true); return; }
+    }
+    requestAnimationFrame(perfLoop);
+  }
+  document.addEventListener("visibilitychange", syncFrames);
 
   function makeMonitor(kind, page, c, r, ui) {
     var el = document.createElement("div");
@@ -407,6 +493,7 @@ var WORK = [
     world.appendChild(grid);
     hxBox.appendChild(world);
     layoutGrid();
+    if (framesWanted) loadFrames();
   }
   function sites() { return mons.filter(function (m) { return m.kind === "site"; }); }
   function logos() { return mons.filter(function (m) { return m.kind === "logo"; }); }
@@ -578,7 +665,7 @@ var WORK = [
     hx.classList.toggle("waves-big", showBig); hx.classList.toggle("waves-logo", showLogo);
   }
   if ("IntersectionObserver" in window) {
-    new IntersectionObserver(function (es) { heroVisible = es[0].isIntersecting && es[0].intersectionRatio > 0.01; syncWaves(); }, { threshold: [0, 0.02] }).observe(hx.querySelector(".hx-sticky"));
+    new IntersectionObserver(function (es) { heroVisible = es[0].isIntersecting && es[0].intersectionRatio > 0.01; syncWaves(); syncFrames(); }, { threshold: [0, 0.02] }).observe(hx.querySelector(".hx-sticky"));
   }
 
   if (document.fonts && document.fonts.load) Promise.all([document.fonts.load('900 100px "Inter Variable"')]).then(function () { layoutGrid(); stopWaves(); if (activated) startWaves(); });
@@ -593,6 +680,7 @@ var WORK = [
     if (skyLogo) gsap.set(skyLogo, { autoAlpha: 0 });
     letters.forEach(function (L) { L.dy = 0.75; L.o = 0; L.sy = 1; L.s = 1; }); wordShift.x = 0; writeLetters();
     lit = false;
+    syncFrames();
   }
   /* lit: the logo wall shows its sky; each outer screen is either the plain blue or its website */
   function allLit() {
@@ -606,6 +694,7 @@ var WORK = [
     letters.forEach(function (L) { L.dy = 0; L.o = 1; L.sy = 1; L.s = 1; }); wordShift.x = 0; writeLetters();
     lit = true;
     syncLogoKey();
+    syncFrames();
   }
 
   /* ---------- what each screen shows while the wall wakes up ----------
@@ -728,7 +817,7 @@ var WORK = [
   /* ---------- the website examples: turned over one at a time, or all at once from the logo wall ---------- */
   function flipCase(m, on, delay, f, quick) {
     if (m.ftl) m.ftl.kill();
-    var T = gsap.timeline({ delay: delay || 0, onStart: function () { m.flipping = true; }, onComplete: function () { m.flipping = false; m.ftl = null; } });
+    var T = gsap.timeline({ delay: delay || 0, onStart: function () { m.flipping = true; syncFrames(); }, onComplete: function () { m.flipping = false; m.ftl = null; syncFrames(); } });
     m.ftl = T;
     if (calm || reduce) { T.to(m.fill, { opacity: on ? 0 : 1, duration: reduce ? 0.01 : quick ? 0.3 : 0.5, ease: "power1.inOut" }); return; }
     gsap.killTweensOf(m.inner, "rotationX,rotationY");
@@ -894,6 +983,7 @@ var WORK = [
     if (activated || !grid) return;
     activated = true;
     if (!reduce) { unbindHover = bindHover(); startGlitches(); startWaves(); }
+    if (lite) setLite(true);
   }
   function startGlitches() {
     var next = function () {
@@ -915,7 +1005,7 @@ var WORK = [
       var tilt = function (y, x) { if (!m.flipping) gsap.to(m.inner, { rotationY: y, rotationX: x, duration: 0.6, ease: "power3.out", overwrite: "auto" }); };
       var on = function () {
         if (!lit || phase !== "done") return;
-        hovered = m;
+        hovered = m; if (lite) syncFrames();
         m.el.classList.add("on"); grid.classList.add("hovering");
         gsap.to(m.inner, { scale: 1.05, duration: 0.45, ease: "power3.out", overwrite: "auto" });
       };
@@ -925,7 +1015,7 @@ var WORK = [
         tilt(((e.clientX - b.left) / b.width - 0.5) * 12, -((e.clientY - b.top) / b.height - 0.5) * 4);
       };
       var off = function () {
-        if (hovered === m) hovered = null;
+        if (hovered === m) { hovered = null; if (lite) syncFrames(); }
         m.el.classList.remove("on"); grid.classList.remove("hovering");
         gsap.to(m.inner, m.flipping ? { scale: 1, duration: 0.45, ease: "power3.out" } : { scale: 1, rotationY: 0, rotationX: 0, duration: 0.45, ease: "power3.out", overwrite: "auto" });
       };
@@ -1007,6 +1097,7 @@ var WORK = [
     pv.appendChild(pvFrame);
     pv.hidden = false;
     html.classList.add("pv-open");
+    syncFrames();
     var r = m && m.scr.getBoundingClientRect();
     if (reduce || !r || !r.width) {
       if (!reduce) gsap.fromTo(pv, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.out" });
@@ -1034,6 +1125,7 @@ var WORK = [
       pvTw = null; pv.hidden = true; pvSettle();
       if (pvFrame) { pvFrame.remove(); pvFrame = null; }
       html.classList.remove("pv-open");
+      syncFrames();
       if (pvFrom) pvFrom.focus({ preventScroll: true });
     };
     if (pvTw) { pvTw.kill(); pvTw = null; }
@@ -1182,7 +1274,7 @@ var WORK = [
     addEventListener("pointerup", function () { cur.classList.remove("down"); });
   }
 
-  Promise.race([Promise.all(frameLoads), new Promise(function (res) { setTimeout(res, 4000); })])
+  Promise.race([new Promise(function (res) { addEventListener("load", res, { once: true }); }), new Promise(function (res) { setTimeout(res, 2500); })])
     .then(function () { enterBtn.disabled = false; });
 
   function initScroll() {
@@ -1252,6 +1344,7 @@ var WORK = [
     initScroll();
     ScrollTrigger.refresh();
     busy = false;
+    syncFrames();
   }
 
   /* History entries make Back/Forward work. Some preview frames forbid changing the URL, so fall back gracefully. */
@@ -1268,6 +1361,7 @@ var WORK = [
   function enterHome(fromHistory) {
     if (busy || view === "home") return;
     busy = true; view = "home";
+    loadFrames();
     if (!fromHistory) pushView("home");
     stage.inert = true; home.inert = true;
     gsap.set([home, stage, veil], { clearProps: "all" });
@@ -1296,6 +1390,7 @@ var WORK = [
     pauseDrift(false);
     enterBtn.focus({ preventScroll: true });
     busy = false;
+    syncFrames();
   }
 
   function leaveHome() {
@@ -1353,6 +1448,7 @@ var WORK = [
   /* Loaded straight onto the homepage (reload on #home) */
   if (view === "home") {
     stage.inert = true; home.inert = false;
+    loadFrames();
     pauseDrift(true);
     var t0 = gsap.timeline();
     if (!introDone) armIntro();

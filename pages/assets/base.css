@@ -30,6 +30,9 @@ img{display:block;max-width:100%}
 html.on-wall{overflow:hidden;scrollbar-width:none}
 html.on-wall::-webkit-scrollbar{display:none}
 
+/* Paused by the homepage wall: every animation holds its current frame */
+html.wall-paused *,html.wall-paused *::before,html.wall-paused *::after{animation-play-state:paused!important}
+
 /* Photos: a soft tone shows until (or instead of) the picture */
 .ph{position:relative;overflow:hidden;background:var(--ph,linear-gradient(135deg,#2a2d33,#14161a))}
 .ph>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}

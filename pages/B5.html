@@ -30,8 +30,8 @@ body{background:var(--bg);color:var(--tx);font-family:"Space Grotesk V",Arial,sa
 .date b{display:block;font-family:"Unbounded V",sans-serif;font-weight:800;font-size:clamp(24px,2.6vw,40px);color:var(--acid);line-height:1}
 .date span{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#cfcfca}
 .eq{display:flex;align-items:flex-end;gap:5px;height:56px;justify-self:center}
-.eq i{width:7px;border-radius:3px;background:linear-gradient(0deg,var(--pink),var(--acid));animation:eq 1s ease-in-out infinite alternate}
-@keyframes eq{from{height:12%}to{height:100%}}
+.eq i{width:7px;height:100%;border-radius:3px;background:linear-gradient(0deg,var(--pink),var(--acid));transform-origin:50% 100%;animation:eq 1s ease-in-out infinite alternate}
+@keyframes eq{from{transform:scaleY(.12)}to{transform:scaleY(1)}}
 .buy{display:flex;align-items:center;gap:14px;background:var(--tx);color:#0a0a0a;border-radius:999px;padding:8px 8px 8px 24px;font-weight:800;text-transform:uppercase;font-size:14px}
 .buy b{display:grid;place-items:center;width:50px;height:50px;border-radius:50%;background:var(--pink);color:#fff}
 .line{border-block:1px solid var(--line);overflow:hidden;white-space:nowrap;padding:18px 0;background:var(--acid);color:#0a0a0a}
