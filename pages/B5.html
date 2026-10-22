@@ -23,7 +23,7 @@ body{background:var(--bg);color:var(--tx);font-family:"Space Grotesk V",Arial,sa
 .big h1{font-size:clamp(86px,min(16.8vw,30vh),300px);line-height:.8;letter-spacing:-.05em}
 .big h1 span{display:block;white-space:nowrap}
 .big h1 .a{animation:stretch 2.4s cubic-bezier(.7,0,.2,1) infinite alternate;transform-origin:left bottom}
-.big h1 .b{color:transparent;-webkit-text-stroke:2px var(--tx);padding-left:12vw;animation:stretch2 2.4s cubic-bezier(.7,0,.2,1) infinite alternate;transform-origin:left top}
+.big h1 .b{color:var(--acid);padding-left:12vw;animation:stretch2 2.4s cubic-bezier(.7,0,.2,1) infinite alternate;transform-origin:left top}
 @keyframes stretch{from{transform:scaleY(1)}to{transform:scaleY(1.08) skewX(-6deg)}}
 @keyframes stretch2{from{transform:scaleY(1.06) skewX(-4deg)}to{transform:scaleY(1)}}
 .meta{position:relative;z-index:2;display:grid;grid-template-columns:auto 1fr auto;gap:28px;align-items:end;padding-bottom:clamp(16px,3.4vh,34px)}

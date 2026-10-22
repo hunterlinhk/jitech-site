@@ -20,8 +20,13 @@ so a local server is the reliable way to preview.
 | Path | What it is |
 | --- | --- |
 | `index.html` | Entrance screen and homepage (one route, two layers) |
-| `assets/css/site.css` | All styles |
-| `assets/js/site.js` | Everything that moves: entrance, monitor wall, intro sequence, screen 2, full-page scrolling |
+| `website-development.html`, `geo-optimization.html`, `standalone-websites.html`, `contact.html` | The service pages and the contact page |
+| `assets/css/site.css` | Homepage styles, plus the navigation and footer every page shares |
+| `assets/css/inner.css` | Styles for the service and contact pages |
+| `assets/js/site.js` | Homepage: entrance, monitor wall, intro sequence, full-page scrolling |
+| `assets/js/i18n.js` | English / Spanish switching |
+| `assets/js/ui.js` | Shared by every page: the language menu and the round cursor |
+| `assets/js/inner.js` | Service and contact pages: mobile menu, scroll reveals, contact form |
 | `pages/*.html` | The 13 concept websites shown on the monitors. Each is a complete, original page and opens full screen when a monitor is clicked |
 | `pages/assets/` | What the concept pages share: fonts, reset, entrance motion, photo fallbacks |
 | `assets/fonts/pages/` | Fonts used by the concept pages (all SIL Open Font License; licenses alongside) |
@@ -120,6 +125,23 @@ The live websites on the wall are the heaviest part of the site, so:
   later if the wall measures below 45 frames per second (or more than 1 in 10 frames over 50 ms) for two
   3-second windows in a row. The choice lasts for the visit.
 - Add `?lite` or `?full` to the address (for example `index.html?full`) to force either mode, e.g. for a demo.
+
+## Languages
+
+The site is in English and Spanish. The menu at the right end of the navigation switches language on every page,
+and the choice is remembered. A first-time visitor whose browser is set to Spanish sees Spanish automatically;
+`?lang=es` or `?lang=en` on any address forces one.
+
+English is written in the HTML as usual, and the Spanish sits on the same element:
+`<h2 data-es="Lo que hacemos">What we do</h2>`. Attributes work the same way
+(`data-attr="aria-label" data-attr-es="…"`), and text written by scripts is in `STR` in `assets/js/i18n.js`.
+The concept websites on the monitors stay in English, since they are design examples.
+
+## Contact form
+
+The site has no server, so the contact form opens the visitor's email app with the message filled in.
+Put the real address in `data-email="[Contact email]"` on the form in `contact.html`, and replace the
+`[Contact email]` and `[Phone number]` placeholders shown on that page.
 
 ## Accessibility
 

@@ -1,6 +1,6 @@
 /* ===== Edit here ===== */
 var BRAND = "JIEWEITECH";
-var CONTACT_EMAIL = "[Contact email]";
+// Contact details live in contact.html (the form sends to the address in its data-email attribute).
 // Images for the "Selected work" section. Missing files show a labeled placeholder.
 var SCREEN_DIR = "assets/img/shots/";
 // Two separate groups, so the two columns never show the same design.
@@ -32,10 +32,10 @@ var SERVICE_IMAGES = [
   {src:"assets/img/shots/R4.jpg", alt:"Standalone website example"}
 ];
 var WORK = [
-  {file:"T1.jpg", variant:3, ratio:1.6, caption:"Design concept · Noon"},
-  {file:"B5.jpg", variant:5, ratio:1.6, caption:"Design concept · Sonic Field"},
-  {file:"T2.jpg", variant:2, ratio:1.6, caption:"Design concept · Nocturne"},
-  {file:"B3.jpg", variant:1, ratio:1.6, caption:"Design concept · Ledger"}
+  {file:"T1.jpg", variant:3, ratio:1.6, caption:"Noon", concept:true},
+  {file:"B5.jpg", variant:5, ratio:1.6, caption:"Sonic Field", concept:true},
+  {file:"T2.jpg", variant:2, ratio:1.6, caption:"Nocturne", concept:true},
+  {file:"B3.jpg", variant:1, ratio:1.6, caption:"Ledger", concept:true}
 ];
 /* ===================== */
 
@@ -97,7 +97,9 @@ var WORK = [
     crop.appendChild(img);
     inner.appendChild(crop); shot.appendChild(inner); fig.appendChild(shot);
     var cap = document.createElement("figcaption");
-    cap.className = "cap hfade"; cap.textContent = o.caption;
+    cap.className = "cap hfade";
+    var setCap = function () { cap.textContent = o.concept ? I18N.t("designConcept") + " · " + o.caption : o.caption; };
+    setCap(); document.addEventListener("langchange", setCap);
     if (fig.hasAttribute("data-work")) cap.classList.remove("hfade");
     fig.appendChild(cap);
   }
@@ -424,7 +426,7 @@ var WORK = [
       el.dataset.id = page.id;
       el.setAttribute("role", "button");
       el.setAttribute("tabindex", "0");
-      el.setAttribute("aria-label", page.title + " (design concept)");
+      el.setAttribute("aria-label", page.title + " (" + I18N.t("designConcept").toLowerCase() + ")");
     } else {
       content = document.createElement("span");   /* logo screens are windows onto the shared sky behind them */
       el.classList.add("win");
@@ -433,7 +435,7 @@ var WORK = [
         el.setAttribute("role", "button");
         el.setAttribute("tabindex", "0");
         el.setAttribute("aria-pressed", "false");
-        el.setAttribute("aria-label", "JIEWEITECH logo wall: show or hide the website examples");
+        el.setAttribute("aria-label", I18N.t("logoKey"));
         el.classList.add("logo-key");
       }
     }
@@ -965,6 +967,7 @@ var WORK = [
     phase = "done";
     lockIntro(false);
     introDone = true;
+    try { sessionStorage.setItem("wall-seen", "1"); } catch (e) {}
     wh.armed = false; wh.last = performance.now(); wh.holdUntil = wh.last + 450;   /* the scroll that skipped the intro should not also turn the page */
     activate();
     ScrollTrigger.refresh();
@@ -1111,9 +1114,9 @@ var WORK = [
     var go = function () {
       if (started || frame !== pvFrame) return;
       started = true;
-      pvTw = gsap.to(pvState, { p: 1, duration: 0.9, ease: "power3.inOut", onUpdate: draw,
+      pvTw = gsap.to(pvState, { p: 1, duration: 0.7, ease: "power3.inOut", onUpdate: draw,
         onComplete: function () { pvTw = null; pvSettle(); pvClose.focus({ preventScroll: true }); } });
-      gsap.to(pvBar, { autoAlpha: 1, duration: 0.35, delay: 0.62, ease: "power1.out" });
+      gsap.to(pvBar, { autoAlpha: 1, duration: 0.3, delay: 0.48, ease: "power1.out" });
     };
     /* start once the page has loaded (it is local, so this is almost instant) */
     frame.addEventListener("load", go, { once: true });
@@ -1254,25 +1257,7 @@ var WORK = [
     var list = stops(); window.scrollTo(0, list[nearest(list, window.pageYOffset)]);
   });
 
-  /* ---------- a small round cursor (mouse and trackpad only) ---------- */
-  if (matchMedia("(hover: hover) and (pointer: fine)").matches) {
-    var cur = document.createElement("div");
-    cur.className = "cursor"; cur.setAttribute("aria-hidden", "true"); cur.innerHTML = "<i></i>";
-    document.body.appendChild(cur);
-    html.classList.add("has-cursor");
-    var curX = gsap.quickTo(cur, "x", { duration: 0.16, ease: "power3.out" }), curY = gsap.quickTo(cur, "y", { duration: 0.16, ease: "power3.out" });
-    var HOT = "a, button, [role=button], .row, .hx.is-off .mon";
-    addEventListener("pointermove", function (e) {
-      if (e.pointerType && e.pointerType !== "mouse") return;
-      if (!cur.classList.contains("on")) { gsap.set(cur, { x: e.clientX, y: e.clientY }); cur.classList.add("on"); }
-      curX(e.clientX); curY(e.clientY);
-      var t = e.target;
-      cur.classList.toggle("hot", !!(t && t.closest && t.closest(HOT) && !(t.closest(".hx") && !t.closest(".hx.is-lit, .hx.is-off"))));
-    }, { passive: true });
-    document.documentElement.addEventListener("mouseleave", function () { cur.classList.remove("on"); });
-    addEventListener("pointerdown", function () { cur.classList.add("down"); });
-    addEventListener("pointerup", function () { cur.classList.remove("down"); });
-  }
+  /* the round cursor and the language menu live in ui.js, shared with the other pages */
 
   Promise.race([new Promise(function (res) { addEventListener("load", res, { once: true }); }), new Promise(function (res) { setTimeout(res, 2500); })])
     .then(function () { enterBtn.disabled = false; });
@@ -1302,7 +1287,7 @@ var WORK = [
     menu.classList.toggle("open", open);
     menu.inert = !open;
     menuBtn.setAttribute("aria-expanded", String(open));
-    menuBtn.textContent = open ? "Close" : "Menu";
+    menuBtn.textContent = I18N.t(open ? "close" : "menu");
     html.style.overflow = open ? "hidden" : "";
     if (open) nav.classList.remove("is-hidden");
   }
@@ -1329,7 +1314,6 @@ var WORK = [
   q("[data-top]", home).forEach(function (a) {
     a.addEventListener("click", function (e) { e.preventDefault(); if (menuOpen) setMenu(false); snapTo(0); });
   });
-  $("#mailBtn").href = "mailto:" + CONTACT_EMAIL;
   $("#year").textContent = new Date().getFullYear();
 
   /* ---------- The transition: homepage is a layer on the same route ---------- */
@@ -1425,8 +1409,8 @@ var WORK = [
   /* Photosensitivity: effects can be switched off for this visit (always off with reduced motion). */
   var fxToggle = $("#fxToggle");
   function syncFx() {
-    if (reduce) { fxToggle.textContent = "Effects are off (reduced motion is on)"; fxToggle.disabled = true; fxToggle.setAttribute("aria-pressed", "true"); return; }
-    fxToggle.textContent = calm ? "Effects are off. Turn them back on" : "Turn effects off";
+    if (reduce) { fxToggle.textContent = I18N.t("fxReduced"); fxToggle.disabled = true; fxToggle.setAttribute("aria-pressed", "true"); return; }
+    fxToggle.textContent = I18N.t(calm ? "fxOn" : "fxOff");
     fxToggle.setAttribute("aria-pressed", String(calm));
   }
   fxToggle.addEventListener("click", function () {
@@ -1435,6 +1419,20 @@ var WORK = [
     syncFx();
   });
   syncFx();
+
+  /* ---------- switching language: refresh the text that scripts wrote ---------- */
+  document.addEventListener("langchange", function () {
+    syncFx();
+    menuBtn.textContent = I18N.t(menuOpen ? "close" : "menu");
+    /* the entrance headline is split into words for its animation, so split the new words too */
+    splitWords($("#headline"), "wi");
+    if (!reduce) gsap.set(q(".wi", stage), { autoAlpha: 1, yPercent: 0 });
+    var row = svcRows[svcCur];
+    if (row) { svcNum.textContent = row.querySelector(".num").textContent; svcName.textContent = row.querySelector(".name").textContent; }
+    var k = grid && grid.querySelector(".logo-key");
+    if (k) k.setAttribute("aria-label", I18N.t("logoKey"));
+    sites().forEach(function (m) { m.el.setAttribute("aria-label", m.page.title + " (" + I18N.t("designConcept").toLowerCase() + ")"); });
+  });
 
   try { history.scrollRestoration = "manual"; } catch (e) {}
   try { history.replaceState({ view: view }, ""); } catch (e) {}
@@ -1450,8 +1448,11 @@ var WORK = [
     stage.inert = true; home.inert = false;
     loadFrames();
     pauseDrift(true);
-    var t0 = gsap.timeline();
-    if (!introDone) armIntro();
+    var t0 = gsap.timeline(), seen = false;
+    try { seen = sessionStorage.getItem("wall-seen") === "1"; } catch (e) {}
+    /* coming back from another page of the site: the wall is already on, no intro again */
+    if (!introDone && seen) { armIntro(); skipIntroSeq(); }
+    else if (!introDone) armIntro();
     else heroReveal(t0, 0.1);
     initScroll();
   }

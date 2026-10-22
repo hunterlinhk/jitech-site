@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>JIEWEITECH | Websites built for your business</title>
-<meta name="description" content="We build business websites, optimize for AI-powered search, and create standalone website solutions that help companies establish their own presence online.">
+<title data-es="JIEWEITECH | Sitios web hechos para tu negocio">JIEWEITECH | Websites built for your business</title>
+<meta name="description" content="We build business websites, optimize for AI-powered search, and create standalone website solutions that help companies establish their own presence online." data-attr="content" data-attr-es="Creamos sitios web para empresas, los optimizamos para la búsqueda con IA y desarrollamos sitios independientes que ayudan a las empresas a tener su propia presencia en línea.">
 <meta property="og:title" content="JIEWEITECH | Websites built for your business">
 <meta property="og:description" content="We build business websites, optimize for AI-powered search, and create standalone website solutions that help companies establish their own presence online.">
 <meta property="og:type" content="website">
@@ -26,15 +26,15 @@
   <section class="entrance" aria-label="Welcome">
     <div class="copy">
       <p class="mark fade"><svg class="mk" viewBox="0 0 331.5 392.5" aria-hidden="true" focusable="false"><use href="#jwMark"/></svg><span>JIEWEITECH</span></p>
-      <h1 class="headline" id="headline"><span class="s1">Websites built for your business.</span> <span class="s2">Designed for what's next.</span></h1>
+      <h1 class="headline" id="headline"><span class="s1" data-es="Sitios web hechos para tu negocio.">Websites built for your business.</span> <span class="s2" data-es="Diseñados para lo que viene.">Designed for what's next.</span></h1>
       <div class="foot">
-        <p class="desc fade">We build business websites, optimize for AI-powered search, and create standalone website solutions that help companies establish their own presence online.</p>
-        <button type="button" class="btn enter fade" id="enter" disabled><span class="btn-label">Enter Site</span></button>
-        <p class="ps-note fade" id="psNote"><strong>Photosensitivity warning:</strong> the homepage opens with flickering static and glitch effects. <button type="button" class="ps-btn" id="fxToggle" aria-pressed="false">Turn effects off</button></p>
+        <p class="desc fade" data-es="Creamos sitios web para empresas, los optimizamos para la búsqueda con IA y desarrollamos sitios independientes que ayudan a las empresas a tener su propia presencia en línea.">We build business websites, optimize for AI-powered search, and create standalone website solutions that help companies establish their own presence online.</p>
+        <button type="button" class="btn enter fade" id="enter" disabled><span class="btn-label" data-es="Entrar al sitio">Enter Site</span></button>
+        <p class="ps-note fade" id="psNote"><strong data-es="Aviso de fotosensibilidad:">Photosensitivity warning:</strong> <span data-es="la página de inicio abre con estática parpadeante y efectos de interferencia.">the homepage opens with flickering static and glitch effects.</span> <button type="button" class="ps-btn" id="fxToggle" aria-pressed="false">Turn effects off</button></p>
       </div>
     </div>
-    <div class="wall" id="wall" role="group" aria-label="Design examples">
-      <p class="wall-caption fade">Design examples</p>
+    <div class="wall" id="wall" role="group" aria-label="Design examples" data-attr="aria-label" data-attr-es="Ejemplos de diseño">
+      <p class="wall-caption fade" data-es="Ejemplos de diseño">Design examples</p>
     </div>
   </section>
 
@@ -50,30 +50,37 @@
 <!-- ============ HOMEPAGE ============ -->
 <div class="home" id="home" inert>
   <header class="nav on-top" id="nav">
-    <a class="logo" href="#top" data-top aria-label="JIEWEITECH, back to top"><svg class="mk" viewBox="0 0 331.5 392.5" aria-hidden="true" focusable="false"><use href="#jwMark"/></svg><span>JIEWEITECH</span></a>
+    <a class="logo" href="#top" data-top aria-label="JIEWEITECH, back to top" data-attr="aria-label" data-attr-es="JIEWEITECH, volver arriba"><svg class="mk" viewBox="0 0 331.5 392.5" aria-hidden="true" focusable="false"><use href="#jwMark"/></svg><span>JIEWEITECH</span></a>
     <nav class="nav-links" aria-label="Primary">
-      <a href="#website-development" data-go="website-development">Website Development</a>
-      <a href="#geo-optimization" data-go="geo-optimization">GEO Optimization</a>
-      <a href="#standalone-websites" data-go="standalone-websites">Standalone Websites</a>
-      <a class="nav-cta" href="#contact" data-go="contact">Contact</a>
+      <a href="website-development.html" data-es="Desarrollo web">Website Development</a>
+      <a href="geo-optimization.html" data-es="Optimización GEO">GEO Optimization</a>
+      <a href="standalone-websites.html" data-es="Sitios independientes">Standalone Websites</a>
+      <a class="nav-cta" href="contact.html" data-es="Contacto">Contact</a>
     </nav>
-    <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menu">Menu</button>
+    <div class="lang" data-lang>
+      <button type="button" class="lang-btn" aria-haspopup="true" aria-expanded="false"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M2 10h16M10 2c2.6 2.4 2.6 13.6 0 16M10 2c-2.6 2.4-2.6 13.6 0 16" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><span class="lang-cur">EN</span><svg class="chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+      <ul class="lang-menu" role="menu" hidden>
+        <li role="none"><button type="button" role="menuitemradio" data-set-lang="en" lang="en">English</button></li>
+        <li role="none"><button type="button" role="menuitemradio" data-set-lang="es" lang="es">Español</button></li>
+      </ul>
+    </div>
+    <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menu" data-es="Menú">Menu</button>
   </header>
 
   <div class="menu" id="menu" inert>
     <nav aria-label="Mobile">
-      <a href="#website-development" data-go="website-development">Website Development</a>
-      <a href="#geo-optimization" data-go="geo-optimization">GEO Optimization</a>
-      <a href="#standalone-websites" data-go="standalone-websites">Standalone Websites</a>
-      <a href="#contact" data-go="contact">Contact</a>
+      <a href="website-development.html" data-es="Desarrollo web">Website Development</a>
+      <a href="geo-optimization.html" data-es="Optimización GEO">GEO Optimization</a>
+      <a href="standalone-websites.html" data-es="Sitios independientes">Standalone Websites</a>
+      <a href="contact.html" data-es="Contacto">Contact</a>
     </nav>
-    <p>We build websites around the businesses behind them.</p>
+    <p data-es="Creamos sitios web a la medida de las empresas que los respaldan.">We build websites around the businesses behind them.</p>
   </div>
 
   <main id="main" tabindex="-1">
 
     <section class="hx" id="top" aria-labelledby="hx-title">
-      <h1 class="sr-only" id="hx-title">JIEWEITECH. We build websites around the businesses behind them.</h1>
+      <h1 class="sr-only" id="hx-title" data-es="JIEWEITECH. Creamos sitios web a la medida de las empresas que los respaldan.">JIEWEITECH. We build websites around the businesses behind them.</h1>
       <div class="hx-sticky">
         <div class="hx-box" id="hxBox"></div>
       </div>
@@ -81,35 +88,35 @@
 
     <section class="services" aria-labelledby="services-t">
       <div class="svc-main">
-        <h2 class="sec-title" id="services-t">What we do</h2>
+        <h2 class="sec-title" id="services-t" data-es="Lo que hacemos">What we do</h2>
         <div class="index">
           <article class="row is-active" id="website-development">
             <span class="num" aria-hidden="true">01</span>
-            <h3 class="name">Website Development</h3>
-            <p class="line">Professional business websites built around your goals, content, and identity.</p>
+            <h3 class="name" data-es="Desarrollo web">Website Development</h3>
+            <p class="line"><span data-es="Sitios web profesionales para empresas, construidos en torno a tus objetivos, tu contenido y tu identidad.">Professional business websites built around your goals, content, and identity.</span> <a class="more" href="website-development.html" data-es="Ver más →">Learn more →</a></p>
           </article>
           <article class="row" id="geo-optimization">
             <span class="num" aria-hidden="true">02</span>
-            <h3 class="name">GEO Optimization</h3>
-            <p class="line">Content and structure improvements that support discoverability in AI-powered search.</p>
+            <h3 class="name" data-es="Optimización GEO">GEO Optimization</h3>
+            <p class="line"><span data-es="Mejoras de contenido y estructura que ayudan a que te encuentren en las búsquedas con IA.">Content and structure improvements that support discoverability in AI-powered search.</span> <a class="more" href="geo-optimization.html" data-es="Ver más →">Learn more →</a></p>
           </article>
           <article class="row" id="standalone-websites">
             <span class="num" aria-hidden="true">03</span>
-            <h3 class="name">Standalone Websites</h3>
-            <p class="line">Independent branded websites that give your business its own dedicated destination online.</p>
+            <h3 class="name" data-es="Sitios independientes">Standalone Websites</h3>
+            <p class="line"><span data-es="Sitios web independientes con tu marca, que le dan a tu negocio su propio espacio en línea.">Independent branded websites that give your business its own dedicated destination online.</span> <a class="more" href="standalone-websites.html" data-es="Ver más →">Learn more →</a></p>
           </article>
         </div>
       </div>
       <figure class="svc-media" aria-hidden="true">
         <div class="svc-frame" id="svcFrame"></div>
-        <figcaption class="svc-cap"><span class="svc-num" id="svcNum">01</span><span class="svc-name" id="svcName">Website Development</span></figcaption>
+        <figcaption class="svc-cap"><span class="svc-num" id="svcNum">01</span><span class="svc-name" id="svcName" data-es="Desarrollo web">Website Development</span></figcaption>
       </figure>
     </section>
 
     <section class="work on-dark" id="work" aria-labelledby="work-t">
       <div class="work-head">
-        <h2 id="work-t">Selected work</h2>
-        <p class="work-note">These are design examples, not client case studies.</p>
+        <h2 id="work-t" data-es="Trabajos seleccionados">Selected work</h2>
+        <p class="work-note" data-es="Son ejemplos de diseño, no casos de clientes.">These are design examples, not client case studies.</p>
       </div>
       <div class="work-grid">
         <figure class="frame w1" data-work="0"></figure>
@@ -120,21 +127,21 @@
     </section>
 
     <section class="process" id="process" aria-labelledby="process-t">
-      <h2 id="process-t">From discovery to launch.</h2>
+      <h2 id="process-t" data-es="Del descubrimiento al lanzamiento.">From discovery to launch.</h2>
       <div class="proc-rule"></div>
       <ol class="steps">
-        <li class="step"><span class="snum" aria-hidden="true">01</span><h3>Discovery</h3><p>We learn about your business, goals, and website requirements.</p></li>
-        <li class="step"><span class="snum" aria-hidden="true">02</span><h3>Planning</h3><p>We define the site's structure, design direction, and scope.</p></li>
-        <li class="step"><span class="snum" aria-hidden="true">03</span><h3>Design &amp; Development</h3><p>We design and build the site, refining as we go.</p></li>
-        <li class="step"><span class="snum" aria-hidden="true">04</span><h3>Launch</h3><p>We test, finalize, and launch.</p></li>
+        <li class="step"><span class="snum" aria-hidden="true">01</span><h3 data-es="Descubrimiento">Discovery</h3><p data-es="Conocemos tu negocio, tus objetivos y lo que necesitas de tu sitio.">We learn about your business, goals, and website requirements.</p></li>
+        <li class="step"><span class="snum" aria-hidden="true">02</span><h3 data-es="Planificación">Planning</h3><p data-es="Definimos la estructura del sitio, la dirección de diseño y el alcance.">We define the site's structure, design direction, and scope.</p></li>
+        <li class="step"><span class="snum" aria-hidden="true">03</span><h3 data-es="Diseño y desarrollo">Design &amp; Development</h3><p data-es="Diseñamos y construimos el sitio, puliéndolo en cada paso.">We design and build the site, refining as we go.</p></li>
+        <li class="step"><span class="snum" aria-hidden="true">04</span><h3 data-es="Lanzamiento">Launch</h3><p data-es="Probamos, afinamos los detalles y lanzamos.">We test, finalize, and launch.</p></li>
       </ol>
     </section>
 
     <section class="contact" id="contact" aria-labelledby="contact-t">
-      <h2 id="contact-t">Let's build something that works for your business.</h2>
+      <h2 id="contact-t" data-es="Construyamos algo que funcione para tu negocio.">Let's build something that works for your business.</h2>
       <div class="contact-body">
-        <p>Tell us what you're looking for, and we'll talk through the next steps.</p>
-        <a class="btn on-dark" id="mailBtn" href="mailto:[Contact email]"><span class="btn-label">Get in Touch</span></a>
+        <p data-es="Cuéntanos qué buscas y hablaremos de los próximos pasos.">Tell us what you're looking for, and we'll talk through the next steps.</p>
+        <a class="btn on-dark" id="mailBtn" href="contact.html"><span class="btn-label" data-es="Contáctanos">Get in Touch</span></a>
       </div>
     </section>
   </main>
@@ -142,14 +149,14 @@
   <footer class="site-foot">
     <div class="foot-top">
       <div class="foot-brand">
-        <a class="logo" href="#top" data-top aria-label="JIEWEITECH, back to top"><svg class="mk" viewBox="0 0 331.5 392.5" aria-hidden="true" focusable="false"><use href="#jwMark"/></svg><span>JIEWEITECH</span></a>
-        <p>We build websites around the businesses behind them.</p>
+        <a class="logo" href="#top" data-top aria-label="JIEWEITECH, back to top" data-attr="aria-label" data-attr-es="JIEWEITECH, volver arriba"><svg class="mk" viewBox="0 0 331.5 392.5" aria-hidden="true" focusable="false"><use href="#jwMark"/></svg><span>JIEWEITECH</span></a>
+        <p data-es="Creamos sitios web a la medida de las empresas que los respaldan.">We build websites around the businesses behind them.</p>
       </div>
       <nav class="foot-nav" aria-label="Footer">
-        <a href="#website-development" data-go="website-development">Website Development</a>
-        <a href="#geo-optimization" data-go="geo-optimization">GEO Optimization</a>
-        <a href="#standalone-websites" data-go="standalone-websites">Standalone Websites</a>
-        <a href="#contact" data-go="contact">Contact</a>
+        <a href="website-development.html" data-es="Desarrollo web">Website Development</a>
+        <a href="geo-optimization.html" data-es="Optimización GEO">GEO Optimization</a>
+        <a href="standalone-websites.html" data-es="Sitios independientes">Standalone Websites</a>
+        <a href="contact.html" data-es="Contacto">Contact</a>
       </nav>
       <p class="foot-year">&copy; <span id="year">2026</span></p>
     </div>
@@ -158,7 +165,7 @@
 </div>
 
 <div class="pv" id="pv" hidden role="dialog" aria-modal="true" aria-labelledby="pvTitle">
-  <div class="pv-bar"><span class="pv-tag">Design concept</span><span class="pv-title" id="pvTitle"></span><button type="button" class="pv-close" id="pvClose">Close</button></div>
+  <div class="pv-bar"><span class="pv-tag" data-es="Concepto de diseño">Design concept</span><span class="pv-title" id="pvTitle"></span><button type="button" class="pv-close" id="pvClose" data-es="Cerrar">Close</button></div>
 </div>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
@@ -188,6 +195,8 @@
 
 <script src="assets/vendor/gsap.min.js"></script>
 <script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/ui.js"></script>
 <script src="assets/js/site.js"></script>
 </body>
 </html>
