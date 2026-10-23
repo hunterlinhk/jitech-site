@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Orbital | Small satellites, launched on schedule</title>
+<script src="assets/base.js"></script>
+<link rel="stylesheet" href="assets/base.css">
+<style>
+:root{--bg:#02030a;--tx:#e9ecf7;--mut:#7d8399;--acc:#ff4d2e;--cy:#7fe3ff;--line:rgba(233,236,247,.12)}
+body{background:var(--bg);color:var(--tx);font-family:"Syne V",Arial,sans-serif;font-size:15px}
+.mono{font-family:"JetBrains Mono V",monospace}
+.wrap{width:min(1320px,100% - 56px);margin:0 auto}
+.hero{position:relative;height:100vh;min-height:500px;overflow:hidden}
+.stars,.stars2{position:absolute;inset:0;background-image:radial-gradient(1px 1px at 10% 20%,#fff,transparent),radial-gradient(1px 1px at 30% 70%,#fff,transparent),radial-gradient(1.5px 1.5px at 50% 30%,#fff,transparent),radial-gradient(1px 1px at 70% 10%,#fff,transparent),radial-gradient(1px 1px at 90% 50%,#fff,transparent),radial-gradient(1px 1px at 20% 90%,#fff,transparent),radial-gradient(1.5px 1.5px at 80% 80%,#fff,transparent),radial-gradient(1px 1px at 60% 55%,#fff,transparent);background-size:340px 340px;opacity:.7}
+.stars2{background-size:520px 520px;background-position:120px 60px;opacity:.45;animation:tw 4s ease-in-out infinite alternate}
+@keyframes tw{to{opacity:.15}}
+.planet{position:absolute;right:-14vw;bottom:-58vh;width:min(96vw,150vh);aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle at 34% 28%,#3d6bd6 0%,#1b3a8c 24%,#0b1640 50%,#030614 72%);
+  box-shadow:inset -60px -40px 120px rgba(0,0,0,.85),0 0 90px rgba(90,150,255,.35),0 0 2px 2px rgba(127,227,255,.4)}
+.planet .cl{position:absolute;inset:0;border-radius:50%;overflow:hidden;mix-blend-mode:screen;-webkit-mask:radial-gradient(circle at 40% 35%,#000 40%,transparent 70%);mask:radial-gradient(circle at 40% 35%,#000 40%,transparent 70%)}
+.planet .cl i{position:absolute;top:0;bottom:0;left:-200px;right:-200px;background:repeating-linear-gradient(-18deg,rgba(255,255,255,.05) 0 14px,transparent 14px 46px);will-change:transform;animation:clouds 15s linear infinite}
+@keyframes clouds{to{transform:translateX(148.86px)}}
+.orbit{position:absolute;right:4vw;bottom:-30vh;width:min(110vw,170vh);aspect-ratio:2.6;border:1px dashed rgba(127,227,255,.35);border-radius:50%;transform:rotate(-14deg)}
+.sat{position:absolute;left:50%;top:50%;width:0;height:0;animation:orb 14s linear infinite}
+.sat i{position:absolute;width:14px;height:14px;margin:-7px;background:var(--tx);box-shadow:-16px 0 0 -3px var(--cy),16px 0 0 -3px var(--cy),0 0 18px var(--cy)}
+@keyframes orb{from{transform:rotate(0) translateX(min(55vw,85vh)) scaleY(.38)}to{transform:rotate(360deg) translateX(min(55vw,85vh)) scaleY(.38)}}
+.nav{position:absolute;inset:0 0 auto;z-index:3;height:76px;display:flex;align-items:center;gap:30px;padding:0 max(28px,calc((100% - 1320px)/2));font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.08em}
+.logo{font-weight:800;font-size:22px;letter-spacing:-.02em;text-transform:none;margin-right:auto;display:flex;align-items:center;gap:10px}
+.logo i{width:20px;height:20px;border-radius:50%;border:2px solid var(--tx);position:relative}
+.logo i::after{content:"";position:absolute;right:-5px;top:-3px;width:6px;height:6px;border-radius:50%;background:var(--acc)}
+.nav .m{border:1px solid var(--line);border-radius:999px;padding:10px 16px}
+.in{position:absolute;left:max(28px,calc((100% - 1320px)/2));top:50%;z-index:3;transform:translateY(-56%);max-width:min(1000px,72vw)}
+.in small{color:var(--acc);font-size:12px;letter-spacing:.18em;text-transform:uppercase}
+.in h1{font-size:clamp(48px,min(6.2vw,12vh),108px);line-height:.94;letter-spacing:-.04em;font-weight:700;margin:clamp(12px,2.4vh,22px) 0}
+.in p{color:#b9bfd4;line-height:1.6;max-width:28em;font-size:clamp(15px,1.25vw,17px)}
+.in a{display:inline-flex;gap:12px;align-items:center;margin-top:clamp(20px,3.6vh,34px);background:var(--acc);color:#fff;padding:16px 24px;border-radius:4px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:13px}
+.tele{position:absolute;left:max(28px,calc((100% - 1320px)/2));bottom:clamp(18px,4vh,40px);z-index:3;display:flex;gap:clamp(20px,3vw,44px);font-size:12px;color:var(--mut)}
+.tele b{display:block;color:var(--tx);font-size:clamp(16px,1.5vw,22px);font-weight:500}
+.tele b::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:#3dff9a;margin-right:8px;vertical-align:middle;animation:blink 1.4s steps(1) infinite}
+@keyframes blink{50%{opacity:.2}}
+section{padding:clamp(80px,9vw,130px) 0}
+.h2{font-size:clamp(40px,4.8vw,80px);line-height:.95;letter-spacing:-.04em;font-weight:800;max-width:12em}
+.h2 span{color:var(--acc)}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);margin-top:56px;border-top:1px solid var(--line)}
+.cols div{padding:28px 28px 28px 0;border-right:1px solid var(--line)}
+.cols div+div{padding-left:28px}
+.cols div:last-child{border-right:0}
+.cols b{display:block;font-size:60px;font-weight:800;letter-spacing:-.04em}
+.cols h3{font-size:20px;margin:10px 0 8px}
+.cols p{color:var(--mut);line-height:1.6}
+.manifest{border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.manifest li{display:grid;grid-template-columns:120px 1fr 1fr 120px;padding:18px 22px;border-bottom:1px solid var(--line);font-size:14px}
+.manifest li:first-child{color:var(--mut);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.manifest .ok{color:#3dff9a}
+.foot{display:flex;justify-content:space-between;padding:34px 0;color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:.12em}
+@media (max-width:900px){.nav a:not(.logo):not(.m){display:none}.in{max-width:none;right:28px}.cols{grid-template-columns:1fr}.manifest li{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<section class="hero" style="padding:0">
+  <div class="stars" aria-hidden="true"></div><div class="stars2" aria-hidden="true"></div>
+  <div class="planet" aria-hidden="true"><div class="cl"><i></i></div></div>
+  <div class="orbit" aria-hidden="true"><span class="sat"><i></i></span></div>
+  <header class="nav"><a class="logo" href="#"><i></i>Orbital</a><a href="#">Launch</a><a href="#">Spacecraft</a><a href="#">Missions</a><a href="#">Careers</a><a class="m" href="#">Book a payload</a></header>
+  <div class="in">
+    <small class="mono" data-in>Rideshare · LEO · SSO</small>
+    <h1 data-in style="--d:1">We put small things in high places.</h1>
+    <p data-in style="--d:2">Satellites from 1 to 300 kg, integrated in our Tucson clean room and in orbit within ninety days of signing.</p>
+    <a href="#" data-in style="--d:3">Reserve a slot →</a>
+  </div>
+  <div class="tele mono" data-in style="--d:4"><div><b>ORB-7 nominal</b>Next launch · T−12 d</div><div><b id="alt">548.20 km</b>Altitude</div><div><b>7.59 km/s</b>Velocity</div></div>
+</section>
+<main>
+  <section>
+    <div class="wrap">
+      <h2 class="h2">Space, booked like <span>freight.</span></h2>
+      <div class="cols">
+        <div><b class="mono">01</b><h3>Pick an orbit</h3><p>Sun-synchronous or inclined LEO, every six weeks, all year.</p></div>
+        <div><b class="mono">02</b><h3>Ship us your payload</h3><p>We handle integration, testing, licensing and insurance.</p></div>
+        <div><b class="mono">03</b><h3>Get your first pass</h3><p>Telemetry on day one, through our ground stations on four continents.</p></div>
+      </div>
+    </div>
+  </section>
+  <section style="padding-top:0">
+    <div class="wrap">
+      <ul class="manifest mono">
+        <li><span>Mission</span><span>Orbit</span><span>Payloads</span><span>Status</span></li>
+        <li><span>ORB-7</span><span>SSO 550 km</span><span>14 satellites</span><span class="ok">● Ready</span></li>
+        <li><span>ORB-8</span><span>LEO 45° 500 km</span><span>9 satellites</span><span>Integration</span></li>
+        <li><span>ORB-9</span><span>SSO 600 km</span><span>3 slots left</span><span>Booking</span></li>
+      </ul>
+    </div>
+  </section>
+</main>
+<footer class="wrap foot"><span>Orbital Launch Co.</span><span>Tucson · Kourou · Mahia</span></footer>
+<script>
+(function(){var a=document.getElementById("alt"),t=0;setInterval(function(){if(document.documentElement.classList.contains("wall-paused"))return;t+=.05;a.textContent=(548.2+Math.sin(t)*.35).toFixed(2)+" km";},500);})();
+</script>
+</body>
+</html>

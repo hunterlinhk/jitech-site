@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NOCTURNE | Time, kept in the dark</title>
+<script src="assets/base.js"></script>
+<link rel="stylesheet" href="assets/base.css">
+<style>
+:root{--bg:#07090a;--g:#c9a96a;--g2:#efd9a7;--tx:#ece6da;--mut:#8d877c;--line:rgba(236,230,218,.12)}
+body{background:var(--bg);color:var(--tx);font-family:"Manrope V",Arial,sans-serif;font-size:15px}
+.serif{font-family:"Cormorant V",Georgia,serif}
+.wrap{width:min(1280px,100% - 64px);margin:0 auto}
+.nav{position:absolute;inset:0 0 auto;z-index:4;height:84px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 max(32px,calc((100% - 1280px)/2));font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--mut)}
+.nav .l{display:flex;gap:30px}
+.nav .r{display:flex;gap:30px;justify-content:flex-end}
+.logo{font-family:"Cormorant V",serif;font-size:26px;letter-spacing:.42em;color:var(--tx);text-indent:.42em;font-weight:500}
+.hero{position:relative;min-height:100vh;overflow:hidden;display:flex;align-items:center;background:radial-gradient(55% 75% at 66% 52%,#163027 0%,#0b1512 38%,var(--bg) 72%)}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(30% 40% at 68% 30%,rgba(239,217,167,.10),transparent 70%)}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1fr 1.05fr;align-items:center;gap:40px;padding-top:60px}
+.eb{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--g)}
+.hero h1{font-weight:400;font-size:clamp(54px,min(7vw,13vh),118px);line-height:.9;letter-spacing:-.01em;margin:22px 0 26px}
+.hero h1 i{color:var(--g2);font-weight:300}
+.hero p{max-width:27em;color:var(--mut);line-height:1.75}
+.btn{display:inline-flex;align-items:center;gap:14px;margin-top:clamp(24px,4.5vh,44px);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--tx)}
+.btn::after{content:"";width:56px;height:1px;background:var(--g)}
+.num{position:absolute;right:-1vw;bottom:-6vh;font-family:"Cormorant V",serif;font-size:min(34vw,62vh);line-height:.8;color:rgba(239,217,167,.035);font-weight:300;pointer-events:none}
+/* the watch */
+.watch{position:relative;width:min(40vw,74vh);aspect-ratio:1;margin-left:auto;filter:drop-shadow(0 50px 70px rgba(0,0,0,.65))}
+.watch .lug{position:absolute;left:50%;width:34%;height:16%;transform:translateX(-50%);background:linear-gradient(90deg,#3a352c,#bfae86 30%,#f4e6c2 50%,#a8946a 70%,#2e2a23);border-radius:6px}
+.watch .lug.t{top:-9%}.watch .lug.b{bottom:-9%}
+.watch .case{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 210deg,#6e6047,#f6e7c3,#9b8762,#3d362a,#c9b386,#f6e7c3,#6e6047)}
+.watch .crown{position:absolute;right:-4%;top:46%;width:6%;height:8%;border-radius:3px;background:repeating-linear-gradient(0deg,#c2ad80 0 2px,#7a6a4a 2px 4px)}
+.watch .bez{position:absolute;inset:4.5%;border-radius:50%;background:#0d100e;box-shadow:inset 0 0 0 2px rgba(0,0,0,.6)}
+.watch .dial{position:absolute;inset:7%;border-radius:50%;
+  background:radial-gradient(circle at 38% 30%,rgba(255,255,255,.16),transparent 45%),repeating-conic-gradient(from 0deg,#0e2b22 0 1.2deg,#143a2e 1.2deg 2.4deg);
+  box-shadow:inset 0 0 40px rgba(0,0,0,.7)}
+.watch svg{position:absolute;inset:7%;width:86%;height:86%;overflow:visible}
+.hand{transform-origin:200px 200px;transition:transform .2s cubic-bezier(.4,2.2,.6,1)}
+.glass{position:absolute;inset:7%;border-radius:50%;background:linear-gradient(130deg,rgba(255,255,255,.16),rgba(255,255,255,0) 40%);pointer-events:none}
+/* sections */
+section{padding:clamp(90px,11vw,150px) 0}
+.intro{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;border-top:1px solid var(--line);padding-top:56px}
+.intro h2{font-size:clamp(40px,4.4vw,68px);font-weight:300;line-height:1}
+.intro p{color:var(--mut);line-height:1.8;max-width:34em}
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:70px}
+.trio article{border:1px solid var(--line);padding:40px 28px 30px;text-align:center}
+.mini{width:62%;aspect-ratio:1;margin:0 auto 30px;border-radius:50%;padding:6%;background:conic-gradient(from 210deg,#6e6047,#f6e7c3,#9b8762,#3d362a,#c9b386,#f6e7c3,#6e6047)}
+.mini div{width:100%;height:100%;border-radius:50%;background:var(--d);box-shadow:inset 0 0 22px rgba(0,0,0,.6);position:relative}
+.mini div::before,.mini div::after{content:"";position:absolute;left:50%;bottom:50%;width:3px;border-radius:2px;background:var(--g2);transform-origin:50% 100%}
+.mini div::before{height:34%;transform:translateX(-50%) rotate(-40deg)}
+.mini div::after{height:24%;transform:translateX(-50%) rotate(65deg)}
+.trio h3{font-family:"Cormorant V",serif;font-weight:400;font-size:30px}
+.trio small{display:block;margin-top:8px;color:var(--mut);letter-spacing:.2em;font-size:10px;text-transform:uppercase}
+.quote{text-align:center;max-width:15em;margin:0 auto;font-size:clamp(36px,4.6vw,72px);font-weight:300;line-height:1.08}
+.quote i{color:var(--g2)}
+.specs{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);margin-top:80px}
+.specs div{padding:28px 0;border-bottom:1px solid var(--line)}
+.specs b{display:block;font-family:"Cormorant V",serif;font-size:40px;font-weight:400;color:var(--g2)}
+.specs span{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}
+.foot{padding:50px 0;border-top:1px solid var(--line);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}
+.foot .wrap{display:flex;justify-content:space-between}
+@media (max-width:900px){.nav .l,.nav .r{display:none}.nav{grid-template-columns:1fr}.hero .wrap,.intro{grid-template-columns:1fr}.watch{width:80vw;margin:0 auto}.trio,.specs{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<header class="nav">
+  <nav class="l"><a href="#">Collections</a><a href="#">Calibres</a></nav>
+  <a class="logo" href="#">NOCTURNE</a>
+  <nav class="r"><a href="#">Maison</a><a href="#">Boutiques</a></nav>
+</header>
+<main>
+  <section class="hero" style="padding:0">
+    <span class="num" aria-hidden="true">N°01</span>
+    <div class="wrap">
+      <div>
+        <p class="eb" data-in>Calibre N.01 · Geneva</p>
+        <h1 class="serif" data-in style="--d:1">Time, kept<br><i>in the dark.</i></h1>
+        <p data-in style="--d:2">A hand-wound movement beneath a forest-green sunburst dial. Grade-A luminova, a 72-hour reserve, and only 300 pieces each year.</p>
+        <a class="btn" href="#" data-in style="--d:3">Discover the collection</a>
+      </div>
+      <div class="watch" data-fade style="--d:1" aria-hidden="true">
+        <span class="lug t"></span><span class="lug b"></span><span class="case"></span><span class="crown"></span><span class="bez"></span><span class="dial"></span>
+        <svg viewBox="0 0 400 400">
+          <g id="ticks"></g>
+          <text x="200" y="128" text-anchor="middle" font-family="Cormorant V, serif" font-size="22" letter-spacing="7" fill="#efd9a7">NOCTURNE</text>
+          <text x="200" y="292" text-anchor="middle" font-family="Manrope V, sans-serif" font-size="8.5" letter-spacing="3.5" fill="#b9a982">AUTOMATIQUE · 72H</text>
+          <g class="hand" id="hh"><path d="M196 205 L198 108 L200 98 L202 108 L204 205Z" fill="#efd9a7"/><path d="M198.6 160 L200 112 L201.4 160Z" fill="#dff3e4"/></g>
+          <g class="hand" id="mh"><path d="M197 208 L198.6 60 L200 48 L201.4 60 L203 208Z" fill="#efd9a7"/><path d="M199.2 150 L200 64 L200.8 150Z" fill="#dff3e4"/></g>
+          <g class="hand" id="sh"><path d="M199.4 240 L199.6 44 L200.4 44 L200.6 240Z" fill="#e2b257"/><circle cx="200" cy="225" r="5" fill="none" stroke="#e2b257" stroke-width="1.6"/></g>
+          <circle cx="200" cy="200" r="7" fill="#efd9a7"/><circle cx="200" cy="200" r="2.4" fill="#0e2b22"/>
+        </svg>
+        <span class="glass"></span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="intro"><h2 class="serif">Three dials,<br>one quiet obsession.</h2><p>Each Nocturne is finished by a single watchmaker in our Plainpalais atelier, from the côtes de Genève on the bridges to the hand-applied lume on every index.</p></div>
+      <div class="trio">
+        <article><div class="mini"><div style="--d:repeating-conic-gradient(#0e2b22 0 1.2deg,#143a2e 1.2deg 2.4deg)"></div></div><h3>Forêt</h3><small>Green sunburst · 39 mm</small></article>
+        <article><div class="mini"><div style="--d:repeating-conic-gradient(#14161b 0 1.2deg,#1d2028 1.2deg 2.4deg)"></div></div><h3>Minuit</h3><small>Midnight black · 39 mm</small></article>
+        <article><div class="mini"><div style="--d:repeating-conic-gradient(#d9cdb6 0 1.2deg,#e8dfcb 1.2deg 2.4deg)"></div></div><h3>Ivoire</h3><small>Grained ivory · 36 mm</small></article>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <p class="quote serif">“We make a few watches, <i>slowly</i>, for people who notice.”</p>
+      <div class="specs"><div><b>300</b><span>Pieces a year</span></div><div><b>72 h</b><span>Power reserve</span></div><div><b>21,600</b><span>Vibrations / hour</span></div><div><b>1 · 1</b><span>Watchmaker · watch</span></div></div>
+    </div>
+  </section>
+</main>
+<footer class="foot"><div class="wrap"><span>Nocturne Genève</span><span>Rue de Carouge 12</span><span>© Nocturne</span></div></footer>
+<script>
+(function(){
+  var g=document.getElementById("ticks"),s="";
+  for(var i=0;i<60;i++){var a=i*6,big=i%5===0;
+    s+=big?'<rect x="196" y="22" width="8" height="'+(i%15===0?30:22)+'" rx="1.5" fill="#efd9a7" transform="rotate('+a+' 200 200)"/><rect x="198" y="25" width="4" height="'+(i%15===0?24:16)+'" rx="1" fill="#dff3e4" transform="rotate('+a+' 200 200)"/>'
+          :'<rect x="199.4" y="22" width="1.2" height="7" fill="#9c8e6c" transform="rotate('+a+' 200 200)"/>';}
+  g.innerHTML=s;
+  var hh=document.getElementById("hh"),mh=document.getElementById("mh"),sh=document.getElementById("sh");
+  var t0=Date.now(),base=null;
+  function tick(){if(document.documentElement.classList.contains("wall-paused"))return;var d=new Date(),sec=d.getSeconds(),m=d.getMinutes()+sec/60,h=(d.getHours()%12)+m/60;
+    if(base===null)base=sec;var run=base+Math.round((Date.now()-t0)/1000);   /* keeps counting up, so the hand never sweeps backwards */
+    hh.style.transform="rotate("+h*30+"deg)";mh.style.transform="rotate("+m*6+"deg)";sh.style.transform="rotate("+run*6+"deg)";}
+  tick();setInterval(tick,1000);
+})();
+</script>
+</body>
+</html>

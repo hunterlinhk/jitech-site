@@ -1,0 +1,15 @@
+# Run on any server with Docker:  docker compose up -d
+# Put an HTTPS proxy in front (Caddy, nginx, Cloudflare Tunnel, or your host's load balancer).
+services:
+  web:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATA_DIR: /data
+    ports:
+      - "3000:3000"
+    volumes:
+      - jieweitech-data:/data
+volumes:
+  jieweitech-data:

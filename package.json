@@ -1,0 +1,30 @@
+{
+  "name": "jieweitech-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "JIEWEITECH website, inquiry system and admin dashboard",
+  "license": "UNLICENSED",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "start": "node tools/build.mjs && node server/index.js",
+    "dev": "node tools/build.mjs && node --watch-path=server server/index.js",
+    "admin:create": "node scripts/admin.js create",
+    "admin:reset-password": "node scripts/admin.js reset-password",
+    "admin:disable-2fa": "node scripts/admin.js disable-2fa",
+    "admin:list": "node scripts/admin.js list",
+    "backup": "node scripts/backup.js",
+    "test": "node --test test/*.test.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^13.0.3",
+    "cheerio": "^1.2.0",
+    "compression": "^1.8.2",
+    "express": "^5.3.0",
+    "nodemailer": "^10.2.1",
+    "qrcode": "^1.5.4"
+  }
+}

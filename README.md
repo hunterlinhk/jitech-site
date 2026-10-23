@@ -1,47 +1,165 @@
 # JIEWEITECH website
 
-Static site: an entrance screen, then a homepage whose hero is a wall of monitors.
-No build step is needed: it is plain HTML, CSS and JavaScript, with GSAP vendored in `assets/vendor`.
+The website of Jieweitech, Inc. (an entrance screen, then a homepage whose hero is a wall of monitors), its
+inquiry system, and the admin dashboard where the team handles inquiries.
 
-## Run it locally
+- **Website:** plain HTML, CSS and JavaScript in `public/`, with GSAP vendored. English and Spanish.
+- **Server:** Node.js (Express) in `server/`. It serves the website, takes inquiries at `/api/inquiries`,
+  and runs the dashboard API.
+- **Database:** SQLite, one file in `data/`. Nothing else to install or run.
+- **Dashboard:** `/admin`, in `admin/`. No build step.
 
-Any static server works. From this folder:
+## Run it on your computer
+
+Needs Node.js 20 or newer.
 
 ```bash
-python3 -m http.server 8000
-# open http://localhost:8000
+npm install
+cp .env.example .env          # then set ADMIN_EMAIL and ADMIN_PASSWORD (at least 10 characters)
+npm run dev                   # http://localhost:3000, dashboard at http://localhost:3000/admin
 ```
 
-Opening `index.html` straight from disk mostly works, but the monitors load the pages in `/pages`,
-so a local server is the reliable way to preview.
+The first start creates the admin account from `ADMIN_EMAIL` / `ADMIN_PASSWORD`, and asks for a new password at
+first sign-in. Or create accounts from the command line:
+
+```bash
+npm run admin:create -- you@jieweitech.com "Your Name"   # asks for a password
+npm run admin:reset-password -- you@jieweitech.com        # also unlocks the account and signs it out everywhere
+npm run admin:disable-2fa -- you@jieweitech.com           # if someone loses their phone
+npm run admin:list
+```
+
+`npm test` runs the API checks (inquiries, sign-in, permissions, two-factor codes, export).
+
+## Put it online
+
+It runs anywhere that runs Node.js or Docker and keeps a folder between restarts (for the database):
+Fly.io, Railway or Render (with a persistent disk), or any VPS.
+
+1. Set the environment variables from `.env.example` in your host's dashboard. The important ones:
+   - `SITE_URL`: the live address, e.g. `https://www.jieweitech.com`. It's used in search-engine tags, the sitemap
+     and alert emails, so set it before going live.
+   - `NODE_ENV=production`
+   - `DATA_DIR`: a persistent volume (the Docker image uses `/data`).
+   - `ADMIN_EMAIL`, `ADMIN_PASSWORD` for the first account.
+   - The `SMTP_…` and `MAIL_FROM` settings, so alerts and confirmation emails go out.
+2. Deploy with the `Dockerfile` (`docker compose up -d` on a VPS), or run `npm ci --omit=dev && npm start`.
+   `npm start` builds the site into `dist/` and starts the server.
+3. Serve it over HTTPS. Most hosts do this for you; on a VPS put Caddy or nginx in front. Keep `TRUST_PROXY=1`
+   behind a proxy.
+4. Back up the database: `npm run backup` writes a copy to `backups/` (it keeps 30). Run it daily with cron,
+   or snapshot the volume.
+
+Health check: `GET /api/health`.
 
 ## What's where
 
 | Path | What it is |
 | --- | --- |
-| `index.html` | Entrance screen and homepage (one route, two layers) |
-| `website-development.html`, `geo-optimization.html`, `standalone-websites.html`, `contact.html` | The service pages and the contact page |
-| `assets/css/site.css` | Homepage styles, plus the navigation and footer every page shares |
-| `assets/css/inner.css` | Styles for the service and contact pages |
-| `assets/js/site.js` | Homepage: entrance, monitor wall, intro sequence, full-page scrolling |
-| `assets/js/i18n.js` | English / Spanish switching |
-| `assets/js/ui.js` | Shared by every page: the language menu and the round cursor |
-| `assets/js/inner.js` | Service and contact pages: mobile menu, scroll reveals, contact form |
-| `pages/*.html` | The 13 concept websites shown on the monitors. Each is a complete, original page and opens full screen when a monitor is clicked |
-| `pages/assets/` | What the concept pages share: fonts, reset, entrance motion, photo fallbacks |
-| `assets/fonts/pages/` | Fonts used by the concept pages (all SIL Open Font License; licenses alongside) |
-| `assets/img/shots/*.jpg` | Screenshots of those pages, used on the entrance wall and in "Selected work" |
-| `assets/fonts/` | Inter, Bricolage Grotesque, Hanken Grotesk (all SIL Open Font License) |
-| `assets/vendor/` | GSAP and ScrollTrigger |
-| `tools/make_shots.py` | Regenerates the screenshots after the pages change |
+| `public/index.html` | Entrance screen and homepage (one route, two layers) |
+| `public/website-development.html`, `geo-optimization.html`, `standalone-websites.html` | Service pages |
+| `public/contact.html` | Contact page and inquiry form |
+| `public/privacy.html`, `public/404.html` | Privacy policy and the not-found page |
+| `public/assets/css/site.css` | Homepage styles, plus the navigation and footer every page shares |
+| `public/assets/css/inner.css` | Styles for the service, contact and privacy pages |
+| `public/assets/js/site.js` | Homepage: entrance, monitor wall, intro sequence, full-page scrolling |
+| `public/assets/js/i18n.js` | English / Spanish switching |
+| `public/assets/js/ui.js` | Every page: the language menu, the round cursor, and where a visit came from |
+| `public/assets/js/inner.js` | Service and contact pages: mobile menu, scroll reveals, the inquiry form |
+| `public/pages/*.html` | The 13 concept websites shown on the monitors |
+| `server/` | The server: `app.js` (routes), `store.js` (database queries), `auth.js` (sign-in), `notify.js` (alerts and emails), `routes/` (the two APIs) |
+| `admin/` | The dashboard (`js/app.js`, `js/inquiries.js`, `js/overview.js`, `js/pages.js`) |
+| `tools/build.mjs` | Builds `dist/`: Spanish pages, search tags, sitemap. Runs on `npm start` / `npm run dev` |
+| `scripts/` | Account commands and the backup |
+| `test/` | API tests |
+| `dist/` | Built site (generated, not in git) |
+| `data/` | The database (not in git) |
 
-## Common edits
+## Company details
 
-- **Brand name / contact email:** the "Edit here" block at the top of `assets/js/site.js`, plus the text in `index.html`.
-- **Which website sits on which monitor:** `LAYOUTS` in `assets/js/site.js` (`wide` for landscape screens, `tall` for portrait).
-- **A concept page's text or design:** edit its file in `/pages` directly, then run `tools/make_shots.py` for that page.
-- **Colors:** CSS variables at the top of `assets/css/site.css`.
-- **"What we do" pictures:** `SERVICE_IMAGES` in `assets/js/site.js`.
+Jieweitech, Inc. · 3678 Admiralty Way, Suite 503, Marina del Rey, CA 90292, United States · +1 (510) 628-5269.
+They appear in the footer of every page, on the contact page, in the privacy policy, in confirmation emails,
+and in the structured data search engines read. To change them, edit `company` in `server/config.js` (emails,
+structured data, `llms.txt`) and the text in the HTML pages.
+
+## Inquiries
+
+The contact form sends to `POST /api/inquiries`. It works without JavaScript too (the server redirects back
+with a thank-you message). Each inquiry gets a reference number like `JW-1001`, shown to the visitor.
+
+Spam protection, without puzzles for real visitors:
+- a hidden field that only bots fill in (they get a normal-looking reply and nothing is saved)
+- messages sent within 3 seconds of the page opening, or with many links, go to the Spam folder instead of the inbox
+- at most 6 messages per network per 10 minutes (30 a day), and 5 per email address per hour
+
+When an inquiry arrives:
+- everyone signed in to the dashboard sees it immediately (a pop-up, an optional sound and desktop notification,
+  and the unread count in the browser tab)
+- team members who keep "Email me about new inquiries" on, plus any addresses under Settings, get an email
+- an optional chat alert goes to a Slack, Discord, Teams or Zapier webhook (Settings)
+- the visitor gets a confirmation in their language with their reference number (can be turned off in Settings)
+
+Email needs the SMTP settings. Until they're set, alerts appear only in the dashboard; a failed email is noted
+in the inquiry's activity.
+
+## The dashboard
+
+At `/admin`. Sign in with your team account.
+
+- **Overview:** today, the last 7 and 30 days, deals won this month, a 14-day chart, the pipeline, what people ask
+  for, and what needs attention (unread and follow-ups due).
+- **Inbox and views:** Inbox (open inquiries), Unread, Assigned to me, Follow-up due, All, Archived, Spam, plus one
+  link per pipeline stage and per tag.
+- **Search** across name, company, email, phone, message, notes and tags, or a reference number. Filter by status,
+  person, service, priority, language and date; sort; export what you see as a CSV spreadsheet.
+- **Each inquiry:** reply by email (opens your mail app with a greeting in the visitor's language), call, or
+  WhatsApp; set the status (New, Contacted, In discussion, Quote sent, Won, Closed / lost), priority, owner,
+  follow-up date and tags; write internal notes; see the full history and earlier inquiries from the same email.
+- **Bulk actions:** select several to change status, assign, tag, archive, mark read or unread, mark as spam or delete.
+- **Shortcuts:** `/` search, `J` / `K` next and previous, `E` archive, `Esc` back to the list.
+- **Team** (admins add people; each new person gets a one-time temporary password), **Settings** (alerts and the
+  security log), and **Your account** (password, two-factor sign-in, sessions, notifications, light or dark look).
+
+Roles: team members can read and manage every inquiry, add notes and export. Admins can also add people,
+delete inquiries and change settings.
+
+### Security
+
+- Passwords are stored as scrypt hashes; at least 10 characters, and common ones are refused.
+- Five wrong passwords lock an account for 15 minutes; sign-in attempts are also limited per network.
+- Optional two-factor sign-in with any authenticator app.
+- Sessions are kept on the server and sent in an HttpOnly, SameSite=Strict cookie (Secure in production). They end
+  after 12 hours without activity or 7 days at most. Changing a password signs out every other session.
+- Every change needs a CSRF token, and requests from other sites are refused.
+- The dashboard has a strict Content Security Policy, can't be framed, and isn't indexed by search engines.
+  Visitor text is always shown as text, never as HTML, in the dashboard and in emails, and the CSV export
+  neutralises spreadsheet formulas.
+- Sign-ins, account changes, exports and deletions are recorded in the security log.
+
+## Languages and search engines
+
+The site is in English and Spanish. Spanish lives in the HTML next to the English
+(`<h2 data-es="Lo que hacemos">What we do</h2>`; attributes with `data-attr="aria-label" data-attr-es="…"`),
+and text written by scripts is in `STR` in `public/assets/js/i18n.js`. The copy uses friendly, neutral
+Latin American Spanish addressed as "tú".
+
+`npm run build` turns that into two sets of pages: English at `/…` and Spanish at `/es/…`, each with the right
+language already in the HTML, so search engines index both. Every page gets:
+- `canonical` and `hreflang` links (English, Spanish, and English as the default)
+- Open Graph tags in its language, with a social preview image
+- structured data: the company (with address and phone), the website, the page, each service with its starting
+  prices, the FAQs, and breadcrumbs
+- plus `sitemap.xml` (with both languages), `robots.txt` (keeps `/admin` and `/api` out) and `llms.txt`,
+  a short summary for AI tools. The concept websites on the monitors are marked `noindex`.
+
+Choosing a language opens the matching address (the homepage swaps its text in place so the wall keeps its state,
+and updates the address bar). The choice is remembered. A first-time visitor whose browser prefers Spanish gets
+Spanish. `?lang=es` or `?lang=en` forces one. Spanish headlines are set slightly smaller and tighter, because
+Spanish runs about a fifth longer than English. The concept websites on the monitors stay in English, since they
+are design examples.
+
+Opening `public/index.html` without the server still works for previewing the design: languages switch in place,
+but the contact form needs the server.
 
 ## The homepage sequence
 
@@ -75,14 +193,14 @@ trackpad momentum is ignored.
 ## Logo and cursor
 
 The JIEWEITECH mark is traced from the original artwork, so its shape is exact. It lives once in
-`index.html` as the `jwMark` symbol: the main shapes take the surrounding text color and the bar takes
-`--mark-accent`. `assets/img/logo.svg` is the original-color version and `assets/img/favicon.svg` the tab icon.
+`public/index.html` as the `jwMark` symbol: the main shapes take the surrounding text color and the bar takes
+`--mark-accent`. `public/assets/img/logo.svg` is the original-color version and `public/assets/img/favicon.svg` the tab icon.
 On computers with a mouse or trackpad, the pointer is a small round cursor that grows over anything clickable.
 
 ## What we do
 
 The services sit on the left and a picture sits on the right. Hovering a service (or tapping it on a phone)
-swaps the picture. The pictures are listed in `SERVICE_IMAGES` at the top of `assets/js/site.js`; they are
+swaps the picture. The pictures are listed in `SERVICE_IMAGES` at the top of `public/assets/js/site.js`; they are
 stand-ins from the concept pages until you add your own.
 
 ## The concept pages
@@ -105,19 +223,21 @@ stand-ins from the concept pages until you add your own.
 
 Photos come from [Unsplash](https://unsplash.com/license) (free to use, no attribution required, credited anyway)
 and load straight from images.unsplash.com. If one can't load, its block keeps a matching colour tone.
-The entrance wall has two separate groups of designs (`SCREENS.left` and `SCREENS.right` in `assets/js/site.js`),
-so the columns never repeat each other. A tile shows the page's screenshot from `assets/img/shots/` when one
+The entrance wall has two separate groups of designs (`SCREENS.left` and `SCREENS.right` in `public/assets/js/site.js`),
+so the columns never repeat each other. A tile shows the page's screenshot from `public/assets/img/shots/` when one
 exists, and otherwise the live page scaled down. Running `tools/make_shots.py` on a machine with internet
-access adds screenshots for the photo pages, and their tiles switch to those automatically.
+access adds screenshots for the photo pages, and their tiles switch to those automatically after the next build.
 
 ## Performance
 
 The live websites on the wall are the heaviest part of the site, so:
 
 - The 12 wall pages load only once Enter Site is clicked.
-- A page animates only while its website is showing and the wall can be seen. It pauses (holds its frame)
-  while the screen is plain blue, when the page is scrolled down, while a preview is open, and when the
-  browser tab is in the background. Screens showing plain blue aren't painted at all.
+- Once the wall is lit, each page plays its opening motion once behind its blue cover, then rests there,
+  already drawn, so turning a screen over has nothing new to draw. (Slower computers warm one page at a time.)
+- A page animates only while its website is showing and the wall can be seen. It holds still while its screen
+  is turning, while the screen is plain blue, when the page is scrolled down, while a preview is open, and when
+  the browser tab is in the background.
 - Page animations only move and fade things (transforms and opacity), which the graphics card handles.
 - **Lite mode** for slower computers: only 4 screens animate at a time, two new ones taking over every
   3 seconds, and the screen under the pointer always plays. It switches on from the start when the browser
@@ -126,30 +246,17 @@ The live websites on the wall are the heaviest part of the site, so:
   3-second windows in a row. The choice lasts for the visit.
 - Add `?lite` or `?full` to the address (for example `index.html?full`) to force either mode, e.g. for a demo.
 
-## Languages
-
-The site is in English and Spanish. The menu at the right end of the navigation switches language on every page,
-and the choice is remembered. A first-time visitor whose browser is set to Spanish sees Spanish automatically;
-`?lang=es` or `?lang=en` on any address forces one.
-
-English is written in the HTML as usual, and the Spanish sits on the same element:
-`<h2 data-es="Lo que hacemos">What we do</h2>`. Attributes work the same way
-(`data-attr="aria-label" data-attr-es="…"`), and text written by scripts is in `STR` in `assets/js/i18n.js`.
-The concept websites on the monitors stay in English, since they are design examples.
-
-## Contact form
-
-The site has no server, so the contact form opens the visitor's email app with the message filled in.
-Put the real address in `data-email="[Contact email]"` on the form in `contact.html`, and replace the
-`[Contact email]` and `[Phone number]` placeholders shown on that page.
-
 ## Accessibility
 
 - A photosensitivity warning with a "Turn effects off" switch sits under Enter Site.
 - `prefers-reduced-motion` turns the static, flicker and drift off automatically.
 - Any key or scroll skips the intro.
+- The inner pages have a "Skip to content" link; form errors are announced and tied to their fields.
 
-## Deploying
+## Fonts
 
-It is a static folder, so GitHub Pages, Netlify, Vercel or Cloudflare Pages can serve it as-is.
-For GitHub Pages: Settings → Pages → Deploy from branch → `main` / root.
+Display type is Bricolage Grotesque; navigation and labels use Inter; body text uses the system's Helvetica Neue
+or Arial. `hanken-grotesk.woff2` is in `public/assets/fonts/` but isn't used: an error in the stylesheet meant it
+never loaded, so the site has always shown Helvetica Neue / Arial for body text. To switch to it, add its
+`@font-face` back to the top of `site.css` and put `"Hanken Grotesk Variable"` first in `--font-body`.
+All fonts are under the SIL Open Font License.
