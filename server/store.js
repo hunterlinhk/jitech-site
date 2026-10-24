@@ -155,6 +155,9 @@ function createStore(db, cfg) {
     inq.events = all(`SELECT e.id, e.type, e.data, e.created_at, e.user_id, u.name AS user_name FROM events e
       LEFT JOIN users u ON u.id = e.user_id WHERE e.inquiry_id = ? ORDER BY e.id`, id)
       .map((e) => ({ id: e.id, type: e.type, data: e.data ? JSON.parse(e.data) : null, createdAt: e.created_at, user: e.user_id ? { id: e.user_id, name: e.user_name } : null }));
+    inq.messages = all(`SELECT m.id, m.to_email, m.subject, m.body, m.created_at, m.user_id, u.name AS user_name FROM messages m
+      LEFT JOIN users u ON u.id = m.user_id WHERE m.inquiry_id = ? ORDER BY m.id`, id)
+      .map((m) => ({ id: m.id, to: m.to_email, subject: m.subject, body: m.body, createdAt: m.created_at, user: m.user_id ? { id: m.user_id, name: m.user_name } : null }));
     inq.related = all(`SELECT id, created_at, status, service FROM inquiries WHERE email = ? COLLATE NOCASE AND id != ? ORDER BY id DESC LIMIT 10`, inq.email, id)
       .map((r) => ({ id: r.id, ref: ref(r.id), createdAt: r.created_at, status: r.status, service: r.service }));
     return inq;
@@ -340,13 +343,22 @@ function createStore(db, cfg) {
     remove(id) { return run("DELETE FROM notes WHERE id = ?", id).changes > 0; }
   };
 
+  /* ---------- emails sent from the dashboard ---------- */
+  const messages = {
+    add(inquiryId, userId, to, subject, body) {
+      const r = run("INSERT INTO messages (inquiry_id, user_id, to_email, subject, body) VALUES (?, ?, ?, ?, ?)", inquiryId, userId, to, subject, body);
+      run("UPDATE inquiries SET updated_at = ? WHERE id = ?", now(), inquiryId);
+      return Number(r.lastInsertRowid);
+    }
+  };
+
   /** Recent submissions from the same email, for duplicate detection. */
   const recentFromEmail = (email, minutes) => one(`SELECT COUNT(*) n FROM inquiries WHERE email = ? COLLATE NOCASE AND created_at >= ?`,
     email, new Date(Date.now() - minutes * 60000).toISOString()).n;
 
   return {
     db, ref, idFromRef,
-    getSettings, setSettings, users, sessions, audit, notes,
+    getSettings, setSettings, users, sessions, audit, notes, messages,
     createInquiry, getInquiry, inquiryDetail, listInquiries, exportInquiries, counts, updateInquiry, deleteInquiry, addEvent, allTags,
     recentFromEmail
   };

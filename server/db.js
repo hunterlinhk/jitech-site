@@ -112,6 +112,19 @@ const MIGRATIONS = [
     created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now'))
   );
   CREATE INDEX audit_created ON audit_log(created_at);
+  `,
+  // 2: emails sent to the customer from the dashboard
+  `
+  CREATE TABLE messages (
+    id INTEGER PRIMARY KEY,
+    inquiry_id INTEGER NOT NULL REFERENCES inquiries(id) ON DELETE CASCADE,
+    user_id INTEGER REFERENCES users(id) ON DELETE SET NULL,
+    to_email TEXT NOT NULL,
+    subject TEXT NOT NULL,
+    body TEXT NOT NULL,
+    created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now'))
+  );
+  CREATE INDEX messages_inquiry ON messages(inquiry_id);
   `
 ];
 

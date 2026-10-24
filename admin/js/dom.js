@@ -154,16 +154,16 @@ export function toast(title, opts = {}) {
 }
 
 /* ---------- dialogs ---------- */
-export function dialog(build) {
+export function dialog(build, opts = {}) {
   return new Promise((resolve) => {
-    const dlg = h("dialog", { class: "dlg" });
+    const dlg = h("dialog", { class: "dlg" + (opts.wide ? " wide" : "") });
     const done = (v) => { dlg.close(); dlg.remove(); resolve(v); };
     dlg.addEventListener("cancel", (e) => { e.preventDefault(); done(null); });
     dlg.appendChild(build(done));
     document.body.appendChild(dlg);
     dlg.showModal();
-    const f = dlg.querySelector("[autofocus], input, textarea, select, button.primary");
-    if (f) f.focus();
+    const f = opts.focus || dlg.querySelector("[autofocus], input, textarea, select, button.primary");
+    if (f) { f.focus(); if (opts.caret != null && f.setSelectionRange) { f.setSelectionRange(opts.caret, opts.caret); f.scrollTop = 0; } }
   });
 }
 export function confirmBox(title, text, { ok = "Confirm", danger = false } = {}) {

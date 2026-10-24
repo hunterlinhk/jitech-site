@@ -27,7 +27,11 @@ class Hub {
 function createNotifier(cfg, store, log = console) {
   const hub = new Hub();
   let transport = null;
-  if (cfg.mailEnabled) {
+  const outbox = [];   // with SMTP_URL=log, emails are printed instead of sent (for trying things out locally)
+  if (cfg.mailEnabled && cfg.smtpUrl === "log") {
+    const json = nodemailer.createTransport({ jsonTransport: true });
+    transport = { sendMail: async (m) => { const r = await json.sendMail(m); outbox.push(m); log.log(`[email] to ${m.to} · ${m.subject}`); return r; } };
+  } else if (cfg.mailEnabled) {
     transport = cfg.smtpUrl
       ? nodemailer.createTransport(cfg.smtpUrl)
       : nodemailer.createTransport({
@@ -179,7 +183,34 @@ ${rows(inq).filter((r) => !["Reference", "Name", "Company"].includes(r[0])).map(
     return out;
   }
 
-  return { hub, inquiryReceived, test, mailEnabled: !!transport, teamEmail, customerEmail };
+  /** A reply written in the dashboard, sent to the customer. Replies from the customer go to the team member who wrote it. */
+  function replyEmail(inq, user, subject, body, quote) {
+    const es = inq.lang === "es";
+    const wrote = es ? `El ${new Date(inq.createdAt).toLocaleDateString("es-MX", { day: "numeric", month: "long", year: "numeric" })}, ${inq.name} escribió:`
+      : `On ${new Date(inq.createdAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}, ${inq.name} wrote:`;
+    const quoted = quote ? "\n\n" + wrote + "\n" + String(inq.message).split("\n").map((l) => "> " + l).join("\n") : "";
+    const html = `<!doctype html><html lang="${es ? "es" : "en"}"><body style="margin:0;background:#ffffff;font-family:Inter,Segoe UI,Arial,sans-serif;color:#0b0d12">
+<div style="max-width:620px;padding:24px 20px;font-size:15px;line-height:1.6;white-space:pre-wrap">${esc(body)}</div>
+${quote ? `<div style="max-width:620px;padding:0 20px 24px;color:#5b6472;font-size:14px;line-height:1.55"><p style="margin:0 0 6px">${esc(wrote)}</p><div style="border-left:3px solid #d5dbe5;padding:2px 0 2px 12px;white-space:pre-wrap">${esc(inq.message)}</div></div>` : ""}
+</body></html>`;
+    return { subject, text: body + quoted, html };
+  }
+  async function sendReply(inq, user, { subject, body, quote, copyMe }) {
+    if (!transport) throw new Error("Email isn't set up on the server, so replies can't be sent from the dashboard yet.");
+    const m = replyEmail(inq, user, subject, body, quote);
+    const name = String(user.name).replace(/[<>",]/g, "");
+    const fromAddr = (/<([^>]+)>/.exec(from) || [null, from])[1];
+    return transport.sendMail({
+      from: `${name} · JIEWEITECH <${fromAddr}>`,
+      to: `${inq.name.replace(/[<>",]/g, "")} <${inq.email}>`,
+      replyTo: `${name} <${user.email}>`,
+      bcc: copyMe ? user.email : undefined,
+      subject: m.subject, text: m.text, html: m.html,
+      headers: { "X-JIEWEITECH-Inquiry": inq.ref }
+    });
+  }
+
+  return { hub, outbox, inquiryReceived, test, sendReply, replyEmail, get mailEnabled() { return !!transport; }, teamEmail, customerEmail };
 }
 
 module.exports = { createNotifier, esc };

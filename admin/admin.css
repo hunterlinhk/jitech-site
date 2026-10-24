@@ -389,3 +389,16 @@ dialog.dlg::backdrop{background:rgb(5 7 12 / .5);backdrop-filter:blur(2px)}
   .filters .select{max-width:none;flex:1 1 40%}
 }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* reply composer and sent emails */
+dialog.dlg.wide{width:min(680px,calc(100vw - 32px))}
+.reply-form .textarea{min-height:260px;font-size:14.5px}
+.reply-acts{flex-wrap:wrap;align-items:center}
+.reply-acts .else{display:flex;gap:6px;align-items:center;flex-wrap:wrap;font-size:12.5px}
+.mails li{border-top:1px solid var(--line)}
+.mails summary{display:flex;gap:10px;align-items:center;padding:12px 16px;cursor:pointer;list-style:none}
+.mails summary::-webkit-details-marker{display:none}
+.mails summary .t{display:flex;flex-direction:column;min-width:0}
+.mails summary b{font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mails summary small{color:var(--faint);font-size:12px}
+.mails .nb{padding:0 16px 14px 48px;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.55;font-size:13.5px}

@@ -99,8 +99,9 @@ When an inquiry arrives:
 - an optional chat alert goes to a Slack, Discord, Teams or Zapier webhook (Settings)
 - the visitor gets a confirmation in their language with their reference number (can be turned off in Settings)
 
-Email needs the SMTP settings. Until they're set, alerts appear only in the dashboard; a failed email is noted
-in the inquiry's activity.
+Email needs the SMTP settings. Until they're set, alerts appear only in the dashboard and replies open in your own
+email; a failed email is noted in the inquiry's activity. To try email locally without sending anything, set
+`SMTP_URL=log`: emails are printed in the server log instead.
 
 ## The dashboard
 
@@ -112,7 +113,9 @@ At `/admin`. Sign in with your team account.
   link per pipeline stage and per tag.
 - **Search** across name, company, email, phone, message, notes and tags, or a reference number. Filter by status,
   person, service, priority, language and date; sort; export what you see as a CSV spreadsheet.
-- **Each inquiry:** reply by email (opens your mail app with a greeting in the visitor's language), call, or
+- **Each inquiry:** reply by email right in the dashboard (the server sends it from the company address, with a
+  greeting and signature in the visitor's language; their answer comes back to your own inbox, and every reply is
+  kept in the inquiry), or open the draft in Gmail, Outlook or your mail app instead; call or
   WhatsApp; set the status (New, Contacted, In discussion, Quote sent, Won, Closed / lost), priority, owner,
   follow-up date and tags; write internal notes; see the full history and earlier inquiries from the same email.
 - **Bulk actions:** select several to change status, assign, tag, archive, mark read or unread, mark as spam or delete.

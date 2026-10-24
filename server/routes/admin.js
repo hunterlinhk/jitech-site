@@ -277,6 +277,32 @@ function adminRoutes({ cfg, store, notifier, auth }) {
     ok(res);
   });
 
+  /* reply to the customer by email, from the dashboard */
+  r.post("/inquiries/:id/reply", async (req, res) => {
+    const id = idParam(req);
+    const inq = id && store.getInquiry(id);
+    if (!inq) return res.status(404).json({ error: "not_found" });
+    if (!notifier.mailEnabled) return res.status(409).json({ error: "mail_off", message: "Email isn't set up on the server, so replies can't be sent from here. Use your mail app instead." });
+    const b = req.body || {};
+    const subject = String(b.subject || "").replace(/[\r\n]+/g, " ").trim().slice(0, 200);
+    const body = String(b.body || "").replace(/\r\n?/g, "\n").trim();
+    if (!subject) return bad(res, "Add a subject.");
+    if (!body) return bad(res, "Write your reply first.");
+    if (body.length > 20000) return bad(res, "That reply is too long (20,000 characters at most).");
+    try {
+      await notifier.sendReply(inq, req.user, { subject, body, quote: b.quote !== false, copyMe: !!b.copyMe });
+    } catch (e) {
+      store.addEvent(id, req.user.id, "notify_failed", { channel: "reply", error: String(e.message).slice(0, 200) });
+      return res.status(502).json({ error: "send_failed", message: "The email server didn't accept the message: " + String(e.message).slice(0, 200) });
+    }
+    store.messages.add(id, req.user.id, inq.email, subject, body);
+    store.addEvent(id, req.user.id, "replied", { subject });
+    if (inq.status === "new") store.updateInquiry(id, { status: "contacted" }, req.user.id);
+    if (!inq.read) store.updateInquiry(id, { read: true }, req.user.id);
+    broadcast("updated", { id }, req.user.id);
+    res.json({ ok: true, inquiry: store.inquiryDetail(id) });
+  });
+
   r.get("/tags", (req, res) => res.json(store.allTags()));
 
   /* ---------- team ---------- */

@@ -315,12 +315,63 @@ async function save(p, msg) {
   } catch (e) { errorToast(e, "Couldn't save"); paintDetail(true); return false; }
 }
 
-function replyLink(d) {
+/* ---------- replying ----------
+   Replies are written here and sent by the server, so they work whatever email app (or webmail) the team uses.
+   Replies from the customer go straight to the inbox of the person who wrote. */
+function draftFor(d) {
   const es = d.lang === "es";
   const first = String(d.name).trim().split(/\s+/)[0];
-  const subject = es ? `Re: Tu consulta a JIEWEITECH (${d.ref})` : `Re: Your inquiry to JIEWEITECH (${d.ref})`;
-  const body = es ? `Hola, ${first}:\n\nGracias por escribirnos.\n\n` : `Hi ${first},\n\nThanks for reaching out.\n\n`;
-  return `mailto:${encodeURIComponent(d.email)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  const co = state.meta.company || {};
+  const site = String(state.meta.siteUrl || "").replace(/^https?:\/\//, "");
+  return {
+    subject: es ? `Re: Tu consulta a JIEWEITECH (${d.ref})` : `Re: Your inquiry to JIEWEITECH (${d.ref})`,
+    greeting: es ? `Hola, ${first}:\n\nGracias por escribir a JIEWEITECH.\n\n` : `Hi ${first},\n\nThanks for reaching out to JIEWEITECH.\n\n`,
+    signature: (es ? "\n\nSaludos cordiales,\n" : "\n\nBest regards,\n") + `${state.user.name}\nJIEWEITECH · ${co.legalName || "Jieweitech, Inc."}\n${co.phone || ""}\n${site}`
+  };
+}
+function mailLinks(d, subject, body) {
+  const e = encodeURIComponent;
+  return {
+    app: `mailto:${d.email}?subject=${e(subject)}&body=${e(body)}`,
+    gmail: `https://mail.google.com/mail/?view=cm&fs=1&to=${e(d.email)}&su=${e(subject)}&body=${e(body)}`,
+    outlook: `https://outlook.office.com/mail/deeplink/compose?to=${e(d.email)}&subject=${e(subject)}&body=${e(body)}`
+  };
+}
+async function openReply(d) {
+  const draft = draftFor(d);
+  const subject = h("input", { class: "input", id: "r-subject", maxlength: "200", value: draft.subject });
+  const body = h("textarea", { class: "textarea", id: "r-body", rows: 12, maxlength: "20000" });
+  body.value = draft.greeting + draft.signature;
+  const quote = h("input", { type: "checkbox", checked: true });
+  const copyMe = h("input", { type: "checkbox" });
+  const err = h("p", { class: "err", role: "alert", hidden: true });
+  const send = h("button", { class: "btn primary", type: "submit", disabled: !state.meta.mailEnabled }, icon("reply", "sm"), "Send reply");
+  const elsewhere = (label, key) => h("a", { class: "btn sm", target: key === "app" ? null : "_blank", rel: "noopener noreferrer",
+    onclick: (e) => { e.currentTarget.href = mailLinks(d, subject.value, body.value)[key]; } , href: "#" }, label);
+  const sent = await dialog((done) => h("form", { class: "reply-form", onsubmit: async (e) => {
+    e.preventDefault(); err.hidden = true;
+    send.disabled = true; send.lastChild.textContent = "Sending…";
+    try { const r = await post(`/inquiries/${d.id}/reply`, { subject: subject.value, body: body.value, quote: quote.checked, copyMe: copyMe.checked }); done(r); }
+    catch (ex) { err.textContent = ex.message; err.hidden = false; send.disabled = false; send.lastChild.textContent = "Send reply"; }
+  } },
+  h("h3", { text: "Reply to " + d.name }),
+  state.meta.mailEnabled
+    ? h("p", { text: `Sent to ${d.email} from the company email. When they answer, the reply comes to you at ${state.user.email}.` })
+    : h("div", { class: "statusline warn" }, icon("spam", "sm"), "Email isn't set up on the server, so this can't be sent from here. Use one of the buttons below to open it in your own email instead."),
+  h("div", { class: "field" }, h("label", { class: "fl", for: "r-subject" }, "Subject"), subject),
+  h("div", { class: "field" }, h("label", { class: "fl", for: "r-body" }, "Message"), body),
+  h("div", { class: "field" }, h("label", { class: "check" }, quote, h("span", { text: "Include their original message below my reply" }))),
+  h("div", { class: "field" }, h("label", { class: "check" }, copyMe, h("span", { text: "Send me a copy" }))),
+  err,
+  h("div", { class: "acts reply-acts" },
+    h("span", { class: "else" }, h("span", { class: "muted", text: "Or open in:" }), elsewhere("Gmail", "gmail"), elsewhere("Outlook", "outlook"), elsewhere("Mail app", "app")),
+    h("span", { class: "grow" }),
+    h("button", { class: "btn", type: "button", onclick: () => done(null) }, "Cancel"), send)), { wide: true, focus: body, caret: draft.greeting.length });
+  if (!sent) return;
+  detail = sent.inquiry;
+  paintDetail(true);
+  refreshList({ quiet: true }); loadCounts();
+  toast("Reply sent", { text: d.status === "new" ? "Status changed to Contacted." : "Saved in the inquiry's email history." });
 }
 
 function paintDetail(keepComposer) {
@@ -352,7 +403,7 @@ function paintDetail(keepComposer) {
       h("h2", null, d.name, d.company ? h("span", { class: "co", text: " · " + d.company }) : null),
       h("div", { class: "sub" }, h("b", { text: d.ref }), h("span", { text: fullDate(d.createdAt) }), h("span", { class: "pill", text: state.meta.langs[d.lang] || d.lang }))));
   const actions = h("div", { class: "contact-actions" },
-    h("a", { class: "btn primary", href: replyLink(d), onclick: () => { if (d.status === "new") setTimeout(() => toast("Replied?", { text: "Mark this inquiry as Contacted.", action: { label: "Mark contacted", run: () => save({ status: "contacted" }, "Status: Contacted") } }), 600); } }, icon("reply", "sm"), "Reply by email"),
+    h("button", { class: "btn primary", type: "button", onclick: () => openReply(d) }, icon("reply", "sm"), "Reply by email"),
     d.phone ? h("a", { class: "btn", href: "tel:" + phoneDigits }, icon("phone", "sm"), "Call") : null,
     d.phone && phoneDigits.replace(/\D/g, "").length >= 8 ? h("a", { class: "btn", href: "https://wa.me/" + phoneDigits.replace(/\D/g, ""), target: "_blank", rel: "noopener noreferrer" }, "WhatsApp") : null,
     h("button", { class: "btn", type: "button", onclick: () => copyText(d.email, "Email copied") }, icon("copy", "sm"), "Copy email"));
@@ -384,6 +435,10 @@ function paintDetail(keepComposer) {
   } }, label, h("span", { class: "n", text: String(n) }));
   const tabs = h("div", { class: "tabs", role: "tablist" }, tabBtn("notes", "Notes", d.notes.length), tabBtn("act", "Activity", d.events.length));
   const work = h("article", { class: "card" }, tabs, notesPanel, actPanel);
+  const emails = d.messages && d.messages.length ? h("article", { class: "card" }, h("header", null, h("h3", { text: "Emails sent" }), h("span", { class: "muted", text: String(d.messages.length) })),
+    h("ul", { class: "mails" }, [...d.messages].reverse().map((m) => h("li", null,
+      h("details", null, h("summary", null, avatar(m.user ? m.user.name : "?", "sm"), h("span", { class: "t" }, h("b", { text: m.subject }), h("small", { text: (m.user ? m.user.name : "Former team member") + " · " + ago(m.createdAt) }))),
+        h("p", { class: "nb", text: m.body })))))) : null;
   const which = activeTab && activeTab.tab === "act" ? 1 : 0;
   tabs.children[which].setAttribute("aria-selected", "true");
   notesPanel.hidden = which !== 0; actPanel.hidden = which !== 1;
@@ -423,7 +478,7 @@ function paintDetail(keepComposer) {
     h("ul", { class: "related" }, d.related.map((x) => h("li", null, h("a", { href: "#/inquiries/all/" + x.id }, h("span", { class: "ref", text: x.ref }), statusPill(x.status), h("span", { text: serviceLabel(x.service) }), h("span", { class: "grow" }), h("small", { text: ago(x.createdAt) }))))))) : null;
 
   clear(L.detail, head, h("div", { class: "dbody" }, spamNote, who, actions,
-    h("div", { class: "grid2" }, h("div", null, message, work), h("div", null, manage, details, related))));
+    h("div", { class: "grid2" }, h("div", null, message, emails, work), h("div", null, manage, details, related))));
   if (keepComposer) L.detail.scrollTop = scroll; else L.detail.scrollTop = 0;
   if (keep && document.activeElement === document.body) noteBody.focus();
 }
@@ -495,8 +550,9 @@ function eventEl(e) {
     case "not_spam": ic = "check"; parts = [B(by || "Someone"), " marked this as not spam"]; break;
     case "tags": ic = "tag"; parts = [B(by || "Someone"), (d.added && d.added.length ? " added " + d.added.join(", ") : ""), (d.added && d.added.length && d.removed && d.removed.length ? " and" : ""), (d.removed && d.removed.length ? " removed " + d.removed.join(", ") : "")]; break;
     case "notified": ic = "bell"; parts = [d.channel === "email" ? `Email alert sent to the team (${d.to} ${d.to === 1 ? "address" : "addresses"})` : "Chat alert sent"]; break;
+    case "replied": ic = "reply"; parts = [B(by || "Someone"), " emailed the customer: ", B(d.subject || "")]; break;
     case "autoreply": ic = "mail"; parts = ["Confirmation email sent to the customer"]; break;
-    case "notify_failed": ic = "spam"; bad = true; parts = [`${d.channel === "confirmation" ? "Confirmation email" : d.channel === "webhook" ? "Chat alert" : "Email alert"} failed: ${d.error || "unknown error"}`]; break;
+    case "notify_failed": ic = "spam"; bad = true; parts = [`${d.channel === "confirmation" ? "Confirmation email" : d.channel === "reply" ? "Reply" : d.channel === "webhook" ? "Chat alert" : "Email alert"} failed: ${d.error || "unknown error"}`]; break;
     default: parts = [e.type];
   }
   return h("li", { class: bad ? "bad" : "" }, icon(ic, "sm"), h("span", null, parts), h("time", { title: fullDate(e.createdAt), text: ago(e.createdAt) }));

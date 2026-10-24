@@ -17,10 +17,10 @@ async function start(extra = {}) {
   cfg.minFillSeconds = Number(extra.FORM_MIN_SECONDS || 0);
   cfg.dbPath = path.join(dir, "test.db");
   cfg.bootstrapEmail = "owner@example.com"; cfg.bootstrapPassword = "Correct-Horse-42";
-  const { app, close, store } = createApp(cfg, { log: quiet });
+  const { app, close, store, notifier } = createApp(cfg, { log: quiet });
   const server = await new Promise((res) => { const s = app.listen(0, "127.0.0.1", () => res(s)); });
   const base = `http://127.0.0.1:${server.address().port}`;
-  return { base, store, stop: () => { server.closeAllConnections(); server.close(); close(); fs.rmSync(dir, { recursive: true, force: true }); } };
+  return { base, store, notifier, stop: () => { server.closeAllConnections(); server.close(); close(); fs.rmSync(dir, { recursive: true, force: true }); } };
 }
 
 /* a tiny cookie-keeping client */
@@ -257,5 +257,36 @@ test("the website: pages, Spanish addresses, headers and the dashboard", async (
       assert.match(html, /<html lang="es"/);
       assert.match(html, /hreflang="en"/);
     }
+  } finally { t.stop(); }
+});
+
+test("replying to a customer from the dashboard", async () => {
+  const t = await start({ SMTP_URL: "log" });
+  try {
+    await client(t.base).post("/api/inquiries", inquiry());
+    const c = await signIn(client(t.base));
+    const id = (await c.get("/admin/api/inquiries?view=all")).data.items[0].id;
+    assert.equal((await c.post(`/admin/api/inquiries/${id}/reply`, { subject: "", body: "Hi" })).status, 400);
+    const r = await c.post(`/admin/api/inquiries/${id}/reply`, { subject: "Re: Tu consulta", body: "Hola, Ana:\n\nGracias.", copyMe: true });
+    assert.equal(r.status, 200, JSON.stringify(r.data));
+    assert.equal(r.data.inquiry.status, "contacted");
+    assert.equal(r.data.inquiry.messages.length, 1);
+    assert.ok(r.data.inquiry.events.some((e) => e.type === "replied"));
+    const sent = t.notifier.outbox.find((m) => m.subject === "Re: Tu consulta");
+    assert.ok(sent, "email was sent");
+    assert.match(sent.to, /ana@example\.com/);
+    assert.match(sent.replyTo, /owner@example\.com/);
+    assert.equal(sent.bcc, "owner@example.com");
+    assert.match(sent.text, /> We need a website/);
+  } finally { t.stop(); }
+});
+
+test("replies can't be sent when email isn't set up", async () => {
+  const t = await start();
+  try {
+    await client(t.base).post("/api/inquiries", inquiry());
+    const c = await signIn(client(t.base));
+    const id = (await c.get("/admin/api/inquiries?view=all")).data.items[0].id;
+    assert.equal((await c.post(`/admin/api/inquiries/${id}/reply`, { subject: "Hi", body: "Hello" })).status, 409);
   } finally { t.stop(); }
 });
