@@ -260,6 +260,36 @@ test("the website: pages, Spanish addresses, headers and the dashboard", async (
   } finally { t.stop(); }
 });
 
+test("the Design Studio page, its preview, and a document sent from it", async () => {
+  const t = await start();
+  try {
+    let r = await fetch(t.base + "/design-studio.html");
+    let html = await r.text();
+    assert.equal(r.status, 200);
+    for (let n = 1; n <= 8; n++) assert.match(html, new RegExp('data-step="' + n + '"'));
+    assert.match(html, /assets\/js\/studio\.js/);
+    r = await fetch(t.base + "/pages/studio-preview.html");
+    assert.equal(r.status, 200);
+    assert.match(await r.text(), /StudioPreview/);
+    if (fs.existsSync(path.join(__dirname, "..", "dist", "es", "design-studio.html"))) {
+      r = await fetch(t.base + "/es/design-studio.html");
+      html = await r.text();
+      assert.match(html, /<html lang="es"/);
+      assert.match(html, /Estudio de diseño/);
+    }
+    // what studio.js posts when a visitor sends their document
+    r = await fetch(t.base + "/api/inquiries", { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" }, body: JSON.stringify({
+      name: "Ana Prueba", email: "ana@example.com", service: "website-development", plan: "standard", lang: "es", page: "/es/design-studio.html",
+      message: "Enviado desde el estudio de diseño.\n\nREQUISITOS DE DISEÑO WEB · DS-20261024-ABCD\nPlan recomendado: Estándar ($500)"
+    }) });
+    const j = await r.json();
+    assert.equal(r.status, 201);
+    assert.ok(j.ok && j.ref);
+    const row = t.store.db.prepare("SELECT service, plan, lang, source_page FROM inquiries ORDER BY id DESC LIMIT 1").get();
+    assert.deepEqual(row, { service: "website-development", plan: "standard", lang: "es", source_page: "/es/design-studio.html" });
+  } finally { t.stop(); }
+});
+
 test("replying to a customer from the dashboard", async () => {
   const t = await start({ SMTP_URL: "log" });
   try {

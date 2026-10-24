@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Design preview</title>
+<link rel="stylesheet" href="assets/base.css">
+<script src="assets/garments.js"></script>
+<script src="assets/pets.js"></script>
+<style>
+/* The sample website drawn by the JIEWEITECH Design Studio. Every choice arrives as a CSS variable or a class on <html>. */
+:root{--bg:#fff;--sf:#f4f4f5;--ink:#18181b;--mut:#6b6b72;--line:rgba(0,0,0,.12);--pri:#1d4ed8;--on:#fff;--acc:#f59e0b;--r:10px;--rb:10px;--hf:"Inter V";--bf:"Inter V";--hw:750;--hst:100%;--hls:-.03em;--hsc:1;--bs:16px;--pad:96px;--spd:1}
+html{background:var(--bg);color:var(--ink);font-family:var(--bf),Arial,sans-serif;font-size:var(--bs);scroll-behavior:smooth}
+body{background:var(--bg);overflow-x:hidden;transition:background .4s,color .4s}
+.h{font-family:var(--hf),Arial,sans-serif;font-weight:var(--hw);font-stretch:var(--hst);letter-spacing:var(--hls);line-height:1;text-wrap:balance}
+html.upper .h{text-transform:uppercase;letter-spacing:max(var(--hls),0em)}
+.mono{font-family:"JetBrains Mono V",monospace}
+.c{width:min(1200px,100% - 48px);margin:0 auto}
+img,svg{display:block}
+/* header */
+.hd{position:relative;z-index:20;background:var(--bg);transition:padding .3s,box-shadow .3s,background .4s}
+html.sticky .hd{position:sticky;top:0}
+html.sticky .hd.small{box-shadow:0 1px 0 var(--line),0 10px 30px rgba(0,0,0,.06)}
+.hd .c{display:flex;align-items:center;gap:26px;height:76px;transition:height .3s}
+.hd.small .c{height:60px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;white-space:nowrap}
+.logo i{width:32px;height:32px;border-radius:calc(var(--r) * .7);background:var(--pri);color:var(--on);display:grid;place-items:center;font-style:normal;font-size:15px;font-family:var(--hf);font-weight:800}
+.links{display:flex;gap:24px;font-weight:600;font-size:14.5px;margin-left:auto}
+.links a{position:relative;opacity:.85;white-space:nowrap}
+.tools{display:flex;align-items:center;gap:12px}
+.lng{font-size:12.5px;font-weight:700;opacity:.7;border:1px solid var(--line);border-radius:var(--rb);padding:6px 8px;white-space:nowrap}
+.cart{position:relative;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center}
+.cart b{position:absolute;right:-4px;top:-4px;background:var(--acc);color:#111;font-size:10px;border-radius:99px;padding:1px 5px}
+.burger{width:40px;height:40px;border-radius:var(--rb);border:1px solid var(--line);display:none;place-items:center}
+.burger::before{content:"";width:16px;height:10px;border-block:2px solid currentColor;box-shadow:inset 0 4px 0 -2px transparent;background:linear-gradient(currentColor,currentColor) center/100% 2px no-repeat}
+html.nav-center .hd .c{display:grid;grid-template-columns:1fr auto 1fr}
+html.nav-center .links{margin:0;justify-content:flex-start;order:-1}
+html.nav-center .logo{justify-self:center}
+html.nav-center .tools{justify-self:end}
+html.nav-minimal .links{display:none}
+html.nav-minimal .burger{display:grid}
+html.nav-minimal .tools{margin-left:auto}
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 24px;border-radius:var(--rb);font-weight:700;font-size:15px;white-space:nowrap;transition:transform .3s,box-shadow .3s,background .3s}
+.btn.p{background:var(--pri);color:var(--on)}
+.btn.s{border:1.5px solid var(--line);color:var(--ink)}
+.btn.sm{height:42px;padding:0 18px;font-size:14px}
+/* hero */
+.hero{position:relative;overflow:hidden}
+.hero .c{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center;min-height:min(78vh,720px);padding:56px 0 calc(var(--pad) * .8)}
+.ey{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--pri)}
+.ey::before{content:"";width:22px;height:2px;background:currentColor}
+.hero h1{font-size:calc(clamp(40px,5.4vw,76px) * var(--hsc));margin:18px 0 20px}
+.hero p.l{font-size:1.12rem;line-height:1.6;color:var(--mut);max-width:30em}
+.hero .acts{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.hero .proof{display:flex;gap:28px;margin-top:36px;flex-wrap:wrap}
+.hero .proof b{display:block;font-family:var(--hf);font-size:24px;font-weight:var(--hw)}
+.hero .proof small{color:var(--mut);font-size:13px}
+.vis{position:relative;aspect-ratio:1;max-height:560px;width:100%;justify-self:center}
+.panel{position:absolute;inset:4%;border-radius:calc(var(--r) * 2.4);background:var(--sf);overflow:hidden}
+.panel.tint{background:color-mix(in srgb,var(--pri) 14%,var(--sf))}
+.vis .art{position:absolute;inset:12%}
+.vis .art svg{width:100%;height:100%}
+.chip{position:absolute;background:var(--bg);color:var(--ink);border-radius:calc(var(--r) * 1.2);padding:12px 16px;font-weight:700;font-size:14px;box-shadow:0 14px 34px rgba(0,0,0,.14);display:flex;gap:10px;align-items:center;white-space:nowrap}
+.chip i{font-style:normal;width:30px;height:30px;border-radius:calc(var(--r) * .8);background:var(--acc);display:grid;place-items:center;color:#111;font-size:14px}
+.chip small{display:block;font-weight:500;color:var(--mut);font-size:12px}
+.chip.a{left:0;top:16%}.chip.b{right:0;bottom:14%}
+.scene .s1{position:absolute;left:4%;top:10%;width:52%;aspect-ratio:1;border-radius:calc(var(--r) * 2);background:var(--sf)}
+.scene .s2{position:absolute;right:4%;top:30%;width:46%;aspect-ratio:.8;border-radius:calc(var(--r) * 2);background:color-mix(in srgb,var(--acc) 30%,var(--sf))}
+.scene .s3{position:absolute;left:22%;bottom:4%;width:42%;aspect-ratio:1.1;border-radius:calc(var(--r) * 2);background:color-mix(in srgb,var(--pri) 18%,var(--sf))}
+.scene .s1 svg,.scene .s2 svg,.scene .s3 svg{position:absolute;inset:10%;width:80%;height:80%}
+.abs .o{position:absolute;border-radius:50%;filter:blur(0)}
+.abs .o1{width:70%;aspect-ratio:1;left:4%;top:8%;background:var(--pri)}
+.abs .o2{width:46%;aspect-ratio:1;right:4%;bottom:6%;background:var(--acc);mix-blend-mode:multiply}
+html.dark .abs .o2{mix-blend-mode:screen}
+.abs .o3{width:26%;aspect-ratio:1;right:24%;top:10%;border:3px solid var(--ink);opacity:.5}
+.abs .grid{position:absolute;inset:0;background-image:radial-gradient(var(--ink) 1.2px,transparent 1.3px);background-size:22px 22px;opacity:.18}
+/* hero layouts */
+html.hero-center .hero .c{grid-template-columns:1fr;text-align:center;justify-items:center;min-height:auto;padding-top:72px}
+html.hero-center .hero p.l{margin:0 auto}
+html.hero-center .hero .acts,html.hero-center .hero .proof{justify-content:center}
+html.hero-center .hero h1{max-width:14em}
+html.hero-center .vis{aspect-ratio:2.2;max-height:none;max-width:1000px}
+html.hero-center .vis .art{inset:8% 30%}
+html.hero-full .hero{background:var(--pri);color:var(--on)}
+html.hero-full .hero .c{grid-template-columns:1fr;min-height:min(86vh,760px);align-content:end}
+html.hero-full .hero .vis{position:absolute;right:-4%;top:0;bottom:0;width:58%;max-height:none;aspect-ratio:auto;opacity:.95}
+html.hero-full .hero .vis .panel{inset:0;border-radius:0;background:color-mix(in srgb,var(--on) 10%,transparent)}
+html.hero-full .hero .txt{max-width:640px;position:relative;z-index:2}
+html.hero-full .hero p.l,html.hero-full .hero .proof small{color:color-mix(in srgb,var(--on) 78%,transparent)}
+html.hero-full .ey{color:var(--on)!important}
+html.hero-full .hero .btn.p{background:var(--on);color:var(--pri)}
+html.hero-full .hero .btn.s{border-color:color-mix(in srgb,var(--on) 45%,transparent);color:var(--on)}
+html.hero-full .hero .chip{display:none}
+html.hero-editorial .hero .c{grid-template-columns:1.5fr 1fr;align-items:end;gap:36px}
+html.hero-editorial .hero h1{font-size:calc(clamp(48px,7.4vw,112px) * var(--hsc));line-height:.92}
+html.hero-editorial .hero .vis{aspect-ratio:.78}
+html.hero-editorial .hero .vis .panel{inset:0;border-radius:var(--r)}
+html.hero-editorial .hero .txt{border-top:2px solid var(--ink);padding-top:20px}
+html.vis-type .hero .vis{display:none}
+html.vis-type .hero .c{grid-template-columns:1fr}
+html.vis-type .hero h1{font-size:calc(clamp(52px,8.4vw,128px) * var(--hsc));max-width:12em}
+/* decoration */
+.deco{position:absolute;inset:0;pointer-events:none}
+html.deco-dots .deco{background-image:radial-gradient(color-mix(in srgb,var(--ink) 22%,transparent) 1.3px,transparent 1.4px);background-size:24px 24px;mask-image:linear-gradient(180deg,#000,transparent 85%);-webkit-mask-image:linear-gradient(180deg,#000,transparent 85%)}
+html.deco-lines .deco{background-image:linear-gradient(color-mix(in srgb,var(--ink) 8%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--ink) 8%,transparent) 1px,transparent 1px);background-size:64px 64px}
+html.deco-blobs .deco::before,html.deco-blobs .deco::after{content:"";position:absolute;border-radius:50%;filter:blur(70px);opacity:.35}
+html.deco-blobs .deco::before{width:420px;height:420px;background:var(--pri);left:-120px;top:-80px}
+html.deco-blobs .deco::after{width:360px;height:360px;background:var(--acc);right:-80px;bottom:-60px}
+/* sections */
+.sec{padding:var(--pad) 0}
+.sec.alt{background:var(--sf)}
+.sh{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:36px;flex-wrap:wrap}
+.sh h2{font-size:calc(clamp(32px,3.6vw,52px) * var(--hsc));max-width:15em}
+.sh p{color:var(--mut);max-width:28em;line-height:1.6}
+.marq{border-block:1px solid var(--line);overflow:hidden;white-space:nowrap;padding:20px 0;font-family:var(--hf);font-weight:var(--hw);font-size:20px;color:var(--mut)}
+.marq div{display:inline-flex;gap:56px;padding-right:56px}
+html.marquee .marq div{animation:mq calc(28s / var(--spd)) linear infinite}
+@keyframes mq{to{transform:translateX(-100%)}}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.chips span{border:1px solid var(--line);border-radius:var(--rb);padding:8px 14px;font-size:13.5px;font-weight:600}
+.chips span.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(var(--cols,3),minmax(0,1fr));gap:18px}
+.card{border-radius:var(--r);overflow:hidden;transition:transform .35s,box-shadow .35s,border-color .35s;position:relative}
+html.cards-flat .card{background:var(--sf)}
+html.cards-flat .sec.alt .card{background:var(--bg)}
+html.cards-outline .card{border:1px solid var(--line)}
+html.cards-shadow .card{background:var(--bg);box-shadow:0 1px 2px rgba(0,0,0,.06),0 14px 34px rgba(0,0,0,.08)}
+html.cards-glass .card{background:color-mix(in srgb,var(--sf) 55%,transparent);border:1px solid color-mix(in srgb,var(--ink) 12%,transparent);backdrop-filter:blur(14px)}
+.card .pic{aspect-ratio:1.1;display:grid;place-items:center;background:color-mix(in srgb,var(--pri) 8%,var(--sf));margin:10px;border-radius:calc(var(--r) * .8)}
+html.cards-outline .card .pic,html.cards-glass .card .pic{background:color-mix(in srgb,var(--pri) 8%,transparent)}
+.card .pic svg{width:72%;height:72%}
+.card .meta{padding:6px 18px 20px}
+.card .meta b{display:block;font-size:16.5px;margin-bottom:4px}
+.card .meta small{color:var(--mut);font-size:13.5px}
+.card .row{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+.card .price{font-weight:800;font-size:17px}
+.card .add{font-size:13px;font-weight:700;color:var(--pri);border:1.5px solid currentColor;border-radius:var(--rb);padding:7px 12px}
+.tag{position:absolute;left:20px;top:20px;background:var(--acc);color:#111;font-size:11.5px;font-weight:800;border-radius:var(--rb);padding:4px 9px;letter-spacing:.04em}
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.why div{padding:28px;border-radius:var(--r)}
+html.cards-flat .why div{background:var(--bg)}
+html.cards-outline .why div,html.cards-glass .why div{border:1px solid var(--line)}
+html.cards-shadow .why div{background:var(--bg);box-shadow:0 14px 34px rgba(0,0,0,.07)}
+.why i{display:grid;place-items:center;width:46px;height:46px;border-radius:calc(var(--r) * .8);background:var(--pri);color:var(--on);font-style:normal;font-size:20px;margin-bottom:22px}
+.why h3{font-size:22px;margin-bottom:8px}
+.why p{color:var(--mut);line-height:1.6;font-size:15px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;text-align:center}
+.stats b{display:block;font-family:var(--hf);font-weight:var(--hw);font-size:calc(46px * var(--hsc));color:var(--pri)}
+.stats small{color:var(--mut)}
+.revs{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.revs div{border-radius:var(--r);padding:26px;border:1px solid var(--line)}
+.revs .st{color:var(--acc);letter-spacing:2px}
+.revs p{line-height:1.6;margin:12px 0 18px}
+.revs small{color:var(--mut)}
+.news{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.news .im{aspect-ratio:1.6;border-radius:var(--r);background:linear-gradient(135deg,color-mix(in srgb,var(--pri) 40%,var(--sf)),color-mix(in srgb,var(--acc) 40%,var(--sf)));margin-bottom:14px}
+.news small{color:var(--mut);font-size:13px}
+.news b{display:block;font-size:18px;margin-top:6px;line-height:1.3}
+.form{display:grid;grid-template-columns:1fr 1.1fr;gap:40px;align-items:start}
+.form .fs{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:28px;border-radius:var(--r);background:var(--bg);border:1px solid var(--line)}
+.form .fs label{display:grid;gap:6px;font-size:13px;font-weight:600}
+.form .fs span.in{height:46px;border-radius:calc(var(--r) * .6);border:1px solid var(--line);background:var(--sf)}
+.form .fs .w{grid-column:1/-1}
+.form .fs span.ta{height:96px}
+.form ul{display:grid;gap:12px;margin-top:22px}
+.form li{display:flex;gap:10px;align-items:center;color:var(--mut)}
+.form li::before{content:"✓";color:var(--pri);font-weight:800}
+.cfg{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center;border-radius:calc(var(--r) * 1.6);background:var(--sf);padding:36px}
+.cfg .sw{display:flex;gap:8px;margin:18px 0}
+.cfg .sw i{width:30px;height:30px;border-radius:50%;border:3px solid var(--bg);box-shadow:0 0 0 1px var(--line)}
+.cfg .pic{aspect-ratio:1.2;display:grid;place-items:center}
+.cfg .pic svg{width:70%;height:90%}
+.nl{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;padding:36px;border-radius:calc(var(--r) * 1.6);background:var(--pri);color:var(--on)}
+.nl h3{font-size:30px}
+.nl .in{display:flex;gap:8px;background:var(--bg);border-radius:var(--rb);padding:6px;min-width:min(380px,100%)}
+.nl .in span{flex:1;color:var(--mut);padding:10px 12px;font-size:14px}
+.cta{text-align:center;padding:calc(var(--pad) * 1.1) 0}
+.cta h2{font-size:calc(clamp(36px,4.6vw,68px) * var(--hsc));max-width:13em;margin:0 auto 26px}
+.ft{background:var(--ink);color:var(--bg);padding:56px 0 30px;font-size:14px}
+.ft .c{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:30px}
+.ft b{display:block;margin-bottom:12px}
+.ft a{display:block;opacity:.7;margin:6px 0}
+.ft .logo i{background:var(--acc);color:#111}
+.ft .bot{grid-column:1/-1;border-top:1px solid color-mix(in srgb,var(--bg) 18%,transparent);padding-top:20px;margin-top:20px;display:flex;justify-content:space-between;opacity:.6;font-size:13px;flex-wrap:wrap;gap:10px}
+.wa{position:fixed;right:20px;bottom:20px;z-index:30;width:56px;height:56px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 10px 26px rgba(0,0,0,.2)}
+.wa svg{width:28px}
+.map{aspect-ratio:2.6;border-radius:var(--r);background:var(--sf);position:relative;overflow:hidden;background-image:linear-gradient(color-mix(in srgb,var(--ink) 7%,transparent) 2px,transparent 2px),linear-gradient(90deg,color-mix(in srgb,var(--ink) 7%,transparent) 2px,transparent 2px);background-size:46px 46px}
+.map i{position:absolute;width:22px;height:22px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:var(--pri);border:4px solid var(--bg);box-shadow:0 6px 14px rgba(0,0,0,.2)}
+/* hover effects */
+html.hv-lift .card:hover,html.hv-lift .why div:hover{transform:translateY(-6px)}
+html.hv-lift .btn:hover{transform:translateY(-2px)}
+html.hv-glow .card:hover{box-shadow:0 0 0 2px var(--pri),0 18px 40px color-mix(in srgb,var(--pri) 30%,transparent)}
+html.hv-glow .btn.p:hover{box-shadow:0 10px 30px color-mix(in srgb,var(--pri) 55%,transparent)}
+html.hv-underline .links a::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;background:var(--pri);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+html.hv-underline .links a:hover::after{transform:none}
+html.hv-underline .card:hover .meta b{text-decoration:underline;text-underline-offset:4px}
+/* entrance motion */
+[data-a]{transition:opacity calc(.8s / var(--spd)) cubic-bezier(.16,1,.3,1),transform calc(.9s / var(--spd)) cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--i,0) * 80ms / var(--spd))}
+html.en-fade [data-a]:not(.in){opacity:0}
+html.en-rise [data-a]:not(.in){opacity:0;transform:translateY(40px)}
+html.en-zoom [data-a]:not(.in){opacity:0;transform:scale(.92)}
+html.en-slide [data-a]:not(.in){opacity:0;transform:translateX(-50px)}
+html.parallax .hero .vis{will-change:transform}
+/* responsive (the preview really changes width for tablet and phone) */
+@media (max-width:980px){.hero .c,html.hero-editorial .hero .c{grid-template-columns:1fr}.vis{max-width:520px}.why,.revs,.news{grid-template-columns:1fr 1fr}.form,.cfg{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.grid{--cols:2!important}.links{display:none}.burger{display:grid}.tools{margin-left:auto}html.nav-center .hd .c{grid-template-columns:auto 1fr}html.nav-center .logo{justify-self:start}html.hero-full .hero .vis{width:100%;opacity:.25}.ft .c{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.c{width:calc(100% - 32px)}.why,.revs,.news,.form .fs{grid-template-columns:1fr}.hero .c{padding-top:28px;gap:28px}.hero .acts .btn{flex:1;justify-content:center}.lng{display:none}.nl,.cfg{padding:24px}.chip{display:none}.sh h2{font-size:calc(30px * var(--hsc))}.grid{gap:10px}.card .meta{padding:4px 12px 14px}.card .row{flex-direction:column;align-items:flex-start;gap:8px}.hd .btn{display:none}}
+</style>
+</head>
+<body>
+<div id="site"></div>
+<script>
+(function () {
+  "use strict";
+  var L = "en";
+  var T = function (en, es) { return L === "es" ? es : en; };
+  var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+  function shade(hex, amt) { var h = String(hex).replace("#", ""); if (h.length === 3) h = h.replace(/./g, "$&$&"); var n = parseInt(h, 16), r = n >> 16, g = (n >> 8) & 255, b = n & 255, f = function (c) { return Math.max(0, Math.min(255, Math.round(amt > 0 ? c + (255 - c) * amt : c * (1 + amt)))); }; return "#" + ((1 << 24) + (f(r) << 16) + (f(g) << 8) + f(b)).toString(16).slice(1); }
+
+  /* ---------- sample content for each industry ---------- */
+  var IND = {
+    mfg: { name: "Northfield Machining", h: ["Precision parts, delivered on time.", "Piezas de precisión, entregadas a tiempo."], p: ["CNC machining, sheet metal and assembly for OEMs, from the first prototype to 10,000 pieces.", "Mecanizado CNC, chapa metálica y ensamblaje para fabricantes, desde el primer prototipo hasta 10.000 piezas."],
+      items: [["Machined housings", "Carcasas mecanizadas", 24], ["Precision shafts", "Ejes de precisión", 18], ["Sheet metal brackets", "Soportes de chapa", 9], ["Custom gears", "Engranajes a medida", 32]],
+      stats: [["ISO 9001", "certified", "certificado"], ["±0.005", "mm tolerance", "mm de tolerancia"], ["48 h", "quote turnaround", "para cotizar"], ["38", "countries served", "países atendidos"]], ey: ["CNC machining · OEM", "Mecanizado CNC · OEM"] },
+    apparel: { name: "Loom & Thread", h: ["Your label, made in our factory.", "Tu marca, fabricada en nuestra planta."], p: ["Private-label apparel from 300 pieces: cut and sew, printing, embroidery and packaging.", "Ropa de marca propia desde 300 piezas: corte y confección, estampado, bordado y empaque."],
+      items: [["Heavyweight tee", "Camiseta gruesa", 14], ["Fleece hoodie", "Sudadera de felpa", 32], ["Piqué polo", "Polo piqué", 19], ["Bomber jacket", "Chaqueta bomber", 58]],
+      stats: [["300", "pcs minimum", "piezas mínimo"], ["7 days", "to samples", "para muestras"], ["BSCI", "audited", "auditada"], ["2M", "garments a year", "prendas al año"]], ey: ["Garment OEM · ODM", "Confección OEM · ODM"] },
+    trading: { name: "Harbor Trade Co.", h: ["Housewares by the carton or the container.", "Artículos para el hogar por caja o por contenedor."], p: ["3,800 products from audited factories, consolidated into one shipment to your warehouse.", "3.800 productos de fábricas auditadas, consolidados en un solo envío a tu almacén."],
+      items: [["Glass storage jars", "Frascos de vidrio", 4.1], ["Non-stick pan", "Sartén antiadherente", 7.9], ["Laundry basket", "Cesto de ropa", 3.2], ["Insulated bottle", "Botella térmica", 3.85]],
+      stats: [["3,800", "SKUs", "productos"], ["40+", "factories", "fábricas"], ["1 CBM", "minimum", "mínimo"], ["60", "countries", "países"]], ey: ["Wholesale · import & export", "Mayoreo · importación y exportación"] },
+    outdoor: { name: "Summit Gear", h: ["Built for the long way up.", "Hecho para el camino largo."], p: ["Tents, packs and camp gear tested on real trails, with a lifetime repair promise.", "Carpas, mochilas y equipo de campamento probados en senderos reales, con reparación de por vida."],
+      items: [["Ridge 2 tent", "Carpa Ridge 2", 469], ["Trail pack 28 L", "Mochila 28 L", 189], ["Camp lantern", "Linterna de campamento", 49], ["Steel bottle", "Botella de acero", 34]],
+      stats: [["1.3 kg", "lightest tent", "carpa más ligera"], ["Lifetime", "repairs", "reparaciones"], ["4.9★", "12k reviews", "12 mil reseñas"], ["1%", "for the planet", "para el planeta"]], ey: ["Outdoor equipment", "Equipo para exteriores"] },
+    pet: { name: "Happy Tails", h: ["Good food for good dogs.", "Buena comida para buenos perros."], p: ["Vet-approved food, toys and beds, delivered on your schedule.", "Comida aprobada por veterinarios, juguetes y camas, entregados cuando los necesitas."],
+      items: [["Salmon recipe 6 kg", "Receta de salmón 6 kg", 46], ["Bolster bed", "Cama con borde", 79], ["Nylon collar", "Collar de nailon", 18], ["Fetch ball", "Pelota", 9]],
+      stats: [["18k", "happy pets", "mascotas felices"], ["10%", "off autoship", "en entregas automáticas"], ["Vet", "approved", "aprobado"], ["60-day", "guarantee", "garantía"]], ey: ["Pet supplies", "Productos para mascotas"] },
+    beauty: { name: "Lumen Skin", h: ["Skincare that keeps it simple.", "Cuidado de la piel, sin complicaciones."], p: ["Four clean essentials, made in small batches and refillable for life.", "Cuatro esenciales limpios, hechos en lotes pequeños y recargables de por vida."],
+      items: [["Vitamin C serum", "Sérum de vitamina C", 58], ["Barrier cream", "Crema reparadora", 48], ["Gel cleanser", "Limpiador en gel", 32], ["Mineral SPF 40", "Protector mineral FPS 40", 38]],
+      stats: [["4", "essentials", "esenciales"], ["100%", "refillable", "recargable"], ["Vegan", "& cruelty-free", "y libre de crueldad"], ["4.8★", "9k reviews", "9 mil reseñas"]], ey: ["Clean skincare", "Cuidado limpio de la piel"] },
+    services: { name: "Clearpath Advisory", h: ["Clear advice for growing companies.", "Asesoría clara para empresas en crecimiento."], p: ["Strategy, compliance and finance support for manufacturers and exporters.", "Estrategia, cumplimiento y finanzas para fabricantes y exportadores."],
+      items: [["Market entry", "Entrada a mercados", 0], ["Export compliance", "Cumplimiento de exportación", 0], ["Finance & tax", "Finanzas e impuestos", 0], ["Operations audit", "Auditoría de operaciones", 0]],
+      stats: [["15 yrs", "experience", "de experiencia"], ["320", "clients", "clientes"], ["12", "countries", "países"], ["98%", "would recommend", "nos recomendaría"]], ey: ["Business advisory", "Asesoría empresarial"] }
+  };
+  var PAGE_LBL = { home: ["Home", "Inicio"], about: ["About", "Nosotros"], products: ["Products", "Productos"], cases: ["Case studies", "Casos"], news: ["News", "Noticias"], faq: ["FAQ", "Preguntas"], contact: ["Contact", "Contacto"], careers: ["Careers", "Empleo"], downloads: ["Downloads", "Descargas"] };
+
+  /* ---------- drawings ---------- */
+  function svg(inner, vb) { return '<svg viewBox="' + (vb || "0 0 200 200") + '" xmlns="http://www.w3.org/2000/svg">' + inner + "</svg>"; }
+  function art(ind, i, S) {
+    var p = S.pri, a = S.acc, m = "#9aa4b1", md = "#5f6a78";
+    var cols = [p, a, shade(p, -0.35), shade(a, 0.35)];
+    if (ind === "apparel" && window.Garment) return Garment.draw(["tee", "hoodie", "polo", "bomber"][i % 4], cols[i % 4], i === 0 ? { logo: { text: (S.name || "").split(" ")[0].toUpperCase().slice(0, 8), place: "Center front", color: "#ffffff" } } : {});
+    if (ind === "pet" && window.Pets) return Pets.draw(["foodbag", "bed", "collar", "ball"][i % 4], { color: cols[i % 4], text: (S.name || "").split(" ")[0].toUpperCase().slice(0, 9), brand: (S.name || "").split(" ")[0], sub: "SALMON", weight: "6 KG" });
+    if (ind === "mfg") return svg([
+      '<path d="M40 80 L110 45 L170 75 L170 140 L100 175 L40 145Z" fill="' + m + '"/><path d="M40 80 L100 110 L170 75 L110 45Z" fill="#c7cfd8"/><path d="M100 110 L100 175 L170 140 L170 75Z" fill="' + md + '"/><ellipse cx="104" cy="78" rx="22" ry="11" fill="' + md + '"/><ellipse cx="104" cy="78" rx="12" ry="6" fill="#2b323b"/><circle cx="135" cy="125" r="9" fill="' + p + '"/>',
+      '<rect x="20" y="88" width="160" height="26" rx="13" fill="' + m + '"/><rect x="20" y="88" width="160" height="10" rx="5" fill="#c7cfd8"/><rect x="60" y="82" width="18" height="38" rx="4" fill="' + p + '"/><rect x="128" y="84" width="12" height="34" rx="3" fill="' + md + '"/>',
+      '<path d="M40 50 L80 50 L80 130 L160 130 L160 160 L40 160Z" fill="' + m + '"/><path d="M40 50 L80 50 L80 60 L40 60Z" fill="#c7cfd8"/><circle cx="60" cy="90" r="8" fill="#2b323b"/><circle cx="120" cy="145" r="8" fill="#2b323b"/><rect x="40" y="156" width="120" height="4" fill="' + p + '"/>',
+      '<g transform="translate(100 100)">' + Array.from({ length: 12 }, function (_, k) { return '<rect x="-9" y="-78" width="18" height="24" rx="3" fill="' + m + '" transform="rotate(' + k * 30 + ')"/>'; }).join("") + '<circle r="60" fill="' + m + '"/><circle r="42" fill="#c7cfd8"/><circle r="16" fill="' + p + '"/><circle r="7" fill="#2b323b"/></g>'][i % 4]);
+    if (ind === "trading") return svg([
+      '<rect x="68" y="34" width="64" height="20" rx="6" fill="' + shade(p, -0.3) + '"/><rect x="58" y="52" width="84" height="120" rx="20" fill="' + p + '" opacity=".85"/><rect x="74" y="80" width="52" height="30" rx="4" fill="#fff" opacity=".85"/>',
+      '<circle cx="86" cy="110" r="58" fill="#2c3540"/><circle cx="86" cy="110" r="46" fill="#3c4653"/><rect x="138" y="102" width="56" height="16" rx="8" fill="' + a + '"/>',
+      '<path d="M36 64 H164 L150 170 H50 Z" fill="' + a + '"/><path d="M42 96H158M46 128H154" stroke="#fff" stroke-width="5" opacity=".5"/><rect x="30" y="56" width="140" height="14" rx="7" fill="' + shade(a, -0.3) + '"/>',
+      '<rect x="80" y="20" width="40" height="22" rx="5" fill="#2c3540"/><rect x="68" y="40" width="64" height="140" rx="22" fill="' + p + '"/><rect x="68" y="80" width="64" height="34" fill="' + a + '"/>'][i % 4]);
+    if (ind === "outdoor") return svg([
+      '<path d="M20 160 L100 40 L180 160Z" fill="' + p + '"/><path d="M100 40 L180 160 L150 160Z" fill="' + shade(p, -0.3) + '"/><path d="M78 160 L100 96 L122 160Z" fill="' + shade(p, -0.5) + '"/><path d="M100 40 L100 30" stroke="#333" stroke-width="4"/><ellipse cx="100" cy="164" rx="86" ry="6" fill="rgba(0,0,0,.15)"/>',
+      '<path d="M60 60 Q60 34 90 32 H110 Q140 34 140 60 L146 170 Q146 182 132 182 H68 Q54 182 54 170Z" fill="' + p + '"/><rect x="74" y="110" width="52" height="56" rx="8" fill="' + shade(p, -0.2) + '"/><rect x="70" y="60" width="8" height="110" fill="' + a + '"/><rect x="122" y="60" width="8" height="110" fill="' + a + '"/><path d="M86 34 Q100 16 114 34" stroke="' + a + '" stroke-width="7" fill="none"/>',
+      '<rect x="78" y="40" width="44" height="14" rx="4" fill="#333"/><path d="M84 30 Q100 14 116 30" stroke="#333" stroke-width="5" fill="none"/><rect x="70" y="54" width="60" height="100" rx="10" fill="' + a + '" opacity=".35"/><rect x="70" y="54" width="60" height="100" rx="10" fill="none" stroke="#333" stroke-width="5"/><ellipse cx="100" cy="100" rx="14" ry="24" fill="' + a + '"/><rect x="66" y="152" width="68" height="16" rx="5" fill="#333"/>',
+      '<rect x="84" y="20" width="32" height="20" rx="5" fill="#333"/><rect x="72" y="40" width="56" height="140" rx="16" fill="' + shade(a, -0.1) + '"/><rect x="72" y="70" width="56" height="10" fill="' + p + '"/>'][i % 4]);
+    if (ind === "beauty") return svg([
+      '<ellipse cx="100" cy="40" rx="14" ry="20" fill="#3b2a22"/><rect x="82" y="58" width="36" height="20" fill="' + a + '"/><rect x="64" y="78" width="72" height="104" rx="18" fill="' + p + '" opacity=".9"/><rect x="74" y="112" width="52" height="36" fill="#fff" opacity=".85"/>',
+      '<rect x="44" y="86" width="112" height="22" rx="5" fill="' + a + '"/><rect x="38" y="106" width="124" height="74" rx="16" fill="' + shade(p, 0.75) + '" stroke="' + p + '" stroke-opacity=".3"/><rect x="70" y="130" width="60" height="22" fill="#fff" opacity=".9"/>',
+      '<rect x="94" y="14" width="12" height="30" fill="#3b2a22"/><rect x="82" y="12" width="36" height="8" rx="3" fill="#3b2a22"/><rect x="66" y="44" width="68" height="138" rx="12" fill="' + shade(a, 0.6) + '" stroke="' + a + '" stroke-opacity=".4"/><rect x="76" y="90" width="48" height="40" fill="#fff" opacity=".8"/>',
+      '<path d="M66 24 H134 L124 160 H76 Z" fill="' + shade(p, 0.55) + '"/><rect x="80" y="160" width="40" height="24" rx="4" fill="' + p + '"/><text x="100" y="90" text-anchor="middle" font-family="Inter V,Arial" font-weight="800" font-size="13" fill="' + shade(p, -0.4) + '">SPF 40</text>'][i % 4]);
+    return svg([
+      '<rect x="40" y="110" width="26" height="60" rx="5" fill="' + p + '"/><rect x="86" y="80" width="26" height="90" rx="5" fill="' + a + '"/><rect x="132" y="44" width="26" height="126" rx="5" fill="' + shade(p, -0.3) + '"/><path d="M40 70 L100 50 L150 24" stroke="' + p + '" stroke-width="5" fill="none"/>',
+      '<circle cx="100" cy="100" r="70" fill="none" stroke="' + p + '" stroke-width="10"/><path d="M100 100 L130 60 L112 108Z" fill="' + a + '"/><path d="M100 100 L70 140 L88 92Z" fill="' + shade(p, -0.3) + '"/>',
+      '<path d="M100 26 L162 50 V100 Q162 150 100 176 Q38 150 38 100 V50Z" fill="' + p + '"/><path d="M72 102 L94 124 L132 82" stroke="#fff" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
+      '<rect x="50" y="30" width="100" height="140" rx="10" fill="' + shade(a, 0.5) + '"/><path d="M68 64H132M68 88H132M68 112H112" stroke="' + shade(p, -0.2) + '" stroke-width="8" stroke-linecap="round"/><circle cx="140" cy="150" r="26" fill="' + p + '"/><path d="M128 150 L137 159 L153 141" stroke="#fff" stroke-width="6" fill="none"/>'][i % 4]);
+  }
+
+  /* ---------- page ---------- */
+  function price(S, n) {
+    if (S.industry === "services") return T("Book a call", "Agenda una llamada");
+    if (S.goal === "shop") return "$" + (n % 1 ? n.toFixed(2) : n);
+    return S.industry === "trading" ? "FOB $" + n.toFixed(2) : T("MOQ ", "MOQ ") + (S.industry === "mfg" ? "50" : "300") + T(" pcs", " pzas");
+  }
+  function render(S) {
+    L = S.lang === "es" ? "es" : "en";
+    var I = IND[S.industry] || IND.mfg, name = esc(S.name || I.name), root = document.documentElement;
+    var shop = S.goal === "shop" && S.industry !== "services", F = S.feats || {}, P = S.pages || {};
+    var cta1 = S.industry === "services" ? T("Book a consultation", "Agenda una consulta") : shop ? T("Shop now", "Comprar ahora") : S.goal === "brand" ? T("Discover the range", "Descubre la colección") : T("Request a quote", "Solicitar cotización");
+    var cta2 = S.industry === "services" ? T("Our services", "Nuestros servicios") : T("View products", "Ver productos");
+    var tag = esc(S.tagline || "");
+    var nav = ["about", "products", "cases", "news", "faq", "downloads", "careers", "contact"].filter(function (k) { return P[k]; }).slice(0, 5).map(function (k) { return "<a>" + (k === "products" && S.industry === "services" ? T("Services", "Servicios") : T(PAGE_LBL[k][0], PAGE_LBL[k][1])) + "</a>"; }).join("");
+    var langs = (S.langs || ["en"]);
+    var h = "";
+    h += '<header class="hd"><div class="c"><a class="logo"><i>' + esc((S.name || I.name).trim().charAt(0).toUpperCase()) + "</i>" + name + '</a><nav class="links">' + nav + '</nav><div class="tools">' + (langs.length > 1 ? '<span class="lng">' + langs.slice(0, 3).map(function (x) { return x.toUpperCase(); }).join(" · ") + "</span>" : "") + (shop ? '<span class="cart">🛒<b>2</b></span>' : "") + '<a class="btn p sm">' + (shop ? T("Shop", "Tienda") : S.industry === "services" ? T("Book a call", "Agendar") : T("Get a quote", "Cotizar")) + '</a><span class="burger"></span></div></div></header>';
+    var vis = "";
+    if (S.visual === "product") vis = '<div class="panel tint"></div><div class="art">' + art(S.industry, 0, S) + '</div><div class="chip a"><i>★</i><div>' + I.stats[0][0] + "<small>" + T(I.stats[0][1], I.stats[0][2]) + '</small></div></div><div class="chip b"><i>✓</i><div>' + I.stats[2][0] + "<small>" + T(I.stats[2][1], I.stats[2][2]) + "</small></div></div>";
+    else if (S.visual === "scene") vis = '<div class="scene"><div class="s1">' + art(S.industry, 0, S) + '</div><div class="s2">' + art(S.industry, 1, S) + '</div><div class="s3">' + art(S.industry, 2, S) + '</div></div><div class="chip b"><i>★</i><div>' + I.stats[3][0] + "<small>" + T(I.stats[3][1], I.stats[3][2]) + "</small></div></div>";
+    else if (S.visual === "abstract") vis = '<div class="abs"><div class="grid"></div><div class="o o1"></div><div class="o o2"></div><div class="o o3"></div></div>';
+    h += '<section class="hero"><div class="deco"></div><div class="c"><div class="txt"><span class="ey" data-a>' + (tag || T(I.ey[0], I.ey[1])) + '</span><h1 class="h" data-a style="--i:1">' + T(I.h[0], I.h[1]) + '</h1><p class="l" data-a style="--i:2">' + T(I.p[0], I.p[1]) + '</p><div class="acts" data-a style="--i:3"><a class="btn p">' + cta1 + ' →</a><a class="btn s">' + cta2 + '</a></div><div class="proof" data-a style="--i:4">' + I.stats.slice(0, 3).map(function (s) { return "<div><b>" + s[0] + "</b><small>" + T(s[1], s[2]) + "</small></div>"; }).join("") + '</div></div><div class="vis" data-a style="--i:2">' + vis + "</div></div></section>";
+    if (S.scroll && S.scroll.marquee) { var words = I.items.map(function (x) { return T(x[0], x[1]); }).concat(I.stats.map(function (s) { return s[0] + " " + T(s[1], s[2]); })); h += '<div class="marq"><div>' + words.map(function (w) { return "<span>✦ " + w + "</span>"; }).join("") + "</div><div>" + words.map(function (w) { return "<span>✦ " + w + "</span>"; }).join("") + "</div></div>"; }
+    // products
+    var cols = Math.max(2, Math.min(4, +S.cols || 3)), items = I.items.slice(0, cols === 2 ? 2 : cols === 3 ? 3 : 4);
+    if (cols === 3 && !F.filters) items = I.items.slice(0, 3);
+    h += '<section class="sec"><div class="c"><div class="sh" data-a><h2 class="h">' + (S.industry === "services" ? T("What we do", "Lo que hacemos") : shop ? T("Best sellers", "Más vendidos") : T("Products & capabilities", "Productos y capacidades")) + "</h2><p>" + (shop ? T("Free shipping on orders over $60. Easy 30-day returns.", "Envío gratis en pedidos de más de $60. Devoluciones fáciles en 30 días.") : T("Every product can be customized to your specifications and brand.", "Cada producto puede adaptarse a tus especificaciones y a tu marca.")) + "</p></div>";
+    if (F.filters) h += '<div class="chips" data-a><span class="on">' + T("All", "Todo") + "</span>" + I.items.map(function (x) { return "<span>" + T(x[0], x[1]).split(" ").slice(-1)[0] + "</span>"; }).join("") + "<span>" + T("Price", "Precio") + " ▾</span></div>";
+    h += '<div class="grid" style="--cols:' + cols + '">' + items.map(function (x, i) { return '<article class="card" data-a style="--i:' + i + '">' + (i === 0 ? '<span class="tag">' + (shop ? T("NEW", "NUEVO") : T("POPULAR", "POPULAR")) + "</span>" : "") + '<div class="pic">' + art(S.industry, i, S) + '</div><div class="meta"><b>' + T(x[0], x[1]) + "</b><small>" + (S.industry === "services" ? T("Fixed-fee packages", "Paquetes con tarifa fija") : shop ? "★★★★★ (" + (120 + i * 37) + ")" : T("Custom sizes and finishes", "Medidas y acabados a medida")) + '</small><div class="row"><span class="price">' + price(S, x[2]) + '</span><span class="add">' + (shop ? T("Add to cart", "Añadir") : F.rfq ? T("Add to RFQ", "Añadir a RFQ") : T("Details", "Detalles")) + "</span></div></div></article>"; }).join("") + "</div></div></section>";
+    // why
+    var why = S.goal === "shop" ? [["🚚", "Free shipping", "Envío gratis", "On every order over $60, with tracking.", "En todos los pedidos de más de $60, con seguimiento."], ["↺", "Easy returns", "Devoluciones fáciles", "30 days to change your mind.", "30 días para cambiar de opinión."], ["🔒", "Secure checkout", "Pago seguro", "Cards, PayPal and Apple Pay.", "Tarjetas, PayPal y Apple Pay."]]
+      : S.goal === "brand" ? [["✦", "Our story", "Nuestra historia", "How a small workshop became a brand people love.", "Cómo un pequeño taller se convirtió en una marca querida."], ["◎", "Made with care", "Hecho con cuidado", "Materials we can trace and people we know by name.", "Materiales que podemos rastrear y personas que conocemos."], ["♥", "Community", "Comunidad", "Events, stories and the people who use what we make.", "Eventos, historias y las personas que usan lo que hacemos."]]
+      : [["⚡", "Fast quotes", "Cotizaciones rápidas", "Send a drawing or a spec and get a price within 48 hours.", "Envía un plano o una especificación y recibe precio en 48 horas."], ["🏭", "Factory direct", "Directo de fábrica", "No middlemen, so you get better prices and clear lead times.", "Sin intermediarios: mejores precios y plazos claros."], ["✓", "Quality checked", "Calidad verificada", "Every order is inspected before it ships, with a report.", "Cada pedido se inspecciona antes del envío, con informe."]];
+    h += '<section class="sec alt"><div class="c"><div class="sh" data-a><h2 class="h">' + T("Why " + name, "Por qué " + name) + '</h2></div><div class="why">' + why.map(function (w, i) { return '<div data-a style="--i:' + i + '"><i>' + w[0] + '</i><h3 class="h">' + T(w[1], w[2]) + "</h3><p>" + T(w[3], w[4]) + "</p></div>"; }).join("") + "</div></div></section>";
+    h += '<section class="sec"><div class="c stats">' + I.stats.map(function (s, i) { return '<div data-a style="--i:' + i + '"><b data-count="' + esc(s[0]) + '">' + s[0] + "</b><small>" + T(s[1], s[2]) + "</small></div>"; }).join("") + "</div></section>";
+    if (F.config) h += '<section class="sec" style="padding-top:0"><div class="c"><div class="cfg" data-a><div><span class="ey">' + T("Configurator", "Configurador") + '</span><h2 class="h" style="font-size:calc(38px * var(--hsc));margin-top:12px">' + T("Make it yours", "Hazlo tuyo") + '</h2><div class="sw"><i style="background:' + S.pri + '"></i><i style="background:' + S.acc + '"></i><i style="background:#222"></i><i style="background:#ddd"></i></div><a class="btn p">' + T("Start customizing", "Empezar a personalizar") + '</a></div><div class="pic">' + art(S.industry, 1, S) + "</div></div></div></section>";
+    if (F.reviews) h += '<section class="sec alt"><div class="c"><div class="sh" data-a><h2 class="h">' + T("What customers say", "Lo que dicen los clientes") + '</h2></div><div class="revs">' + [["Fast, clear and exactly to spec. Our go-to supplier.", "Rápidos, claros y exactos. Nuestro proveedor de confianza.", "M. Chen, Procurement"], ["The samples arrived in a week and looked perfect.", "Las muestras llegaron en una semana y se veían perfectas.", "L. Ortega, Brand owner"], ["Great communication from quote to delivery.", "Gran comunicación desde la cotización hasta la entrega.", "J. Patel, Operations"]].map(function (r, i) { return '<div data-a style="--i:' + i + '"><span class="st">★★★★★</span><p>“' + T(r[0], r[1]) + "”</p><small>" + r[2] + "</small></div>"; }).join("") + "</div></div></section>";
+    if (P.news) h += '<section class="sec"><div class="c"><div class="sh" data-a><h2 class="h">' + T("Latest news", "Últimas noticias") + '</h2><a class="btn s sm">' + T("All news", "Todas las noticias") + '</a></div><div class="news">' + [["New production line now open", "Nueva línea de producción en marcha"], ["Meet us at the trade show in March", "Visítanos en la feria de marzo"], ["How to plan your next order", "Cómo planear tu próximo pedido"]].map(function (n, i) { return '<div data-a style="--i:' + i + '"><div class="im"></div><small>' + T("Oct " + (12 - i * 4) + ", 2026", (12 - i * 4) + " oct 2026") + "</small><b>" + T(n[0], n[1]) + "</b></div>"; }).join("") + "</div></div></section>";
+    if (F.form || F.rfq) h += '<section class="sec alt"><div class="c form"><div data-a><span class="ey">' + T("Contact", "Contacto") + '</span><h2 class="h" style="font-size:calc(clamp(32px,3.6vw,52px) * var(--hsc));margin-top:14px">' + (F.rfq ? T("Request a quote", "Solicita una cotización") : T("Tell us what you need", "Cuéntanos lo que necesitas")) + "</h2><ul><li>" + T("Reply within one business day", "Respuesta en un día hábil") + "</li><li>" + T("Upload drawings or photos", "Sube planos o fotos") + "</li><li>" + T("No obligation", "Sin compromiso") + '</li></ul></div><div class="fs" data-a style="--i:1"><label>' + T("Name", "Nombre") + '<span class="in"></span></label><label>' + T("Company", "Empresa") + '<span class="in"></span></label><label class="w">' + T("Email", "Correo") + '<span class="in"></span></label><label class="w">' + T("Message", "Mensaje") + '<span class="in ta"></span></label><a class="btn p w" style="justify-content:center">' + T("Send", "Enviar") + "</a></div></div></section>";
+    if (F.map) h += '<section class="sec"><div class="c"><div class="sh" data-a><h2 class="h">' + T("Find us", "Encuéntranos") + '</h2></div><div class="map" data-a><i style="left:30%;top:40%"></i><i style="left:64%;top:58%"></i></div></div></section>';
+    if (F.newsletter) h += '<section class="sec" style="padding-top:0"><div class="c"><div class="nl" data-a><h3 class="h">' + T("Get new products first", "Recibe las novedades primero") + '</h3><div class="in"><span>' + T("Your email", "Tu correo") + '</span><a class="btn p sm" style="background:var(--ink);color:var(--bg)">' + T("Subscribe", "Suscribirme") + "</a></div></div></div></section>";
+    h += '<section class="cta"><div class="c" data-a><h2 class="h">' + (shop ? T("Ready when you are.", "Listos cuando tú lo estés.") : T("Let’s build something together.", "Construyamos algo juntos.")) + '</h2><a class="btn p">' + cta1 + " →</a>" + (F.catalog ? ' <a class="btn s">' + T("Download catalog (PDF)", "Descargar catálogo (PDF)") + "</a>" : "") + "</div></section>";
+    var fl = ["about", "products", "cases", "news", "faq", "downloads", "careers", "contact"].filter(function (k) { return P[k]; }).map(function (k) { return "<a>" + T(PAGE_LBL[k][0], PAGE_LBL[k][1]) + "</a>"; });
+    h += '<footer class="ft"><div class="c"><div><a class="logo"><i>' + esc((S.name || I.name).trim().charAt(0).toUpperCase()) + "</i>" + name + '</a><p style="opacity:.7;margin-top:14px;max-width:22em;line-height:1.6">' + T(I.p[0], I.p[1]) + "</p></div><div><b>" + T("Company", "Empresa") + "</b>" + fl.slice(0, 4).join("") + "</div><div><b>" + T("More", "Más") + "</b>" + (fl.slice(4).join("") || "<a>" + T("Privacy", "Privacidad") + "</a>") + "</div><div><b>" + T("Contact", "Contacto") + "</b><a>hello@" + (S.name || I.name).toLowerCase().replace(/[^a-z0-9]+/g, "") + ".com</a><a>+1 (555) 010-2030</a></div><div class=\"bot\"><span>© 2026 " + name + "</span><span>" + langs.map(function (x) { return x.toUpperCase(); }).join(" · ") + "</span></div></div></footer>";
+    if (F.chat) h += '<span class="wa"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.5-.6-2.7-1.2-4.4-3.9-4.6-4.1-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.1.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 1.9 1.1.9 2 1.2 2.3 1.4.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.8-.1 1.4z"/></svg></span>';
+    document.getElementById("site").innerHTML = h;
+    // theme
+    var cls = ["nav-" + S.nav, "hero-" + S.hero, "vis-" + S.visual, "cards-" + S.cards, "deco-" + S.deco, "hv-" + S.hover, "en-" + S.enter, S.mode === "dark" ? "dark" : "light"];
+    if (S.hcase === "upper") cls.push("upper");
+    if (S.scroll) { if (S.scroll.sticky) cls.push("sticky"); if (S.scroll.parallax) cls.push("parallax"); if (S.scroll.marquee) cls.push("marquee"); }
+    root.className = cls.join(" ");
+    var V = S.vars || {};
+    for (var k in V) root.style.setProperty(k, V[k]);
+    root.lang = L;
+    observe(S);
+  }
+  /* ---------- motion ---------- */
+  var io;
+  function observe(S) {
+    if (io) io.disconnect();
+    var els = document.querySelectorAll("[data-a]");
+    if (S.enter === "none") { els.forEach(function (e) { e.classList.add("in"); }); }
+    else {
+      io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); if (S.scroll && S.scroll.counters) count(e.target); } }); }, { threshold: 0.12 });
+      els.forEach(function (e) { io.observe(e); });
+    }
+    if (S.enter === "none" && S.scroll && S.scroll.counters) document.querySelectorAll(".stats [data-a]").forEach(count);
+  }
+  function count(el) {
+    var b = el.querySelector("[data-count]"); if (!b) return;
+    var raw = b.getAttribute("data-count"), m = raw.match(/^([^\d]*)([\d,.]+)(.*)$/); if (!m) return;
+    var target = parseFloat(m[2].replace(/,/g, "")), dec = (m[2].split(".")[1] || "").length, t0 = performance.now(), dur = 1400;
+    (function step(t) { var k = Math.min(1, (t - t0) / dur), v = target * (1 - Math.pow(1 - k, 3)); b.textContent = m[1] + v.toLocaleString("en-US", { minimumFractionDigits: dec, maximumFractionDigits: dec }) + m[3]; if (k < 1) requestAnimationFrame(step); })(t0);
+  }
+  addEventListener("scroll", function () {
+    var hd = document.querySelector(".hd"); if (hd) hd.classList.toggle("small", scrollY > 40);
+    if (document.documentElement.classList.contains("parallax")) { var v = document.querySelector(".hero .vis"); if (v) v.style.transform = "translateY(" + scrollY * 0.18 + "px)"; }
+  }, { passive: true });
+  var last;
+  window.StudioPreview = {
+    render: function (S) { last = S; render(S); },
+    replay: function () { if (!last) return; window.scrollTo(0, 0); render(last); },
+    /* window.scrollTo, not scrollIntoView: that would also scroll the page around the preview */
+    scrollTo: function (sel) { var e = document.querySelector(sel); if (!e) return; var hd = document.querySelector(".hd"); window.scrollTo({ top: sel === "#site" ? 0 : Math.max(0, e.getBoundingClientRect().top + window.scrollY - (hd ? hd.offsetHeight : 0) - 16), behavior: "smooth" }); }
+  };
+  if (window.parent && window.parent !== window) { try { window.parent.postMessage({ studioPreviewReady: true }, location.origin); } catch (e) {} }
+})();
+</script>
+</body>
+</html>

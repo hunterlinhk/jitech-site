@@ -3,99 +3,258 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Orbital | Small satellites, launched on schedule</title>
+<title>Meridian Trading | Wholesale housewares, by the carton or the container</title>
 <script src="assets/base.js"></script>
 <link rel="stylesheet" href="assets/base.css">
 <style>
-:root{--bg:#02030a;--tx:#e9ecf7;--mut:#7d8399;--acc:#ff4d2e;--cy:#7fe3ff;--line:rgba(233,236,247,.12)}
-body{background:var(--bg);color:var(--tx);font-family:"Syne V",Arial,sans-serif;font-size:15px}
-.mono{font-family:"JetBrains Mono V",monospace}
+:root{--bg:#f4f1ea;--nv:#0d2340;--sea:#1f6f8b;--or:#ef6a2b;--sk:#cfe3ea;--mut:#5e6876;--line:rgba(13,35,64,.13)}
+html,body{overflow-x:clip}
+body{background:var(--bg);color:var(--nv);font-family:"Inter V",Arial,sans-serif;font-size:15.5px}
+.un{font-family:"Unbounded V",sans-serif}
 .wrap{width:min(1320px,100% - 56px);margin:0 auto}
-.hero{position:relative;height:100vh;min-height:500px;overflow:hidden}
-.stars,.stars2{position:absolute;inset:0;background-image:radial-gradient(1px 1px at 10% 20%,#fff,transparent),radial-gradient(1px 1px at 30% 70%,#fff,transparent),radial-gradient(1.5px 1.5px at 50% 30%,#fff,transparent),radial-gradient(1px 1px at 70% 10%,#fff,transparent),radial-gradient(1px 1px at 90% 50%,#fff,transparent),radial-gradient(1px 1px at 20% 90%,#fff,transparent),radial-gradient(1.5px 1.5px at 80% 80%,#fff,transparent),radial-gradient(1px 1px at 60% 55%,#fff,transparent);background-size:340px 340px;opacity:.7}
-.stars2{background-size:520px 520px;background-position:120px 60px;opacity:.45;animation:tw 4s ease-in-out infinite alternate}
-@keyframes tw{to{opacity:.15}}
-.planet{position:absolute;right:-14vw;bottom:-58vh;width:min(96vw,150vh);aspect-ratio:1;border-radius:50%;
-  background:radial-gradient(circle at 34% 28%,#3d6bd6 0%,#1b3a8c 24%,#0b1640 50%,#030614 72%);
-  box-shadow:inset -60px -40px 120px rgba(0,0,0,.85),0 0 90px rgba(90,150,255,.35),0 0 2px 2px rgba(127,227,255,.4)}
-.planet .cl{position:absolute;inset:0;border-radius:50%;overflow:hidden;mix-blend-mode:screen;-webkit-mask:radial-gradient(circle at 40% 35%,#000 40%,transparent 70%);mask:radial-gradient(circle at 40% 35%,#000 40%,transparent 70%)}
-.planet .cl i{position:absolute;top:0;bottom:0;left:-200px;right:-200px;background:repeating-linear-gradient(-18deg,rgba(255,255,255,.05) 0 14px,transparent 14px 46px);will-change:transform;animation:clouds 15s linear infinite}
-@keyframes clouds{to{transform:translateX(148.86px)}}
-.orbit{position:absolute;right:4vw;bottom:-30vh;width:min(110vw,170vh);aspect-ratio:2.6;border:1px dashed rgba(127,227,255,.35);border-radius:50%;transform:rotate(-14deg)}
-.sat{position:absolute;left:50%;top:50%;width:0;height:0;animation:orb 14s linear infinite}
-.sat i{position:absolute;width:14px;height:14px;margin:-7px;background:var(--tx);box-shadow:-16px 0 0 -3px var(--cy),16px 0 0 -3px var(--cy),0 0 18px var(--cy)}
-@keyframes orb{from{transform:rotate(0) translateX(min(55vw,85vh)) scaleY(.38)}to{transform:rotate(360deg) translateX(min(55vw,85vh)) scaleY(.38)}}
-.nav{position:absolute;inset:0 0 auto;z-index:3;height:76px;display:flex;align-items:center;gap:30px;padding:0 max(28px,calc((100% - 1320px)/2));font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.08em}
-.logo{font-weight:800;font-size:22px;letter-spacing:-.02em;text-transform:none;margin-right:auto;display:flex;align-items:center;gap:10px}
-.logo i{width:20px;height:20px;border-radius:50%;border:2px solid var(--tx);position:relative}
-.logo i::after{content:"";position:absolute;right:-5px;top:-3px;width:6px;height:6px;border-radius:50%;background:var(--acc)}
-.nav .m{border:1px solid var(--line);border-radius:999px;padding:10px 16px}
-.in{position:absolute;left:max(28px,calc((100% - 1320px)/2));top:50%;z-index:3;transform:translateY(-56%);max-width:min(1000px,72vw)}
-.in small{color:var(--acc);font-size:12px;letter-spacing:.18em;text-transform:uppercase}
-.in h1{font-size:clamp(48px,min(6.2vw,12vh),108px);line-height:.94;letter-spacing:-.04em;font-weight:700;margin:clamp(12px,2.4vh,22px) 0}
-.in p{color:#b9bfd4;line-height:1.6;max-width:28em;font-size:clamp(15px,1.25vw,17px)}
-.in a{display:inline-flex;gap:12px;align-items:center;margin-top:clamp(20px,3.6vh,34px);background:var(--acc);color:#fff;padding:16px 24px;border-radius:4px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:13px}
-.tele{position:absolute;left:max(28px,calc((100% - 1320px)/2));bottom:clamp(18px,4vh,40px);z-index:3;display:flex;gap:clamp(20px,3vw,44px);font-size:12px;color:var(--mut)}
-.tele b{display:block;color:var(--tx);font-size:clamp(16px,1.5vw,22px);font-weight:500}
-.tele b::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:#3dff9a;margin-right:8px;vertical-align:middle;animation:blink 1.4s steps(1) infinite}
-@keyframes blink{50%{opacity:.2}}
-section{padding:clamp(80px,9vw,130px) 0}
-.h2{font-size:clamp(40px,4.8vw,80px);line-height:.95;letter-spacing:-.04em;font-weight:800;max-width:12em}
-.h2 span{color:var(--acc)}
-.cols{display:grid;grid-template-columns:repeat(3,1fr);margin-top:56px;border-top:1px solid var(--line)}
-.cols div{padding:28px 28px 28px 0;border-right:1px solid var(--line)}
-.cols div+div{padding-left:28px}
-.cols div:last-child{border-right:0}
-.cols b{display:block;font-size:60px;font-weight:800;letter-spacing:-.04em}
-.cols h3{font-size:20px;margin:10px 0 8px}
-.cols p{color:var(--mut);line-height:1.6}
-.manifest{border:1px solid var(--line);border-radius:6px;overflow:hidden}
-.manifest li{display:grid;grid-template-columns:120px 1fr 1fr 120px;padding:18px 22px;border-bottom:1px solid var(--line);font-size:14px}
-.manifest li:first-child{color:var(--mut);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
-.manifest .ok{color:#3dff9a}
-.foot{display:flex;justify-content:space-between;padding:34px 0;color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:.12em}
-@media (max-width:900px){.nav a:not(.logo):not(.m){display:none}.in{max-width:none;right:28px}.cols{grid-template-columns:1fr}.manifest li{grid-template-columns:1fr 1fr}}
+.nav{height:76px;display:flex;align-items:center;gap:28px;font-weight:600;font-size:14.5px}
+.logo{font-family:"Unbounded V",sans-serif;font-weight:700;font-size:19px;margin-right:auto;display:flex;align-items:center;gap:10px}
+.logo i{width:30px;height:30px;border-radius:50%;background:var(--nv);position:relative;overflow:hidden}
+.logo i::after{content:"";position:absolute;left:-10%;right:-10%;top:52%;height:3px;background:var(--or);box-shadow:0 -7px 0 #fff,0 7px 0 #fff}
+.nav .cta{background:var(--nv);color:#fff;border-radius:999px;padding:12px 18px}
+.hero{min-height:calc(100vh - 76px);display:grid;grid-template-columns:1fr 1.1fr;gap:30px;align-items:center;padding-bottom:4vh}
+.k{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--or)}
+h1{font-family:"Unbounded V",sans-serif;font-weight:700;font-size:clamp(46px,min(5.6vw,10.8vh),98px);line-height:.98;letter-spacing:-.04em;margin:clamp(14px,2.6vh,24px) 0}
+h1 em{font-style:normal;color:var(--sea)}
+.lede{max-width:29em;line-height:1.6;color:var(--mut);font-size:clamp(15.5px,1.15vw,18px)}
+.go{display:flex;gap:12px;margin-top:clamp(20px,3.6vh,34px);flex-wrap:wrap}
+.go a{font-weight:700;border-radius:999px;padding:17px 26px}
+.go a:first-child{background:var(--or);color:#fff}
+.go a:last-child{border:2px solid var(--nv)}
+.nums{display:flex;gap:34px;margin-top:clamp(24px,4.4vh,44px);flex-wrap:wrap}
+.nums b{display:block;font-family:"Unbounded V",sans-serif;font-size:26px}
+.nums small{color:var(--mut);font-size:13px}
+.port{position:relative;aspect-ratio:1.15;border-radius:28px;background:linear-gradient(180deg,#cfe3ea 0,#e8f1f4 58%,#1f6f8b 58%,#174f66 100%);overflow:hidden}
+.port svg{position:absolute;inset:0;width:100%;height:100%}
+@keyframes lower{0%,15%{transform:none}50%,70%{transform:translateY(90px)}100%{transform:none}}
+.hook{animation:lower 6s cubic-bezier(.6,0,.3,1) infinite}
+@keyframes bob{to{transform:translateY(5px)}}
+.ship{animation:bob 3s ease-in-out infinite alternate}
+@keyframes wave{to{transform:translateX(-120px)}}
+.wave{animation:wave 5s linear infinite}
+.strip{background:var(--nv);color:#fff;padding:18px 0}
+.strip .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-weight:600;font-size:14px}
+.strip span{opacity:.85}
+.strip b{color:var(--or)}
+section{padding:clamp(70px,8vw,120px) 0}
+.h2{font-family:"Unbounded V",sans-serif;font-weight:700;font-size:clamp(34px,3.9vw,64px);line-height:1;letter-spacing:-.04em;margin-top:12px}
+/* planner */
+.pl{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:18px;margin-top:34px;align-items:start}
+.cat{background:#fff;border-radius:20px;border:1px solid var(--line);overflow:hidden}
+.ct-h{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:16px 18px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.ct-h b{font-size:17px}
+.ct-h .bt{display:flex;gap:6px;flex-wrap:wrap}
+.ct-h button{border:1.5px solid var(--line);border-radius:999px;padding:8px 14px;font-weight:600;font-size:13.5px}
+.ct-h button.p{background:var(--sea);color:#fff;border-color:var(--sea)}
+.sku{display:grid;grid-template-columns:56px minmax(0,1fr) auto 118px;gap:14px;align-items:center;padding:12px 18px;border-bottom:1px solid var(--line)}
+.sku:last-child{border:0}
+.sku .ic{width:56px;height:56px;border-radius:14px;display:grid;place-items:center}
+.sku .ic svg{width:40px;height:40px}
+.sku b{display:block;font-size:15px}
+.sku small{color:var(--mut);font-size:12.5px;display:block;line-height:1.5}
+.sku .pr{text-align:right;font-weight:700;font-size:14px;font-variant-numeric:tabular-nums}
+.sku .pr small{font-weight:500}
+.st{display:flex;align-items:center;border:1.5px solid var(--line);border-radius:999px;overflow:hidden}
+.st button{width:32px;height:34px;font-weight:700;font-size:17px;color:var(--sea)}
+.st input{width:50px;border:0;text-align:center;font:inherit;font-weight:700;-moz-appearance:textfield}
+.st input::-webkit-inner-spin-button{display:none}
+.sku.on{background:#f3f9fb}
+.side{position:sticky;top:14px;display:grid;gap:12px}
+.cont{background:var(--nv);color:#fff;border-radius:20px;padding:18px}
+.ctype{display:flex;gap:6px;margin-bottom:14px}
+.ctype button{flex:1;border-radius:12px;padding:10px 6px;background:rgba(255,255,255,.08);font-weight:700;font-size:14px}
+.ctype button small{display:block;font-weight:500;font-size:11.5px;opacity:.7}
+.ctype button.on{background:#fff;color:var(--nv)}
+.cvis{background:#091a31;border-radius:12px;padding:12px}
+.cvis svg{width:100%;display:block}
+.bars{display:grid;gap:10px;margin-top:14px}
+.bar p{display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px}
+.bar p b{font-variant-numeric:tabular-nums}
+.bar div{height:9px;border-radius:9px;background:rgba(255,255,255,.12);overflow:hidden}
+.bar i{display:block;height:100%;border-radius:9px;background:#5fd0a5;transition:width .35s}
+.bar i.hi{background:var(--or)}
+.over{background:#3b1d14;color:#ffd2bf;border-radius:10px;padding:10px 12px;font-size:13px;margin-top:12px;display:none;gap:10px;align-items:center;justify-content:space-between}
+.over.on{display:flex}
+.over button{background:var(--or);color:#fff;border-radius:999px;padding:7px 12px;font-weight:700;font-size:12.5px;white-space:nowrap}
+.sum{background:#fff;border-radius:20px;border:1px solid var(--line);padding:18px}
+.sum label{display:flex;justify-content:space-between;align-items:center;gap:10px;font-weight:600;font-size:14px;margin-bottom:10px}
+.sum select{border:1.5px solid var(--line);border-radius:10px;padding:8px 10px;font:inherit;font-size:14px}
+.sum .r{display:flex;justify-content:space-between;padding:6px 0;font-size:14px;border-bottom:1px dashed var(--line)}
+.sum .r b{font-variant-numeric:tabular-nums}
+.sum .t{display:flex;justify-content:space-between;align-items:baseline;margin-top:10px}
+.sum .t b{font-family:"Unbounded V",sans-serif;font-size:26px}
+.sum .lc{background:var(--sk);border-radius:12px;padding:10px 12px;font-size:13.5px;margin-top:12px}
+.sum>button{width:100%;margin-top:12px;background:var(--or);color:#fff;border-radius:999px;padding:15px;font-weight:700}
+.sum>button:disabled{opacity:.4;cursor:not-allowed}
+.ok{font-size:13.5px;color:#13704a;margin-top:8px;min-height:1.2em}
+.legend{display:flex;flex-wrap:wrap;gap:6px 12px;margin-top:10px;font-size:12px;opacity:.85}
+.legend span{display:flex;align-items:center;gap:5px}
+.legend i{width:10px;height:10px;border-radius:2px;display:block}
+.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:30px 0 40px;color:var(--mut);font-size:14px}
+@media (max-width:1040px){.pl{grid-template-columns:minmax(0,1fr)}.side{position:static}}
+@media (max-width:860px){.nav a:not(.logo):not(.cta){display:none}.hero{grid-template-columns:1fr;padding:10px 0 50px}}
+@media (max-width:560px){.logo{font-size:16px;white-space:nowrap}.nav .cta{padding:10px 14px;white-space:nowrap;font-size:13px}.wrap{width:calc(100% - 32px)}.sku{grid-template-columns:48px minmax(0,1fr) auto;row-gap:8px}.sku .ic{width:48px;height:48px}.sku .st{grid-column:2/-1;justify-self:start}.nums{gap:20px}}
 </style>
 </head>
 <body>
-<section class="hero" style="padding:0">
-  <div class="stars" aria-hidden="true"></div><div class="stars2" aria-hidden="true"></div>
-  <div class="planet" aria-hidden="true"><div class="cl"><i></i></div></div>
-  <div class="orbit" aria-hidden="true"><span class="sat"><i></i></span></div>
-  <header class="nav"><a class="logo" href="#"><i></i>Orbital</a><a href="#">Launch</a><a href="#">Spacecraft</a><a href="#">Missions</a><a href="#">Careers</a><a class="m" href="#">Book a payload</a></header>
-  <div class="in">
-    <small class="mono" data-in>Rideshare · LEO · SSO</small>
-    <h1 data-in style="--d:1">We put small things in high places.</h1>
-    <p data-in style="--d:2">Satellites from 1 to 300 kg, integrated in our Tucson clean room and in orbit within ninety days of signing.</p>
-    <a href="#" data-in style="--d:3">Reserve a slot →</a>
-  </div>
-  <div class="tele mono" data-in style="--d:4"><div><b>ORB-7 nominal</b>Next launch · T−12 d</div><div><b id="alt">548.20 km</b>Altitude</div><div><b>7.59 km/s</b>Velocity</div></div>
-</section>
-<main>
-  <section>
-    <div class="wrap">
-      <h2 class="h2">Space, booked like <span>freight.</span></h2>
-      <div class="cols">
-        <div><b class="mono">01</b><h3>Pick an orbit</h3><p>Sun-synchronous or inclined LEO, every six weeks, all year.</p></div>
-        <div><b class="mono">02</b><h3>Ship us your payload</h3><p>We handle integration, testing, licensing and insurance.</p></div>
-        <div><b class="mono">03</b><h3>Get your first pass</h3><p>Telemetry on day one, through our ground stations on four continents.</p></div>
+<div class="wrap">
+  <header class="nav"><a class="logo" href="#"><i></i>Meridian Trading</a><a href="#planner">Load planner</a><a href="#">Catalog</a><a href="#">Private label</a><a href="#">Logistics</a><a class="cta" href="#planner">Wholesale login</a></header>
+  <section class="hero" style="padding-top:0">
+    <div>
+      <p class="k" data-in>Wholesale housewares · Ningbo &amp; Shenzhen</p>
+      <h1 data-in style="--d:1">Kitchen to closet, <em>by the container.</em></h1>
+      <p class="lede" data-in style="--d:2">3,800 houseware SKUs from 40 audited factories, consolidated into one shipment. Mix products in a single container and see the fill, weight and landed cost before you order.</p>
+      <div class="go" data-in style="--d:3"><a href="#planner">Plan a container</a><a href="#">Request the catalog</a></div>
+      <div class="nums" data-in style="--d:4"><div><b>3,800</b><small>SKUs in stock</small></div><div><b>1 CBM</b><small>minimum per SKU</small></div><div><b>60</b><small>destination countries</small></div></div>
+    </div>
+    <div class="port" data-fade style="--d:2">
+      <svg viewBox="0 0 600 520" aria-hidden="true">
+        <g class="wave" opacity=".35"><path d="M0 340 q30 -10 60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0" stroke="#fff" stroke-width="3" fill="none"/><path d="M0 420 q30 -10 60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0" stroke="#fff" stroke-width="3" fill="none"/></g>
+        
+        <g class="ship">
+          <path d="M70 300 L540 300 L500 370 L110 370 Z" fill="#0d2340"/><rect x="70" y="292" width="470" height="10" fill="#ef6a2b"/>
+          <rect x="460" y="226" width="60" height="66" fill="#f4f1ea"/><rect x="468" y="236" width="44" height="10" fill="#1f6f8b"/>
+          <g data-stack></g>
+        </g>
+        <defs><clipPath id="below"><rect x="0" y="56" width="600" height="470"/></clipPath></defs>
+        <g clip-path="url(#below)"><g class="hook"><rect x="302" y="-200" width="3" height="336" fill="#0d2340"/><rect x="284" y="132" width="40" height="6" fill="#0d2340"/><rect x="276" y="138" width="56" height="30" fill="#ef6a2b"/><path d="M287 141V165M298 141V165M309 141V165M320 141V165" stroke="rgba(0,0,0,.18)" stroke-width="2"/></g></g>
+        <rect x="438" y="40" width="14" height="260" fill="#0d2340"/><rect x="250" y="40" width="300" height="16" fill="#0d2340"/>
+      </svg>
+    </div>
+  </section>
+</div>
+<div class="strip"><div class="wrap"><span><b>FOB</b> Ningbo, Shenzhen</span><span><b>LCL</b> from 1 CBM</span><span><b>QC</b> on every order</span><span><b>30-day</b> sample turnaround</span></div></div>
+<main class="wrap">
+  <section id="planner">
+    <p class="k">Container load planner</p>
+    <h2 class="h2">Mix it, fill it, ship it.</h2>
+    <div class="pl">
+      <div class="cat">
+        <div class="ct-h"><b>Best sellers · cartons</b><div class="bt"><button type="button" data-clear>Clear</button><button type="button" class="p" data-auto>Auto-fill container</button></div></div>
+        <div data-skus></div>
+      </div>
+      <div class="side">
+        <div class="cont">
+          <div class="ctype" data-ctype></div>
+          <div class="cvis" data-vis></div>
+          <div class="legend" data-legend></div>
+          <div class="bars"><div class="bar"><p><span>Volume</span><b data-vt></b></p><div><i data-vb></i></div></div><div class="bar"><p><span>Weight</span><b data-wt></b></p><div><i data-wb></i></div></div></div>
+          <div class="over" data-over><span data-otext></span><button type="button" data-up>Switch</button></div>
+        </div>
+        <div class="sum" aria-live="polite">
+          <label>Destination port<select data-port><option value="2350">Los Angeles, US</option><option value="2900">New York, US</option><option value="1950">Rotterdam, NL</option><option value="2050">Hamburg, DE</option><option value="1600">Sydney, AU</option><option value="3100">Santos, BR</option></select></label>
+          <div class="r"><span>Cartons</span><b data-cartons></b></div>
+          <div class="r"><span>Units</span><b data-units></b></div>
+          <div class="r"><span>Goods value, FOB</span><b data-fob></b></div>
+          <div class="r"><span>Ocean freight (indicative)</span><b data-fr></b></div>
+          <div class="t"><span>Estimated CFR total</span><b data-total></b></div>
+          <div class="lc" data-lc></div>
+          <button type="button" data-pi disabled>Request proforma invoice</button>
+          <p class="ok" data-ok></p>
+        </div>
       </div>
     </div>
   </section>
-  <section style="padding-top:0">
-    <div class="wrap">
-      <ul class="manifest mono">
-        <li><span>Mission</span><span>Orbit</span><span>Payloads</span><span>Status</span></li>
-        <li><span>ORB-7</span><span>SSO 550 km</span><span>14 satellites</span><span class="ok">● Ready</span></li>
-        <li><span>ORB-8</span><span>LEO 45° 500 km</span><span>9 satellites</span><span>Integration</span></li>
-        <li><span>ORB-9</span><span>SSO 600 km</span><span>3 slots left</span><span>Booking</span></li>
-      </ul>
-    </div>
-  </section>
 </main>
-<footer class="wrap foot"><span>Orbital Launch Co.</span><span>Tucson · Kourou · Mahia</span></footer>
+<footer class="wrap foot"><span>Meridian Trading · wholesale housewares</span><span>Concept site by JIEWEITECH</span></footer>
 <script>
-(function(){var a=document.getElementById("alt"),t=0;setInterval(function(){if(document.documentElement.classList.contains("wall-paused"))return;t+=.05;a.textContent=(548.2+Math.sin(t)*.35).toFixed(2)+" km";},500);})();
+(function () {
+  var $ = function (s) { return document.querySelector(s); };
+  /* id, name, carton cm [l,w,h], units/carton, carton kg, unit FOB, color, icon */
+  var P = [
+    ["MT-1042", "Borosilicate storage jars, set of 3", [52, 38, 34], 12, 14.2, 4.10, "#1f6f8b", "jar"],
+    ["MT-2210", "Bamboo cutting board, 3 sizes", [46, 32, 30], 10, 16.8, 5.60, "#c58b4a", "board"],
+    ["MT-3307", "Stainless insulated bottle 750 ml", [48, 36, 28], 24, 11.6, 3.85, "#ef6a2b", "bottle"],
+    ["MT-4120", "Linen-look table runner", [60, 40, 30], 50, 9.4, 1.95, "#9aa67b", "cloth"],
+    ["MT-5021", "Ceramic dinner plate 27 cm", [56, 30, 30], 24, 19.5, 2.40, "#e4dccb", "plate"],
+    ["MT-6088", "Collapsible laundry hamper", [60, 45, 40], 20, 8.1, 3.20, "#6f86c9", "basket"],
+    ["MT-7003", "Non-stick frying pan 28 cm", [62, 33, 35], 10, 15.3, 7.90, "#8a96a8", "pan"],
+    ["MT-8114", "Glass food containers, 10 pc", [54, 40, 38], 6, 17.9, 9.50, "#5fd0a5", "box"]
+  ];
+  var C = { "20": ["20′ GP", 28, 25000, 1], "40": ["40′ GP", 58, 26500, 1.75], "40hq": ["40′ HQ", 68, 26500, 1.85] };
+  var Q = {}, ct = "40hq";
+  P.forEach(function (p) { Q[p[0]] = 0; });
+  [["MT-1042", 220], ["MT-3307", 300], ["MT-5021", 180], ["MT-7003", 140]].forEach(function (x) { Q[x[0]] = x[1]; });
+  function cbm(p) { return p[2][0] * p[2][1] * p[2][2] / 1e6; }
+  function m(n) { return "$" + Math.round(n).toLocaleString("en-US"); }
+  function icon(k, c) {
+    var I = {
+      jar: '<rect x="12" y="10" width="16" height="6" rx="2" fill="#0d2340"/><rect x="10" y="15" width="20" height="20" rx="5" fill="' + c + '" opacity=".85"/>',
+      board: '<rect x="6" y="12" width="26" height="18" rx="5" fill="' + c + '"/><circle cx="29" cy="21" r="2" fill="#f4f1ea"/>',
+      bottle: '<rect x="16" y="4" width="8" height="5" rx="1" fill="#0d2340"/><rect x="13" y="9" width="14" height="27" rx="5" fill="' + c + '"/>',
+      cloth: '<path d="M6 12 H34 V28 H6 Z" fill="' + c + '"/><path d="M6 16H34M6 24H34" stroke="#fff" stroke-width="1.5" opacity=".6"/>',
+      plate: '<circle cx="20" cy="20" r="15" fill="' + c + '" stroke="#bfb39a"/><circle cx="20" cy="20" r="9" fill="none" stroke="#bfb39a"/>',
+      basket: '<path d="M8 12 H32 L29 34 H11 Z" fill="' + c + '"/><path d="M10 18H30M10 24H30" stroke="#fff" stroke-width="1.5" opacity=".5"/>',
+      pan: '<circle cx="16" cy="22" r="11" fill="' + c + '"/><rect x="26" y="20" width="12" height="4" rx="2" fill="#0d2340"/>',
+      box: '<rect x="7" y="16" width="26" height="16" rx="3" fill="' + c + '" opacity=".8"/><rect x="6" y="12" width="28" height="5" rx="2" fill="#0d2340"/>'
+    };
+    return '<svg viewBox="0 0 40 40">' + I[k] + "</svg>";
+  }
+  $("[data-skus]").innerHTML = P.map(function (p) {
+    return '<div class="sku" data-id="' + p[0] + '"><span class="ic" style="background:' + p[6] + '22">' + icon(p[7], p[6]) + '</span><div><b>' + p[1] + "</b><small>" + p[0] + " · " + p[3] + " pcs/ctn · " + p[2].join("×") + " cm · " + cbm(p).toFixed(3) + " m³ · " + p[4] + ' kg</small></div><div class="pr">$' + p[5].toFixed(2) + "<small> /pc</small></div>" + '<div class="st"><button type="button" data-d="-10" aria-label="10 fewer cartons">−</button><input inputmode="numeric" aria-label="Cartons of ' + p[1] + '"><button type="button" data-d="10" aria-label="10 more cartons">+</button></div></div>';
+  }).join("");
+  $("[data-ctype]").innerHTML = Object.keys(C).map(function (k) { return '<button type="button" data-c="' + k + '">' + C[k][0] + "<small>" + C[k][1] + " m³ · " + (C[k][2] / 1000).toFixed(1) + " t</small></button>"; }).join("");
+  $("[data-legend]").innerHTML = P.map(function (p) { return '<span><i style="background:' + p[6] + '"></i>' + p[0] + "</span>"; }).join("");
+  function totals() { var v = 0, w = 0, u = 0, f = 0, n = 0; P.forEach(function (p) { var q = Q[p[0]]; n += q; v += q * cbm(p); w += q * p[4]; u += q * p[3]; f += q * p[3] * p[5]; }); return { v: v, w: w, u: u, f: f, n: n }; }
+  function vis(t) {
+    var c = C[ct], cols = Math.round(26 * c[3] / 1.85), rows = ct === "40hq" ? 7 : 6, cells = cols * rows, W = 560, H = 190, cw = (W - 24) / cols, ch = (H - 24) / rows;
+    var s = '<svg viewBox="0 0 ' + W + " " + H + '"><rect x="2" y="2" width="' + (W - 4) + '" height="' + (H - 4) + '" rx="6" fill="#132b4b" stroke="#ef6a2b" stroke-width="4"/>';
+    for (var i = 1; i < 14; i++) s += '<path d="M' + (i * W / 14) + ' 4V' + (H - 4) + '" stroke="#1d3a60" stroke-width="2"/>';
+    var idx = 0;
+    P.forEach(function (p) {
+      var n = Math.round(Q[p[0]] * cbm(p) / c[1] * cells);
+      for (var k = 0; k < n && idx < cells; k++, idx++) { var col = Math.floor(idx / rows), row = idx % rows; s += '<rect x="' + (12 + col * cw + 1) + '" y="' + (H - 12 - (row + 1) * ch + 1) + '" width="' + (cw - 2) + '" height="' + (ch - 2) + '" rx="2" fill="' + p[6] + '"/>'; }
+    });
+    if (t.v > c[1]) s += '<rect x="2" y="2" width="' + (W - 4) + '" height="' + (H - 4) + '" rx="6" fill="none" stroke="#ff4d4d" stroke-width="6" stroke-dasharray="10 8"/>';
+    s += "</svg>";
+    return s;
+  }
+  function paint() {
+    var t = totals(), c = C[ct], vp = t.v / c[1] * 100, wp = t.w / c[2] * 100;
+    document.querySelectorAll("[data-c]").forEach(function (b) { b.classList.toggle("on", b.dataset.c === ct); });
+    document.querySelectorAll(".sku").forEach(function (r) { var q = Q[r.dataset.id]; r.classList.toggle("on", q > 0); var i = r.querySelector("input"); if (document.activeElement !== i) i.value = q; });
+    $("[data-vis]").innerHTML = vis(t);
+    $("[data-vt]").textContent = t.v.toFixed(1) + " / " + c[1] + " m³ · " + Math.round(vp) + "%";
+    $("[data-wt]").textContent = Math.round(t.w).toLocaleString("en-US") + " / " + c[2].toLocaleString("en-US") + " kg · " + Math.round(wp) + "%";
+    $("[data-vb]").style.width = Math.min(100, vp) + "%"; $("[data-vb]").classList.toggle("hi", vp > 100);
+    $("[data-wb]").style.width = Math.min(100, wp) + "%"; $("[data-wb]").classList.toggle("hi", wp > 100);
+    var over = $("[data-over]"), next = ct === "20" ? "40" : ct === "40" ? "40hq" : null;
+    if (vp > 100 || wp > 100) { over.classList.add("on"); $("[data-otext]").textContent = (vp > 100 ? "Over volume by " + (t.v - c[1]).toFixed(1) + " m³." : "Over the weight limit.") + (next ? " A " + C[next][0] + " fits more." : " Split into two containers."); over.querySelector("button").style.display = next ? "" : "none"; over.querySelector("button").textContent = next ? "Switch to " + C[next][0] : ""; }
+    else over.classList.remove("on");
+    var fr = Math.round(+$("[data-port]").value * c[3]);
+    $("[data-cartons]").textContent = t.n.toLocaleString("en-US"); $("[data-units]").textContent = t.u.toLocaleString("en-US");
+    $("[data-fob]").textContent = m(t.f); $("[data-fr]").textContent = t.n ? m(fr) : "$0";
+    $("[data-total]").textContent = m(t.n ? t.f + fr : 0);
+    $("[data-lc]").innerHTML = t.u ? "Freight adds <b>$" + (fr / t.u).toFixed(2) + "</b> per unit. " + (vp < 85 ? "Fill the remaining " + (c[1] - t.v).toFixed(1) + " m³ to bring that down." : "Well packed, nice.") : "Add cartons to see cost per unit.";
+    $("[data-pi]").disabled = !t.n || vp > 100 || wp > 100;
+  }
+  $("[data-skus]").addEventListener("click", function (e) { var b = e.target.closest("[data-d]"); if (!b) return; var id = b.closest("[data-id]").dataset.id; Q[id] = Math.max(0, Q[id] + +b.dataset.d); $("[data-ok]").textContent = ""; paint(); });
+  $("[data-skus]").addEventListener("input", function (e) { var id = e.target.closest("[data-id]").dataset.id; Q[id] = Math.max(0, Math.min(9999, parseInt(e.target.value, 10) || 0)); paint(); });
+  $("[data-ctype]").addEventListener("click", function (e) { var b = e.target.closest("[data-c]"); if (b) { ct = b.dataset.c; paint(); } });
+  $("[data-up]").addEventListener("click", function () { ct = ct === "20" ? "40" : "40hq"; paint(); });
+  $("[data-port]").addEventListener("change", paint);
+  $("[data-clear]").addEventListener("click", function () { P.forEach(function (p) { Q[p[0]] = 0; }); paint(); });
+  $("[data-auto]").addEventListener("click", function () {
+    var c = C[ct], t = totals(), free = c[1] * 0.97 - t.v, wfree = c[2] * 0.97 - t.w;
+    if (free <= 0.2) { $("[data-ok]").textContent = "The container is already full."; return; }
+    var picks = P.filter(function (p) { return Q[p[0]] > 0; }); if (!picks.length) picks = P;
+    var per = free / picks.length;
+    picks.forEach(function (p) { var add = Math.floor(per / cbm(p)); add = Math.min(add, Math.floor(wfree / picks.length / p[4])); Q[p[0]] += Math.max(0, add); });
+    $("[data-ok]").textContent = "Topped up " + picks.length + " product" + (picks.length > 1 ? "s" : "") + " to fill the " + c[0] + ".";
+    paint();
+  });
+  $("[data-pi]").addEventListener("click", function () { $("[data-ok]").textContent = "✓ Proforma PI-" + Math.floor(20000 + Math.random() * 79999) + " requested. Your account manager will send it with stock dates within one working day."; });
+  /* hero: containers stacked on the ship */
+  var cols = ["#ef6a2b", "#1f6f8b", "#0d2340", "#e4dccb", "#5fd0a5", "#ef6a2b", "#6f86c9", "#1f6f8b", "#0d2340", "#ef6a2b", "#c58b4a", "#1f6f8b"], st = "";
+  for (var i = 0; i < 12; i++) { var x = 96 + (i % 6) * 60, y = 262 - Math.floor(i / 6) * 34; if (i === 9) continue; st += '<g><rect x="' + x + '" y="' + y + '" width="56" height="30" fill="' + cols[i] + '"/>' + [1, 2, 3, 4].map(function (k) { return '<path d="M' + (x + k * 11) + " " + (y + 3) + "V" + (y + 27) + '" stroke="rgba(0,0,0,.18)" stroke-width="2"/>'; }).join("") + "</g>"; }
+  $("[data-stack]").innerHTML = st;
+  paint();
+})();
 </script>
 </body>
 </html>

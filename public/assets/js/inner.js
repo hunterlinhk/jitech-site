@@ -129,4 +129,51 @@
     if (params.get("sent")) showDone(params.get("sent"));
     else if (params.get("error")) banner(params.get("error") === "rate_limited" ? "errRate" : params.get("error") === "invalid" ? "errFix" : "errServer");
   }
+
+  /* ---------- plan finder (website development page) ---------- */
+  var finder = document.querySelector("[data-finder]");
+  if (finder) {
+    var P = {
+      basic: { name: ["Basic", "Básico"], price: "$200" },
+      standard: { name: ["Standard", "Estándar"], price: "$500" },
+      premium: { name: ["Premium", "Premium"], price: "$800" }
+    };
+    var WHY = {
+      p15: ["Up to 15 product or service pages fit in Basic.", "Hasta 15 páginas de productos o servicios caben en Básico."],
+      p40: ["16 to 40 product pages need Standard (Basic allows 15).", "De 16 a 40 páginas de producto necesitan Estándar (Básico permite 15)."],
+      p75: ["41 to 75 product pages need Premium (Standard allows 40).", "De 41 a 75 páginas de producto necesitan Premium (Estándar permite 40)."],
+      p76: ["More than 75 product pages: start with Premium and we'll quote the extra pages.", "Más de 75 páginas de producto: empieza con Premium y te cotizamos las páginas adicionales."],
+      inq: ["Inquiry forms and a dashboard for products and news start at Standard.", "Los formularios de consulta y el panel de productos y noticias empiezan en Estándar."],
+      noinq: ["Customers reach you by phone and email shown on the site.", "Tus clientes te contactan por el teléfono y el correo que aparecen en el sitio."],
+      lang: ["More than one language starts at Standard.", "Varios idiomas empiezan en Estándar."],
+      aiMid: ["Standard adds GEO promotion with articles on general online platforms.", "Estándar agrega promoción GEO con artículos en plataformas generales en línea."],
+      aiHigh: ["Premium adds keyword analysis, advanced AI search optimization and industry media promotion.", "Premium agrega análisis de palabras clave, optimización avanzada para IA y promoción en medios del sector."],
+      aiLow: ["Basic SEO and GEO are included in every plan.", "El SEO y el GEO básicos vienen en todos los planes."]
+    };
+    var RANK = ["basic", "standard", "premium"];
+    var calc = function () {
+      var v = function (n) { var el = finder.querySelector('input[name="' + n + '"]:checked'); return el ? el.value : ""; };
+      var lvl = 0, why = [];
+      var pr = v("products");
+      if (pr === "15") why.push("p15");
+      if (pr === "40") { lvl = Math.max(lvl, 1); why.push("p40"); }
+      if (pr === "75") { lvl = 2; why.push("p75"); }
+      if (pr === "76") { lvl = 2; why.push("p76"); }
+      if (v("inquiries") === "yes") { lvl = Math.max(lvl, 1); why.push("inq"); } else why.push("noinq");
+      if (v("langs") === "yes") { lvl = Math.max(lvl, 1); why.push("lang"); }
+      var ai = v("ai");
+      if (ai === "high") { lvl = 2; why.push("aiHigh"); } else if (ai === "mid") { lvl = Math.max(lvl, 1); why.push("aiMid"); } else why.push("aiLow");
+      var id = RANK[lvl], es = I18N.lang === "es" ? 1 : 0;
+      finder.querySelector("[data-fname]").textContent = P[id].name[es];
+      finder.querySelector("[data-fprice]").textContent = P[id].price + " USD";
+      var ul = finder.querySelector("[data-fwhy]");
+      ul.textContent = "";
+      why.forEach(function (k) { var li = document.createElement("li"); li.textContent = WHY[k][es]; ul.appendChild(li); });
+      var cta = finder.querySelector("[data-fcta]");
+      cta.setAttribute("href", (cta.getAttribute("href") || "").split("?")[0] + "?service=website-development&plan=" + id);
+    };
+    finder.addEventListener("change", calc);
+    document.addEventListener("langchange", calc);
+    calc();
+  }
 })();

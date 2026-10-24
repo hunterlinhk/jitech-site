@@ -208,28 +208,49 @@ stand-ins from the concept pages until you add your own.
 
 ## The concept pages
 
-| Monitor | Page | Look |
-| --- | --- | --- |
-| L1 | Casa Ondina, a hotel on the Amalfi Coast | Full-bleed pool photo, serif title, booking bar |
-| T1 | Noon, home solar | Striped poster sun rising over a panel field |
-| T2 | Nocturne, a watchmaker | A live watch drawn in code, gold on forest green |
-| R3 | Volta, electric cars | Night car photo under huge condensed type |
-| L2 | Aurora, an AI ops tool | Moving aurora glow over a product window |
-| L3 | Halden & Co., architects | Editorial serif masthead over a framed building |
-| R4 | Kiln, a coffee roaster | Playful type, a drawn coffee bag, spinning badge |
-| T4 | Atlas, mountain gear | Dawn summit photo with ALTITUDE across it |
-| B3 | Ledger, business banking | Floating 3D cards and payment notes |
-| B2 | Maison Sable, skincare | Soft split hero with product photo |
-| B5 | Sonic Field, a festival | Stretching giant type, equalizer, lineup ticker |
-| B6 | Orbital, a launch company | A planet with a satellite in orbit |
-| L4 | Verde, grocery delivery | Rotating salad plate with stickers |
+Thirteen example websites for the industries we serve: fashion and garment export, pet supplies, outdoor
+equipment, industrial manufacturing, wholesale trading and branded online stores. The first four are complete
+little sites (catalog, filters, product pages, cart or quote list, checkout or RFQ); the rest are a homepage plus
+the one feature that matters most in that industry. All run on plain HTML and JavaScript, with no server.
 
-Photos come from [Unsplash](https://unsplash.com/license) (free to use, no attribution required, credited anyway)
+| Monitor | Page | What it shows |
+| --- | --- | --- |
+| L1 | Loomline, garment OEM/ODM | Catalog, sample builder (garment, fabric, color, logo, label, packaging), quote list |
+| L2 | Atelier Nord, fashion store | Full shop: filters, size guide with fit finder, cart, promo code, checkout |
+| L3 | Ferro Precision, CNC machining | Part catalog, instant quote (material, tolerance, finish, quantity), DFM checks |
+| T2 | Nocturne, watches | Online store and watch configurator with engraving |
+| L4 | Verde Wholesale, produce | Trade quick-order sheet: case pricing, volume tiers, order cutoff timer, delivery day |
+| T1 | Wag & Co., pet store | Food finder that portions food by pet, weight and activity, with autoship |
+| B5 | PawPro, private-label pet products | Product builder with your logo and packaging, unit price at every quantity, RFQ list |
+| T4 | Atlas, outdoor gear | Side-by-side tent comparison |
+| R3 | Ridgeline Packworks, OEM backpacks | Pack builder: style, fabric, colors, branding, features, front and back views, pricing |
+| B3 | Halden Flow, industrial valves | Valve selector and pipe sizing from process conditions, downloadable datasheet |
+| B6 | Meridian Trading, wholesale housewares | Container load planner: fill, weight and freight per unit for 20′, 40′ and 40′ HQ |
+| R4 | Kiln, coffee roaster | Subscription builder |
+| B2 | Maison Sable, skincare brand | Skincare routine finder |
+
+The shared shop engine is `public/pages/assets/shop.js` (with `shop.css`); products are drawn in code by
+`garments.js` and `pets.js`, so the newer pages need no photos.
+
+The photos on T4, B2 and L4 come from [Unsplash](https://unsplash.com/license) (free to use, no attribution required, credited anyway)
 and load straight from images.unsplash.com. If one can't load, its block keeps a matching colour tone.
 The entrance wall has two separate groups of designs (`SCREENS.left` and `SCREENS.right` in `public/assets/js/site.js`),
 so the columns never repeat each other. A tile shows the page's screenshot from `public/assets/img/shots/` when one
 exists, and otherwise the live page scaled down. Running `tools/make_shots.py` on a machine with internet
 access adds screenshots for the photo pages, and their tiles switch to those automatically after the next build.
+
+## Design Studio
+
+`design-studio.html` lets a visitor design their website in 8 steps (business, layout, colors, fonts, style,
+motion, pages and features, review) while a sample website beside the options updates live, on desktop, tablet or
+phone sizes. The sample site is `public/pages/studio-preview.html`, drawn from the choices by
+`public/assets/js/studio.js`; the page itself is generated with the other inner pages.
+
+At the end it writes a **Website Design Requirements Document** with the layout, color palette (with contrast
+checks), fonts, style, motion, sitemap, features and a recommended plan. Visitors can download it, print it or
+save it as a PDF, copy it, or send it to you: it arrives in the dashboard as a new Website Development inquiry,
+with the plan filled in and the whole specification in the message. Choices are kept in the visitor's browser,
+so they can come back to them.
 
 ## Performance
 

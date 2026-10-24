@@ -10,9 +10,9 @@ const SERVICES = {
 
 const PLANS = {
   "not-sure": { en: "Not sure yet", es: "Aún no lo sé" },
-  basic: { en: "Basic (from $149)", es: "Básico (desde $149)" },
-  standard: { en: "Standard (from $448)", es: "Estándar (desde $448)" },
-  premium: { en: "Premium (from $747)", es: "Premium (desde $747)" }
+  basic: { en: "Basic ($200)", es: "Básico ($200)" },
+  standard: { en: "Standard ($500)", es: "Estándar ($500)" },
+  premium: { en: "Premium ($800)", es: "Premium ($800)" }
 };
 
 // The sales pipeline, in order. "open" statuses show in the Inbox.

@@ -3,78 +3,298 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Halden &amp; Co. | Architecture</title>
+<title>Ferro Precision | CNC machining, turning and sheet metal on demand</title>
+<meta name="description" content="Instant quotes for CNC machined, turned and sheet metal parts, from 1 to 10,000 pieces. ISO 9001 certified. A JIEWEITECH design concept.">
 <script src="assets/base.js"></script>
 <link rel="stylesheet" href="assets/base.css">
+<link rel="stylesheet" href="assets/shop.css">
 <style>
-:root{--bg:#ecebe6;--tx:#161613;--mut:#77756d;--line:rgba(22,22,19,.16);--acc:#b4532a}
-body{background:var(--bg);color:var(--tx);font-family:"Inter V",Arial,sans-serif;font-size:14px}
-.serif{font-family:"Instrument Serif",Georgia,serif;font-weight:400}
-.pad{padding:0 clamp(20px,2.6vw,40px)}
-.hero{height:100vh;min-height:500px;display:flex;flex-direction:column}
-.nav{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;height:56px;align-items:center;font-size:12px;text-transform:uppercase;letter-spacing:.08em}
-.nav a:last-child{text-align:right}
-.title{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;border-top:1px solid var(--line);padding-top:6px}
-.title h1{font-size:clamp(90px,min(17.5vw,30vh),300px);line-height:.8;letter-spacing:-.035em;white-space:nowrap}
-.title h1 i{color:var(--acc)}
-.title p{max-width:21em;font-size:13px;line-height:1.5;color:var(--mut);padding-bottom:1.4vh}
-.frame{position:relative;flex:1;min-height:0;margin:clamp(12px,2vh,22px) 0 clamp(16px,2.6vw,40px);--ph:linear-gradient(160deg,#c9c6bd,#8f8b80)}
-.frame>img{animation:reveal 1.6s cubic-bezier(.7,0,.2,1) both}
-@keyframes reveal{from{clip-path:inset(0 0 100% 0);transform:scale(1.12)}to{clip-path:inset(0);transform:scale(1)}}
-.frame .cap{position:absolute;left:0;right:0;bottom:0;z-index:1;display:flex;justify-content:space-between;align-items:flex-end;padding:18px 20px;color:#fff;font-size:12px;letter-spacing:.06em;text-transform:uppercase;background:linear-gradient(0deg,rgba(0,0,0,.45),transparent)}
-.frame .cap b{font-family:"Instrument Serif",serif;font-size:clamp(26px,2.6vw,40px);font-weight:400;text-transform:none;letter-spacing:0}
-.count{position:absolute;right:20px;top:18px;z-index:1;color:#fff;font-size:12px}
-section{padding:clamp(80px,9vw,140px) 0}
-.about{display:grid;grid-template-columns:1fr 2fr;gap:40px;border-top:1px solid var(--line);padding-top:18px}
-.about small{text-transform:uppercase;letter-spacing:.1em;font-size:11px;color:var(--mut)}
-.about h2{font-size:clamp(34px,3.6vw,58px);line-height:1.05;letter-spacing:-.01em}
-.about h2 i{color:var(--acc)}
-.works{display:grid;grid-template-columns:1.25fr 1fr;gap:clamp(16px,2vw,28px);margin-top:70px}
-.work .ph{aspect-ratio:4/5}
-.work:first-child .ph{aspect-ratio:4/3.6}
-.work .meta{display:flex;justify-content:space-between;padding-top:10px;border-top:1px solid var(--line);margin-top:12px}
-.work h3{font-family:"Instrument Serif",serif;font-weight:400;font-size:28px}
-.work span{color:var(--mut);font-size:12px}
-.work:nth-child(2){margin-top:120px}
-.list{margin-top:90px;border-top:1px solid var(--tx)}
-.list li{display:grid;grid-template-columns:60px 2fr 1fr 1fr 80px;align-items:baseline;padding:20px 0;border-bottom:1px solid var(--line);transition:padding .4s}
-.list li:hover{padding-left:12px}
-.list b{font-family:"Instrument Serif",serif;font-size:30px;font-weight:400}
-.list span{color:var(--mut)}
-.foot{display:flex;justify-content:space-between;align-items:flex-end;padding:40px 0 30px}
-.foot h2{font-size:clamp(60px,10vw,170px);line-height:.85;letter-spacing:-.03em}
-.foot p{color:var(--mut);text-align:right;line-height:1.7}
-@media (max-width:860px){.nav{grid-template-columns:1fr 1fr}.nav a:nth-child(2),.nav a:nth-child(3){display:none}.title p{display:none}.about,.works{grid-template-columns:1fr}.work:nth-child(2){margin-top:0}.list li{grid-template-columns:40px 1fr 80px}.list li span:nth-child(3),.list li span:nth-child(4){display:none}}
+:root{--bg:#101215;--fg:#eceef0;--muted:#8d949c;--line:rgba(236,238,240,.12);--card:#181b20;--soft:#181b20;--accent:#ff6a13;--accent-fg:#101215;--radius:4px;--head:"Archivo V",Arial,sans-serif;--body:"Inter V",Arial,sans-serif;--mono:"JetBrains Mono V",ui-monospace,monospace;--wrap:1380px}
+body{font-size:15px}
+.mono{font-family:var(--mono)}
+.head{position:sticky;top:0;z-index:40;background:rgba(16,18,21,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.head .wrap{display:flex;align-items:center;gap:28px;height:70px}
+.logo{display:flex;align-items:center;gap:10px;font:800 21px/1 var(--head);font-stretch:112%;letter-spacing:.02em;margin-right:auto;text-transform:uppercase}
+.logo i{width:26px;height:26px;background:var(--accent);clip-path:polygon(0 0,100% 0,100% 30%,40% 30%,40% 45%,85% 45%,85% 70%,40% 70%,40% 100%,0 100%)}
+.nav{display:flex;gap:24px;font-size:14px;font-weight:550;color:#c7ccd1}
+.nav a:hover{color:#fff}
+.qbtn{display:flex;align-items:center;height:42px;padding:0 16px;border:1px solid var(--line);border-radius:4px;font-weight:650;font-size:14px}
+.burger{display:none}
+.hero{position:relative;min-height:calc(100vh - 70px);min-height:max(520px,calc(100vh - 70px));display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);align-items:center;overflow:hidden;border-bottom:1px solid var(--line)}
+.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(120,170,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(120,170,255,.06) 1px,transparent 1px);background-size:32px 32px;mask-image:radial-gradient(ellipse at 70% 50%,#000 30%,transparent 75%)}
+.hcopy{position:relative;padding:40px 0 40px max(24px,calc((100vw - 1380px) / 2))}
+.tag{font:500 12.5px/1 var(--mono);color:var(--accent);letter-spacing:.06em;text-transform:uppercase}
+.hero h1{font:800 clamp(52px,min(6.4vw,11vh),112px)/.9 var(--head);font-stretch:85%;letter-spacing:-.02em;text-transform:uppercase;margin:20px 0}
+.hero h1 span{color:var(--accent)}
+.hero p{color:var(--muted);font-size:17px;line-height:1.6;max-width:31em}
+.ctas{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+.specline{display:flex;gap:30px;margin-top:40px;font:500 13px/1.4 var(--mono);color:var(--muted)}
+.specline b{display:block;color:var(--fg);font:700 26px/1 var(--head);margin-bottom:6px}
+.hart{position:relative;height:100%;min-height:500px}
+.hart svg.main{position:absolute;inset:6% 4% 6% 0;width:96%;height:88%}
+.callout{position:absolute;font:500 12px/1.4 var(--mono);color:#c7ccd1;padding-left:12px;border-left:1px solid var(--accent)}
+.callout b{color:var(--accent);display:block}
+.spin{transform-origin:50% 50%;animation:float 6s ease-in-out infinite alternate}
+@keyframes float{from{transform:translateY(-8px)}to{transform:translateY(8px)}}
+.sec{padding:clamp(60px,7vw,100px) 0}
+.sec-h{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:32px;flex-wrap:wrap}
+.sec-h h2{font:800 clamp(34px,3.8vw,56px)/.95 var(--head);font-stretch:85%;text-transform:uppercase;max-width:16em}
+.sec-h p{color:var(--muted);max-width:28em;line-height:1.6}
+.procs{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.proc{background:var(--bg);padding:26px;display:flex;flex-direction:column;gap:12px;min-height:280px}
+.proc .pa{height:120px}
+.proc h3{font:800 22px/1 var(--head);font-stretch:90%;text-transform:uppercase}
+.proc p{color:var(--muted);line-height:1.55;font-size:14px}
+.proc .mono{font-size:12.5px;color:var(--accent);margin-top:auto}
+.strip{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center;padding:40px;border:1px solid var(--line);border-radius:4px;background:linear-gradient(120deg,#181b20,#13161a)}
+.strip h2{font:800 clamp(30px,3vw,46px)/.95 var(--head);font-stretch:85%;text-transform:uppercase;margin-bottom:14px}
+.strip p{color:var(--muted);line-height:1.6;margin-bottom:22px}
+.mini{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mini div{padding:14px;border:1px solid var(--line);border-radius:4px;font:500 12.5px/1.5 var(--mono);color:var(--muted)}
+.mini b{display:block;color:var(--fg);font:700 20px/1.1 var(--head)}
+.foot{border-top:1px solid var(--line);padding:40px 0;color:var(--muted);font-size:13.5px}
+.foot .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+/* instant quote */
+.iq{width:min(var(--wrap),100% - 48px);margin:0 auto;padding:36px 0 90px;display:grid;grid-template-columns:minmax(0,1fr) 420px;gap:36px;align-items:start}
+.iq h1{font:800 clamp(38px,4vw,60px)/.95 var(--head);font-stretch:85%;text-transform:uppercase;margin:10px 0 8px}
+.iq>div>p{color:var(--muted);line-height:1.6;margin-bottom:24px}
+.drop{display:flex;align-items:center;gap:18px;padding:22px;border:1.5px dashed rgba(255,106,19,.5);border-radius:6px;margin-bottom:22px;cursor:pointer;background:rgba(255,106,19,.04)}
+.drop b{display:block;font-size:16px}
+.drop small{color:var(--muted)}
+.drop input{display:none}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px 18px}
+.fld{display:flex;flex-direction:column;gap:7px}
+.fld>span{font:500 12px/1 var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.fld select,.fld input{height:46px;border:1px solid var(--line);border-radius:4px;background:#14171b;color:var(--fg);padding:0 12px;font:inherit}
+.dims{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.seg{display:flex;border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.seg button{flex:1;height:44px;font-size:13.5px;font-weight:600;color:var(--muted);border-right:1px solid var(--line)}
+.seg button:last-child{border-right:0}
+.seg button.on{background:var(--accent);color:#101215}
+.res{position:sticky;top:90px;border:1px solid var(--line);border-radius:6px;background:#15181c;overflow:hidden}
+.res .pv{height:220px;background:#0d0f12;border-bottom:1px solid var(--line);display:grid;place-items:center;position:relative}
+.res .pv svg{height:100%;width:100%}
+.res .pv .dimtag{position:absolute;right:12px;bottom:10px;font:500 12px/1 var(--mono);color:var(--muted)}
+.res .body{padding:22px}
+.big{font:800 46px/1 var(--head);font-stretch:85%}
+.rows{margin:16px 0;display:flex;flex-direction:column;gap:8px;font:500 13.5px/1.3 var(--mono)}
+.rows div{display:flex;justify-content:space-between;color:var(--muted)}
+.rows b{color:var(--fg);font-weight:600}
+.curve{width:100%;height:120px;margin:6px 0 16px}
+.curve text{fill:#8d949c;font:500 10px var(--mono)}
+.dfm{margin-top:12px;font:500 12.5px/1.5 var(--mono);color:#ffb37f}
+.caps{width:min(var(--wrap),100% - 48px);margin:0 auto;padding:40px 0 90px}
+.caps h1{font:800 clamp(40px,5vw,72px)/.92 var(--head);font-stretch:85%;text-transform:uppercase;margin:14px 0 30px;max-width:14em}
+.tbl{width:100%;border-collapse:collapse;font-size:14.5px;margin-bottom:40px}
+.tbl th,.tbl td{text-align:left;padding:13px 12px;border-bottom:1px solid var(--line)}
+.tbl th{font:500 12px/1 var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.tbl td:first-child{font-weight:650}
+.sh-card h3{font-family:var(--head);font-weight:700;font-size:18px}
+.sh-art{background:radial-gradient(circle at 50% 40%,#20242a,#14171b)}
+.sh-stage,.sh-thumb,.sh-line-art{background:radial-gradient(circle at 50% 40%,#20242a,#14171b)}
+.sh-shop-head h1,.sh-buy h1,.sh-checkout h1,.sh-narrow h1{font-weight:800;font-stretch:85%;text-transform:uppercase}
+.sh-select,.sh-input,.sh-field input,.sh-field select,.sh-field textarea{background:#14171b}
+@media (max-width:980px){.nav{display:none}.burger{display:block}body.menu-open .nav{display:flex;position:absolute;top:70px;left:0;right:0;flex-direction:column;padding:18px 24px;background:var(--bg);border-bottom:1px solid var(--line)}
+  .hero,.strip,.iq{grid-template-columns:1fr}.hcopy{padding:40px 24px}.hart{min-height:380px}.procs{grid-template-columns:1fr 1fr}.res{position:static}.grid2{grid-template-columns:1fr}.qbtn span:first-child{display:none}}
 </style>
 </head>
 <body>
-<section class="hero pad" style="padding-top:0;padding-bottom:0">
-  <nav class="nav"><a href="#">Halden &amp; Co.</a><a href="#">Projects (24)</a><a href="#">Studio</a><a href="#">Contact</a></nav>
-  <div class="title">
-    <h1 class="serif" data-in>Halden <i>&amp;</i> Co.</h1>
-    <p data-in style="--d:2">An architecture practice in Copenhagen and Oslo, designing calm buildings for cities that keep changing.</p>
-  </div>
-  <div class="frame ph">
-    <img src="https://images.unsplash.com/photo-1527576539890-dfa815648363?auto=format&fit=crop&w=2200&q=72" alt="Curved brick facades of a tower complex against a bright sky">
-    <span class="count">01 / 24</span>
-    <div class="cap"><b>Axel Quarter</b><span>Copenhagen · Mixed use · 2025</span><span>View project →</span></div>
-  </div>
-</section>
-<main class="pad">
-  <section>
-    <div class="about"><small>Studio</small><h2 class="serif">We design buildings that age <i>gracefully</i>, read clearly from the street and feel generous from the inside.</h2></div>
-    <div class="works">
-      <article class="work"><div class="ph"><img src="https://images.unsplash.com/photo-1483366774565-c783b9f70e2c?auto=format&fit=crop&w=1400&q=70" alt="A concrete building seen from below" loading="lazy"></div><div class="meta"><h3>Nordlys Library</h3><span>Oslo · 2024</span></div></article>
-      <article class="work"><div class="ph"><img src="https://images.unsplash.com/photo-1532456745301-b2c645d8b80d?auto=format&fit=crop&w=1000&q=70" alt="A white concrete facade pattern" loading="lazy"></div><div class="meta"><h3>Kalk House</h3><span>Aarhus · 2023</span></div></article>
+<header class="head"><div class="wrap">
+  <a class="logo" href="#/"><i></i>Ferro Precision</a>
+  <nav class="nav"><a href="#/instant-quote" data-nav="instant-quote">Instant quote</a><a href="#/shop" data-nav="shop">Standard parts</a><a href="#/capabilities" data-nav="capabilities">Capabilities</a><a href="#/quote" data-nav="quote">Request a quote</a></nav>
+  <a class="qbtn" href="#" data-cart><span data-cart-label>Quote list</span><span data-cart-count>0</span></a>
+  <button class="burger" data-menu aria-label="Menu">Menu</button>
+</div></header>
+
+<main>
+<section data-view="home">
+  <div class="hero">
+    <div class="hcopy">
+      <p class="tag" data-in>// CNC machining · turning · sheet metal</p>
+      <h1 data-in style="--d:1">Precision parts,<br><span>in 5 days.</span></h1>
+      <p data-in style="--d:2">Upload a CAD file, pick a material and finish, and get a price in seconds. From one prototype to 10,000 production parts, inspected and shipped from our ISO 9001 shop.</p>
+      <div class="ctas" data-in style="--d:3"><a class="sh-btn" href="#/instant-quote">Get an instant quote</a><a class="sh-btn ghost" href="#/shop">Standard parts</a></div>
+      <div class="specline" data-in style="--d:4"><div><b>±0.01 mm</b>tightest tolerance</div><div><b>42</b>materials</div><div><b>1–10k</b>pieces per order</div></div>
     </div>
-    <ul class="list">
-      <li><span>03</span><b>Harbour Baths</b><span>Civic</span><span>Copenhagen</span><span>2023</span></li>
-      <li><span>04</span><b>Vinter Atelier</b><span>Cultural</span><span>Bergen</span><span>2022</span></li>
-      <li><span>05</span><b>Linden Court</b><span>Housing</span><span>Malmö</span><span>2022</span></li>
-      <li><span>06</span><b>Stille Pavilion</b><span>Landscape</span><span>Oslo</span><span>2021</span></li>
-    </ul>
-  </section>
-  <footer class="foot"><h2 class="serif">Let’s build.</h2><p>studio@halden.co<br>Bredgade 21, Copenhagen<br>Photos: Unsplash</p></footer>
+    <div class="hart" aria-hidden="true">
+      <div class="spin" style="position:absolute;inset:0" data-hero></div>
+      <div class="callout" style="left:6%;top:16%"><b>MATERIAL</b>Aluminum 6061-T6</div>
+      <div class="callout" style="right:6%;top:30%"><b>TOLERANCE</b>±0.02 mm on bores</div>
+      <div class="callout" style="left:10%;bottom:16%"><b>FINISH</b>Type II anodize, black</div>
+      <div class="callout" style="right:8%;bottom:12%"><b>LEAD TIME</b>5 business days</div>
+    </div>
+  </div>
+  <section class="sec"><div class="wrap">
+    <div class="sec-h"><h2>Four processes under one roof.</h2><p>One supplier, one quality system, one invoice, from the first prototype to repeat production.</p></div>
+    <div class="procs">
+      <div class="proc"><div class="pa" data-part="enclosure|#c9ced4"></div><h3>CNC milling</h3><p>3-, 4- and 5-axis milling for housings, brackets and complex prismatic parts.</p><span class="mono">up to 1,200 × 600 × 500 mm</span></div>
+      <div class="proc"><div class="pa" data-part="pin|#b7bcc2"></div><h3>CNC turning</h3><p>Shafts, pins, bushings and threaded parts on Swiss-type and live-tool lathes.</p><span class="mono">Ø2 – Ø300 mm</span></div>
+      <div class="proc"><div class="pa" data-part="bracket|#8c9298"></div><h3>Sheet metal</h3><p>Laser cutting, bending and welding in steel, stainless and aluminum.</p><span class="mono">0.5 – 12 mm thickness</span></div>
+      <div class="proc"><div class="pa" data-part="gear|#c9a24a"></div><h3>Finishing</h3><p>Anodizing, powder coating, bead blasting, passivation and laser marking.</p><span class="mono">12 finishes in house</span></div>
+    </div>
+  </div></section>
+  <section class="sec" style="padding-top:0"><div class="wrap">
+    <div class="strip"><div><h2>A price in 10 seconds, not 10 days.</h2><p>Our instant quote engine prices your part from its size, material, tolerance and finish, and shows how the unit price drops with quantity.</p><a class="sh-btn" href="#/instant-quote">Try the instant quote</a></div>
+    <div class="mini"><div><b>$38.40</b>unit price at 10 pcs</div><div><b>$11.90</b>unit price at 500 pcs</div><div><b>Nov 06</b>ships, standard</div><div><b>DFM</b>feedback within 4 hours</div></div></div>
+  </div></section>
+  <section class="sec" style="padding-top:0"><div class="wrap">
+    <div class="sec-h"><h2>Standard parts, ready to order.</h2><a href="#/shop" style="border-bottom:1px solid">All standard parts</a></div>
+    <div class="sh-grid" data-products="featured" data-limit="4"></div>
+  </div></section>
+</section>
+<section data-view="shop" hidden></section>
+<section data-view="p" hidden></section>
+<section data-view="quote" hidden></section>
+<section data-view="instant-quote" hidden></section>
+<section data-view="capabilities" hidden><div class="caps">
+  <p class="tag">// Capabilities</p><h1>Machines, materials and tolerances.</h1>
+  <table class="tbl"><thead><tr><th>Process</th><th>Machines</th><th>Max part size</th><th>Standard tolerance</th><th>Best tolerance</th></tr></thead><tbody>
+    <tr><td>3-axis milling</td><td>14 × Haas VF series</td><td>1,200 × 600 × 500 mm</td><td>±0.1 mm</td><td>±0.02 mm</td></tr>
+    <tr><td>5-axis milling</td><td>6 × DMG Mori DMU</td><td>650 × 650 × 500 mm</td><td>±0.05 mm</td><td>±0.01 mm</td></tr>
+    <tr><td>CNC turning</td><td>9 × Swiss-type and live-tool lathes</td><td>Ø300 × 600 mm</td><td>±0.05 mm</td><td>±0.01 mm</td></tr>
+    <tr><td>Sheet metal</td><td>Fiber laser, 3 press brakes, TIG/MIG</td><td>3,000 × 1,500 mm</td><td>±0.2 mm</td><td>±0.1 mm</td></tr>
+  </tbody></table>
+  <table class="tbl"><thead><tr><th>Material family</th><th>Grades</th><th>Typical use</th></tr></thead><tbody>
+    <tr><td>Aluminum</td><td>6061-T6, 7075-T6, 5052, 2024</td><td>Housings, brackets, fixtures</td></tr>
+    <tr><td>Stainless steel</td><td>303, 304, 316L, 17-4 PH</td><td>Food, medical and marine parts</td></tr>
+    <tr><td>Steel</td><td>1018, 1045, 4140, tool steels</td><td>Shafts, gears, wear parts</td></tr>
+    <tr><td>Brass and copper</td><td>C360 brass, C110 copper</td><td>Fittings, electrical contacts</td></tr>
+    <tr><td>Plastics</td><td>POM (Delrin), PEEK, nylon, ABS, PC</td><td>Insulators, low-friction parts</td></tr>
+  </tbody></table>
+  <p class="mono" style="color:var(--muted)">ISO 9001:2015 · ITAR registered · First-article inspection reports and CMM data available on request</p>
+</div></section>
 </main>
+<footer class="foot"><div class="wrap"><span>Ferro Precision Manufacturing · quotes@ferro.example · +1 (000) 000-0000</span><span>A website concept by JIEWEITECH</span></div></footer>
+
+<script src="assets/shop.js"></script>
+<script>
+(function () {
+  var sh = function (h, a) { return Shop.shade(h, a); };
+  /* isometric drawing helpers (400 × 400 board) */
+  function partSVG(kind, hex, o) {
+    o = o || {};
+    var s = 1, cx = 200, cy = o.cy || 210, out = [];
+    var P = function (x, y, z) { return [cx + (x - y) * 0.866 * s, cy + (x + y) * 0.5 * s - z * s]; };
+    var poly = function (pts, fill, extra) { return '<polygon points="' + pts.map(function (p) { return p[0].toFixed(1) + "," + p[1].toFixed(1); }).join(" ") + '" fill="' + fill + '"' + (extra || ' stroke="rgba(0,0,0,.25)" stroke-width="1"') + "/>"; };
+    var box = function (x, y, z, w, d, h, c) {
+      out.push(poly([P(x + w, y, z), P(x + w, y + d, z), P(x + w, y + d, z + h), P(x + w, y, z + h)], sh(c, -0.28)));
+      out.push(poly([P(x, y + d, z), P(x + w, y + d, z), P(x + w, y + d, z + h), P(x, y + d, z + h)], sh(c, -0.1)));
+      out.push(poly([P(x, y, z + h), P(x + w, y, z + h), P(x + w, y + d, z + h), P(x, y + d, z + h)], sh(c, 0.18)));
+    };
+    var ell = function (x, y, z, r, fill, extra) { var c0 = P(x, y, z); return '<ellipse cx="' + c0[0].toFixed(1) + '" cy="' + c0[1].toFixed(1) + '" rx="' + (r * 1.2247 * s).toFixed(1) + '" ry="' + (r * 0.7071 * s).toFixed(1) + '" fill="' + fill + '"' + (extra || "") + "/>"; };
+    var cyl = function (x, y, z, r, h, c, teeth) {
+      var b = P(x, y, z), t = P(x, y, z + h), rx = r * 1.2247 * s, ry = r * 0.7071 * s;
+      var gid = "cg" + Math.random().toString(36).slice(2, 7);
+      out.push('<defs><linearGradient id="' + gid + '" x1="0" x2="1"><stop offset="0" stop-color="' + sh(c, -0.05) + '"/><stop offset=".45" stop-color="' + sh(c, 0.25) + '"/><stop offset="1" stop-color="' + sh(c, -0.35) + '"/></linearGradient></defs>');
+      if (teeth) {
+        var ring = function (cz, rr, k) { var pts = []; for (var i = 0; i < k * 2; i++) { var a = i / (k * 2) * Math.PI * 2, R = i % 2 ? rr * 0.86 : rr; pts.push(P(x + Math.cos(a) * R, y + Math.sin(a) * R, cz)); } return pts; };
+        out.push(poly(ring(z, r, teeth), sh(c, -0.3)));
+        for (var zz = z; zz < z + h; zz += 2) out.push(poly(ring(zz, r, teeth), sh(c, -0.18 + (zz - z) / h * 0.12), ' stroke="none"'));
+        out.push(poly(ring(z + h, r, teeth), sh(c, 0.18)));
+        return;
+      }
+      out.push('<path d="M' + (b[0] - rx) + " " + b[1] + " A" + rx + " " + ry + " 0 0 0 " + (b[0] + rx) + " " + b[1] + " L" + (t[0] + rx) + " " + t[1] + " A" + rx + " " + ry + " 0 0 1 " + (t[0] - rx) + " " + t[1] + ' Z" fill="url(#' + gid + ')" stroke="rgba(0,0,0,.25)"/>');
+      out.push(ell(x, y, z + h, r, sh(c, 0.16), ' stroke="rgba(0,0,0,.2)"'));
+    };
+    var hole = function (x, y, z, r) { out.push(ell(x, y, z, r, "#0d0f12", ' stroke="' + sh(hex, -0.4) + '"')); };
+    if (kind === "enclosure") { s = 1.05; box(-70, -50, 0, 140, 100, 56, hex); box(-70, -50, 56, 140, 100, 10, sh(hex, 0.04)); [[-58, -38], [58, -38], [-58, 38], [58, 38]].forEach(function (q) { hole(q[0], q[1], 66, 4); }); out.push(poly([P(-40, -30, 66.2), P(40, -30, 66.2), P(40, 30, 66.2), P(-40, 30, 66.2)], sh(hex, 0.05), ' stroke="' + sh(hex, -0.2) + '"')); }
+    else if (kind === "bracket") { s = 1.1; box(-60, -40, 0, 120, 80, 12, hex); box(-60, 28, 12, 120, 12, 80, hex); hole(-30, -10, 12, 7); hole(30, -10, 12, 7); var a1 = P(-30, 40, 62), a2 = P(30, 40, 62); out.push('<ellipse cx="' + a1[0] + '" cy="' + a1[1] + '" rx="6" ry="8" fill="#0d0f12"/><ellipse cx="' + a2[0] + '" cy="' + a2[1] + '" rx="6" ry="8" fill="#0d0f12"/>'); }
+    else if (kind === "flange") { s = 1.05; cyl(0, 0, 0, 90, 18, hex); cyl(0, 0, 18, 46, 30, hex); hole(0, 0, 48, 26); for (var i = 0; i < 6; i++) { var a = i / 6 * Math.PI * 2; hole(Math.cos(a) * 68, Math.sin(a) * 68, 18, 7); } }
+    else if (kind === "pin") { s = 1; cyl(0, 0, 0, 34, 40, hex); cyl(0, 0, 40, 24, 110, hex); cyl(0, 0, 150, 16, 26, hex); hole(0, 0, 176, 6); }
+    else if (kind === "spacer") { s = 1.3; cyl(0, 0, 0, 52, 56, hex); hole(0, 0, 56, 26); }
+    else if (kind === "gear") { s = 1.05; cyl(0, 0, 0, 92, 30, hex, 18); cyl(0, 0, 30, 34, 26, hex); hole(0, 0, 56, 16); }
+    else if (kind === "plate") { s = 1.05; box(-90, -60, 0, 180, 120, 16, hex); out.push(poly([P(-60, -30, 16.2), P(60, -30, 16.2), P(60, 30, 16.2), P(-60, 30, 16.2)], sh(hex, -0.25))); [[-76, -46], [76, -46], [-76, 46], [76, 46]].forEach(function (q) { hole(q[0], q[1], 16, 6); }); }
+    else if (kind === "knob") { s = 1.25; cyl(0, 0, 0, 48, 40, hex, 24); cyl(0, 0, 40, 30, 10, sh(hex, 0.05)); hole(0, 0, 50, 8); }
+    else if (kind === "hero") { s = 1.65; cy = 230; box(-80, -60, 0, 160, 120, 40, hex); cyl(30, -10, 40, 28, 34, hex); hole(30, -10, 74, 14); hole(60, 40, 40, 8); hole(-50, -40, 40, 8); out.push(poly([P(-62, -10, 40.2), P(-10, -10, 40.2), P(-10, 40, 40.2), P(-62, 40, 40.2)], sh(hex, -0.3))); }
+    var shadow = '<ellipse cx="200" cy="' + (cy + 70) + '" rx="150" ry="26" fill="rgba(0,0,0,.35)" filter="blur(6px)"/>';
+    return '<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg"' + (o.cls ? ' class="' + o.cls + '"' : "") + ">" + (o.noShadow ? "" : '<ellipse cx="200" cy="' + (cy + 80) + '" rx="130" ry="18" fill="rgba(0,0,0,.35)"/>') + out.join("") + "</svg>";
+  }
+  var MAT = {
+    "Aluminum 6061": { hex: "#c9ced4", rate: 0.012, mach: 1 }, "Aluminum 7075": { hex: "#d3d6da", rate: 0.018, mach: 1.1 }, "Stainless 304": { hex: "#b7bcc2", rate: 0.04, mach: 1.9 }, "Steel 1045": { hex: "#8c9298", rate: 0.02, mach: 1.5 },
+    "Brass C360": { hex: "#c9a24a", rate: 0.05, mach: 1.2 }, "Titanium Gr5": { hex: "#9aa0a8", rate: 0.15, mach: 3 }, "POM (Delrin)": { hex: "#ece9e2", rate: 0.015, mach: 0.8 }, "Black anodized aluminum": { hex: "#34383e", rate: 0.014, mach: 1.05 }
+  };
+  var mats = function () { return Array.prototype.map.call(arguments, function (n) { return { name: n, hex: MAT[n].hex }; }); };
+  var P = [
+    { id: "fp-sc12", sku: "FP-SC12", name: "Shaft collar, one-piece clamp", kind: "spacer", cat: "Shaft components", process: "CNC turning", colors: mats("Aluminum 6061", "Stainless 304", "Steel 1045"), tiers: [[1, 9.8], [25, 6.4], [100, 4.2], [500, 2.9]], moq: 1, featured: true, desc: "Precision clamp collar with a 1/4-20 cap screw. Bore tolerance H7.", specs: { "Bore sizes": "6–50 mm", Tolerance: "H7 bore", Finish: "As machined or black oxide", Standard: "DIN 705 compatible" } },
+    { id: "fp-fl80", sku: "FP-FL80", name: "Bearing flange, 6-bolt", kind: "flange", cat: "Shaft components", process: "CNC turning", colors: mats("Aluminum 6061", "Steel 1045", "Stainless 304"), tiers: [[1, 46], [25, 31], [100, 22.5], [500, 17.8]], featured: true, desc: "Flanged bearing housing with six M8 clearance holes on a 136 mm PCD.", specs: { "Outer diameter": "180 mm", Bore: "52 mm H7", Thickness: "48 mm overall", Holes: "6 × Ø9 on 136 mm PCD" } },
+    { id: "fp-gr18", sku: "FP-GR18", name: "Spur gear, module 2, 18 teeth", kind: "gear", cat: "Power transmission", process: "CNC milling", colors: mats("Steel 1045", "Brass C360", "POM (Delrin)"), tiers: [[1, 38], [25, 24], [100, 16.5], [500, 12.1]], featured: true, badge: "Hardened option", desc: "20° pressure angle spur gear with hub, cut on our gear hobber. Induction hardening available.", specs: { Module: "2", Teeth: "18", "Pitch diameter": "36 mm", "Face width": "20 mm", Hardening: "Optional, 50–55 HRC" } },
+    { id: "fp-kn48", sku: "FP-KN48", name: "Knurled control knob", kind: "knob", cat: "Hardware", process: "CNC turning", colors: mats("Black anodized aluminum", "Aluminum 6061", "Brass C360"), tiers: [[1, 14], [25, 8.9], [100, 5.6], [500, 3.8]], desc: "Diamond-knurled knob with set screw, for 6 mm D-shafts.", specs: { Diameter: "48 mm", Shaft: "6 mm D-cut", Knurl: "Diamond, 1.0 pitch" } },
+    { id: "fp-lb120", sku: "FP-LB120", name: "Right-angle mounting bracket", kind: "bracket", cat: "Brackets & plates", process: "Sheet metal", colors: mats("Steel 1045", "Stainless 304", "Aluminum 6061"), tiers: [[1, 18], [25, 9.5], [100, 5.2], [500, 3.4]], featured: true, desc: "Laser-cut and formed bracket, 6 mm plate, with slotted holes for adjustment.", specs: { Size: "120 × 80 × 92 mm", Thickness: "6 mm", Finish: "Zinc plate or powder coat" } },
+    { id: "fp-mp180", sku: "FP-MP180", name: "Machined mounting plate", kind: "plate", cat: "Brackets & plates", process: "CNC milling", colors: mats("Aluminum 6061", "Aluminum 7075", "Black anodized aluminum"), tiers: [[1, 64], [25, 41], [100, 29], [500, 22]], desc: "Fly-cut flat plate with a 4 mm pocket and four counterbored holes.", specs: { Size: "180 × 120 × 16 mm", Flatness: "0.05 mm", Pocket: "120 × 60 × 4 mm" } },
+    { id: "fp-en140", sku: "FP-EN140", name: "Electronics enclosure with lid", kind: "enclosure", cat: "Enclosures", process: "CNC milling", colors: mats("Black anodized aluminum", "Aluminum 6061"), tiers: [[1, 128], [25, 84], [100, 58], [500, 44]], badge: "IP65", desc: "Two-part enclosure milled from billet, with an O-ring groove for IP65 sealing.", specs: { Outside: "140 × 100 × 66 mm", Wall: "4 mm", Sealing: "IP65 with Viton O-ring", Finish: "Type II anodize" } },
+    { id: "fp-sp52", sku: "FP-SP52", name: "Precision spacer", kind: "spacer", cat: "Hardware", process: "CNC turning", colors: mats("POM (Delrin)", "Aluminum 6061", "Brass C360", "Titanium Gr5"), tiers: [[1, 6.5], [25, 3.1], [100, 1.8], [500, 1.1]], desc: "Turned spacer with chamfered edges. Length to order.", specs: { "Outer diameter": "8–60 mm", Length: "2–100 mm", Tolerance: "±0.05 mm" } },
+    { id: "fp-dp150", sku: "FP-DP150", name: "Stepped drive pin", kind: "pin", cat: "Shaft components", process: "CNC turning", colors: mats("Steel 1045", "Stainless 304"), tiers: [[1, 22], [25, 13], [100, 8.4], [500, 6.2]], desc: "Three-diameter stepped pin with a cross hole, ground to h6.", specs: { Length: "176 mm", Diameters: "34 / 24 / 16 mm", Tolerance: "h6 on bearing seat" } },
+    { id: "custom", hidden: true, name: "Custom machined part", kind: "hero", cat: "Custom", price: 0, colors: mats("Aluminum 6061") }
+  ];
+  P.forEach(function (p) { p.unit = "pc"; p.views = 1; p.material = p.colors.map(function (c) { return c.name; }); p.points = [p.process, "Inspection report included", "Ships in 5–10 business days"]; });
+  var art = function (p, st) { st = st || {}; var c = p.colors[st.color || 0] || p.colors[0]; return partSVG(st.kind || p.kind, st.hex || c.hex); };
+  document.querySelector("[data-hero]").innerHTML = partSVG("hero", "#c9ced4", { cls: "main" });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-part]"), function (el) { var a = el.dataset.part.split("|"); el.innerHTML = partSVG(a[0], a[1], { noShadow: true }); el.firstChild.style.height = "100%"; el.firstChild.style.width = "100%"; });
+
+  /* instant quote */
+  var Q = { process: "CNC milling", material: "Aluminum 6061", L: 120, W: 80, H: 40, complexity: 1, tol: "±0.1 mm", finish: "As machined", qty: 50, speed: "Standard", file: "" };
+  var PROC = { "CNC milling": { setup: 85, rate: 1.25, kind: "hero" }, "CNC turning": { setup: 60, rate: 0.95, kind: "pin" }, "Sheet metal": { setup: 50, rate: 0.7, kind: "bracket" } };
+  var TOL = { "±0.1 mm": 1, "±0.05 mm": 1.22, "±0.02 mm": 1.45, "±0.01 mm": 1.75 };
+  var FIN = { "As machined": 0, "Bead blast": 1.6, "Anodize, clear": 2.6, "Anodize, black": 2.9, "Powder coat": 4.2, "Passivate": 1.8 };
+  function price(qty) {
+    var m = MAT[Q.material], pr = PROC[Q.process], vol = Q.L * Q.W * Q.H / 1000;
+    var stock = vol * m.rate * (Q.process === "Sheet metal" ? 0.25 : 1);
+    var minutes = (Math.pow(vol, 0.62) * [0.9, 1.6, 2.7][Q.complexity] * m.mach + 6) * (Q.process === "Sheet metal" ? 0.4 : 1);
+    var area = (2 * (Q.L * Q.W + Q.L * Q.H + Q.W * Q.H)) / 10000;
+    var fin = FIN[Q.finish] ? FIN[Q.finish] + area * (Q.finish.indexOf("Anod") === 0 ? 3 : 2) : 0;
+    var unit = (stock + minutes * pr.rate * TOL[Q.tol]) * Math.max(0.42, 1 - 0.17 * Math.log10(qty)) + fin + pr.setup / qty;
+    if (Q.speed === "Expedited") unit *= 1.35;
+    return Math.max(1.2, unit);
+  }
+  function shipDate() { var d = new Date(), n = Q.speed === "Expedited" ? 5 : 10 + (Q.qty > 500 ? 5 : 0); while (n > 0) { d.setDate(d.getDate() + 1); if (d.getDay() % 6) n--; } return d.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" }); }
+  function iq(el) {
+    el = Shop.fresh(el);
+    var opt = function (list, cur) { return list.map(function (v) { return "<option" + (v === cur ? " selected" : "") + ">" + v + "</option>"; }).join(""); };
+    el.innerHTML = '<div class="iq"><div><p class="tag">// Instant quote</p><h1>Price your part</h1><p>Prices update as you type. Upload your CAD file with the request and an engineer checks it for manufacturability within 4 hours.</p>' +
+      '<label class="drop"><input type="file" accept=".step,.stp,.iges,.igs,.stl,.dxf,.pdf" multiple data-file><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ff6a13" stroke-width="1.6"><path d="M12 16V4M7 9l5-5 5 5M4 16v4h16v-4"/></svg><span><b data-fname>Upload CAD files</b><small>STEP, IGES, STL, DXF or PDF drawings · files stay private</small></span></label>' +
+      '<div class="grid2"><label class="fld"><span>Process</span><select data-q="process">' + opt(Object.keys(PROC), Q.process) + '</select></label><label class="fld"><span>Material</span><select data-q="material">' + opt(Object.keys(MAT), Q.material) + "</select></label>" +
+      '<div class="fld" style="grid-column:1/-1"><span>Bounding box (mm) · length × width × height</span><div class="dims"><input type="number" min="5" max="1200" value="' + Q.L + '" data-q="L" aria-label="Length"><input type="number" min="5" max="600" value="' + Q.W + '" data-q="W" aria-label="Width"><input type="number" min="2" max="500" value="' + Q.H + '" data-q="H" aria-label="Height"></div></div>' +
+      '<div class="fld" style="grid-column:1/-1"><span>Complexity</span><div class="seg" data-seg="complexity"><button type="button" data-v="0">Simple · few features</button><button type="button" data-v="1">Moderate · pockets &amp; holes</button><button type="button" data-v="2">Complex · 5-axis surfaces</button></div></div>' +
+      '<label class="fld"><span>Tightest tolerance</span><select data-q="tol">' + opt(Object.keys(TOL), Q.tol) + '</select></label><label class="fld"><span>Finish</span><select data-q="finish">' + opt(Object.keys(FIN), Q.finish) + "</select></label>" +
+      '<label class="fld"><span>Quantity</span><input type="number" min="1" max="10000" value="' + Q.qty + '" data-q="qty"></label><div class="fld"><span>Lead time</span><div class="seg" data-seg="speed"><button type="button" data-v="Standard">Standard</button><button type="button" data-v="Expedited">Expedited</button></div></div></div></div>' +
+      '<aside class="res"><div class="pv" data-pv></div><div class="body"><p class="tag">Unit price</p><p class="big" data-unit></p><div class="rows"><div><span>Quantity</span><b data-qn></b></div><div><span>Order total</span><b data-tot></b></div><div><span>Ships by</span><b data-ship></b></div><div><span>Inspection</span><b>FAI report included</b></div></div>' +
+      '<svg class="curve" viewBox="0 0 380 120" data-curve></svg><button class="sh-btn block" type="button" data-addq>Add to quote list</button><p class="dfm" data-dfm></p></div></aside></div>';
+    var paint = function () {
+      var u = price(Q.qty);
+      el.querySelector("[data-unit]").textContent = Shop.money(u);
+      el.querySelector("[data-qn]").textContent = Q.qty.toLocaleString("en-US") + " pcs";
+      el.querySelector("[data-tot]").textContent = Shop.money(u * Q.qty);
+      el.querySelector("[data-ship]").textContent = shipDate();
+      el.querySelector("[data-pv]").innerHTML = partSVG(PROC[Q.process].kind, MAT[Q.material].hex) + '<span class="dimtag">' + Q.L + " × " + Q.W + " × " + Q.H + " mm</span>";
+      Array.prototype.forEach.call(el.querySelectorAll("[data-seg]"), function (g) { Array.prototype.forEach.call(g.children, function (b) { b.classList.toggle("on", String(Q[g.dataset.seg]) === b.dataset.v); }); });
+      var qs = [1, 10, 50, 100, 500, 1000, 5000], ps = qs.map(price), mx = Math.max.apply(null, ps);
+      var pts = qs.map(function (q, i) { return [20 + i * 56, 100 - ps[i] / mx * 80]; });
+      el.querySelector("[data-curve]").innerHTML = '<path d="M' + pts.map(function (p) { return p.join(" "); }).join(" L") + '" fill="none" stroke="#ff6a13" stroke-width="2"/>' + pts.map(function (p, i) { return '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="3" fill="#ff6a13"/><text x="' + p[0] + '" y="116" text-anchor="middle">' + (qs[i] >= 1000 ? qs[i] / 1000 + "k" : qs[i]) + '</text><text x="' + p[0] + '" y="' + (p[1] - 8) + '" text-anchor="middle">$' + (ps[i] < 10 ? ps[i].toFixed(2) : Math.round(ps[i])) + "</text>"; }).join("");
+      var warn = [];
+      if (Q.tol === "±0.01 mm" && Q.material.indexOf("POM") === 0) warn.push("⚠ Plastics move with temperature; ±0.01 mm is hard to hold in POM. We may suggest ±0.05 mm.");
+      if (Q.process === "Sheet metal" && Q.H > 150) warn.push("⚠ Sheet metal parts over 150 mm tall may need welding. We'll review your drawing.");
+      if (Q.process === "CNC turning" && Math.abs(Q.L - Q.W) > 60) warn.push("⚠ Turned parts are round: width and height usually match the diameter.");
+      el.querySelector("[data-dfm]").textContent = warn.join(" ");
+    };
+    el.addEventListener("input", function (e) { var k = e.target.dataset.q; if (!k) return; Q[k] = ["L", "W", "H", "qty"].indexOf(k) > -1 ? Math.max(1, +e.target.value || 1) : e.target.value; paint(); });
+    el.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-seg] button"); if (b) { var k = b.parentNode.dataset.seg; Q[k] = k === "complexity" ? +b.dataset.v : b.dataset.v; paint(); }
+      if (e.target.closest("[data-addq]")) Shop.add("custom", Q.qty, { process: Q.process, material: Q.material, size: Q.L + "×" + Q.W + "×" + Q.H + " mm", tolerance: Q.tol, finish: Q.finish, file: Q.file, _unit: Math.round(price(Q.qty) * 100) / 100, _state: { kind: PROC[Q.process].kind, hex: MAT[Q.material].hex } });
+    });
+    el.querySelector("[data-file]").addEventListener("change", function (e) { var f = Array.prototype.map.call(e.target.files, function (x) { return x.name; }); Q.file = f.join(", "); el.querySelector("[data-fname]").textContent = f.length ? f.join(", ") : "Upload CAD files"; });
+    paint();
+  }
+  Shop.init({
+    id: "L3", name: "Ferro Precision", mode: "quote", products: P, art: art, files: "Attach CAD files or drawings (STEP, IGES, DXF, PDF)", rfqPrefix: "FP",
+    labels: { cart: "Quote list", add: "Add to quote list", added: "Added to your quote list", shop: "Standard parts", all: "Standard parts" },
+    quoteLead: "Send your drawings and quantities. An engineer reviews every request and replies with a firm quote within 4 business hours.",
+    quotePlaceholder: "Quantities, materials, tolerances, finishes, certifications needed…",
+    facets: [{ key: "cat", label: "Category" }, { key: "process", label: "Process" }, { key: "material", label: "Material" }, { key: "price", label: "Unit price (500+)", type: "range" }],
+    options: function (p) { return [{ key: "color", label: "Material", type: "swatch", values: p.colors }, { key: "finish", label: "Finish", type: "select", values: [{ name: "As machined" }, { name: "Bead blast", add: 0.8 }, { name: "Anodize / black oxide", add: 1.6 }, { name: "Powder coat", add: 2.4 }] }]; },
+    priceAdjust: function (p, price, o) { var add = { "Bead blast": 0.8, "Anodize / black oxide": 1.6, "Powder coat": 2.4 }[o.finish] || 0; var m = { "Stainless 304": 1.35, "Titanium Gr5": 2.6, "Brass C360": 1.2, "Aluminum 7075": 1.12 }[o.color] || 1; return price * m + add; },
+    views: { "instant-quote": iq }
+  });
+})();
+</script>
 </body>
 </html>

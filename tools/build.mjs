@@ -25,6 +25,7 @@ const PAGES = [
   { file: "website-development.html", path: "website-development.html", priority: "0.9", service: "website-development" },
   { file: "geo-optimization.html", path: "geo-optimization.html", priority: "0.9", service: "geo-optimization" },
   { file: "standalone-websites.html", path: "standalone-websites.html", priority: "0.9", service: "standalone-websites" },
+  { file: "design-studio.html", path: "design-studio.html", priority: "0.8" },
   { file: "contact.html", path: "contact.html", priority: "0.8" },
   { file: "privacy.html", path: "privacy.html", priority: "0.3" },
   { file: "404.html", path: null }
@@ -97,7 +98,7 @@ function jsonLd(page, lang, $) {
     const name = text($, "h1");
     graph.push({ "@type": "Service", name: $("title").text().split("|")[0].trim(), description: $('meta[name="description"]').attr("content"),
       provider: { "@id": org["@id"] }, areaServed: "Worldwide", serviceType: name, url: url(lang, page.path),
-      ...(page.service === "website-development" ? { offers: [["Basic", 149], ["Standard", 448], ["Premium", 747]].map(([n, p]) => ({ "@type": "Offer", name: n, price: String(p), priceCurrency: "USD", description: es ? "Precio inicial" : "Starting price" })) } : {}) });
+      ...(page.service === "website-development" ? { offers: [["Basic", 200, "Hasta 6 páginas principales y 15 subpáginas; tarjeta de presentación digital", "Up to 6 main pages and 15 subpages; a digital business card website"], ["Standard", 500, "Hasta 11 páginas principales y 40 subpáginas; sitio corporativo completo con formularios, panel y varios idiomas", "Up to 11 main pages and 40 subpages; a complete company website with forms, dashboard and multiple languages"], ["Premium", 800, "Hasta 15 páginas principales y 75 subpáginas; GEO avanzado y promoción en medios del sector", "Up to 15 main pages and 75 subpages; advanced GEO and industry media promotion"]].map(([n, p, des, den]) => ({ "@type": "Offer", name: n, price: String(p), priceCurrency: "USD", description: es ? des : den })) } : {}) });
   }
   const faqs = $(".faq details").toArray().map((d) => ({ "@type": "Question", name: text($, $(d).find("summary")), acceptedAnswer: { "@type": "Answer", text: text($, $(d).find("p")) } }));
   if (faqs.length) graph.push({ "@type": "FAQPage", mainEntity: faqs, inLanguage: lang });
@@ -199,9 +200,10 @@ fs.writeFileSync(path.join(OUT, "llms.txt"), `# ${CO.brand}
 
 ## Services
 
-- [Website Development](${url("en", "website-development.html")}): websites for manufacturers, trading companies and B2B service providers. Plans start at $149 (Basic), $448 (Standard) and $747 (Premium).
+- [Website Development](${url("en", "website-development.html")}): websites for manufacturers, trading companies and B2B service providers. Plans: Basic $200 (up to 6 main pages and 15 product or service subpages, a digital business card site), Standard $500 (up to 11 main pages and 40 subpages, inquiry forms, product and news dashboard, multiple languages, analytics), Premium $800 (up to 15 main pages and 75 subpages, advanced GEO, industry media promotion).
 - [GEO Optimization](${url("en", "geo-optimization.html")}): helps AI tools such as ChatGPT, Gemini, Perplexity and Google's AI Overviews describe and recommend a business correctly.
 - [Standalone Websites](${url("en", "standalone-websites.html")}): branded sites on a company's own domain, built for export and direct inquiries.
+- [Design Studio](${url("en", "design-studio.html")}): an interactive tool where visitors choose layout, colors, fonts, style and animation, see a live preview of their website, and get a design requirements document with a plan recommendation.
 
 ## In Spanish
 
@@ -209,6 +211,7 @@ fs.writeFileSync(path.join(OUT, "llms.txt"), `# ${CO.brand}
 - [Desarrollo web](${url("es", "website-development.html")})
 - [Optimización GEO](${url("es", "geo-optimization.html")})
 - [Sitios web independientes](${url("es", "standalone-websites.html")})
+- [Estudio de diseño](${url("es", "design-studio.html")})
 - [Contacto](${url("es", "contact.html")})
 `);
 

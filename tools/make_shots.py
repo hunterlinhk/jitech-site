@@ -6,7 +6,7 @@ Start the site first (npm run dev, which serves http://localhost:3000), then
     python3 tools/make_shots.py L1 R3      (only these pages)
 Some pages use photos from Unsplash, so run it on a machine that can reach images.unsplash.com.
 """
-import io, os, sys, glob
+import io, os, re, sys, glob
 from playwright.sync_api import sync_playwright
 from PIL import Image
 
@@ -14,7 +14,8 @@ ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 BASE = os.environ.get("SHOTS_BASE", "http://localhost:3000/")
 OUT = os.path.join(ROOT, "public", "assets", "img", "shots")
 os.makedirs(OUT, exist_ok=True)
-ids = sys.argv[1:] or sorted(os.path.splitext(os.path.basename(f))[0] for f in glob.glob(os.path.join(ROOT, "public", "pages", "*.html")))
+# every concept page (named like L1 or B5); helper pages such as the Design Studio preview are skipped
+ids = sys.argv[1:] or sorted(n for n in (os.path.splitext(os.path.basename(f))[0] for f in glob.glob(os.path.join(ROOT, "public", "pages", "*.html"))) if re.fullmatch(r"[A-Z]\d", n))
 with sync_playwright() as p:
     b = p.chromium.launch()
     pg = b.new_page(viewport={"width": 1440, "height": 900})

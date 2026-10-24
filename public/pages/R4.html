@@ -57,6 +57,41 @@ section{padding:clamp(80px,9vw,130px) 0}
 .club ul li{display:flex;justify-content:space-between;padding:16px 0;border-bottom:1.5px solid rgba(244,234,215,.3);font-weight:700;font-size:18px}
 .foot{padding:30px 0 40px;display:flex;justify-content:space-between;color:var(--mut);font-weight:600}
 @media (max-width:900px){.nav a:not(.logo):not(.cart){display:none}.stage{grid-template-columns:1fr}.art{display:none}.blends,.club{grid-template-columns:1fr}}
+/* feature */
+.sub-sec{padding:clamp(80px,9vw,130px) 0;background:#efe1c6}
+.sub-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(320px,.75fr);gap:clamp(30px,5vw,80px);align-items:start}
+.sub-k{font-weight:800;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--tc)}
+.sub-h{font-size:clamp(40px,4.6vw,72px);line-height:.95;font-weight:900;letter-spacing:-.03em;margin:14px 0 30px}
+.sub-h i{color:var(--tc)}
+.sub-step{display:flex;align-items:center;gap:12px;margin:26px 0 12px;font-weight:800;font-size:17px}
+.sub-step b{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--br);color:var(--cr);font-size:14px}
+.sub-opts{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.sub-opts.four{grid-template-columns:repeat(4,1fr)}.sub-opts.three{grid-template-columns:repeat(3,1fr)}
+.sub-opts button{display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:16px;border-radius:16px;background:var(--cr);border:2px solid transparent;font-weight:800;font-size:15px;text-align:left;position:relative}
+.sub-opts button i{width:22px;height:22px;border-radius:50%;margin-bottom:6px}
+.sub-opts button small{font-weight:600;color:var(--mut);font-size:12.5px}
+.sub-opts button.on{border-color:var(--br);background:#fff8ea;box-shadow:4px 4px 0 var(--br)}
+.sub-row{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.sub-row label{display:flex;flex-direction:column;gap:10px;font-weight:700;background:var(--cr);padding:16px;border-radius:16px}
+.sub-row output{float:right;font-family:"Fraunces V";font-weight:900;font-size:20px;color:var(--tc)}
+.sub-row input{accent-color:var(--tc)}
+.sub-card{position:sticky;top:24px;background:var(--br);color:var(--cr);border-radius:28px;padding:28px}
+.sub-bag{height:250px;display:grid;place-items:center}
+.sub-bag svg{height:100%}
+.sub-name{font-weight:900;font-size:30px;line-height:1;margin:6px 0 14px}
+.sub-sum{display:flex;flex-direction:column;gap:8px;font-size:14.5px;color:#e6d4b8;margin-bottom:18px}
+.sub-sum li{display:flex;justify-content:space-between;gap:10px;border-bottom:1px dashed rgba(244,234,215,.2);padding-bottom:8px}
+.sub-sum b{color:var(--cr)}
+.sub-price span{font-size:15px;color:#e6d4b8}
+.sub-price b{font-family:"Fraunces V";font-size:38px;color:var(--mu);font-weight:900}
+.sub-price s{opacity:.6}
+.sub-price small{display:block;color:#bfa98a;margin-top:4px}
+.sub-btn{width:100%;height:56px;margin-top:18px;border-radius:99px;background:var(--tc);color:#fff;font-weight:800;font-size:16px}
+.sub-btn.done{background:var(--sg)}
+.sub-fine{font-size:12.5px;color:#bfa98a;margin-top:12px;text-align:center}
+@media (max-width:900px){.sub-grid{grid-template-columns:1fr}.sub-opts.four{grid-template-columns:1fr 1fr}.sub-card{position:static}}
+
+/* /feature */
 </style>
 </head>
 <body>
@@ -65,7 +100,7 @@ section{padding:clamp(80px,9vw,130px) 0}
 </defs></svg>
 <section class="hero" style="padding:0">
   <div class="wrap" style="height:100%;display:flex;flex-direction:column">
-    <header class="nav"><a class="logo" href="#">kiln<span>.</span></a><a href="#">Shop</a><a href="#">Subscriptions</a><a href="#">Cafés</a><a href="#">Wholesale</a><a class="cart" href="#">Bag (2)</a></header>
+    <header class="nav"><a class="logo" href="#">kiln<span>.</span></a><a href="#">Shop</a><a href="#subscribe">Subscriptions</a><a href="#">Cafés</a><a href="#">Wholesale</a><a class="cart" href="#">Bag (2)</a></header>
     <div class="stage">
       <div>
         <h1 class="fr" data-in>Roasted <span class="t">slow,</span><br>poured <span class="u">loud.</span></h1>
@@ -111,7 +146,71 @@ section{padding:clamp(80px,9vw,130px) 0}
       <ul><li><span>Every 2 weeks</span><span>−15%</span></li><li><span>Roaster’s pick</span><span>Rotating</span></li><li><span>Free shipping</span><span>Always</span></li><li><span>Pause or skip</span><span>Anytime</span></li></ul>
     </div>
   </section>
+<!-- feature -->
+  <section class="sub-sec" id="subscribe">
+    <div class="wrap sub-grid">
+      <div>
+        <p class="sub-k">Subscriptions · save 15%</p>
+        <h2 class="fr sub-h">Coffee that shows up <i>before you run out.</i></h2>
+        <div class="sub-step"><b>1</b><span>How do you like it?</span></div>
+        <div class="sub-opts" data-g="roast">
+          <button type="button" data-v="light"><i style="background:#c99a5b"></i>Light &amp; fruity<small>Ethiopia, Kenya</small></button>
+          <button type="button" data-v="medium"><i style="background:#8a5a33"></i>Balanced<small>Colombia, Guatemala</small></button>
+          <button type="button" data-v="dark"><i style="background:#3d2316"></i>Dark &amp; bold<small>Brazil, Sumatra</small></button>
+          <button type="button" data-v="rotating"><i style="background:conic-gradient(#c99a5b,#8a5a33,#3d2316,#c99a5b)"></i>Roaster's pick<small>A new origin each time</small></button>
+        </div>
+        <div class="sub-step"><b>2</b><span>How do you brew?</span></div>
+        <div class="sub-opts four" data-g="grind"><button type="button" data-v="Whole bean">Whole bean</button><button type="button" data-v="Espresso">Espresso</button><button type="button" data-v="Pour-over">Pour-over</button><button type="button" data-v="French press">French press</button></div>
+        <div class="sub-step"><b>3</b><span>How much do you drink?</span></div>
+        <div class="sub-row"><label>Cups a day <output data-cupso></output><input type="range" min="1" max="6" value="2" data-cups></label><label>People <output data-ppl-o></output><input type="range" min="1" max="4" value="1" data-ppl></label></div>
+        <div class="sub-step"><b>4</b><span>Delivery</span></div>
+        <div class="sub-opts three" data-g="freq"><button type="button" data-v="1">Every week</button><button type="button" data-v="2">Every 2 weeks</button><button type="button" data-v="4">Every 4 weeks</button></div>
+      </div>
+      <aside class="sub-card">
+        <div class="sub-bag" data-bag></div>
+        <p class="sub-name fr" data-name></p>
+        <ul class="sub-sum" data-sum></ul>
+        <div class="sub-price"><span><s data-was></s> <b data-price></b> per delivery</span><small data-per></small></div>
+        <button type="button" class="sub-btn" data-start>Start my subscription</button>
+        <p class="sub-fine">Skip, pause or cancel anytime. Free shipping on every subscription order.</p>
+      </aside>
+    </div>
+  </section>
+
+<!-- /feature -->
 </main>
 <footer class="wrap foot"><span>kiln. coffee roasters · Portland, OR</span><span>@kilncoffee</span></footer>
+<script data-feature>
+(function () {
+  var S = { roast: "medium", grind: "Pour-over", freq: "2", cups: 2, ppl: 1 };
+  var NAMES = { light: ["No. 7 Ethiopia", "#f2b33d"], medium: ["No. 3 Colombia", "#dd5a2c"], dark: ["No. 9 Sumatra", "#7c9a6d"], rotating: ["Roaster's pick", "#2a170e"] };
+  var sec = document.querySelector(".sub-sec");
+  function bag(label, col) {
+    return '<svg viewBox="0 0 260 340"><path d="M40 60 L220 60 L232 318 Q232 332 218 332 L42 332 Q28 332 28 318 Z" fill="' + col + '" stroke="#2a170e" stroke-width="5"/><path d="M40 60 L60 22 L200 22 L220 60" fill="#f4ead7" stroke="#2a170e" stroke-width="5"/>' +
+      '<rect x="62" y="120" width="136" height="150" rx="10" fill="#f4ead7" stroke="#2a170e" stroke-width="4"/><text x="130" y="168" text-anchor="middle" font-family="Fraunces V,serif" font-weight="900" font-size="34" fill="#2a170e">kiln.</text>' +
+      '<text x="130" y="206" text-anchor="middle" font-family="Manrope V,sans-serif" font-weight="800" font-size="14" fill="#2a170e">' + label + '</text><text x="130" y="236" text-anchor="middle" font-family="Manrope V,sans-serif" font-weight="700" font-size="11" fill="#7a6556">' + S.grind.toUpperCase() + "</text></svg>";
+  }
+  function paint() {
+    sec.querySelectorAll("[data-g]").forEach(function (g) { g.querySelectorAll("button").forEach(function (b) { b.classList.toggle("on", S[g.dataset.g] === b.dataset.v); }); });
+    var grams = S.cups * S.ppl * 15 * 7 * +S.freq, bags = Math.max(1, Math.ceil(grams / 340)), unit = S.roast === "rotating" ? 21 : 19;
+    var full = bags * unit, price = Math.round(full * 0.85 * 100) / 100;
+    sec.querySelector("[data-cupso]").textContent = S.cups; sec.querySelector("[data-ppl-o]").textContent = S.ppl;
+    sec.querySelector("[data-bag]").innerHTML = bag(NAMES[S.roast][0], NAMES[S.roast][1]);
+    sec.querySelector("[data-name]").textContent = bags + " × " + NAMES[S.roast][0];
+    var next = new Date(); next.setDate(next.getDate() + 3);
+    sec.querySelector("[data-sum]").innerHTML = "<li>Grind <b>" + S.grind + "</b></li><li>Bag size <b>340 g · about " + Math.round(340 / 15) + " cups</b></li><li>Delivery <b>" + { 1: "Every week", 2: "Every 2 weeks", 4: "Every 4 weeks" }[S.freq] + "</b></li><li>First delivery <b>" + next.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" }) + "</b></li>";
+    sec.querySelector("[data-was]").textContent = "$" + full.toFixed(2);
+    sec.querySelector("[data-price]").textContent = "$" + price.toFixed(2);
+    sec.querySelector("[data-per]").textContent = "That's $" + (price / (bags * 22)).toFixed(2) + " a cup, roasted the week it ships.";
+  }
+  sec.addEventListener("click", function (e) {
+    var b = e.target.closest("[data-g] button"); if (b) { S[b.parentNode.dataset.g] = b.dataset.v; paint(); }
+    var st = e.target.closest("[data-start]"); if (st) { st.textContent = "Subscribed ✓ (demo)"; st.classList.add("done"); }
+  });
+  sec.addEventListener("input", function (e) { if (e.target.matches("[data-cups]")) S.cups = +e.target.value; if (e.target.matches("[data-ppl]")) S.ppl = +e.target.value; paint(); });
+  paint();
+})();
+
+</script>
 </body>
 </html>

@@ -3,114 +3,210 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Aurora | The quiet layer that runs your operations</title>
+<title>Atelier Nord | Considered clothing, made to last</title>
+<meta name="description" content="Atelier Nord: coats, knitwear, shirts and trousers in natural fibers. Free shipping over $150 and free returns. A JIEWEITECH design concept.">
 <script src="assets/base.js"></script>
 <link rel="stylesheet" href="assets/base.css">
+<link rel="stylesheet" href="assets/shop.css">
 <style>
-:root{--bg:#05060b;--tx:#eef0ff;--mut:#8f93ad;--line:rgba(255,255,255,.09);--a1:#7c5cff;--a2:#22d3ee;--a3:#ff5fa2}
-body{background:var(--bg);color:var(--tx);font-family:"Space Grotesk V",Arial,sans-serif;font-size:15px}
-.wrap{width:min(1200px,100% - 48px);margin:0 auto}
-.nav{position:relative;z-index:3;height:72px;display:flex;align-items:center;gap:30px;font-size:14px;color:var(--mut)}
-.logo{display:flex;align-items:center;gap:10px;color:var(--tx);font-weight:700;font-size:19px;margin-right:auto}
-.logo i{width:22px;height:22px;border-radius:7px;background:conic-gradient(from 200deg,var(--a1),var(--a2),var(--a3),var(--a1))}
-.nav .b{color:var(--tx);border:1px solid var(--line);border-radius:10px;padding:9px 14px;background:rgba(255,255,255,.04)}
-.hero{position:relative;height:100vh;min-height:520px;overflow:hidden;display:flex;flex-direction:column}
-.sky{position:absolute;inset:-20%;z-index:0;opacity:.9}
-.sky i{position:absolute;border-radius:50%;mix-blend-mode:screen;filter:blur(70px) saturate(1.3);will-change:transform}
-.sky i:nth-child(1){width:46%;height:52%;left:18%;top:8%;background:var(--a1);animation:f1 14s ease-in-out infinite alternate}
-.sky i:nth-child(2){width:40%;height:44%;left:46%;top:2%;background:var(--a2);opacity:.75;animation:f2 17s ease-in-out infinite alternate}
-.sky i:nth-child(3){width:30%;height:36%;left:34%;top:26%;background:var(--a3);opacity:.6;animation:f3 12s ease-in-out infinite alternate}
-@keyframes f1{to{transform:translate(12%,10%) scale(1.15)}}
-@keyframes f2{to{transform:translate(-14%,12%) scale(.9)}}
-@keyframes f3{to{transform:translate(10%,-8%) scale(1.25)}}
-.grain{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(5,6,11,0) 30%,var(--bg) 78%),radial-gradient(rgba(255,255,255,.06) 1px,transparent 1px) 0 0/3px 3px}
-.hero .wrap{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;align-items:center;text-align:center}
-.pill{display:inline-flex;align-items:center;gap:10px;margin-top:clamp(18px,6vh,64px);padding:6px 6px 6px 14px;border:1px solid var(--line);border-radius:999px;font-size:13px;background:rgba(255,255,255,.04);backdrop-filter:blur(8px)}
-.pill b{background:var(--tx);color:var(--bg);border-radius:999px;padding:4px 10px;font-size:11px}
-.hero h1{font-size:clamp(46px,min(6.6vw,12vh),104px);line-height:.98;letter-spacing:-.045em;font-weight:600;margin:clamp(16px,3vh,28px) 0 clamp(14px,2.6vh,22px);max-width:13em}
-.hero h1 em{font-style:normal;background:linear-gradient(90deg,#c9bcff,#8ff0ff 50%,#ffb3d2);-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero p{color:var(--mut);font-size:clamp(15px,1.3vw,18px);max-width:34em;line-height:1.55}
-.form{display:flex;gap:8px;margin-top:clamp(18px,3.4vh,32px);padding:6px;border:1px solid var(--line);border-radius:14px;background:rgba(10,12,22,.7);backdrop-filter:blur(10px)}
-.form span{width:min(280px,40vw);text-align:left;padding:12px;color:#6c7090;font-size:14px}
-.form a{background:var(--tx);color:var(--bg);border-radius:10px;padding:12px 18px;font-weight:600;font-size:14px}
-.app{position:relative;width:min(1020px,92%);margin-top:clamp(28px,6vh,64px);border:1px solid rgba(255,255,255,.14);border-radius:18px 18px 0 0;background:rgba(12,14,26,.75);backdrop-filter:blur(14px);box-shadow:0 -20px 80px rgba(124,92,255,.25);display:grid;grid-template-columns:190px 1fr 260px;min-height:300px;text-align:left;overflow:hidden}
-.app .bar{grid-column:1/-1;height:38px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:7px;padding:0 14px}
-.app .bar i{width:10px;height:10px;border-radius:50%;background:#2a2e44}
-.app aside{border-right:1px solid var(--line);padding:16px;font-size:12.5px;color:var(--mut);display:flex;flex-direction:column;gap:12px}
-.app aside b{color:var(--tx);font-weight:500}
-.app .main{padding:18px 22px}
-.app .main h4{font-weight:500;font-size:14px;margin-bottom:14px}
-.msg{display:flex;gap:10px;margin-bottom:14px;font-size:13px;line-height:1.5;color:#c9cce0}
-.msg i{flex:none;width:24px;height:24px;border-radius:8px;background:#20243a}
-.msg.ai i{background:conic-gradient(from 200deg,var(--a1),var(--a2),var(--a3),var(--a1))}
-.typing{display:inline-block;width:8px;height:14px;background:var(--a2);vertical-align:-2px;animation:blink 1s steps(1) infinite}
-@keyframes blink{50%{opacity:0}}
-.app .right{border-left:1px solid var(--line);padding:16px}
-.app .right small{color:var(--mut);font-size:11px}
-.app .right b{display:block;font-size:26px;font-weight:600;margin:4px 0 12px}
-.bars{display:flex;align-items:flex-end;gap:6px;height:90px}
-.bars span{flex:1;border-radius:4px 4px 0 0;background:linear-gradient(180deg,var(--a2),var(--a1));opacity:.85;animation:grow 2.4s ease-in-out infinite alternate}
-.bars span:nth-child(2n){animation-delay:-.8s}.bars span:nth-child(3n){animation-delay:-1.4s}
-@keyframes grow{from{transform:scaleY(.6);transform-origin:bottom}to{transform:scaleY(1);transform-origin:bottom}}
-/* sections */
-section{padding:clamp(80px,10vw,130px) 0}
-.logos{display:flex;justify-content:space-between;align-items:center;color:#5b5f78;font-weight:700;font-size:20px;letter-spacing:-.02em;padding:34px 0;border-block:1px solid var(--line)}
-.sec-h{font-size:clamp(36px,4vw,60px);letter-spacing:-.04em;line-height:1;font-weight:600;max-width:12em}
-.bento{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:220px;gap:14px;margin-top:48px}
-.cell{border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));padding:24px;position:relative;overflow:hidden}
-.cell h3{font-weight:600;font-size:18px;margin-bottom:8px}
-.cell p{color:var(--mut);font-size:14px;line-height:1.55;max-width:24em}
-.cell.w2{grid-column:span 2}.cell.h2{grid-row:span 2}
-.cell .glow{position:absolute;right:-40px;bottom:-60px;width:220px;height:220px;border-radius:50%;background:var(--c);filter:blur(60px);opacity:.45}
-.nums{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
-.nums div{border:1px solid var(--line);border-radius:18px;padding:26px}
-.nums b{display:block;font-size:46px;font-weight:600;letter-spacing:-.04em}
-.nums span{color:var(--mut);font-size:13px}
-.end{text-align:center}
-.end h2{margin:0 auto}
-.end a{display:inline-block;margin-top:28px;background:var(--tx);color:var(--bg);padding:14px 22px;border-radius:12px;font-weight:600}
-.foot{border-top:1px solid var(--line);padding:30px 0;color:var(--mut);font-size:13px}
-.foot .wrap{display:flex;justify-content:space-between}
-@media (max-width:900px){.nav a:not(.logo):not(.b){display:none}.app{grid-template-columns:1fr}.app aside,.app .right{display:none}.bento,.nums{grid-template-columns:1fr}.cell.w2{grid-column:auto}}
+:root{--bg:#faf8f5;--fg:#191817;--muted:#7a756f;--line:rgba(25,24,23,.12);--card:#efebe5;--soft:#f1ede7;--accent:#191817;--accent-fg:#faf8f5;--clay:#b8876b;--radius:0px;--head:"Instrument Serif",Georgia,serif;--body:"Inter V",Arial,sans-serif;--wrap:1440px}
+body{font-size:14.5px}
+.ann{background:#191817;color:#d8d2c9;text-align:center;font-size:12px;letter-spacing:.08em;height:34px;display:grid;place-items:center}
+.head{position:sticky;top:0;z-index:40;background:rgba(250,248,245,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.head .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:68px}
+.nav{display:flex;gap:26px;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:550}
+.brand{font:400 30px/1 var(--head);letter-spacing:.02em}
+.tools{display:flex;justify-content:flex-end;gap:22px;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:550;align-items:center}
+.burger{display:none}
+.hero{height:calc(100vh - 102px);min-height:520px;display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line)}
+.hero-l{display:flex;flex-direction:column;justify-content:space-between;padding:clamp(28px,4vw,60px) max(24px,3vw)}
+.hero-l small{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font:400 clamp(70px,min(9vw,15vh),170px)/.86 var(--head);letter-spacing:-.02em}
+.hero h1 em{display:block;padding-left:12%;color:var(--clay)}
+.hero-l p{max-width:30em;line-height:1.7;color:var(--muted);font-size:15.5px}
+.hero-l .row{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.cta{display:inline-flex;align-items:center;gap:12px;padding:16px 26px;background:var(--fg);color:var(--bg);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+.hero-r{display:grid;grid-template-columns:1.1fr .9fr;grid-template-rows:1fr 1fr;gap:1px;background:var(--line)}
+.panel{position:relative;overflow:hidden;display:grid;place-items:center}
+.panel:first-child{grid-row:1/3}
+.panel .g{width:84%;animation:drift 9s ease-in-out infinite alternate}
+.panel:first-child .g{width:96%}
+.panel:nth-child(2) .g{animation-delay:-3s}.panel:nth-child(3) .g{animation-delay:-6s}
+.panel span{position:absolute;left:18px;bottom:16px;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase}
+.panel span b{display:block;font:400 22px/1.1 var(--head);letter-spacing:0;text-transform:none;margin-top:3px}
+@keyframes drift{from{transform:translateY(-6px)}to{transform:translateY(6px)}}
+.sec{padding:clamp(60px,7vw,100px) 0}
+.sec-h{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:28px;gap:20px}
+.sec-h h2{font:400 clamp(40px,4.4vw,64px)/1 var(--head)}
+.sec-h a{font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;border-bottom:1px solid}
+.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.cat{position:relative;aspect-ratio:4/5;display:grid;place-items:center;overflow:hidden}
+.cat .g{width:78%;transition:transform .6s cubic-bezier(.16,1,.3,1)}
+.cat:hover .g{transform:scale(1.05)}
+.cat b{position:absolute;left:16px;bottom:14px;font:400 26px/1 var(--head)}
+.edit{display:grid;grid-template-columns:1fr 1fr;min-height:560px}
+.edit .pic{background:#d9cfc2;display:grid;place-items:center}
+.edit .pic .g{width:62%}
+.edit .txt{display:flex;flex-direction:column;justify-content:center;padding:clamp(36px,6vw,100px);background:#2a2724;color:#e9e3da}
+.edit h2{font:400 clamp(44px,5vw,76px)/.95 var(--head);margin:14px 0 20px}
+.edit p{color:#b5ada2;line-height:1.7;max-width:32em;margin-bottom:28px}
+.edit .cta{background:#e9e3da;color:#2a2724;align-self:flex-start}
+.vals{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+.vals div{padding:30px 26px 0 0}
+.vals b{font:400 26px/1.1 var(--head);display:block;margin-bottom:10px}
+.vals p{color:var(--muted);line-height:1.65}
+.news{background:var(--soft);padding:60px 0;text-align:center}
+.news h3{font:400 40px/1 var(--head);margin-bottom:10px}
+.news p{color:var(--muted);margin-bottom:20px}
+.news form{display:flex;max-width:440px;margin:0 auto}
+.news input{flex:1;height:50px;padding:0 16px;border:1px solid var(--fg);background:transparent;font:inherit}
+.news button{height:50px;padding:0 22px;background:var(--fg);color:var(--bg);font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.foot{padding:48px 0 30px;font-size:13px;color:var(--muted);border-top:1px solid var(--line)}
+.foot .wrap{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap}
+.foot .big{font:400 64px/1 var(--head);color:var(--fg)}
+.sh-card h3{font-family:var(--body);font-size:14px;font-weight:500}
+.sh-cat{display:none}
+.sh-card .sh-price{font-weight:500;color:var(--muted);margin-top:2px}
+.sh-art{aspect-ratio:4/5}
+.sh-stage{aspect-ratio:4/5}
+.sh-thumb{aspect-ratio:4/5}
+.sh-buy h1{font-weight:400;font-size:clamp(40px,4vw,58px)}
+.sh-btn{text-transform:uppercase;letter-spacing:.12em;font-size:12.5px}
+.sh-shop-head h1,.sh-checkout h1,.sh-narrow h1{font-weight:400}
+.finder{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:10px;align-items:end;padding:16px;background:var(--soft);margin-top:18px}
+.finder label{display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:var(--muted)}
+.finder input,.finder select{height:42px;border:1px solid var(--line);padding:0 10px;font:inherit;background:var(--bg)}
+.finder output{grid-column:1/-1;font-size:15px}
+.units{display:flex;gap:6px;margin-bottom:12px}
+.units button{padding:6px 12px;border:1px solid var(--line);font-size:12.5px}
+.units button.on{background:var(--fg);color:var(--bg)}
+@media (max-width:900px){.nav{display:none}.burger{display:block}.head .wrap{grid-template-columns:auto 1fr auto}.brand{grid-column:2;text-align:center}
+  body.menu-open .nav{display:flex;position:absolute;top:68px;left:0;right:0;flex-direction:column;background:var(--bg);padding:20px 24px;border-bottom:1px solid var(--line)}
+  .hero{grid-template-columns:1fr;height:auto}.hero-r{min-height:520px}.cats{grid-template-columns:1fr 1fr}.edit,.vals{grid-template-columns:1fr}.tools .t-acc{display:none}.finder{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
-<section class="hero" style="padding:0">
-  <div class="sky" aria-hidden="true"><i></i><i></i><i></i></div>
-  <div class="grain" aria-hidden="true"></div>
-  <div class="wrap">
-    <header class="nav" style="width:100%"><a class="logo" href="#"><i></i>Aurora</a><a href="#">Product</a><a href="#">Agents</a><a href="#">Pricing</a><a href="#">Changelog</a><a class="b" href="#">Sign in</a></header>
-    <a class="pill" href="#" data-in>Aurora 3 is here: agents that finish the job <b>Read →</b></a>
-    <h1 data-in style="--d:1">The quiet layer that <em>runs your operations.</em></h1>
-    <p data-in style="--d:2">Aurora reads your docs, tickets and dashboards, then drafts the reply, files the fix and flags what matters before Monday.</p>
-    <div class="form" data-in style="--d:3"><span>you@company.com</span><a href="#">Start free</a></div>
-    <div class="app" data-in style="--d:4">
-      <div class="bar"><i></i><i></i><i></i></div>
-      <aside><b>Workspace</b><span>Inbox · 12</span><span>Agents</span><span>Reports</span><span>Knowledge</span><span>Settings</span></aside>
-      <div class="main"><h4>Weekly ops review</h4>
-        <div class="msg"><i></i><div>Why did refund requests jump on Thursday?</div></div>
-        <div class="msg ai"><i></i><div>A pricing banner shipped with the wrong currency in the EU. 214 tickets trace back to it. I've drafted a fix and a customer note for review<span class="typing"></span></div></div>
-      </div>
-      <div class="right"><small>Tickets resolved by agents</small><b>78.4%</b><div class="bars"><span style="height:40%"></span><span style="height:55%"></span><span style="height:48%"></span><span style="height:70%"></span><span style="height:64%"></span><span style="height:82%"></span><span style="height:95%"></span></div></div>
+<div class="ann">Free shipping on orders over $150 · Free returns within 30 days</div>
+<header class="head"><div class="wrap">
+  <nav class="nav"><a href="#/shop?dept=Women" data-nav="shop">Women</a><a href="#/shop?dept=Men">Men</a><a href="#/shop?sort=new">New in</a><a href="#/shop?sale=Sale">Sale</a></nav>
+  <button class="burger" data-menu aria-label="Menu">☰</button>
+  <a class="brand" href="#/">Atelier Nord</a>
+  <div class="tools"><a href="#/shop" class="t-acc">Search</a><a href="#" data-cart><span data-cart-label>Bag</span><span data-cart-count>0</span></a></div>
+</div></header>
+
+<main>
+<section data-view="home">
+  <div class="hero">
+    <div class="hero-l">
+      <small data-in>Autumn / Winter 2026</small>
+      <h1 data-in style="--d:1">The quiet<em>season.</em></h1>
+      <div class="row" data-in style="--d:2"><p>Wool coats, heavy knits and crisp cottons, cut to be worn for years. Made in small runs in Portugal and Italy, in natural fibers only.</p><a class="cta" href="#/shop">Shop the collection →</a></div>
+    </div>
+    <div class="hero-r" aria-hidden="true">
+      <div class="panel" style="background:#d9cfc2"><div class="g" data-g="coat|#8c6f5a"></div><span>Look 01<b>Bodil wool coat</b></span></div>
+      <div class="panel" style="background:#e6e1d7"><div class="g" data-g="knit|#efe7da"></div><span>Look 02<b>Saga cable knit</b></span></div>
+      <div class="panel" style="background:#2f3a36"><div class="g" data-g="skirt|#191817"></div><span style="color:#e9e3da">Look 03<b>Ilse pleat skirt</b></span></div>
     </div>
   </div>
-</section>
-<main>
-  <div class="wrap logos" aria-label="Customers"><span>Northwind</span><span>Halcyon</span><span>Parallel</span><span>Quanta</span><span>Lumen&amp;Co</span><span>Vertex</span></div>
-  <section>
-    <div class="wrap">
-      <h2 class="sec-h">Everything your ops team does twice, done once.</h2>
-      <div class="bento">
-        <div class="cell w2" style="--c:var(--a1)"><h3>Agents that close the loop</h3><p>From the first alert to the merged fix, Aurora keeps working until the ticket is actually solved.</p><span class="glow"></span></div>
-        <div class="cell h2" style="--c:var(--a3)"><h3>One search, every tool</h3><p>Slack, Notion, Linear, Zendesk and your warehouse, answered in one place with sources.</p><span class="glow"></span></div>
-        <div class="cell" style="--c:var(--a2)"><h3>Reports that write themselves</h3><p>Monday's review, ready Sunday night.</p><span class="glow"></span></div>
-        <div class="cell" style="--c:var(--a1)"><h3>Private by design</h3><p>SOC 2 Type II, EU hosting and zero training on your data.</p><span class="glow"></span></div>
-      </div>
-      <div class="nums"><div><b>11 h</b><span>saved per person, per week</span></div><div><b>3.2×</b><span>faster ticket resolution</span></div><div><b>40+</b><span>native integrations</span></div></div>
+  <section class="sec"><div class="wrap">
+    <div class="sec-h"><h2>Shop by category</h2><a href="#/shop">View all</a></div>
+    <div class="cats">
+      <a class="cat" href="#/shop?cat=Coats" style="background:#ddd4c8"><div class="g" data-g="coat|#3b3a37"></div><b>Coats</b></a>
+      <a class="cat" href="#/shop?cat=Knitwear" style="background:#e9e4dc"><div class="g" data-g="knit|#b8876b"></div><b>Knitwear</b></a>
+      <a class="cat" href="#/shop?cat=Shirts" style="background:#dfe3e2"><div class="g" data-g="shirt|#f3f1ec"></div><b>Shirts</b></a>
+      <a class="cat" href="#/shop?cat=Trousers%20%26%20skirts" style="background:#e3ddd2"><div class="g" data-g="chino|#5e5a4b"></div><b>Trousers &amp; skirts</b></a>
     </div>
+  </div></section>
+  <section class="sec" style="padding-top:0"><div class="wrap">
+    <div class="sec-h"><h2>New in</h2><a href="#/shop?sort=new">Shop new arrivals</a></div>
+    <div class="sh-grid" data-products="featured" data-limit="4"></div>
+  </div></section>
+  <section class="edit">
+    <div class="pic"><div class="g" data-g="coat|#8c6f5a"></div></div>
+    <div class="txt"><small style="letter-spacing:.16em;text-transform:uppercase;font-size:12px">The wool edit</small><h2>Coats worth keeping.</h2><p>Every coat is cut from Italian wool-cashmere, fully lined, and finished by hand. Find your size with our fit finder, and if it isn't right, returns are free.</p><a class="cta" href="#/shop?cat=Coats">Shop coats →</a></div>
   </section>
-  <section class="end" style="padding-top:0"><div class="wrap"><h2 class="sec-h">Let Aurora take the night shift.</h2><a href="#">Start free for 14 days</a></div></section>
+  <section class="sec"><div class="wrap"><div class="vals">
+    <div><b>Natural fibers</b><p>Wool, cashmere, linen and organic cotton. Nothing that sheds plastic in the wash.</p></div>
+    <div><b>Free returns</b><p>30 days to change your mind, with a prepaid label in every parcel.</p></div>
+    <div><b>Repairs for life</b><p>Send back anything we made and we'll mend it for the cost of postage.</p></div>
+  </div></div></section>
+  <section class="news"><h3>10% off your first order</h3><p>Join our list for new collections and early access to sale.</p><form data-news><input type="email" placeholder="Email address" aria-label="Email address" required><button>Sign up</button></form></section>
+</section>
+<section data-view="shop" hidden></section>
+<section data-view="p" hidden></section>
+<section data-view="checkout" hidden></section>
 </main>
-<footer class="foot"><div class="wrap"><span>© Aurora Labs</span><span>Privacy · Terms · Status</span></div></footer>
+
+<footer class="foot"><div class="wrap"><span class="big">Atelier Nord</span><div><p>Customer care · Shipping · Returns · Size guide</p><p style="margin-top:8px">© 2026 Atelier Nord · A website concept by JIEWEITECH</p></div></div></footer>
+
+<script src="assets/garments.js"></script>
+<script src="assets/shop.js"></script>
+<script>
+(function () {
+  var c = function (name, hex) { return { name: name, hex: hex }; };
+  var CAMEL = c("Camel", "#a9805f"), CHAR = c("Charcoal", "#3b3a37"), OAT = c("Oat", "#e4dccd"), BLACK = c("Black", "#191817"), CLAY = c("Clay", "#b8876b"), NAVY = c("Navy", "#26324a"), WHITE = c("White", "#f3f1ec"), SAGE = c("Sage", "#8f9c86"), MOSS = c("Moss", "#5e5a4b"), BLUE = c("Pale blue", "#bfd0e0"), RUST = c("Rust", "#9b4a2c");
+  var W = ["XS", "S", "M", "L", "XL"], M = ["S", "M", "L", "XL", "XXL"];
+  var BG = { Coats: "#e2d9cd", Knitwear: "#ebe6de", Shirts: "#e2e6e5", "Trousers & skirts": "#e6e0d5", Dresses: "#e9e2da", "T-shirts": "#e7e5e1" };
+  var P = [
+    { id: "bodil", name: "Bodil wool-cashmere coat", type: "coat", dept: "Women", cat: "Coats", price: 420, colors: [CAMEL, CHAR, OAT], sizes: W, soldOut: ["XS"], featured: true, isNew: true, rating: 4.8, reviews: 126, desc: "A double-breasted coat in Italian wool and cashmere, cut long with a softly dropped shoulder. Fully lined in cupro.", specs: { Fabric: "90% wool, 10% cashmere", Lining: "100% cupro", Fit: "Relaxed. Model is 5'9\" and wears S", Origin: "Made in Portugal" }, care: "Dry clean only. Brush after wearing and hang on a wide hanger." },
+    { id: "arvid", name: "Arvid overcoat", type: "coat", dept: "Men", cat: "Coats", price: 460, colors: [CHAR, NAVY, CAMEL], sizes: M, rating: 4.7, reviews: 88, desc: "Single-breasted overcoat with a notch lapel, in a dense melton wool.", specs: { Fabric: "80% wool, 20% polyamide melton", Fit: "Regular", Origin: "Made in Portugal" }, care: "Dry clean only." },
+    { id: "runa", name: "Runa quilted jacket", type: "puffer", dept: "Women", cat: "Coats", price: 260, was: 325, sale: "Sale", colors: [MOSS, BLACK], sizes: W, rating: 4.6, reviews: 54, desc: "Lightweight channel-quilted jacket with recycled down-alternative fill.", specs: { Shell: "Recycled nylon", Fill: "Recycled polyester", Origin: "Made in Portugal" } },
+    { id: "saga", name: "Saga cable knit", type: "knit", dept: "Women", cat: "Knitwear", price: 185, colors: [OAT, CLAY, CHAR], sizes: W, featured: true, isNew: true, rating: 4.9, reviews: 211, desc: "Hand-finished cable sweater in undyed lambswool with a relaxed, cropped body.", specs: { Fabric: "100% lambswool", Gauge: "7 gauge", Origin: "Knitted in Italy" }, care: "Hand wash cold, dry flat." },
+    { id: "eskil", name: "Eskil merino crew", type: "crew", dept: "Men", cat: "Knitwear", price: 145, colors: [NAVY, CHAR, SAGE, RUST], sizes: M, featured: true, rating: 4.7, reviews: 164, desc: "Fine-gauge extra-fine merino crewneck. Light enough to layer, warm enough to wear alone.", specs: { Fabric: "100% extra-fine merino", Gauge: "14 gauge", Origin: "Knitted in Italy" }, care: "Machine wash wool cycle, dry flat." },
+    { id: "tova", name: "Tova cardigan", type: "bomber", dept: "Women", cat: "Knitwear", price: 165, was: 210, sale: "Sale", colors: [CLAY, OAT], sizes: W, rating: 4.5, reviews: 47, desc: "Ribbed cardigan in a soft wool-alpaca blend.", specs: { Fabric: "60% wool, 40% alpaca" } },
+    { id: "linnea", name: "Linnea poplin shirt", type: "shirt", dept: "Women", cat: "Shirts", price: 98, colors: [WHITE, BLUE], sizes: W, rating: 4.6, reviews: 98, desc: "Oversized shirt in crisp organic cotton poplin with a longer back hem.", specs: { Fabric: "100% organic cotton poplin", Fit: "Oversized" }, care: "Machine wash 30°C." },
+    { id: "henrik", name: "Henrik oxford shirt", type: "shirt", dept: "Men", cat: "Shirts", price: 105, colors: [BLUE, WHITE, OAT], sizes: M, featured: true, rating: 4.8, reviews: 143, desc: "Button-down oxford shirt, garment-washed for a soft, lived-in feel.", specs: { Fabric: "100% organic cotton oxford", Fit: "Regular" } },
+    { id: "nils", name: "Nils heavyweight tee", type: "tee", dept: "Men", cat: "T-shirts", price: 48, colors: [WHITE, BLACK, SAGE, OAT], sizes: M, rating: 4.7, reviews: 302, desc: "Boxy 240 gsm tee in organic cotton with a tight rib collar.", specs: { Fabric: "100% organic cotton, 240 gsm" } },
+    { id: "frida", name: "Frida wide trouser", type: "chino", dept: "Women", cat: "Trousers & skirts", price: 155, colors: [MOSS, BLACK, OAT], sizes: W, isNew: true, rating: 4.6, reviews: 71, desc: "High-rise wide-leg trouser with front pleats, in a fluid wool twill.", specs: { Fabric: "100% wool twill", Rise: "High" } },
+    { id: "ilse", name: "Ilse pleat skirt", type: "skirt", dept: "Women", cat: "Trousers & skirts", price: 135, colors: [BLACK, CAMEL], sizes: W, rating: 4.5, reviews: 39, desc: "Midi skirt with soft pleats that move as you walk.", specs: { Fabric: "Recycled polyester crepe", Length: "Midi" } },
+    { id: "oskar", name: "Oskar pleated chino", type: "chino", dept: "Men", cat: "Trousers & skirts", price: 125, colors: [OAT, NAVY, MOSS], sizes: ["28", "30", "32", "34", "36"], rating: 4.6, reviews: 92, desc: "Single-pleat chino with a tapered leg.", specs: { Fabric: "100% organic cotton twill" } },
+    { id: "maja", name: "Maja wrap dress", type: "dress", dept: "Women", cat: "Dresses", price: 195, colors: [SAGE, BLACK, RUST], sizes: W, featured: false, isNew: true, rating: 4.7, reviews: 64, desc: "Linen-blend wrap dress with a tie waist and fluttered sleeve.", specs: { Fabric: "55% linen, 45% viscose" } },
+    { id: "astrid", name: "Astrid tank dress", type: "dress", dept: "Women", cat: "Dresses", price: 140, colors: [BLACK, OAT], sizes: W, rating: 4.4, reviews: 28, desc: "Ribbed knit tank dress, fitted through the body.", specs: { Fabric: "Organic cotton rib" } }
+  ];
+  P.forEach(function (p) { p.views = 3; p.badge = p.sale ? "Sale" : p.isNew ? "New" : null; p.points = ["Free shipping over $150", "Free returns within 30 days", "Repairs for life"]; });
+  var art = function (p, st) {
+    st = st || {};
+    var col = p.colors[st.color || 0].hex;
+    return '<div style="width:100%;height:100%;display:grid;place-items:center;background:' + (BG[p.cat] || "#ece8e1") + '"><div style="width:' + (st.thumb ? 86 : 82) + '%">' + Garment.draw(p.type, col, { view: st.view || 0, fabric: st.view === 2 ? p.specs.Fabric : null }) + "</div></div>";
+  };
+  Array.prototype.forEach.call(document.querySelectorAll("[data-g]"), function (el) { var a = el.getAttribute("data-g").split("|"); el.innerHTML = Garment.draw(a[0], a[1]); });
+
+  var CHART = { Women: [["XS", 80, 64, 88], ["S", 84, 68, 92], ["M", 88, 72, 96], ["L", 94, 78, 102], ["XL", 100, 84, 108]], Men: [["S", 92, 78, 94], ["M", 98, 84, 100], ["L", 104, 90, 106], ["XL", 110, 96, 112], ["XXL", 116, 102, 118]] };
+  function guide(p) {
+    var rows = CHART[p.dept] || CHART.Women;
+    return '<div class="units"><button type="button" class="on" data-u="cm">cm</button><button type="button" data-u="in">inches</button></div><table data-chart><thead><tr><th>Size</th><th>Chest</th><th>Waist</th><th>Hip</th></tr></thead><tbody></tbody></table>' +
+      '<p style="margin-top:22px"><b>Fit finder</b> · Tell us your height and weight and we\'ll suggest a size.</p><div class="finder"><label>Height (cm)<input type="number" data-h value="170" min="140" max="210"></label><label>Weight (kg)<input type="number" data-w value="65" min="35" max="160"></label><label>Preferred fit<select data-f><option value="0">True to size</option><option value="1">Roomier</option><option value="-1">Closer</option></select></label><button class="sh-btn" type="button" data-fit>Find</button><output data-out></output></div>';
+  }
+  document.addEventListener("click", function (e) {
+    var u = e.target.closest("[data-u]"); var m = e.target.closest(".sh-modal");
+    if (u && m) { m.querySelectorAll("[data-u]").forEach(function (b) { b.classList.toggle("on", b === u); }); paintChart(m, u.dataset.u); }
+    if (e.target.closest("[data-fit]") && m) {
+      var h = +m.querySelector("[data-h]").value, w = +m.querySelector("[data-w]").value, f = +m.querySelector("[data-f]").value;
+      var bmi = w / Math.pow(h / 100, 2), idx = Math.max(0, Math.min(4, Math.round((bmi - 18) / 2.6) + (h > 182 ? 1 : 0) + f));
+      var p = Shop.byId[location.hash.split("/p/")[1]], rows = CHART[p.dept] || CHART.Women;
+      m.querySelector("[data-out]").innerHTML = "We suggest <b>" + rows[idx][0] + "</b> in the " + p.name + ". " + (f > 0 ? "Sized up for a roomier fit." : "Based on most customers with similar measurements.");
+    }
+  });
+  function paintChart(m, unit) {
+    var p = Shop.byId[location.hash.split("/p/")[1]], rows = CHART[(p && p.dept) || "Women"];
+    var v = function (n) { return unit === "in" ? (n / 2.54).toFixed(1) : n; };
+    m.querySelector("[data-chart] tbody").innerHTML = rows.map(function (r) { return "<tr><td><b>" + r[0] + "</b></td><td>" + v(r[1]) + "</td><td>" + v(r[2]) + "</td><td>" + v(r[3]) + "</td></tr>"; }).join("");
+  }
+  new MutationObserver(function () { var m = document.querySelector(".sh-modal [data-chart] tbody:empty"); if (m) paintChart(m.closest(".sh-modal"), "cm"); }).observe(document.body, { childList: true });
+
+  var news = document.querySelector("[data-news]");
+  news.addEventListener("submit", function (e) { e.preventDefault(); news.innerHTML = '<p style="font-size:16px">Welcome. Your code <b>NORD10</b> takes 10% off your first order.</p>'; });
+
+  Shop.init({
+    id: "L2", name: "Atelier Nord", mode: "shop", products: P, art: art, freeShip: 150, tax: 0.0925,
+    promo: { code: "NORD10", off: 0.1, label: "10% off your first order applied" },
+    shipping: [{ label: "Standard", eta: "3–5 business days", price: 8 }, { label: "Express", eta: "Next business day", price: 22 }],
+    facets: [{ key: "dept", label: "Department" }, { key: "cat", label: "Category" }, { key: "colors", label: "Color", type: "swatch" }, { key: "sizes", label: "Size", order: ["XS", "S", "M", "L", "XL", "XXL", "28", "30", "32", "34", "36"] }, { key: "sale", label: "Offers" }, { key: "price", label: "Price", type: "range", step: 5 }],
+    options: function (p) { return [{ key: "color", label: "Color", type: "swatch", values: p.colors }, { key: "size", label: "Size", type: "size", values: p.sizes, guide: "Size guide" }]; },
+    sizeGuide: guide,
+    labels: { shop: "Shop" }
+  });
+})();
+</script>
 </body>
 </html>

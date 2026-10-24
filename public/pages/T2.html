@@ -4,20 +4,23 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>NOCTURNE | Time, kept in the dark</title>
+<meta name="description" content="Nocturne makes a few hand-finished mechanical watches each year in Geneva. Shop the collection or configure your own. A JIEWEITECH design concept.">
 <script src="assets/base.js"></script>
 <link rel="stylesheet" href="assets/base.css">
+<link rel="stylesheet" href="assets/shop.css">
 <style>
-:root{--bg:#07090a;--g:#c9a96a;--g2:#efd9a7;--tx:#ece6da;--mut:#8d877c;--line:rgba(236,230,218,.12)}
+
+:root{--fg:#ece6da;--muted:#8d877c;--card:#101413;--soft:#121615;--accent:#c9a96a;--accent-fg:#07090a;--radius:0px;--head:"Cormorant V",Georgia,serif;--body:"Manrope V",Arial,sans-serif;--wrap:1280px;--bg:#07090a;--g:#c9a96a;--g2:#efd9a7;--tx:#ece6da;--mut:#8d877c;--line:rgba(236,230,218,.12)}
 body{background:var(--bg);color:var(--tx);font-family:"Manrope V",Arial,sans-serif;font-size:15px}
 .serif{font-family:"Cormorant V",Georgia,serif}
 .wrap{width:min(1280px,100% - 64px);margin:0 auto}
-.nav{position:absolute;inset:0 0 auto;z-index:4;height:84px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 max(32px,calc((100% - 1280px)/2));font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--mut)}
+.nav{position:sticky;top:0;z-index:40;background:linear-gradient(#07090a,rgba(7,9,10,.85));backdrop-filter:blur(6px);height:84px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 max(32px,calc((100% - 1280px)/2));font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--mut)}
 .nav .l{display:flex;gap:30px}
 .nav .r{display:flex;gap:30px;justify-content:flex-end}
 .logo{font-family:"Cormorant V",serif;font-size:26px;letter-spacing:.42em;color:var(--tx);text-indent:.42em;font-weight:500}
-.hero{position:relative;min-height:100vh;overflow:hidden;display:flex;align-items:center;background:radial-gradient(55% 75% at 66% 52%,#163027 0%,#0b1512 38%,var(--bg) 72%)}
+.hero{position:relative;min-height:calc(100vh - 84px);min-height:max(500px,calc(100vh - 84px));margin-top:0;overflow:hidden;display:flex;align-items:center;background:radial-gradient(55% 75% at 66% 52%,#163027 0%,#0b1512 38%,var(--bg) 72%)}
 .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(30% 40% at 68% 30%,rgba(239,217,167,.10),transparent 70%)}
-.hero .wrap{position:relative;display:grid;grid-template-columns:1fr 1.05fr;align-items:center;gap:40px;padding-top:60px}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1fr 1.05fr;align-items:center;gap:40px;padding-top:0}
 .eb{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--g)}
 .hero h1{font-weight:400;font-size:clamp(54px,min(7vw,13vh),118px);line-height:.9;letter-spacing:-.01em;margin:22px 0 26px}
 .hero h1 i{color:var(--g2);font-weight:300}
@@ -39,7 +42,7 @@ body{background:var(--bg);color:var(--tx);font-family:"Manrope V",Arial,sans-ser
 .hand{transform-origin:200px 200px;transition:transform .2s cubic-bezier(.4,2.2,.6,1)}
 .glass{position:absolute;inset:7%;border-radius:50%;background:linear-gradient(130deg,rgba(255,255,255,.16),rgba(255,255,255,0) 40%);pointer-events:none}
 /* sections */
-section{padding:clamp(90px,11vw,150px) 0}
+.home-v>section{padding:clamp(90px,11vw,150px) 0}
 .intro{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;border-top:1px solid var(--line);padding-top:56px}
 .intro h2{font-size:clamp(40px,4.4vw,68px);font-weight:300;line-height:1}
 .intro p{color:var(--mut);line-height:1.8;max-width:34em}
@@ -61,15 +64,57 @@ section{padding:clamp(90px,11vw,150px) 0}
 .foot{padding:50px 0;border-top:1px solid var(--line);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}
 .foot .wrap{display:flex;justify-content:space-between}
 @media (max-width:900px){.nav .l,.nav .r{display:none}.nav{grid-template-columns:1fr}.hero .wrap,.intro{grid-template-columns:1fr}.watch{width:80vw;margin:0 auto}.trio,.specs{grid-template-columns:1fr 1fr}}
+
+.btn{margin-right:22px}
+.burger{display:none}
+[data-cart-count]{background:var(--g);color:#07090a}
+.sh-grid.three{grid-template-columns:repeat(3,1fr);gap:28px;margin-top:60px}
+.sh-card{border:1px solid var(--line);padding:22px 22px 26px;text-align:center}
+.sh-card .sh-art{background:radial-gradient(circle at 50% 45%,#16201c,#0b0f0e 70%)}
+.sh-card h3{font:400 28px/1.1 var(--head)}
+.sh-cat{color:var(--g)}
+.sh-price{color:var(--mut);font-weight:500}
+.sh-dots{justify-content:center}
+.sh-art,.sh-stage,.sh-thumb,.sh-line-art{background:radial-gradient(circle at 50% 45%,#16201c,#0b0f0e 70%)}
+.sh-buy h1,.sh-shop-head h1,.sh-checkout h1,.sh-narrow h1,.sh-related h2{font-weight:400}
+.sh-btn{text-transform:uppercase;letter-spacing:.2em;font-size:11.5px}
+.sh-select,.sh-input,.sh-field input,.sh-field select,.sh-field textarea,.sh-promo input{background:#0d1110}
+.cfg-band{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;border:1px solid var(--line);padding:50px}
+.cfg-band h2{font-size:clamp(36px,3.6vw,56px);font-weight:300;line-height:1.02;margin:16px 0 18px}
+.cfg-band p{color:var(--mut);line-height:1.75}
+.cb-art{aspect-ratio:1;background:radial-gradient(circle,#13201b,transparent 65%)}
+/* configurator */
+.cfg{width:min(1280px,100% - 48px);margin:0 auto;padding:40px 0 90px;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:start}
+.cfg-stage{position:sticky;top:110px;aspect-ratio:1;background:radial-gradient(circle at 50% 45%,#16201c,#07090a 70%);border:1px solid var(--line)}
+.cfg-stage .flip{position:absolute;left:16px;bottom:14px;display:flex;gap:6px}
+.cfg-stage .flip button{padding:8px 14px;border:1px solid var(--line);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}
+.cfg-stage .flip button.on{border-color:var(--g);color:var(--g2)}
+.cfg h1{font:300 clamp(44px,4.4vw,66px)/1 var(--head);margin:12px 0 10px}
+.cfg .grp{padding:20px 0;border-bottom:1px solid var(--line)}
+.cfg .grp h4{font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--g);margin-bottom:14px;display:flex;justify-content:space-between}
+.cfg .grp h4 em{font-style:normal;letter-spacing:.06em;text-transform:none;color:var(--mut);font-size:13px}
+.opts{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.opt{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--line);text-align:left;cursor:pointer}
+.opt i{width:26px;height:26px;border-radius:50%;flex:none;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
+.opt span{display:flex;flex-direction:column;font-size:14px}
+.opt small{color:var(--mut);font-size:12px}
+.opt.on{border-color:var(--g);background:rgba(201,169,106,.06)}
+.cfg .eng{width:100%;height:48px;background:#0d1110;border:1px solid var(--line);color:var(--tx);padding:0 14px;font:400 18px var(--head);letter-spacing:.1em}
+.total{display:flex;justify-content:space-between;align-items:baseline;margin:22px 0 16px}
+.total b{font:400 40px/1 var(--head);color:var(--g2)}
+.total span{color:var(--mut);font-size:13px}
+@media (max-width:900px){.sh-grid.three,.cfg-band,.cfg{grid-template-columns:1fr}.cfg-stage{position:static}.burger{display:block}
+  body.menu-open .nav .l{display:flex;position:absolute;top:84px;left:0;right:0;flex-direction:column;padding:18px 24px;background:var(--bg)}.nav .r{display:flex}.nav .r>a:first-child{display:none}.nav{grid-template-columns:auto 1fr auto}}
 </style>
 </head>
 <body>
 <header class="nav">
-  <nav class="l"><a href="#">Collections</a><a href="#">Calibres</a></nav>
-  <a class="logo" href="#">NOCTURNE</a>
-  <nav class="r"><a href="#">Maison</a><a href="#">Boutiques</a></nav>
+  <nav class="l"><a href="#/shop" data-nav="shop">Watches</a><a href="#/configure" data-nav="configure">Configure</a><a href="#/shop?cat=Straps">Straps</a></nav>
+  <a class="logo" href="#/">NOCTURNE</a>
+  <nav class="r"><a href="#/shop?cat=Accessories">Accessories</a><a href="#" data-cart><span data-cart-label>Bag</span><span data-cart-count>0</span></a><button class="burger" data-menu aria-label="Menu">Menu</button></nav>
 </header>
 <main>
+<section data-view="home" class="home-v">
   <section class="hero" style="padding:0">
     <span class="num" aria-hidden="true">N°01</span>
     <div class="wrap">
@@ -77,7 +122,7 @@ section{padding:clamp(90px,11vw,150px) 0}
         <p class="eb" data-in>Calibre N.01 · Geneva</p>
         <h1 class="serif" data-in style="--d:1">Time, kept<br><i>in the dark.</i></h1>
         <p data-in style="--d:2">A hand-wound movement beneath a forest-green sunburst dial. Grade-A luminova, a 72-hour reserve, and only 300 pieces each year.</p>
-        <a class="btn" href="#" data-in style="--d:3">Discover the collection</a>
+        <a class="btn" href="#/shop" data-in style="--d:3">Discover the collection</a> &nbsp; <a class="btn" href="#/configure" data-in style="--d:3">Configure yours</a>
       </div>
       <div class="watch" data-fade style="--d:1" aria-hidden="true">
         <span class="lug t"></span><span class="lug b"></span><span class="case"></span><span class="crown"></span><span class="bez"></span><span class="dial"></span>
@@ -94,28 +139,35 @@ section{padding:clamp(90px,11vw,150px) 0}
       </div>
     </div>
   </section>
-
   <section>
     <div class="wrap">
-      <div class="intro"><h2 class="serif">Three dials,<br>one quiet obsession.</h2><p>Each Nocturne is finished by a single watchmaker in our Plainpalais atelier, from the côtes de Genève on the bridges to the hand-applied lume on every index.</p></div>
-      <div class="trio">
-        <article><div class="mini"><div style="--d:repeating-conic-gradient(#0e2b22 0 1.2deg,#143a2e 1.2deg 2.4deg)"></div></div><h3>Forêt</h3><small>Green sunburst · 39 mm</small></article>
-        <article><div class="mini"><div style="--d:repeating-conic-gradient(#14161b 0 1.2deg,#1d2028 1.2deg 2.4deg)"></div></div><h3>Minuit</h3><small>Midnight black · 39 mm</small></article>
-        <article><div class="mini"><div style="--d:repeating-conic-gradient(#d9cdb6 0 1.2deg,#e8dfcb 1.2deg 2.4deg)"></div></div><h3>Ivoire</h3><small>Grained ivory · 36 mm</small></article>
-      </div>
+      <div class="intro"><h2 class="serif">Three dials,<br>one quiet obsession.</h2><p>Each Nocturne is finished by a single watchmaker in our Plainpalais atelier, from the côtes de Genève on the bridges to the hand-applied lume on every index. Choose a reference below, or configure your own.</p></div>
+      <div class="sh-grid three" data-products="featured" data-limit="3"></div>
     </div>
   </section>
-
+  <section style="padding-top:0">
+    <div class="wrap cfg-band">
+      <div class="cb-art" data-cfgart></div>
+      <div><p class="eb">The atelier configurator</p><h2 class="serif">Make it yours, down to the caseback.</h2><p>Choose the case, the dial and the strap, and engrave a few words on the back. We assemble and regulate every configured watch by hand within three weeks.</p><a class="btn" href="#/configure">Open the configurator</a></div>
+    </div>
+  </section>
   <section style="padding-top:0">
     <div class="wrap">
       <p class="quote serif">“We make a few watches, <i>slowly</i>, for people who notice.”</p>
-      <div class="specs"><div><b>300</b><span>Pieces a year</span></div><div><b>72 h</b><span>Power reserve</span></div><div><b>21,600</b><span>Vibrations / hour</span></div><div><b>1 · 1</b><span>Watchmaker · watch</span></div></div>
+      <div class="specs"><div><b>300</b><span>Pieces a year</span></div><div><b>72 h</b><span>Power reserve</span></div><div><b>21,600</b><span>Vibrations / hour</span></div><div><b>5 years</b><span>Warranty</span></div></div>
     </div>
   </section>
+</section>
+<section data-view="shop" hidden></section>
+<section data-view="p" hidden></section>
+<section data-view="checkout" hidden></section>
+<section data-view="configure" hidden></section>
 </main>
-<footer class="foot"><div class="wrap"><span>Nocturne Genève</span><span>Rue de Carouge 12</span><span>© Nocturne</span></div></footer>
+<footer class="foot"><div class="wrap"><span>Nocturne Genève</span><span>Free insured shipping · 30-day returns</span><span>A website concept by JIEWEITECH</span></div></footer>
+<script src="assets/shop.js"></script>
 <script>
 (function(){
+  /* the live hero watch */
   var g=document.getElementById("ticks"),s="";
   for(var i=0;i<60;i++){var a=i*6,big=i%5===0;
     s+=big?'<rect x="196" y="22" width="8" height="'+(i%15===0?30:22)+'" rx="1.5" fill="#efd9a7" transform="rotate('+a+' 200 200)"/><rect x="198" y="25" width="4" height="'+(i%15===0?24:16)+'" rx="1" fill="#dff3e4" transform="rotate('+a+' 200 200)"/>'
@@ -124,9 +176,87 @@ section{padding:clamp(90px,11vw,150px) 0}
   var hh=document.getElementById("hh"),mh=document.getElementById("mh"),sh=document.getElementById("sh");
   var t0=Date.now(),base=null;
   function tick(){if(document.documentElement.classList.contains("wall-paused"))return;var d=new Date(),sec=d.getSeconds(),m=d.getMinutes()+sec/60,h=(d.getHours()%12)+m/60;
-    if(base===null)base=sec;var run=base+Math.round((Date.now()-t0)/1000);   /* keeps counting up, so the hand never sweeps backwards */
+    if(base===null)base=sec;var run=base+Math.round((Date.now()-t0)/1000);
     hh.style.transform="rotate("+h*30+"deg)";mh.style.transform="rotate("+m*6+"deg)";sh.style.transform="rotate("+run*6+"deg)";}
   tick();setInterval(tick,1000);
+})();
+(function(){
+  var CASES={steel:{name:"Polished steel",stops:["#5c6066","#e9ecef","#9aa0a6","#3a3e44","#c5cad0"],add:0},gold:{name:"18k rose gold",stops:["#6e4a37","#f3c9a8","#a8735a","#3d2a20","#dba486"],add:9800},black:{name:"Black DLC steel",stops:["#141516","#56595e","#26282b","#0b0c0d","#3d4045"],add:650}};
+  var DIALS={foret:{name:"Forêt green",a:"#0e2b22",b:"#1d4a3b",ink:"#efd9a7"},minuit:{name:"Minuit black",a:"#121318",b:"#262a33",ink:"#efd9a7"},ivoire:{name:"Ivoire",a:"#d9cdb6",b:"#efe6d4",ink:"#3b3326"},saumon:{name:"Saumon",a:"#d99b7e",b:"#f0c2a8",ink:"#3a2418"},bleu:{name:"Bleu nuit",a:"#14223d",b:"#28406b",ink:"#e8e4da"}};
+  var STRAPS={calf:{name:"Brown calf leather",c:"#6b4329",add:0},black:{name:"Black alligator-embossed",c:"#1b1a19",add:180},mesh:{name:"Milanese mesh",c:"mesh",add:420},rubber:{name:"Forest rubber",c:"#1f3a31",add:120},sand:{name:"Sand suede",c:"#b49a7a",add:90}};
+  var uid=0;
+  function watch(o){
+    o=o||{}; var id=++uid, cs=CASES[o.case||"steel"], dl=DIALS[o.dial||"foret"], st=STRAPS[o.strap||"calf"], size=o.size===36?0.9:o.size===42?1.06:1;
+    var g='<defs><linearGradient id="ca'+id+'" x1="0" y1="0" x2="1" y2="1">'+cs.stops.map(function(c,i){return '<stop offset="'+(i/4)+'" stop-color="'+c+'"/>';}).join("")+'</linearGradient>'+
+      '<radialGradient id="dl'+id+'" cx=".4" cy=".32" r=".8"><stop offset="0" stop-color="'+dl.b+'"/><stop offset=".7" stop-color="'+dl.a+'"/><stop offset="1" stop-color="'+Shop.shade(dl.a,-0.35)+'"/></radialGradient>'+
+      '<pattern id="ms'+id+'" width="6" height="6" patternUnits="userSpaceOnUse"><rect width="6" height="6" fill="#9aa0a6"/><path d="M0 3 L6 3 M3 0 L3 6" stroke="#d9dde1" stroke-width="1.4"/></pattern>'+
+      '<linearGradient id="gl'+id+'" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".2"/><stop offset=".45" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>';
+    var strapFill=st.c==="mesh"?"url(#ms"+id+")":st.c, sd=st.c==="mesh"?"#6c7176":Shop.shade(st.c,-0.3);
+    var strap='<rect x="146" y="-10" width="108" height="150" rx="14" fill="'+strapFill+'"/><rect x="146" y="260" width="108" height="150" rx="14" fill="'+strapFill+'"/>'+
+      (st.c!=="mesh"?'<rect x="156" y="-10" width="88" height="140" rx="8" fill="none" stroke="'+Shop.shade(st.c==="mesh"?"#999":st.c,0.25)+'" stroke-width="1.4" stroke-dasharray="4 4" opacity=".7"/><rect x="156" y="270" width="88" height="140" rx="8" fill="none" stroke="'+Shop.shade(st.c,0.25)+'" stroke-width="1.4" stroke-dasharray="4 4" opacity=".7"/>':"")+
+      (o.strap==="rubber"?[300,320,340,360].map(function(y){return '<rect x="166" y="'+y+'" width="68" height="6" rx="3" fill="'+sd+'"/>';}).join(""):"");
+    var lugs='<path d="M150 112 L170 80 L230 80 L250 112 Z" fill="url(#ca'+id+')"/><path d="M150 288 L170 320 L230 320 L250 288 Z" fill="url(#ca'+id+')"/>';
+    if(o.view===1){
+      var t=String(o.text||"").slice(0,22).replace(/[&<>"]/g,"");
+      return '<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">'+g+'<g transform="translate(200 200) scale('+size+') translate(-200 -200)">'+strap+lugs+'<circle cx="200" cy="200" r="118" fill="url(#ca'+id+')"/><circle cx="200" cy="200" r="104" fill="none" stroke="'+cs.stops[3]+'" stroke-opacity=".4" stroke-width="2"/>'+
+        '<circle cx="200" cy="200" r="62" fill="#0b0d0f"/><circle cx="200" cy="200" r="62" fill="url(#gl'+id+')"/>'+[[182,186,24,"#b9a07a"],[222,206,18,"#9c865f"],[196,226,12,"#c9b386"]].map(function(c){var t2="";for(var k=0;k<12;k++){var a=k/12*Math.PI*2;t2+='<rect x="'+(c[0]-2)+'" y="'+(c[1]-c[2]-4)+'" width="4" height="6" fill="'+c[3]+'" transform="rotate('+(k*30)+' '+c[0]+' '+c[1]+')"/>';}return '<circle cx="'+c[0]+'" cy="'+c[1]+'" r="'+c[2]+'" fill="'+c[3]+'"/>'+t2+'<circle cx="'+c[0]+'" cy="'+c[1]+'" r="3" fill="#7a1f2b"/>';}).join("")+
+        '<path id="arc'+id+'" d="M110 200 A90 90 0 0 1 290 200" fill="none"/><text font-family="Cormorant V,serif" font-size="15" letter-spacing="3" fill="'+cs.stops[3]+'" fill-opacity=".8"><textPath href="#arc'+id+'" startOffset="50%" text-anchor="middle">'+(t||"NOCTURNE · GENÈVE")+'</textPath></text>'+
+        '<text x="200" y="300" text-anchor="middle" font-family="Manrope V,sans-serif" font-size="8" letter-spacing="2.5" fill="'+cs.stops[3]+'" fill-opacity=".7">N°'+(o.no||"0142")+' / 300 · SAPPHIRE CASEBACK</text></g></svg>';
+    }
+    var ticks="";for(var i=0;i<12;i++){ticks+='<rect x="197" y="'+(i%3===0?94:98)+'" width="6" height="'+(i%3===0?20:13)+'" rx="1.5" fill="'+dl.ink+'" transform="rotate('+(i*30)+' 200 200)"/>';}
+    for(var j=0;j<60;j++){if(j%5)ticks+='<rect x="199.5" y="96" width="1" height="5" fill="'+dl.ink+'" fill-opacity=".55" transform="rotate('+(j*6)+' 200 200)"/>';}
+    return '<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">'+g+'<g transform="translate(200 200) scale('+size+') translate(-200 -200)">'+strap+lugs+
+      '<rect x="314" y="188" width="14" height="24" rx="3" fill="url(#ca'+id+')"/><circle cx="200" cy="200" r="120" fill="url(#ca'+id+')"/><circle cx="200" cy="200" r="108" fill="#0c0e0d"/><circle cx="200" cy="200" r="102" fill="url(#dl'+id+')"/>'+ticks+
+      '<text x="200" y="158" text-anchor="middle" font-family="Cormorant V,serif" font-size="13" letter-spacing="4.5" fill="'+dl.ink+'">NOCTURNE</text><text x="200" y="258" text-anchor="middle" font-family="Manrope V,sans-serif" font-size="5.5" letter-spacing="2" fill="'+dl.ink+'" fill-opacity=".75">AUTOMATIQUE · 72H</text>'+
+      '<g transform="rotate(-62 200 200)"><path d="M197 204 L198.5 140 L200 132 L201.5 140 L203 204Z" fill="'+dl.ink+'"/></g><g transform="rotate(58 200 200)"><path d="M198 206 L199 110 L200 102 L201 110 L202 206Z" fill="'+dl.ink+'"/></g><g transform="rotate(170 200 200)"><path d="M199.5 230 L199.7 104 L200.3 104 L200.5 230Z" fill="#e2b257"/></g><circle cx="200" cy="200" r="5" fill="'+dl.ink+'"/>'+
+      '<circle cx="200" cy="200" r="102" fill="url(#gl'+id+')"/></g></svg>';
+  }
+  var P=[
+    {id:"foret-39",name:"Forêt 39",cat:"Watches",collection:"Calibre N.01",price:3450,cfg:{case:"steel",dial:"foret",strap:"calf",size:39},featured:true,badge:"Signature",desc:"Our first reference: a green sunburst dial in a 39 mm polished steel case, with the hand-wound N.01 movement and a 72-hour reserve.",specs:{Case:"39 mm polished steel, 10.4 mm thick",Movement:"Calibre N.01, hand-wound, 72 h reserve","Water resistance":"50 m",Crystal:"Domed sapphire, anti-reflective",Warranty:"5 years"}},
+    {id:"minuit-39",name:"Minuit 39",cat:"Watches",collection:"Calibre N.01",price:3650,cfg:{case:"black",dial:"minuit",strap:"black",size:39},featured:true,desc:"Black DLC case, midnight dial and gold indices that glow green in the dark.",specs:{Case:"39 mm black DLC steel",Movement:"Calibre N.01, hand-wound","Water resistance":"50 m",Warranty:"5 years"}},
+    {id:"ivoire-36",name:"Ivoire 36",cat:"Watches",collection:"Calibre N.02",price:3250,cfg:{case:"steel",dial:"ivoire",strap:"sand",size:36},featured:true,isNew:true,badge:"New",desc:"A grained ivory dial in a slim 36 mm case. Our most classic proportions.",specs:{Case:"36 mm polished steel, 9.2 mm thick",Movement:"Calibre N.02, automatic",Warranty:"5 years"}},
+    {id:"saumon-39",name:"Saumon 39 Or Rose",cat:"Watches",collection:"Calibre N.01",price:13250,cfg:{case:"gold",dial:"saumon",strap:"calf",size:39},desc:"A salmon dial in 18k rose gold. Limited to 30 pieces a year.",specs:{Case:"39 mm 18k rose gold",Movement:"Calibre N.01, gold-plated bridges",Edition:"30 pieces a year"}},
+    {id:"bleu-42",name:"Bleu Nuit 42 Sport",cat:"Watches",collection:"Calibre N.03",price:3950,cfg:{case:"steel",dial:"bleu",strap:"rubber",size:42},desc:"A 42 mm sports watch with 200 m water resistance and a quick-release rubber strap.",specs:{Case:"42 mm brushed steel",Movement:"Calibre N.03, automatic","Water resistance":"200 m"}},
+    {id:"strap-calf",name:"Calf leather strap",cat:"Straps",price:240,cfg:{case:"steel",dial:"foret",strap:"calf"},desc:"Hand-stitched Italian calf with a quick-release spring bar.",specs:{Width:"20 mm",Buckle:"Steel pin buckle"}},
+    {id:"strap-mesh",name:"Milanese mesh bracelet",cat:"Straps",price:420,cfg:{case:"steel",dial:"minuit",strap:"mesh"},desc:"Fine-woven steel mesh with a sliding clasp.",specs:{Width:"20 mm"}},
+    {id:"strap-rubber",name:"Sport rubber strap",cat:"Straps",price:160,cfg:{case:"black",dial:"bleu",strap:"rubber"},desc:"FKM rubber, vanilla-scented, quick-release.",specs:{Width:"20 / 22 mm"}},
+    {id:"roll",name:"Leather watch roll",cat:"Accessories",price:190,cfg:{case:"steel",dial:"ivoire",strap:"sand"},desc:"A travel roll for two watches in vegetable-tanned leather.",specs:{Holds:"2 watches"}},
+    {id:"custom",hidden:true,name:"Configured Nocturne",cat:"Watches",price:0}
+  ];
+  P.forEach(function(p){p.views=2;p.points=["Free insured shipping","30-day returns","5-year warranty"];});
+  var art=function(p,st){st=st||{};var c=Object.assign({},p.cfg||st.cfg||{});if(st.cfg)Object.assign(c,st.cfg);if(p.cfg&&p.cat==="Watches"&&st.strapPick!=null)c.strap=Object.keys(STRAPS)[st.strapPick];c.view=st.view||0;c.text=st.text||c.text;return watch(c);};
+  document.querySelector("[data-cfgart]").innerHTML=watch({case:"gold",dial:"saumon",strap:"calf"});
+  /* configurator */
+  var B={model:39,case:"steel",dial:"foret",strap:"calf",text:"",view:0};
+  var BASE={36:3250,39:3450,42:3950};
+  function total(){return BASE[B.model]+CASES[B.case].add+STRAPS[B.strap].add+(B.text?90:0);}
+  function configure(el){
+    el=Shop.fresh(el);
+    var grp=function(title,key,obj,sub){return '<div class="grp"><h4>'+title+' <em data-n="'+key+'"></em></h4><div class="opts">'+Object.keys(obj).map(function(k){var o=obj[k];var sw=o.stops?"conic-gradient("+o.stops.join(",")+")":o.a?"radial-gradient("+o.b+","+o.a+")":o.c==="mesh"?"repeating-linear-gradient(45deg,#9aa0a6 0 3px,#d9dde1 3px 5px)":o.c;return '<button type="button" class="opt" data-k="'+key+'" data-v="'+k+'"><i style="background:'+sw+'"></i><span>'+o.name+'<small>'+(o.add?"+ "+Shop.money(o.add,true):"Included")+'</small></span></button>';}).join("")+"</div></div>";};
+    el.innerHTML='<div class="cfg"><div class="cfg-stage" data-stage></div><div><p class="eb">Configurator</p><h1 class="serif">Your Nocturne</h1><p style="color:var(--mut);line-height:1.7">Assembled and regulated by hand in Geneva within three weeks, then delivered insured to your door.</p>'+
+      '<div class="grp"><h4>Size</h4><div class="opts" style="grid-template-columns:repeat(3,1fr)">'+[36,39,42].map(function(s){return '<button type="button" class="opt" data-k="model" data-v="'+s+'"><span>'+s+' mm<small>from '+Shop.money(BASE[s],true)+'</small></span></button>';}).join("")+'</div></div>'+
+      grp("Case","case",CASES)+grp("Dial","dial",DIALS)+grp("Strap","strap",STRAPS)+
+      '<div class="grp"><h4>Caseback engraving <em>+ $90 · up to 22 letters</em></h4><input class="eng" maxlength="22" placeholder="For A., 24.10.2026" data-text></div>'+
+      '<div class="total"><span>Total, insured delivery included</span><b data-total></b></div><button class="sh-btn block big" type="button" data-addw>Add to bag</button></div></div>';
+    var paint=function(){
+      el.querySelector("[data-stage]").innerHTML=watch({case:B.case,dial:B.dial,strap:B.strap,size:B.model,view:B.view,text:B.text})+'<div class="flip"><button type="button" data-v0 class="'+(B.view?"":"on")+'">Front</button><button type="button" data-v1 class="'+(B.view?"on":"")+'">Caseback</button></div>';
+      Array.prototype.forEach.call(el.querySelectorAll("[data-k]"),function(b){b.classList.toggle("on",String(B[b.dataset.k])===b.dataset.v);});
+      el.querySelector('[data-n="case"]').textContent=CASES[B.case].name;el.querySelector('[data-n="dial"]').textContent=DIALS[B.dial].name;el.querySelector('[data-n="strap"]').textContent=STRAPS[B.strap].name;
+      el.querySelector("[data-total]").textContent=Shop.money(total(),true);
+    };
+    el.addEventListener("click",function(e){var b=e.target.closest("[data-k]");if(b){B[b.dataset.k]=b.dataset.k==="model"?+b.dataset.v:b.dataset.v;B.view=0;paint();}
+      if(e.target.closest("[data-v0]")){B.view=0;paint();} if(e.target.closest("[data-v1]")){B.view=1;paint();}
+      if(e.target.closest("[data-addw]"))Shop.add("custom",1,{size:B.model+" mm",case:CASES[B.case].name,dial:DIALS[B.dial].name,strap:STRAPS[B.strap].name,engraving:B.text?"“"+B.text+"”":"",_unit:total(),_state:{cfg:{case:B.case,dial:B.dial,strap:B.strap,size:B.model},text:B.text}});});
+    el.addEventListener("input",function(e){if(e.target.matches("[data-text]")){B.text=e.target.value;B.view=1;paint();}});
+    paint();
+  }
+  Shop.init({id:"T2",name:"Nocturne",mode:"shop",products:P,art:art,freeShip:1,orderPrefix:"NCT",
+    shipping:[{label:"Insured courier",eta:"2–4 business days, signature required",price:0},{label:"Boutique pickup, Geneva",eta:"Ready in 1 day",price:0}],
+    facets:[{key:"cat",label:"Category"},{key:"collection",label:"Collection"},{key:"price",label:"Price",type:"range",step:50}],
+    options:function(p){if(p.cat!=="Watches")return[];return[{key:"strapPick",label:"Strap",type:"select",values:Object.keys(STRAPS).map(function(k){return{name:STRAPS[k].name,add:STRAPS[k].add,k:k};})},{key:"text",label:"Caseback engraving (optional, + $90)",type:"text",max:22,placeholder:"Up to 22 letters"}];},
+    priceAdjust:function(p,price,o){if(p.cat!=="Watches")return price;var k=Object.keys(STRAPS).filter(function(k){return STRAPS[k].name===o.strapPick;})[0];var base=p.cfg?STRAPS[p.cfg.strap].add:0;return price+(k?STRAPS[k].add-base:0)+(o.text?90:0);},
+    views:{configure:configure},labels:{shop:"Watches",all:"All watches"}
+  });
 })();
 </script>
 </body>

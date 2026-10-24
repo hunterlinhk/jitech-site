@@ -3,106 +3,252 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Ledger | Business banking that keeps up</title>
+<title>Halden Flow | Industrial valves, sized and specified online</title>
 <script src="assets/base.js"></script>
 <link rel="stylesheet" href="assets/base.css">
 <style>
-:root{--bg:#f4f2ff;--ink:#120f2b;--mut:#6c6890;--v:#5b3df5;--v2:#8f7bff;--lime:#c6f432;--line:rgba(18,15,43,.1)}
-body{background:var(--bg);color:var(--ink);font-family:"Manrope V",Arial,sans-serif;font-size:15px}
-.wrap{width:min(1260px,100% - 56px);margin:0 auto}
-.hero{position:relative;height:100vh;min-height:520px;overflow:hidden;display:flex;flex-direction:column;background:radial-gradient(50% 60% at 78% 50%,#dcd5ff 0%,rgba(244,242,255,0) 70%),var(--bg)}
-.nav{height:76px;display:flex;align-items:center;gap:30px;font-weight:600;font-size:14px;color:var(--mut)}
-.logo{display:flex;align-items:center;gap:9px;font-weight:800;font-size:21px;color:var(--ink);margin-right:auto;letter-spacing:-.03em}
-.logo i{width:24px;height:24px;border-radius:8px;background:var(--ink);position:relative}
-.logo i::after{content:"";position:absolute;inset:7px 6px;border-radius:3px;background:var(--lime)}
-.nav .o{color:var(--ink)}
-.nav .b{background:var(--ink);color:#fff;border-radius:12px;padding:12px 18px}
-.stage{flex:1;display:grid;grid-template-columns:1.05fr 1fr;align-items:center;gap:30px;min-height:0}
-.tag{display:inline-flex;gap:8px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 14px 7px 8px;font-size:13px;font-weight:600}
-.tag b{background:var(--lime);border-radius:999px;padding:3px 9px;font-size:11px}
-h1{font-size:clamp(46px,min(6vw,11vh),98px);line-height:.98;letter-spacing:-.05em;font-weight:800;margin:clamp(14px,2.6vh,24px) 0}
-h1 span{color:var(--v)}
-.lede{color:var(--mut);font-size:clamp(15px,1.3vw,18px);line-height:1.55;max-width:28em}
-.ctas{display:flex;gap:12px;margin-top:clamp(20px,3.6vh,34px);align-items:center}
-.ctas a:first-child{background:var(--v);color:#fff;border-radius:14px;padding:17px 24px;font-weight:700;box-shadow:0 14px 30px rgba(91,61,245,.35)}
-.ctas a:last-child{font-weight:700}
-.trust{display:flex;gap:22px;margin-top:clamp(20px,4vh,40px);color:var(--mut);font-size:13px;font-weight:600}
-.trust span::before{content:"✓ ";color:var(--v)}
-/* the card */
-.scene{position:relative;height:min(70vh,560px);perspective:1400px}
-.card{position:absolute;left:12%;top:16%;width:min(30vw,52vh,440px);aspect-ratio:1.586;border-radius:22px;transform-style:preserve-3d;animation:float 7s ease-in-out infinite alternate;
-  background:radial-gradient(120% 140% at 0% 0%,#a594ff 0%,#5b3df5 40%,#1d1460 100%);box-shadow:0 40px 80px rgba(48,25,160,.45),inset 0 1px 0 rgba(255,255,255,.4);color:#fff;padding:7%}
-@keyframes float{from{transform:rotateX(18deg) rotateY(-24deg) rotateZ(6deg) translateY(0)}to{transform:rotateX(10deg) rotateY(-12deg) rotateZ(2deg) translateY(-16px)}}
-.card .shine{position:absolute;inset:0;border-radius:inherit;overflow:hidden;pointer-events:none}
-.card .shine::before{content:"";position:absolute;top:0;bottom:0;left:-60%;width:60%;background:linear-gradient(115deg,transparent 20%,rgba(255,255,255,.35) 50%,transparent 80%);animation:sheen 4s ease-in-out infinite}
-@keyframes sheen{from{transform:translateX(0)}to{transform:translateX(370%)}}
-.card .chip{width:16%;aspect-ratio:1.3;border-radius:6px;background:linear-gradient(135deg,#f6e6a8,#c9a94e);margin-top:6%}
-.card .num{position:absolute;left:7%;bottom:22%;font-family:"JetBrains Mono V",monospace;letter-spacing:.14em;font-size:clamp(12px,1.25vw,18px)}
-.card .name{position:absolute;left:7%;bottom:9%;font-size:12px;letter-spacing:.14em;opacity:.8}
-.card .brand{position:absolute;right:7%;top:9%;font-weight:800;font-size:clamp(14px,1.5vw,20px)}
-.card.back{left:28%;top:34%;background:radial-gradient(120% 140% at 0% 0%,#efffb0 0%,#c6f432 45%,#7aa50e 100%);color:var(--ink);animation-delay:-3s;z-index:-1;opacity:.95}
-.note{position:absolute;background:#fff;border-radius:16px;padding:12px 16px;box-shadow:0 18px 40px rgba(18,15,43,.12);display:flex;gap:12px;align-items:center;font-size:13px;animation:bob 5s ease-in-out infinite alternate}
-@keyframes bob{to{transform:translateY(-10px)}}
-.note i{width:34px;height:34px;border-radius:10px;background:var(--lime);display:grid;place-items:center;font-style:normal;font-weight:800}
-.note b{display:block;font-size:15px}
-.note small{color:var(--mut)}
-.n1{right:2%;top:8%}.n2{left:0;bottom:6%;animation-delay:-2s}
-section{padding:clamp(80px,9vw,130px) 0}
-.h2{font-size:clamp(38px,4.4vw,70px);line-height:1;letter-spacing:-.05em;font-weight:800;max-width:13em}
-.h2 span{color:var(--v)}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:50px}
-.f{background:#fff;border:1px solid var(--line);border-radius:22px;padding:24px;min-height:220px;display:flex;flex-direction:column;justify-content:space-between}
-.f .ic{width:44px;height:44px;border-radius:14px;background:var(--bg);display:grid;place-items:center;font-weight:800;color:var(--v)}
-.f h3{font-size:18px;margin-bottom:6px}
-.f p{color:var(--mut);font-size:14px;line-height:1.5}
-.dark{background:var(--ink);color:#fff;border-radius:36px;padding:clamp(36px,5vw,70px);display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
-.dark .h2 span{color:var(--lime)}
-.dark .big{font-size:clamp(70px,9vw,150px);font-weight:800;letter-spacing:-.06em;line-height:.9;color:var(--lime)}
-.dark p{color:#b3aed6;line-height:1.6;margin-top:10px}
-.foot{padding:36px 0;color:var(--mut);font-size:13px;display:flex;justify-content:space-between}
-@media (max-width:900px){.nav a:not(.logo):not(.b){display:none}.stage,.dark{grid-template-columns:1fr}.scene{display:none}.grid{grid-template-columns:1fr 1fr}}
+:root{--bg:#eef0f2;--st:#14181d;--bl:#1849b8;--ye:#ffc21a;--mut:#5d6672;--line:rgba(20,24,29,.13);--pa:#fff}
+html,body{overflow-x:clip}
+body{background:var(--bg);color:var(--st);font-family:"Inter V",Arial,sans-serif;font-size:15.5px}
+.mono{font-family:"JetBrains Mono V",monospace}
+.wrap{width:min(1320px,100% - 56px);margin:0 auto}
+.nav{height:74px;display:flex;align-items:center;gap:28px;font-weight:600;font-size:14.5px}
+.logo{font-family:"Archivo V",sans-serif;font-weight:800;font-size:23px;letter-spacing:.01em;margin-right:auto;display:flex;align-items:center;gap:10px;font-stretch:125%}
+.logo svg{width:30px}
+.nav .cta{background:var(--bl);color:#fff;border-radius:6px;padding:11px 16px}
+.hero{background:var(--st);color:#e9edf2;overflow:hidden}
+.hero .wrap{min-height:calc(100vh - 74px);display:grid;grid-template-columns:1fr 1.1fr;gap:30px;align-items:center;padding:4vh 0}
+.k{font-family:"JetBrains Mono V",monospace;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ye)}
+h1{font-family:"Archivo V",sans-serif;font-weight:800;font-stretch:118%;font-size:clamp(50px,min(6vw,11.6vh),108px);line-height:.9;letter-spacing:-.035em;margin:clamp(14px,2.6vh,24px) 0}
+h1 span{color:var(--ye)}
+.lede{max-width:30em;line-height:1.6;color:#a9b3bf;font-size:clamp(15.5px,1.15vw,18px)}
+.go{display:flex;gap:12px;margin-top:clamp(20px,3.6vh,34px);flex-wrap:wrap}
+.go a{font-weight:700;border-radius:6px;padding:17px 24px}
+.go a:first-child{background:var(--ye);color:var(--st)}
+.go a:last-child{border:1.5px solid rgba(233,237,242,.35)}
+.kpi{display:grid;grid-template-columns:repeat(3,auto);gap:34px;margin-top:clamp(24px,4.4vh,44px);justify-content:start;border-top:1px solid rgba(233,237,242,.14);padding-top:20px}
+.kpi b{display:block;font-family:"JetBrains Mono V",monospace;font-size:24px;color:#fff}
+.kpi small{color:#8792a0;font-size:12.5px}
+.vstage{position:relative;aspect-ratio:600/420}
+.vstage svg{width:100%;height:100%}
+.grid{position:absolute;inset:0;background-image:linear-gradient(rgba(233,237,242,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(233,237,242,.06) 1px,transparent 1px);background-size:30px 30px;mask-image:radial-gradient(circle,#000 40%,transparent 75%);-webkit-mask-image:radial-gradient(circle,#000 40%,transparent 75%)}
+@keyframes flow{to{stroke-dashoffset:-60}}
+.fl{animation:flow 1.2s linear infinite}
+@keyframes lever{0%,35%{transform:rotate(0)}50%,85%{transform:rotate(-90deg)}100%{transform:rotate(0)}}
+.lev{transform-origin:300px 132px;animation:lever 7s cubic-bezier(.6,0,.3,1) infinite}
+.std{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;padding:20px 0;color:var(--mut);font-family:"JetBrains Mono V",monospace;font-size:12.5px;border-bottom:1px solid var(--line)}
+section{padding:clamp(70px,8vw,120px) 0}
+.h2{font-family:"Archivo V",sans-serif;font-weight:800;font-stretch:118%;font-size:clamp(38px,4.4vw,72px);line-height:.94;letter-spacing:-.035em;margin-top:12px}
+.sec-k{color:var(--bl)}
+/* selector */
+.sel{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:18px;margin-top:34px;align-items:start}
+.inp{background:var(--pa);border:1px solid var(--line);border-radius:10px;padding:6px 20px 20px}
+.f{padding:14px 0;border-bottom:1px solid var(--line)}
+.f:last-child{border:0}
+.f>p{font-weight:700;font-size:14px;margin-bottom:9px;display:flex;justify-content:space-between;gap:10px}
+.f>p output{font-family:"JetBrains Mono V",monospace;color:var(--bl);font-weight:600}
+.seg{display:flex;flex-wrap:wrap;gap:5px}
+.seg button{border:1.5px solid var(--line);border-radius:6px;padding:8px 11px;font-size:13.5px;font-weight:600;background:#f7f8fa}
+.seg button.on{background:var(--st);color:#fff;border-color:var(--st)}
+input[type=range]{width:100%;accent-color:var(--bl)}
+.scale{display:flex;justify-content:space-between;font-family:"JetBrains Mono V",monospace;font-size:11px;color:var(--mut)}
+.out{position:sticky;top:14px;display:grid;gap:12px}
+.card{background:var(--pa);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.card .vis{background:#1b2027;position:relative;aspect-ratio:600/330}
+.card .vis svg{width:100%;height:100%}
+.card .tagl{position:absolute;left:14px;top:12px;font-family:"JetBrains Mono V",monospace;font-size:12px;color:var(--ye)}
+.card .tagr{position:absolute;right:14px;top:12px;font-family:"JetBrains Mono V",monospace;font-size:12px;color:#8792a0}
+.card .hd{padding:16px 18px 6px;display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.card h3{font-family:"Archivo V",sans-serif;font-stretch:112%;font-size:24px}
+.card .code{font-family:"JetBrains Mono V",monospace;font-size:12.5px;background:#eef2fb;color:var(--bl);padding:5px 8px;border-radius:4px}
+.ds{display:grid;grid-template-columns:1fr 1fr;padding:6px 18px 14px}
+.ds div{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line);font-size:13.5px}
+.ds div:nth-child(odd){margin-right:14px}
+.ds span{color:var(--mut)}
+.ds b{font-family:"JetBrains Mono V",monospace;font-weight:600;text-align:right}
+.why{padding:0 18px 14px;font-size:13.5px;color:var(--mut);line-height:1.5}
+.why li{padding-left:16px;position:relative;margin-top:4px}
+.why li::before{content:"›";position:absolute;left:0;color:var(--bl);font-weight:800}
+.warn{margin:0 18px 14px;background:#fff6dc;border-left:3px solid var(--ye);padding:10px 12px;font-size:13px;border-radius:4px;display:none}
+.warn.on{display:block}
+.pipe{background:var(--st);color:#e9edf2;border-radius:10px;padding:16px 18px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center}
+.pipe .ring{width:96px;height:96px}
+.pipe b{font-family:"JetBrains Mono V",monospace;font-size:26px;color:var(--ye)}
+.pipe p{font-size:13.5px;color:#a9b3bf;line-height:1.5}
+.vbar{height:8px;border-radius:5px;background:#2b323b;margin-top:8px;overflow:hidden;position:relative}
+.vbar i{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,#3ecf8e,#ffc21a 70%,#ff5a3c);transition:width .3s}
+.acts{display:flex;gap:8px;flex-wrap:wrap}
+.acts button{flex:1;border-radius:6px;padding:14px;font-weight:700;min-width:150px}
+.acts .a{background:var(--bl);color:#fff}
+.acts .b{border:1.5px solid var(--st)}
+.msg{font-size:13.5px;color:#14733f;min-height:1.2em}
+.inds{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:34px}
+.inds div{background:var(--pa);border:1px solid var(--line);border-radius:10px;padding:20px}
+.inds b{font-family:"Archivo V",sans-serif;font-stretch:112%;font-size:19px}
+.inds p{color:var(--mut);font-size:14px;margin-top:6px;line-height:1.5}
+.inds i{font-style:normal;font-family:"JetBrains Mono V",monospace;font-size:12px;color:var(--bl);display:block;margin-bottom:22px}
+.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:30px 0 40px;color:var(--mut);font-size:14px}
+@media (max-width:1040px){.sel{grid-template-columns:minmax(0,1fr)}.out{position:static}.inds{grid-template-columns:1fr 1fr}}
+@media (max-width:860px){.nav a:not(.logo):not(.cta){display:none}.hero .wrap{grid-template-columns:1fr}.kpi{gap:18px}.kpi b{font-size:19px}}
+@media (max-width:520px){.logo{font-size:17px;white-space:nowrap}.nav .cta{white-space:nowrap;padding:10px 12px;font-size:13px}.wrap{width:calc(100% - 32px)}.ds{grid-template-columns:1fr}.ds div:nth-child(odd){margin-right:0}.inds{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<section class="hero" style="padding:0">
-  <div class="wrap" style="height:100%;display:flex;flex-direction:column">
-    <header class="nav"><a class="logo" href="#"><i></i>Ledger</a><a href="#">Accounts</a><a href="#">Cards</a><a href="#">Payments</a><a href="#">Pricing</a><a class="o" href="#">Log in</a><a class="b" href="#">Open an account</a></header>
-    <div class="stage">
-      <div>
-        <span class="tag" data-in><b>NEW</b> 4.2% on idle cash, paid daily</span>
-        <h1 data-in style="--d:1">Banking that keeps up with <span>your business.</span></h1>
-        <p class="lede" data-in style="--d:2">Accounts, cards, invoices and payroll in one place, with no monthly fees and approval in about ten minutes.</p>
-        <div class="ctas" data-in style="--d:3"><a href="#">Open a free account</a><a href="#">Talk to sales →</a></div>
-        <div class="trust" data-in style="--d:4"><span>FDIC insured to $5M</span><span>No monthly fees</span><span>4.9 · App Store</span></div>
-      </div>
-      <div class="scene" aria-hidden="true">
-        <div class="card back"><span class="shine"></span><div class="brand">Ledger</div><div class="chip"></div><div class="num">5381 •••• •••• 2207</div><div class="name">TEAM CARD</div></div>
-        <div class="card"><span class="shine"></span><div class="brand">Ledger</div><div class="chip"></div><div class="num">4716 •••• •••• 9042</div><div class="name">MARA OKAFOR</div></div>
-        <div class="note n1"><i>$</i><div><b>+ $12,480.00</b><small>Invoice #1042 paid</small></div></div>
-        <div class="note n2"><i>%</i><div><b>$318.22</b><small>Interest this month</small></div></div>
-      </div>
+<div class="wrap">
+  <header class="nav"><a class="logo" href="#"><svg viewBox="0 0 30 30"><circle cx="15" cy="15" r="13" fill="none" stroke="#1849b8" stroke-width="3"/><path d="M4 15H26" stroke="#14181d" stroke-width="3"/><rect x="11" y="3" width="8" height="5" fill="#ffc21a"/></svg>HALDEN FLOW</a><a href="#selector">Valve selector</a><a href="#industries">Industries</a><a href="#">Products</a><a href="#">Documents</a><a class="cta" href="#selector">Size a valve</a></header>
+</div>
+<div class="hero">
+  <div class="wrap">
+    <div>
+      <p class="k" data-in>Industrial valves · DN15 to DN600</p>
+      <h1 data-in style="--d:1">Flow control, <span>sized to spec.</span></h1>
+      <p class="lede" data-in style="--d:2">Ball, butterfly, gate, globe and check valves for water, steam, oil and gas and chemical plants. Enter your process conditions and get a recommended valve, material and pipe size in seconds.</p>
+      <div class="go" data-in style="--d:3"><a href="#selector">Open the valve selector</a><a href="#">Download catalog (PDF)</a></div>
+      <div class="kpi" data-in style="--d:4"><div><b>Class 2500</b><small>max pressure rating</small></div><div><b>−196 °C</b><small>to +550 °C</small></div><div><b>48 h</b><small>quote turnaround</small></div></div>
     </div>
+    <div class="vstage" data-fade style="--d:2"><div class="grid"></div><div data-hero></div></div>
   </div>
-</section>
-<main>
-  <section>
-    <div class="wrap">
-      <h2 class="h2">Everything finance does, <span>minus the spreadsheets.</span></h2>
-      <div class="grid">
-        <div class="f"><span class="ic">01</span><div><h3>Smart cards</h3><p>Unlimited virtual cards with limits per team and per vendor.</p></div></div>
-        <div class="f"><span class="ic">02</span><div><h3>Bill pay</h3><p>Forward an invoice by email; we read it, schedule it and pay it.</p></div></div>
-        <div class="f"><span class="ic">03</span><div><h3>Payroll</h3><p>Run payroll in 50 states with taxes filed automatically.</p></div></div>
-        <div class="f"><span class="ic">04</span><div><h3>Reports</h3><p>Real-time cash flow that syncs to QuickBooks and Xero.</p></div></div>
+</div>
+<div class="wrap std"><span>API 6D</span><span>API 598 tested</span><span>ISO 5211 top flange</span><span>ASME B16.34</span><span>PED 2014/68/EU</span><span>Fire-safe API 607</span></div>
+<main class="wrap">
+  <section id="selector">
+    <p class="k sec-k">Valve selector &amp; pipe sizing</p>
+    <h2 class="h2">Tell us the process. We’ll spec the valve.</h2>
+    <div class="sel">
+      <div class="inp">
+        <div class="f"><p>Medium</p><div class="seg" data-g="med"><button type="button" data-v="water">Water</button><button type="button" data-v="steam">Steam</button><button type="button" data-v="gas">Oil &amp; gas</button><button type="button" data-v="chem">Chemicals</button><button type="button" data-v="slurry">Slurry</button></div></div>
+        <div class="f"><p>Function</p><div class="seg" data-g="fn"><button type="button" data-v="onoff">On / off</button><button type="button" data-v="throttle">Throttling</button><button type="button" data-v="check">Stop backflow</button></div></div>
+        <div class="f"><p>Design temperature <output data-o="t"></output></p><input type="range" data-r="t" min="-196" max="550" step="1" aria-label="Design temperature"><div class="scale"><span>−196 °C</span><span>550 °C</span></div></div>
+        <div class="f"><p>Design pressure <output data-o="p"></output></p><input type="range" data-r="p" min="1" max="250" step="1" aria-label="Design pressure"><div class="scale"><span>1 bar</span><span>250 bar</span></div></div>
+        <div class="f"><p>Flow rate <output data-o="q"></output></p><input type="range" data-r="q" min="0.5" max="3000" step="0.5" aria-label="Flow rate"><div class="scale"><span>0.5 m³/h</span><span>3,000 m³/h</span></div></div>
+        <div class="f"><p>Actuation</p><div class="seg" data-g="act"><button type="button" data-v="manual">Manual</button><button type="button" data-v="gear">Gearbox</button><button type="button" data-v="pneu">Pneumatic</button><button type="button" data-v="elec">Electric</button></div></div>
+        <div class="f"><p>End connection</p><div class="seg" data-g="end"><button type="button" data-v="FL">Flanged</button><button type="button" data-v="BW">Butt-weld</button><button type="button" data-v="TH">Threaded</button></div></div>
+      </div>
+      <div class="out" aria-live="polite">
+        <div class="card">
+          <div class="vis"><span class="tagl" data-tl></span><span class="tagr" data-tr></span><div data-vis style="height:100%"></div></div>
+          <div class="hd"><h3 data-name></h3><span class="code" data-code></span></div>
+          <div class="ds" data-ds></div>
+          <ul class="why" data-why></ul>
+          <p class="warn" data-warn></p>
+        </div>
+        <div class="pipe"><svg class="ring" viewBox="0 0 100 100" data-ring></svg><div><b data-dn></b><p data-vel></p><div class="vbar"><i data-vb></i></div></div></div>
+        <div class="acts"><button type="button" class="a" data-rfq>Request quote for this valve</button><button type="button" class="b" data-dl>Download datasheet</button></div>
+        <p class="msg" data-msg></p>
       </div>
     </div>
   </section>
-  <section style="padding-top:0">
-    <div class="wrap dark">
-      <div><h2 class="h2">Your cash should <span>work weekends.</span></h2><p>Idle balances earn interest daily through our partner banks, with same-day access whenever you need it.</p></div>
-      <div class="big">4.2%</div>
-    </div>
+  <section id="industries" style="padding-top:0">
+    <p class="k sec-k">Where our valves work</p>
+    <h2 class="h2">Built for the hard services.</h2>
+    <div class="inds"><div><i>01 / WATER</i><b>Municipal water</b><p>Resilient-seated butterfly and gate valves for treatment plants and networks.</p></div><div><i>02 / ENERGY</i><b>Power &amp; steam</b><p>Forged globe and gate valves in WC6 and F91 for high-temperature lines.</p></div><div><i>03 / O&amp;G</i><b>Oil &amp; gas</b><p>Trunnion ball valves to API 6D with fire-safe certification.</p></div><div><i>04 / PROCESS</i><b>Chemicals &amp; mining</b><p>Lined, duplex and knife-gate valves for corrosive and abrasive media.</p></div></div>
   </section>
 </main>
-<footer class="wrap foot"><span>© Ledger Financial, Inc. Banking services by partner banks, Member FDIC.</span><span>Privacy · Terms</span></footer>
+<footer class="wrap foot"><span>Halden Flow · industrial valves</span><span>Concept site by JIEWEITECH</span></footer>
+<script>
+(function () {
+  var $ = function (s) { return document.querySelector(s); };
+  var S = { med: "water", fn: "onoff", t: 60, p: 16, q: 120, act: "manual", end: "FL" };
+  var DN = [15, 20, 25, 32, 40, 50, 65, 80, 100, 125, 150, 200, 250, 300, 350, 400, 450, 500, 600];
+  var CLASSES = [[150, 19.6], [300, 51.1], [600, 102.1], [900, 153.2], [1500, 255.3], [2500, 425.5]];
+  var NAMES = { ball: "Ball valve", fly: "Butterfly valve", globe: "Globe control valve", gate: "Gate valve", check: "Swing check valve", knife: "Knife gate valve" };
+
+  /* pressure-temperature ratings for carbon steel bodies (ASME B16.34, group 1.1, rounded) */
+  var T = [38, 100, 200, 300, 400, 500, 550], R150 = [19.6, 17.7, 13.8, 10.2, 6.5, 2.8, 1.4], R300 = [51.1, 46.6, 43.8, 39.8, 34.7, 28.2, 24];
+  function interp(tab, t) { t = Math.max(38, t); for (var i = 1; i < T.length; i++) if (t <= T[i]) return tab[i - 1] + (tab[i] - tab[i - 1]) * (t - T[i - 1]) / (T[i] - T[i - 1]); return tab[tab.length - 1]; }
+  function rating(c, t) { return c === 150 ? interp(R150, t) : interp(R300, t) * c / 300; }
+  function pick() {
+    var why = [], type, body, seat, w = "";
+    if (S.fn === "check") { type = "check"; why.push("Stops reverse flow automatically, no actuator needed."); }
+    else if (S.med === "slurry") { type = "knife"; why.push("A knife gate cuts through solids and won’t clog."); }
+    else if (S.fn === "throttle") { type = "globe"; why.push("Globe plug gives fine, stable control across the stroke."); }
+    else if (S.med === "steam" && S.t > 250) { type = "gate"; why.push("Gate valve: full bore and metal seats for hot steam isolation."); }
+    else if (S.q > 900 && S.p <= 25) { type = "fly"; why.push("Large flow at low pressure: a butterfly is lighter and cheaper than a ball valve."); }
+    else { type = "ball"; why.push("Quarter-turn ball valve: tight shut-off and fast operation."); }
+    if (S.t < -46) { body = "CF8M (316 SS)"; why.push("Cryogenic service needs austenitic stainless."); }
+    else if (S.med === "chem") { body = "CD4MCu (duplex)"; why.push("Duplex stainless resists chlorides and acids."); }
+    else if (S.t > 425) { body = "WC6 (Cr-Mo)"; why.push("Chrome-moly keeps its strength above 425 °C."); }
+    else if (S.t < -29) { body = "LCC (low-temp CS)"; why.push("Impact-tested carbon steel down to −46 °C."); }
+    else if (S.med === "water" && S.p <= 16) { body = type === "fly" || type === "gate" ? "Ductile iron, epoxy" : "WCB carbon steel"; }
+    else body = "WCB carbon steel";
+    if (type === "knife") seat = "Hardened 17-4PH"; else if (type === "fly" && S.t <= 120) seat = "EPDM liner"; else if (S.t > 260 || type === "gate" && S.t > 200) seat = "Stellite metal seat"; else if (S.t > 200) seat = "PEEK"; else if (S.t > 120) seat = "RPTFE"; else seat = "PTFE";
+    if (S.t > 260 && type === "ball") why.push("Metal-seated ball valve, because soft seats fail above 260 °C.");
+    var cls = CLASSES[CLASSES.length - 1];
+    for (var i = 0; i < CLASSES.length; i++) if (rating(CLASSES[i][0], S.t) >= S.p) { cls = CLASSES[i]; break; }
+    if (S.med === "steam" && S.t < 100 + S.p * 2.5 && S.p > 1) w = "Check the conditions: steam at " + S.p + " bar condenses below about " + Math.round(100 + 28 * Math.log(S.p + 1)) + " °C.";
+    if (S.end === "TH" && S.dn > 50) w = "Threaded ends are only offered up to DN50. Choose flanged or butt-weld for this size.";
+    return { type: type, body: body, seat: seat, cls: cls[0], why: why, warn: w };
+  }
+  function size() {
+    var v = { water: 2.5, chem: 2, slurry: 1.8, gas: 15, steam: 30 }[S.med], area = (S.q / 3600) / v, d = Math.sqrt(4 * area / Math.PI) * 1000, dn = DN[DN.length - 1];
+    for (var i = 0; i < DN.length; i++) if (DN[i] >= d) { dn = DN[i]; break; }
+    var act = (S.q / 3600) / (Math.PI * Math.pow(dn / 2000, 2));
+    return { dn: dn, v: act, lim: v };
+  }
+  function valve(type, act, opts) {
+    opts = opts || {};
+    var c = opts.c || "#5b6a7d", hi = opts.hi || "#8494a8", dk = "#323b46", s = '<svg viewBox="0 0 600 330" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="vb' + type + act + '" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="' + hi + '"/><stop offset=".55" stop-color="' + c + '"/><stop offset="1" stop-color="' + dk + '"/></linearGradient></defs>';
+    var g = "url(#vb" + type + act + ")", cy = 230;
+    s += '<rect x="0" y="' + (cy - 34) + '" width="600" height="68" fill="#2a313a"/><path d="M0 ' + cy + 'H600" stroke="#5fb0ff" stroke-width="5" stroke-dasharray="14 16" class="fl" opacity=".7"/>';
+    var fl = function (x) { return '<rect x="' + x + '" y="' + (cy - 64) + '" width="22" height="128" rx="3" fill="' + g + '"/>' + [-44, -14, 16, 46].map(function (o) { return '<circle cx="' + (x + 11) + '" cy="' + (cy + o) + '" r="4.5" fill="' + dk + '"/>'; }).join(""); };
+    var stemTop = 120;
+    if (type === "fly") { s += fl(264) + fl(314) + '<rect x="282" y="' + (cy - 70) + '" width="36" height="140" rx="10" fill="' + g + '"/><rect x="292" y="140" width="16" height="30" fill="' + c + '"/>'; stemTop = 140; }
+    else if (type === "knife") { s += fl(250) + fl(328) + '<rect x="270" y="' + (cy - 70) + '" width="60" height="140" rx="6" fill="' + g + '"/><rect x="262" y="70" width="76" height="100" fill="none" stroke="' + c + '" stroke-width="8"/><rect x="292" y="80" width="16" height="90" fill="#c9d2dc"/>'; stemTop = 70; }
+    else {
+      s += fl(150) + fl(428);
+      if (type === "ball") s += '<path d="M172 ' + (cy - 40) + ' L220 ' + (cy - 40) + ' Q240 ' + (cy - 92) + ' 300 ' + (cy - 92) + ' Q360 ' + (cy - 92) + ' 380 ' + (cy - 40) + ' L428 ' + (cy - 40) + ' L428 ' + (cy + 40) + ' L380 ' + (cy + 40) + ' Q360 ' + (cy + 92) + ' 300 ' + (cy + 92) + ' Q240 ' + (cy + 92) + ' 220 ' + (cy + 40) + ' L172 ' + (cy + 40) + ' Z" fill="' + g + '"/><rect x="276" y="128" width="48" height="16" rx="2" fill="' + c + '"/><rect x="292" y="110" width="16" height="24" fill="#c9d2dc"/>';
+      if (type === "globe") s += '<path d="M172 ' + (cy - 40) + ' L230 ' + (cy - 40) + ' Q240 ' + (cy - 96) + ' 300 ' + (cy - 96) + ' Q360 ' + (cy - 96) + ' 370 ' + (cy - 40) + ' L428 ' + (cy - 40) + ' L428 ' + (cy + 40) + ' L370 ' + (cy + 40) + ' Q360 ' + (cy + 96) + ' 300 ' + (cy + 96) + ' Q240 ' + (cy + 96) + ' 230 ' + (cy + 40) + ' L172 ' + (cy + 40) + ' Z" fill="' + g + '"/><path d="M262 140 L338 140 L326 96 L274 96 Z" fill="' + g + '"/><rect x="292" y="56" width="16" height="44" fill="#c9d2dc"/><path d="M268 140 H332" stroke="' + dk + '" stroke-width="4"/>';
+      if (type === "gate") s += '<rect x="172" y="' + (cy - 46) + '" width="256" height="92" rx="20" fill="' + g + '"/><path d="M250 ' + (cy - 40) + ' L262 70 L338 70 L350 ' + (cy - 40) + ' Z" fill="' + g + '"/><rect x="292" y="30" width="16" height="44" fill="#c9d2dc"/>';
+      if (type === "check") s += '<path d="M172 ' + (cy - 40) + ' L220 ' + (cy - 40) + ' Q240 ' + (cy - 86) + ' 300 ' + (cy - 86) + ' Q360 ' + (cy - 86) + ' 380 ' + (cy - 40) + ' L428 ' + (cy - 40) + ' L428 ' + (cy + 40) + ' L380 ' + (cy + 40) + ' Q360 ' + (cy + 80) + ' 300 ' + (cy + 80) + ' Q240 ' + (cy + 80) + ' 220 ' + (cy + 40) + ' L172 ' + (cy + 40) + ' Z" fill="' + g + '"/><rect x="236" y="' + (cy - 104) + '" width="128" height="22" rx="4" fill="' + g + '"/>' + [250, 280, 320, 350].map(function (x) { return '<circle cx="' + x + '" cy="' + (cy - 93) + '" r="4" fill="' + dk + '"/>'; }).join("") + '<path d="M440 ' + cy + ' l26 -14 v28 z" fill="#5fb0ff"/>';
+      stemTop = type === "globe" ? 56 : type === "gate" ? 30 : 110;
+    }
+    if (type !== "check") {
+      var y = stemTop;
+      if (act === "manual" && (type === "ball" || type === "fly")) s += '<g class="' + (opts.anim ? "lev" : "") + '"><rect x="284" y="' + (y - 12) + '" width="32" height="18" rx="3" fill="#2a313a"/><rect x="300" y="' + (y - 10) + '" width="200" height="14" rx="7" fill="#ffc21a"/><rect x="470" y="' + (y - 12) + '" width="40" height="18" rx="9" fill="#14181d"/></g>';
+      else if (act === "manual" || act === "gear") {
+        if (act === "gear") s += '<rect x="262" y="' + (y - 40) + '" width="76" height="46" rx="6" fill="#1849b8"/><rect x="338" y="' + (y - 28) + '" width="30" height="20" fill="#1849b8"/><ellipse cx="380" cy="' + (y - 18) + '" rx="10" ry="40" fill="none" stroke="#ffc21a" stroke-width="8"/>';
+        else s += '<ellipse cx="300" cy="' + (y - 6) + '" rx="74" ry="14" fill="none" stroke="#ffc21a" stroke-width="10"/><path d="M226 ' + (y - 6) + 'H374" stroke="#ffc21a" stroke-width="5"/>';
+      } else if (act === "pneu") s += '<rect x="292" y="' + (y - 18) + '" width="16" height="22" fill="#c9d2dc"/><rect x="220" y="' + (y - 86) + '" width="160" height="70" rx="10" fill="#1849b8"/><rect x="232" y="' + (y - 78) + '" width="136" height="6" fill="#3f6fdb"/><rect x="382" y="' + (y - 64) + '" width="44" height="30" rx="4" fill="#d6dde6"/><circle cx="414" cy="' + (y - 49) + '" r="6" fill="#3ecf8e"/>';
+      else s += '<rect x="292" y="' + (y - 18) + '" width="16" height="22" fill="#c9d2dc"/><rect x="236" y="' + (y - 96) + '" width="128" height="80" rx="8" fill="#d6dde6"/><rect x="250" y="' + (y - 84) + '" width="56" height="30" rx="3" fill="#14181d"/><text x="278" y="' + (y - 64) + '" text-anchor="middle" font-family="JetBrains Mono V,monospace" font-size="13" fill="#3ecf8e">100%</text><circle cx="340" cy="' + (y - 70) + '" r="12" fill="#ffc21a"/><rect x="364" y="' + (y - 76) + '" width="22" height="40" rx="3" fill="#b9c3cf"/>';
+    }
+    return s + "</svg>";
+  }
+  function fmt(n) { return n.toLocaleString("en-US"); }
+  function paint() {
+    document.querySelectorAll("[data-g]").forEach(function (g) { g.querySelectorAll("button").forEach(function (b) { b.classList.toggle("on", S[g.dataset.g] === b.dataset.v); }); });
+    document.querySelectorAll("[data-r]").forEach(function (r) { r.value = S[r.dataset.r]; });
+    $("[data-o=t]").textContent = S.t + " °C"; $("[data-o=p]").textContent = S.p + " bar"; $("[data-o=q]").textContent = fmt(S.q) + " m³/h";
+    var z = size(); S.dn = z.dn; var r = pick();
+    var act = r.type === "check" ? "none" : S.act, endName = { FL: "Flanged RF", BW: "Butt-weld", TH: "Threaded NPT" }[S.end];
+    $("[data-vis]").innerHTML = valve(r.type, act, { anim: true });
+    $("[data-tl]").textContent = "DN" + z.dn + " · CLASS " + r.cls; $("[data-tr]").textContent = S.med.toUpperCase() + " · " + S.t + " °C";
+    $("[data-name]").textContent = NAMES[r.type];
+    var code = "HF-" + { ball: "BV", fly: "BF", globe: "GL", gate: "GT", check: "CK", knife: "KG" }[r.type] + "-" + r.cls + "-" + r.body.split(" ")[0].replace(/[()]/g, "") + "-DN" + z.dn + "-" + S.end + (act === "none" ? "" : "-" + { manual: "M", gear: "G", pneu: "PA", elec: "EA" }[act]);
+    $("[data-code]").textContent = code;
+    var rows = [["Size", "DN" + z.dn + " (" + (z.dn / 25.4 < 1 ? (z.dn / 25.4).toFixed(2) : Math.round(z.dn / 25.4)) + "\")"], ["Rating", "ASME Class " + r.cls], ["Body", r.body], ["Seat / trim", r.seat], ["Ends", endName], ["Operator", act === "none" ? "Self-acting" : { manual: r.type === "ball" || r.type === "fly" ? "Lever" : "Handwheel", gear: "Worm gearbox", pneu: "Pneumatic, spring return", elec: "Electric, 24 V DC" }[act]], ["Test", "API 598 shell + seat"], ["Lead time", (act === "elec" || act === "pneu" ? 6 : 4) + (z.dn > 300 ? 3 : 0) + " weeks"]];
+    $("[data-ds]").innerHTML = rows.map(function (x) { return "<div><span>" + x[0] + "</span><b>" + x[1] + "</b></div>"; }).join("");
+    $("[data-why]").innerHTML = r.why.map(function (x) { return "<li>" + x + "</li>"; }).join("");
+    var w = $("[data-warn]"); w.textContent = r.warn; w.classList.toggle("on", !!r.warn);
+    $("[data-dn]").textContent = "DN" + z.dn + " line";
+    $("[data-vel]").textContent = "Velocity " + z.v.toFixed(2) + " m/s at " + fmt(S.q) + " m³/h. Recommended maximum for " + { water: "water", chem: "chemicals", slurry: "slurry", gas: "gas", steam: "steam" }[S.med] + " is " + z.lim + " m/s.";
+    $("[data-vb]").style.width = Math.min(100, z.v / z.lim * 80) + "%";
+    var rr = Math.max(8, Math.min(44, 8 + Math.sqrt(z.dn) * 1.5));
+    $("[data-ring]").innerHTML = '<circle cx="50" cy="50" r="46" fill="none" stroke="#2b323b" stroke-width="2" stroke-dasharray="3 4"/><circle cx="50" cy="50" r="' + rr + '" fill="#2a313a" stroke="#8494a8" stroke-width="4"/><circle cx="50" cy="50" r="' + (rr * 0.6) + '" fill="#5fb0ff" opacity=".35"/>';
+    S._r = r; S._code = code; S._rows = rows; S._z = z; $("[data-msg]").textContent = "";
+  }
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest("[data-g] button"); if (b) { S[b.parentNode.dataset.g] = b.dataset.v; if (b.dataset.v === "steam" && S.t < 180) { S.t = 200; S.p = Math.max(S.p, 10); } if (b.dataset.v === "slurry") S.fn = S.fn === "check" ? "onoff" : S.fn; paint(); }
+    if (e.target.closest("[data-dl]")) {
+      var txt = "HALDEN FLOW · VALVE DATASHEET\n==============================\nModel code: " + S._code + "\nType: " + NAMES[S._r.type] + "\n\nPROCESS CONDITIONS\nMedium: " + S.med + "\nFunction: " + S.fn + "\nDesign temperature: " + S.t + " °C\nDesign pressure: " + S.p + " bar\nFlow rate: " + S.q + " m³/h\n\nSPECIFICATION\n" + S._rows.map(function (x) { return x[0] + ": " + x[1]; }).join("\n") + "\nLine velocity: " + S._z.v.toFixed(2) + " m/s\n\nNotes\n- " + S._r.why.join("\n- ") + (S._r.warn ? "\n- " + S._r.warn : "") + "\n\nIndicative selection. Final sizing is confirmed by a Halden Flow application engineer.\n";
+      var a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([txt], { type: "text/plain" })); a.download = S._code + "-datasheet.txt"; document.body.appendChild(a); a.click(); a.remove();
+      $("[data-msg]").textContent = "Datasheet " + S._code + " downloaded.";
+    }
+    if (e.target.closest("[data-rfq]")) $("[data-msg]").textContent = "✓ Added " + S._code + " to quote request Q-" + Math.floor(40000 + Math.random() * 9999) + ". An application engineer will confirm within 48 hours.";
+  });
+  document.addEventListener("input", function (e) { var r = e.target.closest("[data-r]"); if (r) { S[r.dataset.r] = +r.value; paint(); } });
+  $("[data-hero]").innerHTML = valve("ball", "manual", { anim: true }).replace('viewBox="0 0 600 330"', 'viewBox="0 -60 600 420"');
+  paint();
+})();
+</script>
 </body>
 </html>

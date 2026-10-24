@@ -51,7 +51,34 @@ section{padding:clamp(80px,9vw,130px) 0}
 .quote p{font-family:"Cormorant V",serif;font-size:clamp(28px,3vw,44px);line-height:1.15}
 .quote ul li{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(239,230,220,.2)}
 .foot{padding:36px 0;display:flex;justify-content:space-between;color:var(--mut);font-size:13px}
-@media (max-width:900px){.nav .l,.nav .r a:not(:last-child){display:none}.hero{grid-template-columns:1fr;height:auto}.pic{min-height:420px}.ritual,.quote{grid-template-columns:1fr}}
+@media (max-width:900px){.nav .l,.nav .r a:not(:last-child){display:none}.nav{grid-template-columns:auto 1fr}.nav .r{justify-self:end}.logo{white-space:nowrap;font-size:26px}.hero{grid-template-columns:1fr;height:auto}.pic{min-height:420px}.ritual,.quote{grid-template-columns:1fr}}
+
+
+/* feature */
+.rt-sec{padding:clamp(80px,9vw,130px) 0;background:var(--bg2)}
+.rt-grid{width:min(1300px,100% - 56px);margin:0 auto;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:clamp(30px,5vw,80px);align-items:start}
+.rt-k{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--clay)}
+.rt-h{font-size:clamp(48px,5.4vw,84px);font-weight:400;line-height:.95;margin:14px 0 26px}
+.rt-step{padding:18px 0;border-top:1px solid var(--line)}
+.rt-step p{font-weight:700;margin-bottom:12px}
+.rt-o{display:flex;flex-wrap:wrap;gap:8px}
+.rt-o button{padding:11px 18px;border-radius:99px;border:1px solid var(--line);background:var(--bg);font-weight:600;font-size:14px;color:var(--ink)}
+.rt-o button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.rt-res{position:sticky;top:24px;background:var(--bg);border-radius:4px;padding:28px}
+.rt-shelf{display:flex;justify-content:center;align-items:flex-end;gap:6px;height:220px;margin:14px 0 18px;padding-bottom:14px;border-bottom:6px solid var(--bg2)}
+.rt-shelf svg{height:100%;width:auto}
+.rt-list{display:flex;flex-direction:column;gap:12px;counter-reset:s}
+.rt-list li{display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:baseline;font-size:14.5px}
+.rt-list li::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--clay);color:#fff;font-size:12px;font-weight:700}
+.rt-list b{display:block}
+.rt-list small{color:var(--mut)}
+.rt-tot{display:flex;justify-content:space-between;align-items:baseline;margin:20px 0 14px;padding-top:16px;border-top:1px solid var(--line)}
+.rt-tot b{font-family:"Cormorant V",serif;font-size:36px;font-weight:500}
+.rt-btn{width:100%;height:52px;background:var(--ink);color:var(--bg);letter-spacing:.14em;text-transform:uppercase;font-size:12px;font-weight:700}
+@media (max-width:900px){.rt-grid{grid-template-columns:minmax(0,1fr);width:calc(100% - 40px)}.rt-res{position:static}}
+.rt-tot b{white-space:nowrap}@media (max-width:600px){.rt-shelf{height:150px}.rt-res{padding:22px}}
+
+/* /feature */
 </style>
 </head>
 <body>
@@ -63,7 +90,7 @@ section{padding:clamp(80px,9vw,130px) 0}
 </defs></svg>
 <div class="bar">Free shipping on orders over $60 · Samples with every order</div>
 <div class="wrap">
-  <header class="nav"><nav class="l"><a href="#">Shop</a><a href="#">Rituals</a><a href="#">Ingredients</a></nav><a class="logo" href="#">Maison Sable</a><nav class="r"><a href="#">Journal</a><a href="#">Account</a><a href="#">Bag (1)</a></nav></header>
+  <header class="nav"><nav class="l"><a href="#">Shop</a><a href="#routine">Rituals</a><a href="#">Ingredients</a></nav><a class="logo" href="#">Maison Sable</a><nav class="r"><a href="#">Journal</a><a href="#">Account</a><a href="#">Bag (1)</a></nav></header>
   <section class="hero" style="padding-top:0">
     <div class="copy">
       <small data-in>The Ritual Collection</small>
@@ -89,7 +116,80 @@ section{padding:clamp(80px,9vw,130px) 0}
   <section style="padding-top:0">
     <div class="quote"><p>“The only routine I’ve stuck with for more than a month. My skin finally looks like mine.”<br><small style="font-family:Manrope V,sans-serif;font-size:13px;opacity:.7">Léa, verified buyer</small></p><ul><li><span>Cold-pressed oils</span><span>98% natural</span></li><li><span>Refill pouches</span><span>−40% plastic</span></li><li><span>Dermatologist tested</span><span>All skin types</span></li></ul></div>
   </section>
+
+
+<!-- feature -->
+  <section class="rt-sec" id="routine">
+    <div class="rt-grid">
+      <div class="rt-q">
+        <p class="rt-k">Routine finder · 4 questions</p>
+        <h2 class="cg rt-h">Find your routine.</h2>
+        <div class="rt-step"><p>Your skin feels…</p><div class="rt-o" data-g="type"><button type="button" data-v="dry">Tight &amp; dry</button><button type="button" data-v="oily">Shiny by noon</button><button type="button" data-v="combo">Both, depending</button><button type="button" data-v="sensitive">Easily irritated</button></div></div>
+        <div class="rt-step"><p>Your main concern</p><div class="rt-o" data-g="concern"><button type="button" data-v="glow">Dullness</button><button type="button" data-v="lines">Fine lines</button><button type="button" data-v="spots">Dark spots</button><button type="button" data-v="breakouts">Breakouts</button></div></div>
+        <div class="rt-step"><p>How many steps, honestly?</p><div class="rt-o" data-g="steps"><button type="button" data-v="2">2, quick</button><button type="button" data-v="3">3, balanced</button><button type="button" data-v="4">4, the full ritual</button></div></div>
+        <div class="rt-step"><p>Time of day</p><div class="rt-o" data-g="time"><button type="button" data-v="am">Morning</button><button type="button" data-v="pm">Evening</button><button type="button" data-v="both">Both</button></div></div>
+      </div>
+      <aside class="rt-res">
+        <p class="rt-k">Your routine</p>
+        <div class="rt-shelf" data-shelf></div>
+        <ol class="rt-list" data-list></ol>
+        <div class="rt-tot"><span>Routine set · 15% off</span><b data-tot></b></div>
+        <button type="button" class="rt-btn" data-add>Add routine to bag</button>
+      </aside>
+    </div>
+  </section>
+
+<!-- /feature -->
 </main>
 <footer class="wrap foot"><span>Maison Sable · Grasse, France</span><span>Photo: Unsplash</span></footer>
+
+
+<script data-feature>
+(function () {
+  var S = { type: "combo", concern: "glow", steps: "3", time: "both" };
+  var PR = {
+    cleanserMilk: ["Cloud milk cleanser", "Soft, non-foaming, for dry skin", 32, "pump", "#f4efe7"], cleanserGel: ["Clarifying gel cleanser", "With 2% salicylic acid", 32, "pump", "#cfe3df"],
+    toner: ["Rose water essence", "Hydrating, alcohol-free", 34, "bottle", "#f1d9d2"], vitc: ["15% vitamin C serum", "Brightens dull skin", 58, "dropper", "#f2c879"], retinol: ["Night retinal serum", "Smooths fine lines", 64, "dropper", "#e9d9b4"],
+    niacin: ["Niacinamide 10% serum", "Calms breakouts, refines pores", 44, "dropper", "#dfe7f2"], azelaic: ["Azelaic tone serum", "Fades dark spots", 52, "dropper", "#efe1d0"],
+    cream: ["Barrier repair cream", "Ceramides and squalane", 48, "jar", "#f6f1ea"], gelcream: ["Water gel moisturizer", "Light, oil-free", 44, "jar", "#e3f0ee"], spf: ["Daily mineral SPF 40", "No white cast", 38, "tube", "#fbefd9"], oil: ["Night rescue oil", "For dry or tired skin", 54, "dropper", "#e8c58a"]
+  };
+  function pick() {
+    var clean = S.type === "oily" || S.concern === "breakouts" ? "cleanserGel" : "cleanserMilk";
+    var serum = { glow: "vitc", lines: "retinol", spots: "azelaic", breakouts: "niacin" }[S.concern];
+    if (S.type === "sensitive" && serum === "retinol") serum = "niacin";
+    if (S.time === "am" && serum === "retinol") serum = "vitc";
+    var moist = S.type === "oily" ? "gelcream" : "cream";
+    var r = [clean, serum, moist];
+    if (S.steps === "2") r = [clean, moist];
+    if (S.steps === "4") r = [clean, "toner", serum, moist];
+    if (S.time !== "pm") r.push("spf");
+    if (S.steps === "4" && S.type === "dry" && S.time !== "am") r.push("oil");
+    return r;
+  }
+  function bottle(k) {
+    var p = PR[k], c = p[4], t = p[3], lab = '<rect x="22" y="__Y__" width="56" height="44" fill="#fff" opacity=".85"/><text x="50" y="__T__" text-anchor="middle" font-family="Cormorant V,serif" font-size="11" fill="#3b2a22">SABLE</text>';
+    if (t === "pump") return '<svg viewBox="0 0 100 220"><rect x="44" y="6" width="12" height="30" fill="#3b2a22"/><rect x="34" y="4" width="34" height="8" rx="3" fill="#3b2a22"/><rect x="18" y="36" width="64" height="180" rx="12" fill="' + c + '" stroke="#3b2a22" stroke-opacity=".2"/>' + lab.replace("__Y__", 100).replace("__T__", 126) + "</svg>";
+    if (t === "dropper") return '<svg viewBox="0 0 100 220"><ellipse cx="50" cy="40" rx="12" ry="18" fill="#3b2a22"/><rect x="34" y="56" width="32" height="20" fill="#b8765a"/><rect x="20" y="76" width="60" height="140" rx="16" fill="' + c + '" opacity=".95" stroke="#3b2a22" stroke-opacity=".2"/>' + lab.replace("__Y__", 120).replace("__T__", 146) + "</svg>";
+    if (t === "jar") return '<svg viewBox="0 0 120 220"><rect x="14" y="120" width="92" height="20" rx="4" fill="#b8765a"/><rect x="10" y="140" width="100" height="76" rx="14" fill="' + c + '" stroke="#3b2a22" stroke-opacity=".2"/><text x="60" y="184" text-anchor="middle" font-family="Cormorant V,serif" font-size="13" fill="#3b2a22">SABLE</text></svg>';
+    if (t === "tube") return '<svg viewBox="0 0 90 220"><path d="M14 30 L76 30 L66 190 L24 190 Z" fill="' + c + '" stroke="#3b2a22" stroke-opacity=".2"/><rect x="26" y="190" width="38" height="26" rx="4" fill="#3b2a22"/><text x="45" y="100" text-anchor="middle" font-family="Cormorant V,serif" font-size="11" fill="#3b2a22">SPF 40</text></svg>';
+    return '<svg viewBox="0 0 100 220"><rect x="38" y="20" width="24" height="30" rx="4" fill="#3b2a22"/><rect x="22" y="50" width="56" height="166" rx="10" fill="' + c + '" stroke="#3b2a22" stroke-opacity=".2"/>' + lab.replace("__Y__", 110).replace("__T__", 136) + "</svg>";
+  }
+  var sec = document.querySelector(".rt-sec");
+  function paint() {
+    sec.querySelectorAll("[data-g]").forEach(function (g) { g.querySelectorAll("button").forEach(function (b) { b.classList.toggle("on", S[g.dataset.g] === b.dataset.v); }); });
+    var r = pick(), sum = r.reduce(function (s, k) { return s + PR[k][2]; }, 0);
+    sec.querySelector("[data-shelf]").innerHTML = r.map(bottle).join("");
+    sec.querySelector("[data-list]").innerHTML = r.map(function (k) { return "<li><span><b>" + PR[k][0] + "</b><small>" + PR[k][1] + (k === "spf" ? " · mornings" : k === "retinol" || k === "oil" ? " · evenings" : "") + "</small></span><span>$" + PR[k][2] + "</span></li>"; }).join("");
+    sec.querySelector("[data-tot]").innerHTML = "<s style='font-size:20px;opacity:.5'>$" + sum + "</s> $" + Math.round(sum * 0.85);
+    var b = sec.querySelector("[data-add]"); b.textContent = "Add routine to bag"; b.disabled = false;
+  }
+  sec.addEventListener("click", function (e) {
+    var b = e.target.closest("[data-g] button"); if (b) { S[b.parentNode.dataset.g] = b.dataset.v; paint(); }
+    var a = e.target.closest("[data-add]"); if (a) { a.textContent = "Added to bag ✓"; }
+  });
+  paint();
+})();
+
+</script>
 </body>
 </html>

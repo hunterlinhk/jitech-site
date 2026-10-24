@@ -18,7 +18,7 @@ var RATIOS = [1.6, 1.5, 1.6, 1.45, 1.6, 1.55, 1.5, 1.6];
 // The 20 concept pages around the wall (generated; each one is a complete standalone document).
 // Each one is a real page in /pages (tools/make_pages.py regenerates them).
 var PAGE_DIR = ROOT + "pages/";
-var PAGES = [{"id": "L1", "rect": [20, 58, 335, 232], "title": "Casa Ondina · Above the bay"}, {"id": "L2", "rect": [20, 244, 308, 373], "title": "Aurora · The quiet layer for operations"}, {"id": "L3", "rect": [20, 385, 304, 527], "title": "Halden & Co. · Architecture"}, {"id": "L4", "rect": [20, 541, 305, 688], "title": "Verde · Groceries grown nearby"}, {"id": "T1", "rect": [354, 102, 656, 254], "title": "Noon · Run your home on daylight"}, {"id": "T2", "rect": [689, 68, 1017, 256], "title": "Nocturne · Time, kept in the dark"}, {"id": "T4", "rect": [1336, 62, 1654, 195], "title": "Atlas · Built for altitude"}, {"id": "R3", "rect": [1349, 372, 1654, 518], "title": "Volta · Electric, unhurried"}, {"id": "R4", "rect": [1336, 531, 1654, 645], "title": "Kiln · Roasted slow, poured loud"}, {"id": "B2", "rect": [322, 738, 586, 874], "title": "Maison Sable · Skin, simplified"}, {"id": "B3", "rect": [601, 634, 925, 785], "title": "Ledger · Banking that keeps up"}, {"id": "B5", "rect": [944, 622, 1303, 777], "title": "Sonic Field · Lisbon festival"}, {"id": "B6", "rect": [950, 793, 1317, 904], "title": "Orbital · Small things in high places"}];
+var PAGES = [{"id": "L1", "rect": [20, 58, 335, 232], "title": "Loomline · Apparel made to order"}, {"id": "L2", "rect": [20, 244, 308, 373], "title": "Atelier Nord · Clothing made to last"}, {"id": "L3", "rect": [20, 385, 304, 527], "title": "Ferro Precision · CNC parts on demand"}, {"id": "L4", "rect": [20, 541, 305, 688], "title": "Verde Wholesale · Produce for the trade"}, {"id": "T1", "rect": [354, 102, 656, 254], "title": "Wag & Co. · Food and gear for pets"}, {"id": "T2", "rect": [689, 68, 1017, 256], "title": "Nocturne · Time, kept in the dark"}, {"id": "T4", "rect": [1336, 62, 1654, 195], "title": "Atlas · Built for altitude"}, {"id": "R3", "rect": [1349, 372, 1654, 518], "title": "Ridgeline Packworks · Backpacks for your brand"}, {"id": "R4", "rect": [1336, 531, 1654, 645], "title": "Kiln · Roasted slow, poured loud"}, {"id": "B2", "rect": [322, 738, 586, 874], "title": "Maison Sable · Skin, simplified"}, {"id": "B3", "rect": [601, 634, 925, 785], "title": "Halden Flow · Industrial valves"}, {"id": "B5", "rect": [944, 622, 1303, 777], "title": "PawPro · Private-label pet products"}, {"id": "B6", "rect": [950, 793, 1317, 904], "title": "Meridian Trading · Housewares by the container"}];
 // Selected-work frames. "crop" zooms into a detail (scale, and the origin in % of the frame).
 var HERO = [
   {file:"screen-01.jpg", variant:0, ratio:1.6,  caption:"Design example"},
@@ -34,10 +34,10 @@ var SERVICE_IMAGES = [
   {src:ROOT + "assets/img/shots/R4.jpg", alt:"Standalone website example"}
 ];
 var WORK = [
-  {file:"T1.jpg", variant:3, ratio:1.6, caption:"Noon", concept:true},
-  {file:"B5.jpg", variant:5, ratio:1.6, caption:"Sonic Field", concept:true},
+  {file:"T1.jpg", variant:3, ratio:1.6, caption:"Wag & Co.", concept:true},
+  {file:"B5.jpg", variant:5, ratio:1.6, caption:"PawPro", concept:true},
   {file:"T2.jpg", variant:2, ratio:1.6, caption:"Nocturne", concept:true},
-  {file:"B3.jpg", variant:1, ratio:1.6, caption:"Ledger", concept:true}
+  {file:"B3.jpg", variant:1, ratio:1.6, caption:"Halden Flow", concept:true}
 ];
 /* ===================== */
 

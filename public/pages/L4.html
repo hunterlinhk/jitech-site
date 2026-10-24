@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Verde | Groceries that grew up nearby</title>
+<title>Verde Wholesale | Local produce for kitchens and grocers</title>
 <script src="assets/base.js"></script>
 <link rel="stylesheet" href="assets/base.css">
 <style>
@@ -50,45 +50,215 @@ section{padding:clamp(70px,8vw,120px) 0}
 .how p{opacity:.8;line-height:1.5}
 .foot{display:flex;justify-content:space-between;padding:30px 0 40px;color:var(--mut);font-weight:600}
 @media (max-width:900px){.search,.nav a:not(.logo):not(.cartb){display:none}.hero{grid-template-columns:1fr;height:auto}.plate{width:80vw}.cats{grid-template-columns:1fr 1fr}.how{grid-template-columns:1fr}}
+
+/* feature */
+.os-sec{padding:clamp(70px,8vw,120px) 0 0}
+.os-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:30px}
+.os-head .h2{margin-top:14px}
+.os-cut{background:var(--g);color:#fff;border-radius:22px;padding:16px 22px;text-align:right}
+.os-cut small{display:block;font-weight:600;opacity:.75;font-size:13px}
+.os-cut b{font-size:38px;letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:var(--lime)}
+.os-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:20px;align-items:start}
+.os-main{background:#fff;border-radius:26px;padding:20px;min-width:0}
+.os-tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px}
+.os-tabs{display:flex;gap:6px;flex-wrap:wrap}
+.os-tabs button{border-radius:999px;padding:9px 15px;font-weight:700;font-size:14px;background:var(--bg);color:var(--ink)}
+.os-tabs button.on{background:var(--g);color:#fff}
+.os-find{flex:1;min-width:160px;border:1.5px solid rgba(19,38,27,.14);border-radius:999px;padding:10px 16px;font:inherit;font-size:14px}
+.os-re{font-weight:700;font-size:14px;color:var(--g);padding:9px 12px;border-radius:999px;border:1.5px solid var(--g)}
+.os-row{display:grid;grid-template-columns:minmax(0,2.2fr) 1fr .8fr .8fr 128px .8fr;gap:10px;align-items:center;padding:11px 8px;border-top:1px solid rgba(19,38,27,.08);font-size:15px}
+.os-th{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--mut);border-top:0}
+.os-row .it{display:flex;align-items:center;gap:12px;font-weight:700;min-width:0}
+.os-row .it svg{flex:none;width:38px;height:38px}
+.os-row .it small{display:block;font-weight:500;color:var(--mut);font-size:12.5px}
+.os-row .tier{color:var(--g2);font-weight:700}
+.os-row.has{background:#f3fbe4;border-radius:12px}
+.os-row .ln{font-weight:800;text-align:right;font-variant-numeric:tabular-nums}
+.os-row .low{display:inline-block;margin-left:6px;font-size:11px;font-weight:700;color:var(--tom)}
+.qty{display:flex;align-items:center;border:1.5px solid rgba(19,38,27,.16);border-radius:999px;overflow:hidden;width:max-content}
+.qty button{width:34px;height:34px;font-size:18px;font-weight:700;color:var(--g)}
+.qty input{width:44px;text-align:center;border:0;font:inherit;font-weight:800;-moz-appearance:textfield}
+.qty input::-webkit-inner-spin-button{display:none}
+.os-sum{position:sticky;top:16px;background:var(--ink);color:#fff;border-radius:26px;padding:24px}
+.os-sum h3{font-size:26px;letter-spacing:-.03em;margin-bottom:12px}
+.os-l{display:block;font-size:13px;font-weight:600;opacity:.9;margin-top:10px}
+.os-l small{opacity:.6}
+.os-l select,.os-l input{display:block;width:100%;margin-top:5px;border-radius:12px;padding:10px 12px;border:0;font:inherit;font-size:14px;background:#fff;color:var(--ink)}
+.os-lines{margin:16px 0 8px;max-height:170px;overflow:auto;font-size:14px}
+.os-lines li{display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px dashed rgba(255,255,255,.15)}
+.os-lines li.e{opacity:.6;border:0}
+.os-tot div{display:flex;justify-content:space-between;padding:4px 0;font-size:14.5px}
+.os-tot dd{font-variant-numeric:tabular-nums;font-weight:700}
+.os-tot .g{font-size:22px;font-weight:800;padding-top:10px;margin-top:6px;border-top:1px solid rgba(255,255,255,.2)}
+.os-tot .g dd{color:var(--lime)}
+.os-bar{height:8px;border-radius:9px;background:rgba(255,255,255,.15);margin-top:14px;overflow:hidden}
+.os-bar i{display:block;height:100%;background:var(--lime);width:0;transition:width .4s}
+.os-note{font-size:13px;opacity:.85;margin-top:8px;min-height:1.4em}
+.os-go{width:100%;margin-top:14px;background:var(--tom);color:#fff;border-radius:999px;padding:16px;font-weight:800;font-size:16px}
+.os-go:disabled{opacity:.4;cursor:not-allowed}
+.os-terms{font-size:12px;opacity:.6;margin-top:10px;text-align:center}
+.os-done{position:fixed;inset:0;background:rgba(19,38,27,.5);display:grid;place-items:center;z-index:50;padding:20px}
+.os-done div{background:var(--bg);border-radius:26px;padding:34px;max-width:420px;text-align:center}
+.os-done b{display:block;font-size:30px;color:var(--g);letter-spacing:-.03em;margin:8px 0}
+.os-done button{margin-top:18px;background:var(--g);color:#fff;border-radius:999px;padding:12px 22px;font-weight:700}
+@media (max-width:1000px){.os-grid{grid-template-columns:minmax(0,1fr)}.os-sum{position:static}}
+@media (max-width:700px){.os-th{display:none}.os-row{grid-template-columns:minmax(0,1fr) auto;row-gap:6px}.os-row .pk,.os-row .pc,.os-row .tier{font-size:13px;color:var(--mut)}.os-row .it{grid-column:1/-1}.os-row .pk{grid-column:1}.os-row .pc{display:none}.os-row .tier{grid-column:2;text-align:right}.os-row .ln{grid-column:2}.os-row .qty{grid-column:1}.os-main{padding:12px}}
+@media (max-width:700px){.os-row .tier::before{content:"5+ cases ";font-weight:500;color:var(--mut)}}
+
+/* /feature */
 </style>
 </head>
 <body>
 <div class="wrap">
-  <header class="nav"><a class="logo" href="#"><svg viewBox="0 0 28 28"><path d="M14 26 C4 22 2 12 6 4 C14 4 24 8 22 18 C20 23 17 25 14 26Z" fill="#2f9e55"/><path d="M14 26 C13 18 10 12 6 7" stroke="#13512d" stroke-width="2" fill="none"/></svg>verde</a><span class="search">⌕ Search 4,000 products</span><a href="#">Recipes</a><a href="#">Farms</a><a class="cartb" href="#">Basket · $42.80</a></header>
+  <header class="nav"><a class="logo" href="#"><svg viewBox="0 0 28 28"><path d="M14 26 C4 22 2 12 6 4 C14 4 24 8 22 18 C20 23 17 25 14 26Z" fill="#2f9e55"/><path d="M14 26 C13 18 10 12 6 7" stroke="#13512d" stroke-width="2" fill="none"/></svg>verde</a><span class="search">⌕ Search 600 SKUs</span><a href="#order">Order sheet</a><a href="#">Farms</a><a class="cartb" href="#order">Trade login</a></header>
   <section class="hero" style="padding-top:0">
     <div>
-      <span class="pill" data-in>🌱 From 62 farms within 100 miles</span>
-      <h1 data-in style="--d:1">Groceries that grew up <span>nearby.</span></h1>
-      <p class="lede" data-in style="--d:2">Picked yesterday, at your door in two hours. Seasonal produce, local dairy and bread baked at 4 am, with no plastic in sight.</p>
-      <div class="go" data-in style="--d:3"><a href="#">Start shopping</a><a href="#">How it works</a></div>
+      <span class="pill" data-in>🌱 Wholesale from 62 farms within 100 miles</span>
+      <h1 data-in style="--d:1">Produce that grew up <span>nearby.</span></h1>
+      <p class="lede" data-in style="--d:2">Case pricing for restaurants, cafés and independent grocers. Order by 10 pm, picked at dawn, on your loading dock by 7 am.</p>
+      <div class="go" data-in style="--d:3"><a href="#order">Open the order sheet</a><a href="#">Apply for an account</a></div>
     </div>
     <div class="plate" data-fade style="--d:1">
       <div class="ph"><img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1400&q=72" alt="A bowl of fresh vegetable salad seen from above"></div>
-      <div class="badge"><div><b>2h</b><small>delivery</small></div></div>
+      <div class="badge"><div><b>7am</b><small>delivery</small></div></div>
       <div class="stk s1"><i>🥕</i><div>Harvested<small>yesterday, Petaluma</small></div></div>
-      <div class="stk s2"><i>♻</i><div>Zero plastic<small>reusable crates</small></div></div>
+      <div class="stk s2"><i>♻</i><div>Net 30 terms<small>for trade accounts</small></div></div>
     </div>
   </section>
 </div>
 <main class="wrap">
   <section>
-    <h2 class="h2">What’s good this week</h2>
+    <h2 class="h2">What’s in season this week</h2>
     <div class="cats">
-      <article class="cat"><div class="ph"><img src="https://images.unsplash.com/photo-1526470303-82c787d88682?auto=format&fit=crop&w=700&q=70" alt="Yellow and red bell peppers" loading="lazy"></div><div class="t">Peppers <span>from $1.20</span></div></article>
-      <article class="cat"><div class="ph"><img src="https://images.unsplash.com/photo-1558818498-28c1e002b655?auto=format&fit=crop&w=700&q=70" alt="Tomatoes on a wooden plate" loading="lazy"></div><div class="t">Tomatoes <span>from $2.40</span></div></article>
-      <article class="cat"><div class="ph"><img src="https://images.unsplash.com/photo-1533321942807-08e4008b2025?auto=format&fit=crop&w=700&q=70" alt="Rows of butter lettuce in a field" loading="lazy"></div><div class="t">Greens <span>from $1.80</span></div></article>
-      <article class="cat"><div class="ph"><img src="https://images.unsplash.com/photo-1488459716781-31db52582fe9?auto=format&fit=crop&w=700&q=70" alt="Assorted fruit at a market" loading="lazy"></div><div class="t">Fruit <span>from $0.90</span></div></article>
+      <article class="cat"><div class="ph"><img src="https://images.unsplash.com/photo-1526470303-82c787d88682?auto=format&fit=crop&w=700&q=70" alt="Yellow and red bell peppers" loading="lazy"></div><div class="t">Peppers <span>from $36/case</span></div></article>
+      <article class="cat"><div class="ph"><img src="https://images.unsplash.com/photo-1558818498-28c1e002b655?auto=format&fit=crop&w=700&q=70" alt="Tomatoes on a wooden plate" loading="lazy"></div><div class="t">Tomatoes <span>from $29/case</span></div></article>
+      <article class="cat"><div class="ph"><img src="https://images.unsplash.com/photo-1533321942807-08e4008b2025?auto=format&fit=crop&w=700&q=70" alt="Rows of butter lettuce in a field" loading="lazy"></div><div class="t">Greens <span>from $24/case</span></div></article>
+      <article class="cat"><div class="ph"><img src="https://images.unsplash.com/photo-1488459716781-31db52582fe9?auto=format&fit=crop&w=700&q=70" alt="Assorted fruit at a market" loading="lazy"></div><div class="t">Fruit <span>from $34/case</span></div></article>
     </div>
   </section>
   <section style="padding-top:0">
-    <h2 class="h2">Farm to door in three hops</h2>
+    <h2 class="h2">Farm to dock in three hops</h2>
     <div class="how">
       <div style="background:var(--lime)"><b>1</b><div><h3>Farms pick at dawn</h3><p>Only what was ordered, so nothing goes to waste.</p></div></div>
       <div style="background:var(--g);color:#fff"><b>2</b><div><h3>We pack by noon</h3><p>In reusable crates, kept cool in our Oakland hub.</p></div></div>
-      <div style="background:var(--tom);color:#fff"><b>3</b><div><h3>You eat tonight</h3><p>Two-hour delivery windows, 7 am to 9 pm.</p></div></div>
+      <div style="background:var(--tom);color:#fff"><b>3</b><div><h3>On your dock by 7</h3><p>Refrigerated trucks, six mornings a week.</p></div></div>
     </div>
   </section>
+
+<!-- feature -->
+  <section class="os-sec" id="order">
+    <div class="os-head">
+      <div><span class="pill">Trade accounts · order by 10 pm, delivered by 7 am</span><h2 class="h2">Quick order sheet</h2></div>
+      <div class="os-cut"><small>Next cutoff in</small><b data-cut>--:--:--</b></div>
+    </div>
+    <div class="os-grid">
+      <div class="os-main">
+        <div class="os-tools">
+          <div class="os-tabs" data-tabs><button type="button" data-c="all" class="on">All</button><button type="button" data-c="veg">Vegetables</button><button type="button" data-c="fruit">Fruit</button><button type="button" data-c="herb">Herbs</button><button type="button" data-c="dairy">Dairy &amp; eggs</button></div>
+          <input class="os-find" type="search" placeholder="Find an item or SKU" aria-label="Find an item" data-find>
+          <button type="button" class="os-re" data-reorder>↻ Repeat last order</button>
+        </div>
+        <div class="os-tbl" role="table">
+          <div class="os-row os-th" role="row"><span>Item</span><span>Pack</span><span>Per case</span><span>5+ cases</span><span>Cases</span><span>Line</span></div>
+          <div data-rows></div>
+        </div>
+      </div>
+      <aside class="os-sum">
+        <h3>Your order</h3>
+        <label class="os-l">Delivery day<select data-day></select></label>
+        <label class="os-l">Drop window<select data-win><option>5–7 am · back door</option><option>7–9 am</option><option>9–11 am</option></select></label>
+        <label class="os-l">PO number <small>(optional)</small><input data-po placeholder="e.g. PO-2291"></label>
+        <ul class="os-lines" data-lines></ul>
+        <dl class="os-tot">
+          <div><dt>Cases</dt><dd data-cases>0</dd></div>
+          <div><dt>Subtotal</dt><dd data-sub>$0.00</dd></div>
+          <div><dt>Volume pricing</dt><dd data-save>−$0.00</dd></div>
+          <div><dt>Delivery</dt><dd data-del>$0.00</dd></div>
+          <div class="g"><dt>Total</dt><dd data-total>$0.00</dd></div>
+        </dl>
+        <div class="os-bar"><i data-bar></i></div><p class="os-note" data-note></p>
+        <button type="button" class="os-go" data-submit disabled>Place order</button>
+        <p class="os-terms">Net 30 terms for approved accounts. Prices update daily at 6 am.</p>
+      </aside>
+    </div>
+  </section>
+
+<!-- /feature -->
 </main>
-<footer class="wrap foot"><span>verde · Bay Area</span><span>Photos: Unsplash</span></footer>
+<footer class="wrap foot"><span>verde wholesale · Bay Area</span><span>Photos: Unsplash</span></footer>
+
+<script data-feature>
+(function () {
+  var I = [
+    ["V-101","Heirloom tomatoes","Petaluma","veg","10 lb case",34,29,"#e8452c",0],["V-114","Butter lettuce","Salinas","veg","24 heads",28,24,"#8fcf5a",0],["V-120","Rainbow carrots","Watsonville","veg","25 lb case",31,26,"#f08a24",0],
+    ["V-133","Bell peppers, mixed","Gilroy","veg","11 lb case",36,31,"#f2c12e",1],["V-140","Yellow onions","Stockton","veg","50 lb sack",29,25,"#d9a441",0],["V-152","Lacinato kale","Half Moon Bay","veg","24 bunches",33,28,"#2f6b3c",0],
+    ["F-201","Meyer lemons","Fresno","fruit","18 lb case",42,37,"#f7d943",0],["F-212","Hass avocados, 48 ct","Ventura","fruit","48 count",58,52,"#4a6b2a",1],["F-220","Strawberries","Watsonville","fruit","8 × 1 lb flats",39,34,"#e23b4b",0],
+    ["F-231","Gala apples","Sebastopol","fruit","40 lb case",44,39,"#d6402f",0],["H-301","Italian basil","Brentwood","herb","12 bunches",22,19,"#3c9a4c",0],["H-310","Cilantro","Salinas","herb","30 bunches",24,20,"#58b25a",0],
+    ["D-401","Pasture eggs, large","Petaluma","dairy","15 dozen",63,57,"#f3ead8",0],["D-410","Whole milk, glass","Marin","dairy","6 × ½ gal",27,24,"#ffffff",0],["D-422","Cultured butter","Sonoma","dairy","12 × 1 lb",68,61,"#f6dd8a",0]
+  ];
+  var LAST = { "V-101": 4, "V-114": 3, "F-201": 2, "H-301": 2, "D-401": 1, "V-140": 2 };
+  var Q = {}, cat = "all", find = "";
+  var sec = document.getElementById("order"), rows = sec.querySelector("[data-rows]");
+  function m(n) { return "$" + n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+  function icon(c, k) {
+    var s = c === "#ffffff" || c === "#f3ead8" ? "#13261b33" : "none";
+    if (k === "herb") return '<svg viewBox="0 0 40 40"><path d="M20 36 C20 26 18 18 12 10" stroke="#13512d" stroke-width="2" fill="none"/><ellipse cx="12" cy="12" rx="8" ry="5" fill="' + c + '" transform="rotate(40 12 12)"/><ellipse cx="25" cy="17" rx="8" ry="5" fill="' + c + '" transform="rotate(-30 25 17)"/><ellipse cx="17" cy="25" rx="7" ry="4" fill="' + c + '" transform="rotate(20 17 25)"/></svg>';
+    if (k === "dairy") return '<svg viewBox="0 0 40 40"><ellipse cx="20" cy="22" rx="12" ry="15" fill="' + c + '" stroke="' + (s === "none" ? "#13261b33" : s) + '"/></svg>';
+    return '<svg viewBox="0 0 40 40"><circle cx="20" cy="22" r="14" fill="' + c + '" stroke="' + s + '"/><path d="M20 8 C22 4 26 3 28 4 C26 7 23 8 20 8Z" fill="#2f9e55"/><circle cx="15" cy="17" r="3.5" fill="#fff" opacity=".35"/></svg>';
+  }
+  function unit(it, q) { return q >= 5 ? it[6] : it[5]; }
+  function row(it) {
+    var q = Q[it[0]] || 0;
+    return '<div class="os-row' + (q ? " has" : "") + '" role="row" data-id="' + it[0] + '"><span class="it">' + icon(it[7], it[3]) + '<span>' + it[1] + (it[8] ? '<span class="low">Low stock</span>' : "") + "<small>" + it[0] + " · " + it[2] + '</small></span></span><span class="pk">' + it[4] + '</span><span class="pc">' + m(it[5]) + '</span><span class="tier">' + m(it[6]) + '</span><span class="qty"><button type="button" data-d="-1" aria-label="Fewer cases of ' + it[1] + '">−</button><input inputmode="numeric" value="' + q + '" aria-label="Cases of ' + it[1] + '"><button type="button" data-d="1" aria-label="More cases of ' + it[1] + '">+</button></span><span class="ln">' + (q ? m(q * unit(it, q)) : "–") + "</span></div>";
+  }
+  function list() {
+    var f = find.toLowerCase();
+    var v = I.filter(function (it) { return (cat === "all" || it[3] === cat) && (!f || (it[1] + " " + it[0] + " " + it[2]).toLowerCase().indexOf(f) > -1); });
+    rows.innerHTML = v.length ? v.map(row).join("") : '<p style="padding:30px;text-align:center;color:var(--mut)">No items match “' + find + '”.</p>';
+  }
+  function totals() {
+    var cases = 0, sub = 0, save = 0, lines = [];
+    I.forEach(function (it) { var q = Q[it[0]] || 0; if (!q) return; cases += q; sub += q * it[5]; save += q * (it[5] - unit(it, q)); lines.push("<li><span>" + q + " × " + it[1] + "</span><span>" + m(q * unit(it, q)) + "</span></li>"); });
+    var net = sub - save, del = net === 0 ? 0 : net >= 250 ? 0 : 18, min = 150;
+    sec.querySelector("[data-lines]").innerHTML = lines.join("") || '<li class="e">Add cases from the sheet. Minimum order is $150.</li>';
+    sec.querySelector("[data-cases]").textContent = cases;
+    sec.querySelector("[data-sub]").textContent = m(sub);
+    sec.querySelector("[data-save]").textContent = "−" + m(save);
+    sec.querySelector("[data-del]").textContent = net === 0 ? "$0.00" : del ? m(del) : "Free";
+    sec.querySelector("[data-total]").textContent = m(net + del);
+    sec.querySelector("[data-bar]").style.width = Math.min(100, net / 250 * 100) + "%";
+    sec.querySelector("[data-note]").textContent = net === 0 ? "" : net < min ? m(min - net) + " more to reach the $150 minimum." : net < 250 ? m(250 - net) + " more for free delivery." : "Free delivery unlocked.";
+    sec.querySelector("[data-submit]").disabled = net < min;
+  }
+  function set(id, q) {
+    q = Math.max(0, Math.min(99, q | 0)); Q[id] = q;
+    var r = rows.querySelector('[data-id="' + id + '"]');
+    if (r) { var it = I.filter(function (x) { return x[0] === id; })[0], fresh = document.createElement("div"); fresh.innerHTML = row(it); r.replaceWith(fresh.firstChild); }
+    totals();
+  }
+  rows.addEventListener("click", function (e) { var b = e.target.closest("[data-d]"); if (!b) return; var id = b.closest("[data-id]").dataset.id; set(id, (Q[id] || 0) + +b.dataset.d); });
+  rows.addEventListener("change", function (e) { if (e.target.matches("input")) set(e.target.closest("[data-id]").dataset.id, parseInt(e.target.value, 10) || 0); });
+  sec.querySelector("[data-tabs]").addEventListener("click", function (e) { var b = e.target.closest("button"); if (!b) return; cat = b.dataset.c; this.querySelectorAll("button").forEach(function (x) { x.classList.toggle("on", x === b); }); list(); });
+  sec.querySelector("[data-find]").addEventListener("input", function () { find = this.value.trim(); list(); });
+  sec.querySelector("[data-reorder]").addEventListener("click", function () { Q = {}; for (var k in LAST) Q[k] = LAST[k]; list(); totals(); });
+  var day = sec.querySelector("[data-day]"), now = new Date(), opts = [];
+  for (var i = 1; opts.length < 5; i++) { var d = new Date(now.getFullYear(), now.getMonth(), now.getDate() + i); if (d.getDay() === 0) continue; opts.push("<option>" + d.toLocaleDateString("en-US", { weekday: "long", month: "short", day: "numeric" }) + "</option>"); }
+  day.innerHTML = opts.join("");
+  function tick() {
+    var n = new Date(), c = new Date(n.getFullYear(), n.getMonth(), n.getDate(), 22); if (n >= c) c.setDate(c.getDate() + 1);
+    var s = Math.floor((c - n) / 1000), p = function (x) { return (x < 10 ? "0" : "") + x; };
+    sec.querySelector("[data-cut]").textContent = p(Math.floor(s / 3600)) + ":" + p(Math.floor(s % 3600 / 60)) + ":" + p(s % 60);
+  }
+  tick(); setInterval(tick, 1000);
+  sec.querySelector("[data-submit]").addEventListener("click", function () {
+    var po = sec.querySelector("[data-po]").value.trim(), n = "VW-" + Math.floor(100000 + Math.random() * 899999), o = document.createElement("div");
+    o.className = "os-done"; o.innerHTML = "<div role='dialog' aria-modal='true'><p>Order received</p><b>" + n + "</b><p>" + sec.querySelector("[data-cases]").textContent + " cases for " + day.value + ", " + sec.querySelector("[data-win]").value + (po ? " · " + po.replace(/[<>&]/g, "") : "") + ". A confirmation and invoice are on the way to your account email.</p><button type='button'>Done</button></div>";
+    document.body.appendChild(o); o.querySelector("button").focus();
+    o.addEventListener("click", function (e) { if (e.target === o || e.target.matches("button")) { o.remove(); Q = {}; list(); totals(); } });
+  });
+  list(); totals();
+})();
+
+</script>
 </body>
 </html>

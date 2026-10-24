@@ -774,3 +774,7 @@ html[lang="es"] .contact h2{font-size:clamp(2.2rem,min(5.6vw,9svh),7.4rem)}
   html[lang="es"] .headline{font-size:clamp(2.2rem,10.6vw,4rem)}
   html[lang="es"] .work-head h2,html[lang="es"] .process h2,html[lang="es"] .contact h2{font-size:clamp(2rem,9vw,3.1rem)}
 }
+
+/* five menu items: keep them on one line on smaller laptops */
+@media (min-width:900px) and (max-width:1199px){.nav-links{gap:clamp(.9rem,1.6vw,1.5rem);font-size:.85rem}.nav-links a{white-space:nowrap}}
+@media (min-width:900px) and (max-width:1079px){.nav-links{gap:.7rem;font-size:.8rem}.nav-links .nav-cta{padding-left:.8rem;padding-right:.8rem}}

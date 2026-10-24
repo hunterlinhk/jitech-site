@@ -47,6 +47,34 @@ section{padding:clamp(80px,9vw,130px) 0}
 .exp ul li{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line);font-weight:600}
 .foot{display:flex;justify-content:space-between;padding:40px 0;color:var(--mut);font-size:13px}
 @media (max-width:900px){.nav a:not(.logo):not(.bag){display:none}.bar{grid-template-columns:1fr}.bar p{display:none}.gear{grid-template-columns:1fr}.coords{display:none}}
+/* feature */
+.cmp-sec{padding:clamp(80px,9vw,130px) 0;border-top:1px solid var(--line)}
+.cmp-k{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--acc);font-weight:700}
+.cmp-h{font-size:clamp(44px,6vw,96px);line-height:.9;margin:16px 0 18px}
+.cmp-lead{color:var(--mut);max-width:38em;line-height:1.6;margin-bottom:28px}
+.cmp-filters{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:24px;font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.cmp-filters>span{color:var(--mut);margin-right:6px}
+.cmp-filters button{height:36px;padding:0 16px;border:1px solid var(--line);border-radius:99px;color:var(--tx);font-weight:700;letter-spacing:.06em}
+.cmp-filters button.on{background:var(--acc);border-color:var(--acc);color:#0d0f10}
+.cmp-diff{margin-left:auto;display:flex;align-items:center;gap:8px;text-transform:none;letter-spacing:0;font-weight:500;color:var(--mut);cursor:pointer}
+.cmp-diff input{accent-color:var(--acc)}
+.cmp-grid{display:grid;grid-template-columns:200px repeat(3,minmax(0,1fr));border:1px solid var(--line)}
+.cmp-grid>div{padding:14px 18px;border-bottom:1px solid var(--line);border-left:1px solid var(--line);font-size:15px;min-width:0}
+.cmp-grid>.lab{border-left:0;color:var(--mut);font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;display:flex;align-items:center}
+.cmp-grid>.head{padding:18px}
+.cmp-grid select{width:100%;height:42px;background:#16191b;color:var(--tx);border:1px solid var(--line);padding:0 10px;font:inherit;font-weight:600}
+.cmp-grid .pic{height:150px;margin:12px 0 6px;display:grid;place-items:center}
+.cmp-grid .pic svg{height:100%;width:100%}
+.cmp-grid .best{color:var(--acc);font-weight:800}
+.cmp-grid .best::after{content:" ★";font-size:11px}
+.cmp-grid .price{font-family:"Archivo V";font-stretch:125%;font-weight:900;font-size:26px}
+.cmp-grid .buy{width:100%;height:44px;background:var(--tx);color:#0d0f10;font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:12.5px;margin-top:10px}
+.cmp-grid .buy.done{background:var(--acc)}
+.cmp-grid .bar{height:6px;background:rgba(255,255,255,.1);margin-top:8px}
+.cmp-grid .bar i{display:block;height:100%;background:var(--acc)}
+@media (max-width:900px){.cmp-grid{grid-template-columns:110px repeat(3,minmax(140px,1fr));overflow-x:auto}.cmp-diff{margin-left:0}}
+
+/* /feature */
 </style>
 </head>
 <body>
@@ -55,7 +83,7 @@ section{padding:clamp(80px,9vw,130px) 0}
 </defs></svg>
 <section class="hero ph" style="padding:0">
   <img src="https://images.unsplash.com/photo-1780042426982-cb794203ea1d?auto=format&fit=crop&w=2200&q=72" alt="A snow-covered mountain peak glowing orange at dawn under a dark sky">
-  <header class="nav"><a class="logo" href="#"><svg viewBox="0 0 26 22"><path d="M1 21 L9 5 L13 12 L17 1 L25 21Z" fill="currentColor"/></svg>ATLAS</a><a href="#">Men</a><a href="#">Women</a><a href="#">Expeditions</a><a href="#">Journal</a><a class="bag" href="#">Bag · 0</a></header>
+  <header class="nav"><a class="logo" href="#"><svg viewBox="0 0 26 22"><path d="M1 21 L9 5 L13 12 L17 1 L25 21Z" fill="currentColor"/></svg>ATLAS</a><a href="#">Men</a><a href="#">Women</a><a href="#compare">Compare tents</a><a href="#">Journal</a><a class="bag" href="#">Bag · 0</a></header>
   <div class="word wide" aria-hidden="true">Altitude</div>
   <div class="word2 wide" aria-hidden="true">Altitude</div>
   <div class="coords"><span>47°14′57″N 9°20′36″E</span><span>2,502 m</span><span>−14 °C</span></div>
@@ -82,7 +110,76 @@ section{padding:clamp(80px,9vw,130px) 0}
         <div class="in"><h2 class="wide">Expeditions<br>2027</h2><ul><li><span>Mont Blanc traverse</span><span>Jun · 6 days</span></li><li><span>Lofoten ski touring</span><span>Mar · 8 days</span></li><li><span>Patagonia ice field</span><span>Nov · 14 days</span></li></ul></div></div>
     </div>
   </section>
+<!-- feature -->
+  <section class="cmp-sec" id="compare">
+    <div class="wrap">
+      <p class="cmp-k">Gear lab · Tent comparison</p>
+      <h2 class="wide cmp-h">Pick your shelter.</h2>
+      <p class="cmp-lead">Choose up to three tents and compare weight, space and weather protection side by side. The best value in each row is highlighted.</p>
+      <div class="cmp-filters"><span>Sleeps</span><button type="button" data-cap="0" class="on">All</button><button type="button" data-cap="1">1</button><button type="button" data-cap="2">2</button><button type="button" data-cap="3">3+</button>
+        <label class="cmp-diff"><input type="checkbox" data-diff> Only show differences</label></div>
+      <div class="cmp-grid" data-cmp></div>
+    </div>
+  </section>
+
+<!-- /feature -->
 </main>
 <footer class="wrap foot"><span>ATLAS Mountain Equipment</span><span>Photos: Unsplash</span><span>© Atlas</span></footer>
+<script data-feature>
+(function () {
+  var T = [
+    { id: "a1", name: "Ridge UL 1", cap: 1, kg: 0.98, packed: "38 × 13 cm", floor: 1.9, peak: 102, season: "3-season", hh: 1500, wind: 2, poles: "1 DAC, freestanding", vest: 1, price: 389, col: "#ff6b2c" },
+    { id: "a2", name: "Ridge UL 2", cap: 2, kg: 1.32, packed: "46 × 15 cm", floor: 2.7, peak: 107, season: "3-season", hh: 1500, wind: 2, poles: "2 DAC, freestanding", vest: 2, price: 469, col: "#ff6b2c" },
+    { id: "a3", name: "Summit 2 Expedition", cap: 2, kg: 2.75, packed: "50 × 20 cm", floor: 2.9, peak: 112, season: "4-season", hh: 5000, wind: 4, poles: "4 aluminum, geodesic", vest: 2, price: 829, col: "#e8c547" },
+    { id: "a4", name: "Basecamp 3", cap: 3, kg: 2.4, packed: "55 × 18 cm", floor: 3.8, peak: 122, season: "3-season", hh: 3000, wind: 3, poles: "3 aluminum, freestanding", vest: 2, price: 549, col: "#6fb38f" },
+    { id: "a5", name: "Basecamp 4 Family", cap: 4, kg: 3.9, packed: "62 × 22 cm", floor: 5.6, peak: 152, season: "3-season", hh: 3000, wind: 2, poles: "3 aluminum, tunnel", vest: 2, price: 649, col: "#6fb38f" },
+    { id: "a6", name: "Bivy Storm", cap: 1, kg: 0.62, packed: "30 × 12 cm", floor: 1.4, peak: 58, season: "4-season", hh: 10000, wind: 4, poles: "1 hoop", vest: 0, price: 299, col: "#8aa4d6" }
+  ];
+  var ROWS = [
+    ["Sleeps", function (t) { return t.cap; }, "max"], ["Trail weight", function (t) { return t.kg.toFixed(2) + " kg"; }, "min", "kg"], ["Floor area", function (t) { return t.floor + " m²"; }, "max", "floor"],
+    ["Peak height", function (t) { return t.peak + " cm"; }, "max", "peak"], ["Season", function (t) { return t.season; }], ["Waterproofing", function (t) { return t.hh.toLocaleString("en-US") + " mm"; }, "max", "hh"],
+    ["Wind rating", function (t) { return "●".repeat(t.wind) + "○".repeat(4 - t.wind); }, "max", "wind"], ["Poles", function (t) { return t.poles; }], ["Vestibules", function (t) { return t.vest; }, "max", "vest"], ["Packed size", function (t) { return t.packed; }]
+  ];
+  var cap = 0, diff = false, pick = ["a2", "a3", "a4"];
+  function tent(t) {
+    var w = 120 + t.cap * 34, h = 40 + t.peak * 0.55, x = 200 - w / 2, base = 150;
+    return '<svg viewBox="0 0 400 170"><ellipse cx="200" cy="' + (base + 6) + '" rx="' + (w / 2 + 30) + '" ry="10" fill="rgba(0,0,0,.35)"/>' +
+      '<path d="M' + x + " " + base + " L200 " + (base - h) + " L" + (x + w) + " " + base + ' Z" fill="' + t.col + '"/>' +
+      '<path d="M200 ' + (base - h) + " L" + (x + w) + " " + base + " L" + (x + w + 26) + " " + (base - 8) + " L" + (226) + " " + (base - h - 6) + ' Z" fill="' + t.col + '" opacity=".72"/>' +
+      '<path d="M200 ' + (base - h + 18) + " L" + (200 - w * 0.18) + " " + base + " L" + (200 + w * 0.18) + " " + base + ' Z" fill="#0d0f10" opacity=".55"/>' +
+      '<path d="M' + (x - 6) + " " + (base + 2) + " L200 " + (base - h - 4) + " L" + (x + w + 6) + " " + (base + 2) + '" fill="none" stroke="#f3f1ec" stroke-width="2"/>' + (t.season === "4-season" ? '<path d="M' + (x + w * 0.22) + " " + (base - h * 0.4) + " Q200 " + (base - h * 0.8) + " " + (x + w * 0.78) + " " + (base - h * 0.4) + '" stroke="#f3f1ec" stroke-width="2" fill="none"/>' : "") + "</svg>";
+  }
+  function paint() {
+    var list = T.filter(function (t) { return !cap || (cap === 3 ? t.cap >= 3 : t.cap === cap); });
+    pick = pick.map(function (id, i) { return list.some(function (t) { return t.id === id; }) ? id : (list[i] || list[0] || {}).id; });
+    var chosen = pick.map(function (id) { return T.filter(function (t) { return t.id === id; })[0]; });
+    var h = '<div class="lab"></div>' + chosen.map(function (t, i) {
+      return '<div class="head"><select data-slot="' + i + '" aria-label="Tent ' + (i + 1) + '">' + list.map(function (o) { return '<option value="' + o.id + '"' + (t && o.id === t.id ? " selected" : "") + ">" + o.name + "</option>"; }).join("") + "</select>" +
+        (t ? '<div class="pic">' + tent(t) + '</div><div class="price">$' + t.price + "</div>" : "") + "</div>";
+    }).join("");
+    ROWS.forEach(function (r) {
+      var vals = chosen.map(function (t) { return t ? r[1](t) : ""; });
+      if (diff && vals.every(function (v) { return v === vals[0]; })) return;
+      var best = null;
+      if (r[2]) { var nums = chosen.map(function (t) { return t ? (r[3] ? t[r[3]] : t.cap) : null; }); best = r[2] === "max" ? Math.max.apply(null, nums) : Math.min.apply(null, nums); var ties = nums.filter(function (n) { return n === best; }).length; if (ties === nums.length) best = null; }
+      h += '<div class="lab">' + r[0] + "</div>" + chosen.map(function (t) {
+        var n = t ? (r[3] ? t[r[3]] : t.cap) : null;
+        var bar = r[3] === "kg" ? '<div class="bar"><i style="width:' + Math.round(t.kg / 4 * 100) + '%"></i></div>' : "";
+        return '<div class="' + (best != null && n === best ? "best" : "") + '">' + (t ? r[1](t) : "") + bar + "</div>";
+      }).join("");
+    });
+    h += '<div class="lab"></div>' + chosen.map(function (t) { return '<div>' + (t ? '<button type="button" class="buy" data-buy="' + t.id + '">Add to cart</button>' : "") + "</div>"; }).join("");
+    document.querySelector("[data-cmp]").innerHTML = h;
+  }
+  var sec = document.querySelector(".cmp-sec");
+  sec.addEventListener("change", function (e) { if (e.target.dataset.slot != null) { pick[+e.target.dataset.slot] = e.target.value; paint(); } if (e.target.matches("[data-diff]")) { diff = e.target.checked; paint(); } });
+  sec.addEventListener("click", function (e) {
+    var b = e.target.closest("[data-cap]"); if (b) { cap = +b.dataset.cap; sec.querySelectorAll("[data-cap]").forEach(function (x) { x.classList.toggle("on", x === b); }); pick = ["", "", ""]; paint(); }
+    var by = e.target.closest("[data-buy]"); if (by) { by.textContent = "Added ✓"; by.classList.add("done"); }
+  });
+  paint();
+})();
+
+</script>
 </body>
 </html>
