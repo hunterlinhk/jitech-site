@@ -3,225 +3,267 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PawPro Manufacturing | Private-label pet products, made to your brand</title>
+<title>PawPro | We make the pet brands you already sell</title>
 <script src="assets/base.js"></script>
-<script src="assets/pets.js"></script>
 <link rel="stylesheet" href="assets/base.css">
 <style>
-:root{--bg:#f1f3ee;--ink:#0f2a2e;--te:#1d5a5f;--or:#ff8a3d;--li:#c8f169;--mut:#5d6f70;--line:rgba(15,42,46,.13)}
+/* PawPro: the proof is on the shelf. Young Serif for the voice, Inter for the work; warm shop-wall grey, charcoal, and the safety orange of collar webbing on the factory floor. */
+:root{--wall:#e7e1d9;--paper:#f6f3ee;--ink:#25221f;--soft:#6a635b;--orange:#e0592a;--green:#24503f;--line:rgba(37,34,31,.15);--w:min(1360px,100% - 64px)}
 html,body{overflow-x:clip}
-body{background:var(--bg);color:var(--ink);font-family:"Space Grotesk V",Arial,sans-serif;font-size:16px}
-.wrap{width:min(1320px,100% - 56px);margin:0 auto}
-.top{background:var(--ink);color:#cfe0dc;font-size:13px;font-family:"JetBrains Mono V",monospace}
-.top .wrap{display:flex;justify-content:space-between;gap:12px;padding:9px 0}
-.nav{height:76px;display:flex;align-items:center;gap:28px;font-weight:600;font-size:15px}
-.logo{font-family:"Archivo V",sans-serif;font-weight:800;font-size:26px;letter-spacing:-.02em;margin-right:auto;display:flex;align-items:center;gap:10px;font-stretch:115%}
-.logo i{width:34px;height:34px;border-radius:9px;background:var(--li);display:grid;place-items:center}
-.nav .rfq{background:var(--or);color:#fff;border-radius:10px;padding:12px 18px;font-weight:700}
-.nav .rfq b{background:#fff;color:var(--or);border-radius:99px;padding:0 7px;margin-left:6px;font-size:13px}
-.hero{min-height:calc(100vh - 76px - 34px);display:grid;grid-template-columns:1fr 1.05fr;gap:40px;align-items:center;padding:2vh 0 5vh}
-.k{font-family:"JetBrains Mono V",monospace;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--te)}
-h1{font-family:"Archivo V",sans-serif;font-weight:800;font-stretch:112%;font-size:clamp(54px,min(6.6vw,12.4vh),118px);line-height:.88;letter-spacing:-.04em;margin:clamp(14px,2.6vh,24px) 0}
-h1 span{background:var(--li);padding:0 .12em;border-radius:.12em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
-.lede{max-width:30em;line-height:1.55;color:var(--mut);font-size:clamp(16px,1.2vw,18px)}
-.go{display:flex;gap:12px;margin-top:clamp(20px,3.6vh,34px);flex-wrap:wrap}
-.go a:first-child{background:var(--ink);color:#fff;font-weight:700;border-radius:12px;padding:18px 26px}
-.go a:last-child{border:2px solid var(--ink);font-weight:700;border-radius:12px;padding:16px 24px}
-.facts{display:flex;gap:28px;margin-top:clamp(24px,4.4vh,44px);flex-wrap:wrap}
-.facts b{display:block;font-family:"Archivo V",sans-serif;font-size:30px;font-stretch:112%}
-.facts small{color:var(--mut);font-size:13px}
-.board{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.tile{background:#fff;border-radius:18px;aspect-ratio:1;position:relative;overflow:hidden;border:1px solid var(--line)}
-.tile:nth-child(2){background:var(--li)}.tile:nth-child(4){background:#ffe1cc}.tile:nth-child(9){background:#d9ebe7}.tile:nth-child(6){background:var(--ink)}
-.tile svg{position:absolute;inset:6%;width:88%;height:88%}
-.tile small{position:absolute;left:10px;top:9px;font-family:"JetBrains Mono V",monospace;font-size:11px;color:var(--mut)}
-.tile:nth-child(6) small{color:#9fb6b2}
-.brandchip{grid-column:span 3;display:flex;align-items:center;justify-content:space-between;background:var(--ink);color:#fff;border-radius:18px;padding:16px 20px;gap:12px}
-.brandchip span{font-family:"JetBrains Mono V",monospace;font-size:12px;color:#9fb6b2}
-.brandchip b{font-family:"Archivo V",sans-serif;font-size:26px;font-stretch:120%;letter-spacing:.04em;color:var(--li);transition:opacity .3s}
-.logos{border-block:1px solid var(--line);padding:22px 0;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;color:var(--mut);font-family:"JetBrains Mono V",monospace;font-size:13px}
-section{padding:clamp(70px,8vw,120px) 0}
-.h2{font-family:"Archivo V",sans-serif;font-weight:800;font-stretch:112%;font-size:clamp(40px,4.6vw,76px);line-height:.92;letter-spacing:-.04em;margin-top:12px}
+body{background:var(--paper);color:var(--ink);font-family:"Inter V",Arial,sans-serif;font-size:17px;line-height:1.5}
+.ys{font-family:"Young Serif",Georgia,serif;font-weight:400;letter-spacing:-.015em}
+.c{width:var(--w);margin:0 auto}
+.num{font-variant-numeric:tabular-nums}
+.btn{display:inline-block;background:var(--ink);color:#fff;font-weight:600;padding:15px 22px;font-size:16px;border-radius:999px}
+.btn:hover{background:#3b3631}
+.btn.o{background:var(--orange)}
+.btn.o:hover{background:#c94b1f}
+/* hero: the shop wall, the headline on it, the shelf below */
+.hero{position:relative;background:#e4ddd5}
+.shelf{position:relative;aspect-ratio:2200/1238;overflow:hidden;margin-top:calc(-1 * clamp(40px,9vw,150px));-webkit-mask:linear-gradient(180deg,transparent 0,#000 22%);mask:linear-gradient(180deg,transparent 0,#000 22%)}
+.shelf>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.label{position:absolute;left:45.7%;top:36.4%;width:7.2%;height:12%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:var(--green);line-height:1;container-type:inline-size}
+.label b{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:clamp(9px,17cqi,30px);max-width:94%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;transition:opacity .2s}
+.label small{font-size:clamp(5px,7cqi,11px);font-weight:700;letter-spacing:.08em;margin-top:6%}
+.label i{display:block;width:30%;height:1.5px;background:currentColor;opacity:.5;margin:7% 0 5%}
+.nav{position:relative;z-index:3}
+.nav .c{display:flex;align-items:center;gap:30px;height:80px;font-size:15.5px;font-weight:500}
+.mark{font-family:"Young Serif",Georgia,serif;font-size:26px;margin-right:auto;display:flex;align-items:center;gap:8px}
+.mark i{width:12px;height:12px;border-radius:50%;background:var(--orange)}
+.nav .q{background:var(--ink);color:#fff;padding:10px 16px;border-radius:999px}
+.top{position:relative;z-index:2;padding:clamp(10px,2vh,30px) 0 0}
+.top .c{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:40px;align-items:end}
+.hero h1{font-size:clamp(46px,5.3vw,96px);line-height:.98}
+.try{background:var(--paper);padding:16px 18px;border-radius:14px;box-shadow:0 12px 30px -16px rgba(37,34,31,.4)}
+.try label{display:block;font-size:14.5px;color:var(--soft);margin-bottom:6px}
+.try input{width:100%;border:0;border-bottom:2px solid var(--ink);background:transparent;font-family:"Young Serif",Georgia,serif;font-size:28px;padding:2px 0 6px;color:var(--ink)}
+.try input:focus{outline:none;border-bottom-color:var(--orange)}
+.try p{font-size:14px;color:var(--soft);margin-top:8px}
+.under{background:var(--ink);color:#efe9e1}
+.under .c{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;padding:20px 0}
+.under p{max-width:44em;font-size:16px}
+.under b{color:#fff}
 /* builder */
-.bd{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr) 340px;gap:16px;margin-top:36px;align-items:start}
-.panel{background:#fff;border-radius:20px;padding:20px;border:1px solid var(--line)}
-.panel h3{font-size:14px;font-family:"JetBrains Mono V",monospace;text-transform:uppercase;letter-spacing:.06em;color:var(--te);margin:16px 0 10px}
-.panel h3:first-child{margin-top:0}
-.types{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
-.types button{border:1.5px solid var(--line);border-radius:12px;padding:6px 4px 8px;font-size:12px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:2px}
-.types button svg{width:48px;height:48px}
-.types button.on{border-color:var(--ink);background:#f6faf0;box-shadow:inset 0 0 0 1px var(--ink)}
-.sw{display:flex;flex-wrap:wrap;gap:8px}
-.sw button{width:34px;height:34px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 1px var(--line)}
-.sw button.on{box-shadow:0 0 0 2px var(--ink)}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chips button{border:1.5px solid var(--line);border-radius:10px;padding:8px 12px;font-size:14px;font-weight:600}
-.chips button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
-.chips button small{display:block;font-weight:400;font-size:11px;opacity:.7}
-.panel input[type=text]{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:12px;font:inherit;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
-.view{background:radial-gradient(circle at 50% 40%,#fff,#e6ebe4);border-radius:20px;border:1px solid var(--line);position:sticky;top:16px;padding:18px;display:flex;flex-direction:column}
-.view .art{aspect-ratio:1;max-height:440px;display:grid;place-items:center;position:relative}
-.view .art svg{width:100%;height:100%}
-.view .lab{position:absolute;right:6%;bottom:12%;background:#fff;border-radius:6px;padding:7px 11px;font-family:"Archivo V",sans-serif;font-weight:800;font-stretch:120%;letter-spacing:.06em;font-size:13px;box-shadow:0 6px 14px rgba(0,0,0,.12);transform:rotate(-4deg)}
-.pack{display:flex;gap:10px;align-items:center;justify-content:center;font-size:13px;color:var(--mut);font-family:"JetBrains Mono V",monospace;flex-wrap:wrap}
-.pack span{background:#fff;border-radius:99px;padding:6px 12px;border:1px solid var(--line)}
-.q{background:var(--ink);color:#fff;border-radius:20px;padding:22px;position:sticky;top:16px}
-.q h3{font-family:"Archivo V",sans-serif;font-size:22px;font-stretch:112%;margin-bottom:12px}
-.q .row{display:flex;justify-content:space-between;padding:6px 0;font-size:14px;border-bottom:1px dashed rgba(255,255,255,.14)}
-.q .row b{font-variant-numeric:tabular-nums}
-.tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin:14px 0}
-.tiers div{border-radius:10px;background:rgba(255,255,255,.07);padding:8px 4px;text-align:center;font-size:12px}
-.tiers div b{display:block;font-size:15px}
-.tiers div.on{background:var(--li);color:var(--ink)}
-.q input[type=range]{width:100%;accent-color:var(--li)}
-.q .tot{display:flex;justify-content:space-between;align-items:baseline;margin-top:12px}
-.q .tot{gap:8px;flex-wrap:wrap}.q .tot span{white-space:nowrap}.q .tot b{font-family:"Archivo V",sans-serif;font-size:30px;font-stretch:112%;color:var(--li)}
-.q .btns{display:grid;gap:8px;margin-top:14px}
-.q .btns button{border-radius:12px;padding:14px;font-weight:700}
-.q .btns .a{background:var(--or);color:#fff}
-.q .btns .s{border:1.5px solid rgba(255,255,255,.35)}
-.rfqlist{margin-top:14px;font-size:13px}
-.rfqlist li{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-top:1px solid rgba(255,255,255,.12)}
-.rfqlist li button{color:#ff9f9f;font-size:12px}
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:36px;counter-reset:s}
-.steps div{border-top:3px solid var(--ink);padding-top:16px}
-.steps div::before{counter-increment:s;content:"0" counter(s);font-family:"JetBrains Mono V",monospace;color:var(--or);font-weight:700}
-.steps h3{font-size:21px;margin:8px 0 6px}
-.steps p{color:var(--mut);line-height:1.5;font-size:15px}
-.dlg{position:fixed;inset:0;background:rgba(15,42,46,.55);display:grid;place-items:center;padding:16px;z-index:20}
-.dlg form{background:#fff;border-radius:20px;padding:26px;width:min(520px,100%);display:grid;gap:12px;max-height:94vh;overflow:auto}
-.dlg h3{font-family:"Archivo V",sans-serif;font-size:26px;font-stretch:112%}
-.dlg label{font-size:13px;font-weight:600;display:grid;gap:5px}
-.dlg input,.dlg textarea,.dlg select{border:1.5px solid var(--line);border-radius:10px;padding:11px;font:inherit}
-.dlg .acts{display:flex;gap:8px;justify-content:flex-end}
-.dlg .acts button{border-radius:10px;padding:12px 18px;font-weight:700}
-.dlg .acts .a{background:var(--ink);color:#fff}
-.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:30px 0 40px;color:var(--mut);font-size:14px}
-@media (max-width:1180px){.bd{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.q{grid-column:1/-1;position:static}}
-@media (max-width:900px){.nav a:not(.logo):not(.rfq){display:none}.hero{grid-template-columns:1fr}.bd{grid-template-columns:minmax(0,1fr)}.view{position:static}.steps{grid-template-columns:1fr 1fr}.top .wrap span:last-child{display:none}}
-@media (max-width:520px){.wrap{width:calc(100% - 32px)}.types{grid-template-columns:repeat(4,1fr)}.steps{grid-template-columns:1fr}}
+section{padding:clamp(80px,9vw,140px) 0}
+.h2{font-size:clamp(42px,4.8vw,80px);line-height:1}
+.intro{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:clamp(30px,4vw,56px)}
+.intro p{color:var(--soft);max-width:32em}
+.bld{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(24px,4vw,64px);align-items:start}
+.stage{position:sticky;top:20px;background:var(--wall);border-radius:20px;aspect-ratio:1.05;overflow:hidden;display:grid;grid-template-columns:1.25fr .75fr;align-items:center;padding:6%}
+.stage canvas{width:100%;height:auto;display:block;filter:drop-shadow(0 18px 18px rgba(37,34,31,.18))}
+.pack{justify-self:center;width:90%;aspect-ratio:3/4;border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:12%;box-shadow:0 18px 30px -12px rgba(37,34,31,.35);transition:background .3s,color .3s;position:relative}
+.pack b{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:clamp(16px,1.8vw,26px);line-height:1;word-break:break-word}
+.pack small{font-size:11px;letter-spacing:.06em;margin-top:8px;opacity:.8}
+.pack.hang::before{content:"";position:absolute;top:7%;width:22%;height:5%;border-radius:99px;background:var(--wall)}
+.pack.poly{background:rgba(255,255,255,.45)!important;border:1px solid rgba(37,34,31,.12);backdrop-filter:blur(2px)}
+.pack.box{border-radius:2px;aspect-ratio:1}
+.stage .cap{position:absolute;left:24px;bottom:18px;font-size:14px;color:var(--soft)}
+.stage{position:sticky}
+.opts>div{padding:18px 0;border-top:1px solid var(--line)}
+.opts>div:first-child{border-top:0;padding-top:0}
+.opts h3{font-size:15.5px;font-weight:600;margin-bottom:10px;display:flex;justify-content:space-between;gap:10px}
+.opts h3 span{font-weight:400;color:var(--soft)}
+.ch{display:flex;flex-wrap:wrap;gap:6px}
+.ch button{border:1.5px solid var(--line);padding:9px 14px;border-radius:999px;font-size:15px;font-weight:500}
+.ch button small{color:var(--soft);font-weight:400;margin-left:4px}
+.ch button[aria-pressed=true]{border-color:var(--ink);background:var(--ink);color:#fff}
+.ch button[aria-pressed=true] small{color:#cfc8bf}
+.sw{display:flex;flex-wrap:wrap;gap:10px}
+.sw button{width:36px;height:36px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.12)}
+.sw button[aria-pressed=true]{outline:2px solid var(--ink);outline-offset:3px}
+.tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1.5px solid var(--ink);border-radius:12px;overflow:hidden;margin-top:6px}
+.tiers div{padding:10px 8px;text-align:center;font-size:13.5px;color:var(--soft)}
+.tiers div+div{border-left:1px solid var(--line)}
+.tiers b{display:block;font-size:17px;color:var(--ink)}
+.tiers div.on{background:var(--ink);color:#d9d2c9}
+.tiers div.on b{color:#fff}
+input[type=range]{width:100%;accent-color:var(--orange);margin-top:12px}
+.price{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:6px;flex-wrap:wrap}
+.price b{font-weight:700;font-size:clamp(36px,3.4vw,50px);letter-spacing:-.03em;line-height:1}
+.meta{display:flex;gap:20px;flex-wrap:wrap;font-size:14.5px;color:var(--soft);margin-top:8px}
+.btns{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.btns .btn{flex:1;text-align:center;border:0}
+.btn.line{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.btn.line:hover{background:var(--ink);color:#fff}
+.list{margin-top:16px;font-size:15px}
+.list li{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid var(--line)}
+.list button{color:var(--soft);text-decoration:underline;text-underline-offset:.2em;font-size:14px;margin-left:10px}
+/* factory */
+.fac{background:var(--ink);color:#efe9e1}
+.fac .g{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(30px,5vw,80px);align-items:center}
+.fac .ph{aspect-ratio:3/2;border-radius:20px;--ph:#4a443e}
+.fac ol{margin-top:28px;counter-reset:s}
+.fac li{display:grid;grid-template-columns:44px 1fr;padding:14px 0;border-top:1px solid rgba(239,233,225,.18)}
+.fac li::before{counter-increment:s;content:counter(s);font-family:"Young Serif",Georgia,serif;font-size:26px;line-height:1;color:var(--orange)}
+.fac li b{display:block}
+.fac li span{color:#cfc8bf;font-size:15.5px}
+footer{padding:34px 0 42px;color:var(--soft);font-size:14.5px}
+footer .c{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.dlg{position:fixed;inset:0;z-index:20;background:rgba(37,34,31,.55);display:grid;place-items:center;padding:16px}
+.dlg form{background:var(--paper);border-radius:20px;padding:28px;width:min(520px,100%);display:grid;gap:12px;max-height:94vh;overflow:auto}
+.dlg h3{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:30px;line-height:1.05}
+.dlg p{color:var(--soft);font-size:15px}
+.dlg label{display:grid;gap:5px;font-size:14px;font-weight:600}
+.dlg input,.dlg textarea,.dlg select{border:1.5px solid var(--line);border-radius:10px;padding:11px;font:inherit;background:#fff}
+.dlg .acts{display:flex;gap:8px;justify-content:flex-end;margin-top:4px}
+:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
+@media (max-width:1060px){.bld,.fac .g,.intro{grid-template-columns:minmax(0,1fr)}.stage{position:relative;top:0}}
+@media (max-width:860px){
+  .nav{position:relative}.nav a:not(.mark):not(.q){display:none}
+  .top{padding:8px 0 26px}.top .c{grid-template-columns:1fr;gap:18px}.try{background:#fff}
+  .shelf{aspect-ratio:auto;height:min(80vw,460px);margin-top:-30px}.shelf>img,.label{transform:none}
+  .shelf .inner{position:absolute;top:0;bottom:0;left:50%;aspect-ratio:2200/1238;transform:translateX(-49.5%)}
+}
+@media (min-width:861px){.shelf .inner{position:absolute;inset:0}}
+.shelf .inner>img{position:absolute;inset:0;width:100%;height:100%}
+@media (max-width:600px){:root{--w:calc(100% - 32px)}body{font-size:16px}.stage{grid-template-columns:1fr;gap:16px;aspect-ratio:auto;padding:24px}.stage .cap{position:static;text-align:center}.pack{width:40%}.tiers{grid-template-columns:1fr 1fr}.tiers div:nth-child(3){border-left:0}.tiers div:nth-child(n+3){border-top:1px solid var(--line)}}
 </style>
 </head>
 <body>
-<div class="top"><div class="wrap"><span>OEM · ODM · private label for pet brands</span><span>Factory audits: BSCI · ISO 9001 · Samples in 7 days</span></div></div>
-<div class="wrap">
-  <header class="nav"><a class="logo" href="#"><i><svg viewBox="-16 -18 32 32" width="22" fill="#0f2a2e"><ellipse cx="0" cy="6" rx="9" ry="7.5"/><ellipse cx="-10" cy="-6" rx="4" ry="5"/><ellipse cx="-3.5" cy="-11" rx="4" ry="5"/><ellipse cx="3.5" cy="-11" rx="4" ry="5"/><ellipse cx="10" cy="-6" rx="4" ry="5"/></svg></i>PAWPRO</a><a href="#builder">Product builder</a><a href="#how">How it works</a><a href="#">Catalog</a><a href="#">Factory</a><a class="rfq" href="#builder">RFQ list<b data-count>0</b></a></header>
-  <section class="hero" style="padding-top:0">
-    <div>
-      <p class="k" data-in>Private-label pet products · since 2007</p>
-      <h1 data-in style="--d:1">Your brand.<br><span>Our factory.</span></h1>
-      <p class="lede" data-in style="--d:2">Collars, harnesses, beds, toys and bowls made with your logo, colors and packaging. Design a product below and see unit pricing at every order quantity before you talk to sales.</p>
-      <div class="go" data-in style="--d:3"><a href="#builder">Build a product</a><a href="#">Download catalog</a></div>
-      <div class="facts" data-in style="--d:4"><div><b>300 pcs</b><small>minimum order</small></div><div><b>7 days</b><small>to first sample</small></div><div><b>420+</b><small>brands supplied</small></div></div>
+<header class="hero">
+  <nav class="nav" aria-label="Main"><div class="c">
+    <a class="mark" href="#"><i></i>PawPro</a>
+    <a href="#build">Build a product</a><a href="#factory">The factory</a><a href="#">Catalog</a><a class="q" href="#build">Request a quote</a>
+  </div></nav>
+  <div class="top"><div class="c">
+    <h1 class="ys" data-in>We make the pet brands you already sell.</h1>
+    <div class="try" data-in style="--d:1">
+      <label for="brand">Your brand on our shelf</label>
+      <input id="brand" data-brand value="Barkley" maxlength="14" autocomplete="off">
+      <p>Type a name and watch the green pouch.</p>
     </div>
-    <div class="board" data-fade style="--d:2" data-board></div>
-  </section>
-</div>
-<div class="wrap logos" aria-label="Product lines"><span>COLLARS &amp; LEADS</span><span>HARNESSES</span><span>BEDS &amp; MATS</span><span>TOYS</span><span>BOWLS</span><span>TREAT POUCHES</span><span>PACKAGING</span></div>
-<main class="wrap">
-  <section id="builder">
-    <p class="k">Private-label builder</p>
-    <h2 class="h2">Design it. Price it. Send it.</h2>
-    <div class="bd">
-      <div class="panel">
-        <h3>1 · Product</h3><div class="types" data-types></div>
-        <h3>2 · Color</h3><div class="sw" data-sw></div>
-        <h3>3 · Your brand name</h3><input type="text" data-brand maxlength="10" value="BARKLEY" aria-label="Brand name">
-        <h3>4 · Logo method</h3><div class="chips" data-g="logo"></div>
-        <h3>5 · Packaging</h3><div class="chips" data-g="pack"></div>
+  </div></div>
+  <div class="shelf"><div class="inner">
+    <img src="img/pawpro-shelf.webp" fetchpriority="high" alt="A pet store shelf with food pouches, treats, collars, beds and bowls from six small brands">
+    <div class="label" aria-hidden="true"><b data-shelfname>Barkley</b><i></i><small>DUCK TREATS</small></div>
+  </div></div>
+</header>
+<div class="under"><div class="c"><p>Every product on that shelf, from six different brands, came out of our factory in Ningbo. <b>Collars, harnesses, beds, toys, bowls and treat pouches</b>, from 300 pieces, with your logo and packaging.</p><a class="btn o" href="#build">Build your first product</a></div></div>
+<main>
+  <section id="build"><div class="c">
+    <div class="intro"><h2 class="ys h2">Pick a product. Make it yours.</h2><p>Choose the product, color, logo and packaging. You see it right away, with the unit price at every order quantity, before you talk to anyone in sales.</p></div>
+    <div class="bld">
+      <div class="stage">
+        <canvas data-canvas role="img" aria-label="Your product in the chosen color"></canvas>
+        <div class="pack" data-pack><b data-pname>Barkley</b><small data-psub></small></div>
+        <p class="cap" data-cap></p>
       </div>
-      <div class="view"><div class="art" data-art></div><div class="pack" data-packinfo></div></div>
-      <aside class="q" aria-live="polite">
-        <h3 data-qname></h3>
-        <div class="row"><span>Base unit</span><b data-base></b></div>
-        <div class="row"><span>Logo</span><b data-lp></b></div>
-        <div class="row"><span>Packaging</span><b data-pp></b></div>
-        <div class="tiers" data-tiers></div>
-        <label style="font-size:13px">Order quantity · <b data-qty></b> pcs<input type="range" data-q min="300" max="10000" step="100" value="1000"></label>
-        <div class="row"><span>Sample</span><b data-sample></b></div>
-        <div class="row"><span>Production lead time</span><b data-lead></b></div>
-        <div class="tot"><span>Order total (EXW)</span><b data-tot></b></div>
-        <div class="btns"><button type="button" class="a" data-add>Add to RFQ list</button><button type="button" class="s" data-send>Send RFQ <span data-n></span></button></div>
-        <ul class="rfqlist" data-list></ul>
-      </aside>
+      <div class="opts">
+        <div><h3>Product</h3><div class="ch" data-g="type"></div></div>
+        <div><h3>Color <span data-cname></span></h3><div class="sw" data-sw></div></div>
+        <div><h3>Logo</h3><div class="ch" data-g="logo"></div></div>
+        <div><h3>Packaging</h3><div class="ch" data-g="pack"></div></div>
+        <div aria-live="polite">
+          <h3>Unit price by quantity <span class="num" data-qty></span></h3>
+          <div class="tiers" data-tiers></div>
+          <input type="range" data-q min="300" max="10000" step="100" value="1000" aria-label="Order quantity">
+          <div class="price"><span>Order total, ex-works</span><b class="num" data-tot></b></div>
+          <div class="meta"><span data-sample></span><span data-lead></span></div>
+          <div class="btns"><button type="button" class="btn line" data-add>Add to quote list</button><button type="button" class="btn o" data-send>Request a quote</button></div>
+          <ul class="list" data-list></ul>
+        </div>
+      </div>
     </div>
-  </section>
-  <section id="how" style="padding-top:0">
-    <p class="k">From idea to warehouse</p>
-    <h2 class="h2">Four steps, about seven weeks.</h2>
-    <div class="steps"><div><h3>Spec &amp; quote</h3><p>Build products above or send a tech pack. Quotes come back within one working day.</p></div><div><h3>Sample in 7 days</h3><p>Pre-production samples with your logo, shipped by courier for approval.</p></div><div><h3>Produce &amp; inspect</h3><p>Third-party AQL inspection before packing, with photos and a report.</p></div><div><h3>Ship FOB or DDP</h3><p>Sea or air freight to your warehouse or your Amazon FBA account.</p></div></div>
-  </section>
+  </div></section>
+
+  <section class="fac" id="factory"><div class="c g">
+    <div class="ph"><img src="img/pawpro-factory.webp" alt="A worker feeding orange webbing into a cutting machine, with finished collars in a tray" loading="lazy"></div>
+    <div>
+      <h2 class="ys h2">From your sketch to their shelf in seven weeks.</h2>
+      <ol>
+        <li><span><b>Quote in a day</b>Build products here or send us a tech pack.</span></li>
+        <li><span><b>Samples in 7 days</b>With your logo, sent by courier for approval.</span></li>
+        <li><span><b>Made and inspected</b>Third-party AQL inspection before packing, with photos.</span></li>
+        <li><span><b>Shipped your way</b>To your warehouse or straight into Amazon FBA.</span></li>
+      </ol>
+    </div>
+  </div></section>
 </main>
-<footer class="wrap foot"><span>PawPro Manufacturing · pet products OEM</span><span>Concept site by JIEWEITECH</span></footer>
+<footer><div class="c"><span>PawPro Manufacturing, Ningbo and Los Angeles</span><span>Concept site by JIEWEITECH</span></div></footer>
 <script>
 (function () {
-  var $ = function (s) { return document.querySelector(s); }, money = function (n) { return "$" + n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","); };
-  var P = {
-    collar: ["Nylon collar", 1.35, 300, "collar"], harness: ["No-pull harness", 3.80, 300, "harness"], leash: ["Rope leash", 2.10, 300, "leash"], bed: ["Bolster bed", 9.60, 200, "bed"],
-    ball: ["Rubber ball", 0.62, 1000, "ball"], bowl: ["Steel bowl", 1.95, 500, "bowl"], treats: ["Treat pouch", 0.48, 2000, "treats"], tag: ["ID tag", 0.38, 1000, "tag"]
-  };
-  var COLORS = ["#ff8a3d", "#1d5a5f", "#c8f169", "#e2405b", "#3a6fd8", "#f2c94c", "#7a5af8", "#0f2a2e", "#d7b98e"];
-  var LOGO = { woven: ["Woven label", 0.18], print: ["Screen print", 0.12], emboss: ["Embossed", 0.22], metal: ["Metal badge", 0.45] };
-  var PACK = { poly: ["Polybag", 0.04], card: ["Header card", 0.16], kraft: ["Kraft box", 0.38], gift: ["Gift box", 0.85] };
-  var S = { type: "collar", color: "#ff8a3d", logo: "woven", pack: "card", qty: 1000 }, LIST = [];
-  function draw(k, c, t) { return Pets.draw(P[k][3], { color: c, text: t, brand: t, sub: "PREMIUM", accent: k === "ball" ? "#ffffff" : undefined }); }
-  $("[data-types]").innerHTML = Object.keys(P).map(function (k) { return '<button type="button" data-t="' + k + '">' + draw(k, "#1d5a5f", "") + P[k][0].split(" ").pop() + "</button>"; }).join("");
-  $("[data-sw]").innerHTML = COLORS.map(function (c) { return '<button type="button" data-c="' + c + '" style="background:' + c + '" aria-label="Color ' + c + '"></button>'; }).join("");
-  $("[data-g=logo]").innerHTML = Object.keys(LOGO).map(function (k) { return '<button type="button" data-v="' + k + '">' + LOGO[k][0] + "<small>+$" + LOGO[k][1].toFixed(2) + "</small></button>"; }).join("");
-  $("[data-g=pack]").innerHTML = Object.keys(PACK).map(function (k) { return '<button type="button" data-v="' + k + '">' + PACK[k][0] + "<small>+$" + PACK[k][1].toFixed(2) + "</small></button>"; }).join("");
-  function brand() { return ($("[data-brand]").value.trim().toUpperCase() || "YOUR BRAND").replace(/[<>&"]/g, ""); }
-  function factor(q) { return q >= 5000 ? 0.78 : q >= 3000 ? 0.85 : q >= 1000 ? 0.93 : 1; }
-  function unit(q) { var p = P[S.type]; return (p[1] + LOGO[S.logo][1] + PACK[S.pack][1]) * factor(q); }
-  function paint() {
-    var p = P[S.type], b = brand(), moq = p[2];
-    var r = $("[data-q]"); r.min = moq; if (S.qty < moq) S.qty = moq; r.value = S.qty;
-    document.querySelectorAll("[data-t]").forEach(function (x) { x.classList.toggle("on", x.dataset.t === S.type); });
-    document.querySelectorAll("[data-c]").forEach(function (x) { x.classList.toggle("on", x.dataset.c === S.color); });
-    document.querySelectorAll("[data-g]").forEach(function (g) { g.querySelectorAll("button").forEach(function (x) { x.classList.toggle("on", S[g.dataset.g] === x.dataset.v); }); });
-    $("[data-art]").innerHTML = draw(S.type, S.color, b) + '<span class="lab">' + b + "</span>";
-    $("[data-packinfo]").innerHTML = "<span>" + LOGO[S.logo][0] + "</span><span>" + PACK[S.pack][0] + "</span><span>MOQ " + moq + " pcs</span>";
-    $("[data-qname]").textContent = b + " " + p[0].toLowerCase();
-    $("[data-base]").textContent = money(p[1]); $("[data-lp]").textContent = "+" + money(LOGO[S.logo][1]); $("[data-pp]").textContent = "+" + money(PACK[S.pack][1]);
-    $("[data-tiers]").innerHTML = [[moq, moq + "+"], [1000, "1k+"], [3000, "3k+"], [5000, "5k+"]].filter(function (t, i) { return i === 0 || t[0] > moq; }).map(function (t, i, a) { var next = a[i + 1] ? a[i + 1][0] : Infinity; return '<div class="' + (S.qty >= t[0] && S.qty < next ? "on" : "") + '"><b>' + money(unit(t[0])) + "</b>" + t[1] + "</div>"; }).join("");
-    $("[data-tiers]").style.gridTemplateColumns = "repeat(" + $("[data-tiers]").children.length + ",1fr)";
-    $("[data-qty]").textContent = S.qty.toLocaleString("en-US");
-    $("[data-sample]").textContent = "$" + Math.round(45 + p[1] * 8) + " · 7 days";
-    $("[data-lead]").textContent = (S.qty > 5000 ? 35 : S.qty > 2000 ? 28 : 21) + (S.pack === "gift" ? 5 : 0) + " days";
-    $("[data-tot]").textContent = money(unit(S.qty) * S.qty);
-    $("[data-count]").textContent = LIST.length; $("[data-n]").textContent = LIST.length ? "(" + LIST.length + ")" : "";
-    $("[data-list]").innerHTML = LIST.map(function (l, i) { return "<li><span>" + l.qty.toLocaleString("en-US") + " × " + l.name + "</span><span>" + money(l.total) + ' <button type="button" data-rm="' + i + '">Remove</button></span></li>'; }).join("");
+  var $ = function (s) { return document.querySelector(s); };
+  var money = function (n) { return "$" + n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","); };
+  /* name, base price, minimum order, photo */
+  var P = { collar: ["Nylon collar", 1.35, 300, "img/pawpro-collar.webp"], harness: ["Mesh harness", 3.80, 300, "img/pawpro-harness.webp"], bed: ["Round bed", 9.60, 200, "img/pawpro-bed.webp"] };
+  var COLORS = [["#e0592a", "Safety orange"], ["#24503f", "Forest"], ["#2f4f7a", "Navy"], ["#d9a72f", "Mustard"], ["#d98c8c", "Rose"], ["#3a3633", "Charcoal"], ["#9fb7a6", "Sage"], ["#efe9e1", "Undyed"]];
+  var LOGO = { woven: ["Woven label", 0.18], print: ["Screen print", 0.12], emboss: ["Embossed", 0.22], metal: ["Metal tag", 0.45] };
+  var PACK = { poly: ["Polybag", 0.04, "poly"], card: ["Hang card", 0.16, "hang"], kraft: ["Kraft box", 0.38, "box"], gift: ["Gift box", 0.85, "box"] };
+  var S = { type: "collar", color: "#e0592a", logo: "woven", pack: "card", qty: 1000 }, LIST = [];
+  function chips(sel, map, key, sub) { $(sel).innerHTML = Object.keys(map).map(function (k) { return '<button type="button" data-k="' + key + '" data-v="' + k + '">' + map[k][0] + (sub ? "<small>" + sub(map[k]) + "</small>" : "") + "</button>"; }).join(""); }
+  chips("[data-g=type]", P, "type", function (p) { return "from " + money(p[1]); });
+  chips("[data-g=logo]", LOGO, "logo", function (p) { return "+" + money(p[1]); });
+  chips("[data-g=pack]", PACK, "pack", function (p) { return "+" + money(p[1]); });
+  $("[data-sw]").innerHTML = COLORS.map(function (c) { return '<button type="button" data-k="color" data-v="' + c[0] + '" style="background:' + c[0] + '" aria-label="' + c[1] + '"></button>'; }).join("");
+
+  /* recolor the white product photo pixel by pixel, keeping its folds and stitching */
+  var cv = $("[data-canvas]"), ctx = cv.getContext("2d"), imgs = {}, base = {};
+  function load(k, cb) { if (base[k]) return cb(); var im = new Image(); im.onload = function () { var c = document.createElement("canvas"); c.width = im.naturalWidth; c.height = im.naturalHeight; var x = c.getContext("2d"); x.drawImage(im, 0, 0); base[k] = x.getImageData(0, 0, c.width, c.height); cb(); }; im.src = P[k][3]; }
+  function draw() {
+    load(S.type, function () {
+      var b = base[S.type], h = S.color.slice(1), r = parseInt(h.substr(0, 2), 16) / 255, g = parseInt(h.substr(2, 2), 16) / 255, bl = parseInt(h.substr(4, 2), 16) / 255;
+      cv.width = b.width; cv.height = b.height;
+      var out = ctx.createImageData(b.width, b.height), d = b.data, o = out.data;
+      for (var i = 0; i < d.length; i += 4) {
+        // near-black plastic and bright steel stay as they are; fabric takes the color
+        var lum = (d[i] + d[i + 1] + d[i + 2]) / 765, sat = Math.max(d[i], d[i + 1], d[i + 2]) - Math.min(d[i], d[i + 1], d[i + 2]);
+        var k = lum < 0.25 ? 0 : 1;
+        o[i] = d[i] * (k ? r : 1); o[i + 1] = d[i + 1] * (k ? g : 1); o[i + 2] = d[i + 2] * (k ? bl : 1); o[i + 3] = d[i + 3];
+      }
+      ctx.putImageData(out, 0, 0);
+    });
   }
+  function brand() { return ($("[data-brand]").value.trim() || "Your brand").replace(/[<>&"]/g, ""); }
+  function factor(q) { return q >= 5000 ? 0.78 : q >= 3000 ? 0.85 : q >= 1000 ? 0.93 : 1; }
+  function unit(q) { return (P[S.type][1] + LOGO[S.logo][1] + PACK[S.pack][1]) * factor(q); }
+  function name() { return brand() + " " + P[S.type][0].toLowerCase(); }
+  function paint() {
+    var p = P[S.type], moq = p[2], r = $("[data-q]");
+    r.min = moq; if (S.qty < moq) S.qty = moq; r.value = S.qty;
+    document.querySelectorAll("[data-k]").forEach(function (b) { b.setAttribute("aria-pressed", String(S[b.dataset.k] === b.dataset.v)); });
+    var cname = COLORS.filter(function (c) { return c[0] === S.color; })[0][1], n = brand(), light = S.color === "#efe9e1" || S.color === "#9fb7a6" || S.color === "#d9a72f" || S.color === "#d98c8c";
+    $("[data-cname]").textContent = cname;
+    $("[data-shelfname]").textContent = n; $("[data-pname]").textContent = n;
+    var pk = $("[data-pack]");
+    pk.className = "pack " + PACK[S.pack][2];
+    pk.style.background = S.pack === "kraft" ? "#c4a57a" : S.color; pk.style.color = S.pack === "kraft" ? "#2c2219" : light ? "#25221f" : "#fff";
+    if (S.pack === "poly") pk.style.color = "#25221f";
+    $("[data-psub]").textContent = p[0].toUpperCase();
+    $("[data-cap]").textContent = cname + " " + p[0].toLowerCase() + ", " + LOGO[S.logo][0].toLowerCase() + ", " + PACK[S.pack][0].toLowerCase();
+    var T = [[moq, moq + "+"], [1000, "1,000+"], [3000, "3,000+"], [5000, "5,000+"]].filter(function (t, i) { return i === 0 || t[0] > moq; });
+    $("[data-tiers]").innerHTML = T.map(function (t, i) { var next = T[i + 1] ? T[i + 1][0] : Infinity; return '<div class="' + (S.qty >= t[0] && S.qty < next ? "on" : "") + '"><b class="num">' + money(unit(t[0])) + "</b>" + t[1] + "</div>"; }).join("");
+    $("[data-tiers]").style.gridTemplateColumns = innerWidth > 600 ? "repeat(" + T.length + ",1fr)" : "";
+    $("[data-qty]").textContent = S.qty.toLocaleString("en-US") + " pieces";
+    $("[data-tot]").textContent = money(unit(S.qty) * S.qty);
+    $("[data-sample]").textContent = "Sample " + money(45 + p[1] * 8) + ", 7 days";
+    $("[data-lead]").textContent = "Production " + ((S.qty > 5000 ? 35 : S.qty > 2000 ? 28 : 21) + (S.pack === "gift" ? 5 : 0)) + " days";
+    $("[data-list]").innerHTML = LIST.map(function (l, i) { return "<li><span>" + l.qty.toLocaleString("en-US") + " × " + l.name + '</span><span class="num">' + money(l.total) + '<button type="button" data-rm="' + i + '">Remove</button></span></li>'; }).join("");
+    $("[data-send]").textContent = LIST.length ? "Request a quote for " + LIST.length + (LIST.length > 1 ? " products" : " product") : "Request a quote";
+    draw();
+  }
+  function item() { return { name: name() + ", " + COLORS.filter(function (c) { return c[0] === S.color; })[0][1].toLowerCase() + ", " + PACK[S.pack][0].toLowerCase(), qty: S.qty, total: unit(S.qty) * S.qty }; }
   document.addEventListener("click", function (e) {
-    var t = e.target.closest("[data-t]"); if (t) { S.type = t.dataset.t; return paint(); }
-    var c = e.target.closest("[data-c]"); if (c) { S.color = c.dataset.c; return paint(); }
-    var g = e.target.closest("[data-g] button"); if (g) { S[g.parentNode.dataset.g] = g.dataset.v; return paint(); }
+    var b = e.target.closest("[data-k]"); if (b) { S[b.dataset.k] = b.dataset.v; return paint(); }
     var rm = e.target.closest("[data-rm]"); if (rm) { LIST.splice(+rm.dataset.rm, 1); return paint(); }
-    if (e.target.closest("[data-add]")) { LIST.push({ name: $("[data-qname]").textContent + " · " + LOGO[S.logo][0].toLowerCase() + ", " + PACK[S.pack][0].toLowerCase(), qty: S.qty, total: unit(S.qty) * S.qty }); return paint(); }
+    if (e.target.closest("[data-add]")) { LIST.push(item()); return paint(); }
     if (e.target.closest("[data-send]")) openRFQ();
   });
   $("[data-q]").addEventListener("input", function () { S.qty = +this.value; paint(); });
   $("[data-brand]").addEventListener("input", paint);
   function openRFQ() {
-    if (!LIST.length) LIST.push({ name: $("[data-qname]").textContent + " · " + LOGO[S.logo][0].toLowerCase() + ", " + PACK[S.pack][0].toLowerCase(), qty: S.qty, total: unit(S.qty) * S.qty });
+    if (!LIST.length) LIST.push(item());
     paint();
     var sum = LIST.reduce(function (s, l) { return s + l.total; }, 0), d = document.createElement("div");
     d.className = "dlg";
-    d.innerHTML = '<form><h3>Request a quote</h3><p style="color:var(--mut);font-size:14px">' + LIST.length + " product" + (LIST.length > 1 ? "s" : "") + ", estimated " + money(sum) + ' EXW. A sales engineer replies within one working day.</p><label>Your name<input required name="n"></label><label>Company<input required name="c"></label><label>Work email<input required type="email" name="e"></label><label>Destination market<select><option>United States</option><option>European Union</option><option>United Kingdom</option><option>Australia</option><option>Other</option></select></label><label>Notes<textarea rows="3" placeholder="Pantone colors, target retail price, certifications…"></textarea></label><div class="acts"><button type="button" data-x>Cancel</button><button class="a">Send RFQ</button></div></form>';
+    d.innerHTML = '<form><h3>Request a quote</h3><p>' + LIST.length + " product" + (LIST.length > 1 ? "s" : "") + ", about " + money(sum) + ' ex-works. A product manager replies within one working day.</p><label>Your name<input required name="n" autocomplete="name"></label><label>Company<input required name="c" autocomplete="organization"></label><label>Work email<input required type="email" name="e" autocomplete="email"></label><label>Where you sell<select><option>United States</option><option>European Union</option><option>United Kingdom</option><option>Australia</option><option>Other</option></select></label><label>Notes<textarea rows="3" placeholder="Pantone colors, target retail price, certifications"></textarea></label><div class="acts"><button type="button" class="btn line" data-x>Cancel</button><button class="btn o">Send request</button></div></form>';
     document.body.appendChild(d); d.querySelector("input").focus();
     d.addEventListener("click", function (e) { if (e.target === d || e.target.closest("[data-x]")) d.remove(); });
     d.querySelector("form").addEventListener("submit", function (e) {
-      e.preventDefault(); var n = "RFQ-" + new Date().getFullYear() + "-" + Math.floor(1000 + Math.random() * 8999);
-      this.innerHTML = '<h3>Thanks, request received</h3><p>Reference <b>' + n + "</b>. We’ll send pricing, a sample invoice and a production timeline within one working day.</p><div class='acts'><button type='button' class='a' data-x>Done</button></div>";
+      e.preventDefault();
+      this.innerHTML = '<h3>Request sent</h3><p>Reference RFQ-' + new Date().getFullYear() + "-" + Math.floor(1000 + Math.random() * 8999) + ". You will get pricing, a sample invoice and a production timeline within one working day.</p><div class='acts'><button type='button' class='btn' data-x>Done</button></div>";
       LIST = []; paint();
     });
   }
-  /* hero board: one brand name printed across a range, cycling */
-  var NAMES = ["BARKLEY", "MOSS&PAW", "NORTHTAIL", "GOODBOY"], ni = 0, kinds = ["collar", "ball", "bowl", "bed", "tag", "treats", "harness", "leash", "foodbag"], cols = ["#ff8a3d", "#0f2a2e", "#1d5a5f", "#1d5a5f", "#f2c94c", "#c8f169", "#e2405b", "#ff8a3d", "#1d5a5f"];
-  function board() {
-    var n = NAMES[ni % NAMES.length];
-    $("[data-board]").innerHTML = kinds.map(function (k, i) { return '<div class="tile"><small>' + ["COLLAR", "TOY", "BOWL", "BED", "TAG", "TREATS", "HARNESS", "LEASH", "FOOD"][i] + "</small>" + Pets.draw(k, { color: cols[i], text: n, brand: n, sub: "PRIVATE LABEL", weight: "2 KG" }) + "</div>"; }).join("") + '<div class="brandchip"><span>Now showing your range as</span><b>' + n + "</b></div>";
-  }
-  board(); setInterval(function () { if (document.documentElement.classList.contains("wall-paused")) return; ni++; board(); }, 3200);
   paint();
 })();
 </script>

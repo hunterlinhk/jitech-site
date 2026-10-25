@@ -3,262 +3,288 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Verde Wholesale | Local produce for kitchens and grocers</title>
+<title>Verde Wholesale | Today's produce, on your dock by 7</title>
 <script src="assets/base.js"></script>
 <link rel="stylesheet" href="assets/base.css">
 <style>
-:root{--bg:#fbf6ea;--g:#13512d;--g2:#2f9e55;--lime:#d8f26a;--tom:#ef4b30;--ink:#13261b;--mut:#6b7466}
-body{background:var(--bg);color:var(--ink);font-family:"Bricolage V",Arial,sans-serif;font-size:16px}
-.wrap{width:min(1300px,100% - 56px);margin:0 auto}
-.nav{height:78px;display:flex;align-items:center;gap:28px;font-weight:600;font-size:15px}
-.logo{font-weight:800;font-size:30px;letter-spacing:-.04em;color:var(--g);margin-right:auto;display:flex;align-items:center;gap:6px}
-.logo svg{width:28px}
-.search{display:flex;align-items:center;gap:10px;background:#fff;border:1.5px solid rgba(19,38,27,.12);border-radius:999px;padding:10px 16px;color:var(--mut);min-width:240px}
-.cartb{background:var(--g);color:#fff;border-radius:999px;padding:12px 18px}
-.hero{height:calc(100vh - 78px);min-height:440px;display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center;padding-bottom:3vh}
-.pill{display:inline-flex;align-items:center;gap:8px;background:var(--lime);border-radius:999px;padding:8px 14px;font-weight:700;font-size:14px}
-h1{font-size:clamp(56px,min(7.4vw,13.6vh),128px);line-height:.9;letter-spacing:-.055em;font-weight:800;margin:clamp(14px,2.6vh,24px) 0;color:var(--g)}
-h1 span{color:var(--tom);font-stretch:85%}
-.lede{max-width:26em;line-height:1.5;color:var(--mut);font-size:clamp(16px,1.3vw,19px)}
-.go{display:flex;gap:12px;margin-top:clamp(20px,3.6vh,34px)}
-.go a:first-child{background:var(--tom);color:#fff;border-radius:999px;padding:18px 26px;font-weight:800;font-size:16px}
-.go a:last-child{border:2px solid var(--g);color:var(--g);border-radius:999px;padding:16px 24px;font-weight:700}
-.plate{position:relative;justify-self:center;width:min(42vw,74vh);aspect-ratio:1}
-.plate .ph{position:absolute;inset:0;border-radius:50%;--ph:radial-gradient(circle at 40% 35%,#9bd36a,#2f7d3c);box-shadow:0 40px 70px rgba(19,81,45,.25)}
-.plate .ph img{animation:turn 60s linear infinite}
-@keyframes turn{to{transform:rotate(360deg)}}
-.stk{position:absolute;background:#fff;border-radius:18px;padding:12px 16px;box-shadow:0 16px 34px rgba(19,38,27,.14);font-weight:700;display:flex;gap:10px;align-items:center;animation:bob 4.5s ease-in-out infinite alternate}
-@keyframes bob{to{transform:translateY(-10px) rotate(-2deg)}}
-.stk i{font-style:normal;display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:var(--lime)}
-.stk small{display:block;font-weight:500;color:var(--mut);font-size:12px}
-.s1{left:-8%;top:12%}.s2{right:-6%;bottom:16%;animation-delay:-2s}
-.badge{position:absolute;right:4%;top:2%;width:26%;aspect-ratio:1;border-radius:50%;background:var(--tom);color:#fff;display:grid;place-items:center;text-align:center;font-weight:800;line-height:1;transform:rotate(12deg)}
-.badge b{font-size:clamp(22px,2.4vw,36px);display:block}
-.badge small{font-size:12px}
-section{padding:clamp(70px,8vw,120px) 0}
-.h2{font-size:clamp(42px,5vw,84px);line-height:.92;letter-spacing:-.05em;font-weight:800;color:var(--g)}
-.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:44px}
-.cat{border-radius:26px;overflow:hidden;background:#fff;transition:transform .45s cubic-bezier(.16,1,.3,1)}
-.cat:hover{transform:translateY(-8px) rotate(-1deg)}
-.cat .ph{aspect-ratio:1/1;--ph:linear-gradient(135deg,#cfe8a8,#8cc06b)}
-.cat div.t{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;font-weight:800;font-size:19px}
-.cat span{font-size:13px;font-weight:600;color:var(--mut)}
-.how{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px}
-.how div{border-radius:26px;padding:28px;min-height:240px;display:flex;flex-direction:column;justify-content:space-between}
-.how b{font-size:56px;font-weight:800;letter-spacing:-.05em;line-height:1}
-.how h3{font-size:24px;letter-spacing:-.03em;margin-bottom:6px}
-.how p{opacity:.8;line-height:1.5}
-.foot{display:flex;justify-content:space-between;padding:30px 0 40px;color:var(--mut);font-weight:600}
-@media (max-width:900px){.search,.nav a:not(.logo):not(.cartb){display:none}.hero{grid-template-columns:1fr;height:auto}.plate{width:80vw}.cats{grid-template-columns:1fr 1fr}.how{grid-template-columns:1fr}}
-
-/* feature */
-.os-sec{padding:clamp(70px,8vw,120px) 0 0}
-.os-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:30px}
-.os-head .h2{margin-top:14px}
-.os-cut{background:var(--g);color:#fff;border-radius:22px;padding:16px 22px;text-align:right}
-.os-cut small{display:block;font-weight:600;opacity:.75;font-size:13px}
-.os-cut b{font-size:38px;letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:var(--lime)}
-.os-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:20px;align-items:start}
-.os-main{background:#fff;border-radius:26px;padding:20px;min-width:0}
-.os-tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px}
-.os-tabs{display:flex;gap:6px;flex-wrap:wrap}
-.os-tabs button{border-radius:999px;padding:9px 15px;font-weight:700;font-size:14px;background:var(--bg);color:var(--ink)}
-.os-tabs button.on{background:var(--g);color:#fff}
-.os-find{flex:1;min-width:160px;border:1.5px solid rgba(19,38,27,.14);border-radius:999px;padding:10px 16px;font:inherit;font-size:14px}
-.os-re{font-weight:700;font-size:14px;color:var(--g);padding:9px 12px;border-radius:999px;border:1.5px solid var(--g)}
-.os-row{display:grid;grid-template-columns:minmax(0,2.2fr) 1fr .8fr .8fr 128px .8fr;gap:10px;align-items:center;padding:11px 8px;border-top:1px solid rgba(19,38,27,.08);font-size:15px}
-.os-th{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--mut);border-top:0}
-.os-row .it{display:flex;align-items:center;gap:12px;font-weight:700;min-width:0}
-.os-row .it svg{flex:none;width:38px;height:38px}
-.os-row .it small{display:block;font-weight:500;color:var(--mut);font-size:12.5px}
-.os-row .tier{color:var(--g2);font-weight:700}
-.os-row.has{background:#f3fbe4;border-radius:12px}
-.os-row .ln{font-weight:800;text-align:right;font-variant-numeric:tabular-nums}
-.os-row .low{display:inline-block;margin-left:6px;font-size:11px;font-weight:700;color:var(--tom)}
-.qty{display:flex;align-items:center;border:1.5px solid rgba(19,38,27,.16);border-radius:999px;overflow:hidden;width:max-content}
-.qty button{width:34px;height:34px;font-size:18px;font-weight:700;color:var(--g)}
-.qty input{width:44px;text-align:center;border:0;font:inherit;font-weight:800;-moz-appearance:textfield}
+/* Verde: the price board at a wholesale market. Big Shoulders (Chicago street-sign lettering) on a deep board green, chalk letters, and all other color left to the produce. */
+:root{--board:#14211a;--tile:#1d2c24;--tile2:#18251e;--chalk:#efe9da;--dim:#9db0a3;--paper:#f3f4ef;--ink:#14211a;--soft:#56645b;--red:#d9442f;--gold:#e8b53a;--line:rgba(20,33,26,.16);--w:min(1400px,100% - 56px)}
+html,body{overflow-x:clip}
+body{background:var(--paper);color:var(--ink);font-family:"Public Sans V",Arial,sans-serif;font-size:17px;line-height:1.5}
+.bs{font-family:"Big Shoulders V",Impact,sans-serif}
+.c{width:var(--w);margin:0 auto}
+.num{font-variant-numeric:tabular-nums}
+/* nav */
+.nav{background:var(--board);color:var(--chalk)}
+.nav .c{display:flex;align-items:center;gap:30px;height:68px;font-size:15px}
+.mark{font-family:"Big Shoulders V",sans-serif;font-weight:800;font-size:30px;letter-spacing:.02em;margin-right:auto;display:flex;align-items:baseline;gap:10px}
+.mark small{font-family:"Public Sans V",sans-serif;font-weight:400;font-size:13px;color:var(--dim);letter-spacing:0}
+.nav a:not(.mark){color:#d6dcd3}
+.nav .login{border:1px solid rgba(239,233,218,.4);padding:8px 14px;color:var(--chalk)}
+/* hero: the board and the cold room */
+.hero{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);min-height:calc(100vh - 68px);background:var(--board);color:var(--chalk)}
+.board{padding:clamp(22px,3.4vh,48px) clamp(20px,3.4vw,56px) clamp(20px,3vh,36px) max(28px,calc((100vw - 1400px) / 2));display:flex;flex-direction:column}
+.bh{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:20px;border-bottom:2px solid rgba(239,233,218,.25);padding-bottom:clamp(14px,2vh,22px)}
+.hero h1{font-family:"Big Shoulders V",sans-serif;font-weight:800;font-size:clamp(52px,min(6.2vw,10.4vh),124px);line-height:.86;letter-spacing:.005em;max-width:9em}
+.clock{text-align:right;font-family:"Big Shoulders V",sans-serif;font-weight:700;line-height:1}
+.clock b{display:block;font-size:clamp(34px,3.2vw,52px);color:var(--gold)}
+.clock small{font-family:"Public Sans V",sans-serif;font-weight:400;font-size:14px;color:var(--dim)}
+.rows{flex:1;display:flex;flex-direction:column;justify-content:center;padding:clamp(10px,2vh,24px) 0}
+.row{display:grid;grid-template-columns:minmax(0,1fr) 150px 120px 90px;align-items:center;gap:16px;padding:clamp(4px,.75vh,9px) 0;border-bottom:1px solid rgba(239,233,218,.1)}
+.row .meta{font-size:13.5px;color:var(--dim);line-height:1.3}
+.row .chg{font-family:"Big Shoulders V",sans-serif;font-weight:700;font-size:20px;text-align:right}
+.row .chg.up{color:var(--red)}.row .chg.dn{color:#8fd19e}.row .chg.eq{color:var(--dim)}
+.flap{display:inline-flex;gap:2px;font-family:"Big Shoulders V",sans-serif;font-weight:700;font-size:clamp(18px,min(1.65vw,2.9vh),28px);line-height:1;white-space:nowrap}
+.flap i{font-style:normal;display:inline-grid;place-items:center;width:.82em;height:1.36em;background:linear-gradient(var(--tile) 50%,var(--tile2) 50%);border-radius:2px;position:relative;color:var(--chalk)}
+.flap i::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(0,0,0,.55)}
+.flap i.sp{background:transparent}
+.flap i.sp::after{display:none}
+.price .flap i{color:var(--gold)}
+.bf{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;border-top:2px solid rgba(239,233,218,.25);padding-top:clamp(14px,2vh,22px)}
+.bf p{color:#d6dcd3;font-size:15.5px;max-width:30em}
+.bf p b{color:var(--gold);font-family:"Big Shoulders V",sans-serif;font-size:22px;font-weight:700;letter-spacing:.02em}
+.go{display:inline-block;background:var(--chalk);color:var(--board);font-weight:700;padding:15px 22px;font-size:16px}
+.go:hover{background:#fff}
+.cold{position:relative;--ph:#2b3a31;min-height:100%}
+.cold img{object-position:50% 40%}
+/* the full sheet */
+section{padding:clamp(80px,9vw,140px) 0}
+.h2{font-family:"Big Shoulders V",sans-serif;font-weight:800;font-size:clamp(52px,6vw,100px);line-height:.88}
+.top{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:clamp(30px,4vw,56px)}
+.top p{color:var(--soft);max-width:32em}
+.sheet{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:clamp(20px,2.4vw,36px);align-items:start}
+.tools{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;margin-bottom:10px}
+.tabs{display:flex;flex-wrap:wrap;gap:4px}
+.tabs button{padding:8px 13px;font-weight:600;font-size:15px;color:var(--soft);border-bottom:2px solid transparent}
+.tabs button[aria-pressed=true]{color:var(--ink);border-bottom-color:var(--ink)}
+.find{flex:1;min-width:180px;border:0;border-bottom:1.5px solid var(--ink);background:transparent;padding:9px 2px;font:inherit;font-size:15.5px}
+.find:focus{outline:none;border-bottom-color:var(--red)}
+.re{font-weight:600;font-size:15px;text-decoration:underline;text-underline-offset:.25em}
+table{width:100%;border-collapse:collapse;font-size:15.5px}
+thead th{text-align:left;font-weight:600;font-size:13.5px;color:var(--soft);padding:10px 8px;border-bottom:2px solid var(--ink)}
+th.r,td.r{text-align:right}
+tbody td{padding:12px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
+tbody tr.on td{background:#e6ece2}
+td.it b{display:block;font-weight:600}
+td.it small{color:var(--soft);font-size:13.5px}
+td.it .low{color:var(--red);font-weight:600;margin-left:6px;font-size:12.5px}
+.tier{color:#2c6b3f;font-weight:600}
+.qty{display:inline-flex;align-items:center;border:1.5px solid var(--ink)}
+.qty button{width:34px;height:34px;font-size:18px;font-weight:600}
+.qty input{width:44px;height:34px;border:0;border-inline:1px solid var(--line);text-align:center;font:inherit;font-weight:700;background:transparent;-moz-appearance:textfield}
 .qty input::-webkit-inner-spin-button{display:none}
-.os-sum{position:sticky;top:16px;background:var(--ink);color:#fff;border-radius:26px;padding:24px}
-.os-sum h3{font-size:26px;letter-spacing:-.03em;margin-bottom:12px}
-.os-l{display:block;font-size:13px;font-weight:600;opacity:.9;margin-top:10px}
-.os-l small{opacity:.6}
-.os-l select,.os-l input{display:block;width:100%;margin-top:5px;border-radius:12px;padding:10px 12px;border:0;font:inherit;font-size:14px;background:#fff;color:var(--ink)}
-.os-lines{margin:16px 0 8px;max-height:170px;overflow:auto;font-size:14px}
-.os-lines li{display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px dashed rgba(255,255,255,.15)}
-.os-lines li.e{opacity:.6;border:0}
-.os-tot div{display:flex;justify-content:space-between;padding:4px 0;font-size:14.5px}
-.os-tot dd{font-variant-numeric:tabular-nums;font-weight:700}
-.os-tot .g{font-size:22px;font-weight:800;padding-top:10px;margin-top:6px;border-top:1px solid rgba(255,255,255,.2)}
-.os-tot .g dd{color:var(--lime)}
-.os-bar{height:8px;border-radius:9px;background:rgba(255,255,255,.15);margin-top:14px;overflow:hidden}
-.os-bar i{display:block;height:100%;background:var(--lime);width:0;transition:width .4s}
-.os-note{font-size:13px;opacity:.85;margin-top:8px;min-height:1.4em}
-.os-go{width:100%;margin-top:14px;background:var(--tom);color:#fff;border-radius:999px;padding:16px;font-weight:800;font-size:16px}
-.os-go:disabled{opacity:.4;cursor:not-allowed}
-.os-terms{font-size:12px;opacity:.6;margin-top:10px;text-align:center}
-.os-done{position:fixed;inset:0;background:rgba(19,38,27,.5);display:grid;place-items:center;z-index:50;padding:20px}
-.os-done div{background:var(--bg);border-radius:26px;padding:34px;max-width:420px;text-align:center}
-.os-done b{display:block;font-size:30px;color:var(--g);letter-spacing:-.03em;margin:8px 0}
-.os-done button{margin-top:18px;background:var(--g);color:#fff;border-radius:999px;padding:12px 22px;font-weight:700}
-@media (max-width:1000px){.os-grid{grid-template-columns:minmax(0,1fr)}.os-sum{position:static}}
-@media (max-width:700px){.os-th{display:none}.os-row{grid-template-columns:minmax(0,1fr) auto;row-gap:6px}.os-row .pk,.os-row .pc,.os-row .tier{font-size:13px;color:var(--mut)}.os-row .it{grid-column:1/-1}.os-row .pk{grid-column:1}.os-row .pc{display:none}.os-row .tier{grid-column:2;text-align:right}.os-row .ln{grid-column:2}.os-row .qty{grid-column:1}.os-main{padding:12px}}
-@media (max-width:700px){.os-row .tier::before{content:"5+ cases ";font-weight:500;color:var(--mut)}}
-
-/* /feature */
+td.ln{font-weight:700}
+.empty{padding:30px 8px;color:var(--soft)}
+.sum{background:var(--board);color:var(--chalk);padding:24px;position:sticky;top:20px}
+.sum h3{font-family:"Big Shoulders V",sans-serif;font-weight:800;font-size:38px;line-height:1;margin-bottom:14px}
+.sum label{display:block;font-size:14px;color:var(--dim);margin-top:12px}
+.sum select,.sum input{display:block;width:100%;margin-top:6px;padding:10px;font:inherit;font-size:15px;background:transparent;color:var(--chalk);border:1px solid rgba(239,233,218,.35)}
+.sum select option{color:var(--ink)}
+.sum ul{margin:16px 0 6px;max-height:180px;overflow:auto;font-size:14.5px}
+.sum li{display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px dashed rgba(239,233,218,.16)}
+.sum li.e{color:var(--dim);border:0}
+.sum dl{margin:8px 0 0}
+.sum dl div{display:flex;justify-content:space-between;padding:5px 0;font-size:15px}
+.sum dt{color:var(--dim)}
+.sum .tot{display:flex;justify-content:space-between;align-items:baseline;padding-top:10px;margin-top:8px;border-top:1px solid rgba(239,233,218,.25)}
+.sum .tot b{font-family:"Big Shoulders V",sans-serif;font-weight:800;font-size:44px;line-height:1;color:var(--gold)}
+.bar{height:6px;background:rgba(239,233,218,.14);margin-top:14px}
+.bar i{display:block;height:100%;width:0;background:var(--gold);transition:width .4s}
+.note{font-size:14px;color:#d6dcd3;margin-top:8px;min-height:1.4em}
+.sum .go{width:100%;margin-top:14px;border:0}
+.sum .go:disabled{opacity:.35;cursor:not-allowed}
+.terms{font-size:13px;color:var(--dim);margin-top:10px}
+/* crates: four photos edge to edge, like crates on a pallet */
+.crates{padding:0;display:grid;grid-template-columns:repeat(4,1fr)}
+.crate{position:relative;aspect-ratio:1;--ph:#5a3f2c}
+.crate::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(12,18,14,.78) 0%,rgba(12,18,14,0) 45%)}
+.crate div{position:absolute;z-index:1;left:clamp(16px,1.8vw,28px);right:16px;bottom:clamp(14px,1.6vw,24px);color:var(--chalk)}
+.crate b{display:block;font-family:"Big Shoulders V",sans-serif;font-weight:800;font-size:clamp(28px,2.6vw,42px);line-height:.95}
+.crate small{font-size:14px;color:#dfe5dc}
+/* delivery */
+.dock{padding:0;position:relative;color:var(--chalk);background:var(--board)}
+.dock .ph{height:clamp(380px,42vw,640px);--ph:#2c2f2a}
+.dock .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,22,18,.86) 0%,rgba(14,22,18,.55) 36%,rgba(14,22,18,0) 60%)}
+.dock .in{position:absolute;inset:0;z-index:1;display:flex;align-items:center}
+.dock p{max-width:26em;margin-top:18px;color:#dfe5dc}
+.dock dl{display:flex;gap:clamp(20px,3vw,44px);margin-top:28px}
+.dock dt{font-size:14px;color:var(--dim)}
+.dock dd{margin:0;font-family:"Big Shoulders V",sans-serif;font-weight:800;font-size:clamp(30px,2.6vw,40px);line-height:1}
+footer{padding:34px 0 42px;color:var(--soft);font-size:14.5px}
+footer .c{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.done{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:20px;background:rgba(10,16,12,.6)}
+.done>div{background:var(--paper);padding:34px;max-width:440px}
+.done b{display:block;font-family:"Big Shoulders V",sans-serif;font-weight:800;font-size:40px;line-height:1;margin:6px 0 10px}
+.done button{margin-top:18px;background:var(--board);color:var(--chalk);padding:12px 20px;font-weight:700}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+@media (max-width:1100px){.sheet{grid-template-columns:minmax(0,1fr)}.sum{position:static}.row{grid-template-columns:minmax(0,1fr) 110px 70px}.row .meta{display:none}}
+@media (max-width:900px){.hero{grid-template-columns:1fr;min-height:0}.cold{height:56vw;order:-1}.board{padding:28px 20px}.crates{grid-template-columns:1fr 1fr}.top{grid-template-columns:1fr}.nav a:not(.mark):not(.login){display:none}}
+@media (max-width:640px){:root{--w:calc(100% - 32px)}body{font-size:16px}.mark small{display:none}.row{grid-template-columns:minmax(0,1fr) auto;gap:10px}.row .chg{display:none}.flap{font-size:16px}.clock{display:none}
+  thead{display:none}tbody tr{display:grid;grid-template-columns:1fr auto;gap:4px 12px;padding:12px 0;border-bottom:1px solid var(--line)}tbody td{border:0;padding:0}td.pk,td.tr{display:none}td.pc{grid-column:1;text-align:left!important;font-size:14px}td.pc::after{content:" a case";color:var(--soft)}.crate b{font-size:24px}.crate small{font-size:12.5px;display:block;line-height:1.3}td.q{grid-column:2;grid-row:1/3;align-self:center}td.ln{display:none}
+  .dock .ph{height:640px}.dock .ph::after{background:linear-gradient(0deg,rgba(14,22,18,.92) 0%,rgba(14,22,18,.6) 55%,rgba(14,22,18,.1) 100%)}.dock .in{align-items:flex-end;padding-bottom:40px}.dock dl{flex-wrap:wrap}}
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header class="nav"><a class="logo" href="#"><svg viewBox="0 0 28 28"><path d="M14 26 C4 22 2 12 6 4 C14 4 24 8 22 18 C20 23 17 25 14 26Z" fill="#2f9e55"/><path d="M14 26 C13 18 10 12 6 7" stroke="#13512d" stroke-width="2" fill="none"/></svg>verde</a><span class="search">⌕ Search 600 SKUs</span><a href="#order">Order sheet</a><a href="#">Farms</a><a class="cartb" href="#order">Trade login</a></header>
-  <section class="hero" style="padding-top:0">
-    <div>
-      <span class="pill" data-in>🌱 Wholesale from 62 farms within 100 miles</span>
-      <h1 data-in style="--d:1">Produce that grew up <span>nearby.</span></h1>
-      <p class="lede" data-in style="--d:2">Case pricing for restaurants, cafés and independent grocers. Order by 10 pm, picked at dawn, on your loading dock by 7 am.</p>
-      <div class="go" data-in style="--d:3"><a href="#order">Open the order sheet</a><a href="#">Apply for an account</a></div>
+<nav class="nav" aria-label="Main"><div class="c">
+  <a class="mark" href="#">verde <small>wholesale produce, Oakland</small></a>
+  <a href="#sheet">Order sheet</a><a href="#crates">In season</a><a href="#dock">Delivery</a><a class="login" href="#sheet">Trade login</a>
+</div></nav>
+<header class="hero">
+  <div class="board">
+    <div class="bh">
+      <h1 data-in>Picked last night. On your dock by 7.</h1>
+      <div class="clock" aria-hidden="true"><b class="num" data-now>04:12</b><small data-day>Today</small></div>
     </div>
-    <div class="plate" data-fade style="--d:1">
-      <div class="ph"><img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1400&q=72" alt="A bowl of fresh vegetable salad seen from above"></div>
-      <div class="badge"><div><b>7am</b><small>delivery</small></div></div>
-      <div class="stk s1"><i>🥕</i><div>Harvested<small>yesterday, Petaluma</small></div></div>
-      <div class="stk s2"><i>♻</i><div>Net 30 terms<small>for trade accounts</small></div></div>
+    <div class="rows" data-board aria-label="Today's case prices"></div>
+    <div class="bf">
+      <p>Case prices from 62 farms within 100 miles, updated at 6 am. Order by 10 pm, next cutoff in <b class="num" data-cut>--:--:--</b></p>
+      <a class="go" href="#sheet">Open the order sheet</a>
     </div>
-  </section>
-</div>
-<main class="wrap">
-  <section>
-    <h2 class="h2">What’s in season this week</h2>
-    <div class="cats">
-      <article class="cat"><div class="ph"><img src="https://images.unsplash.com/photo-1526470303-82c787d88682?auto=format&fit=crop&w=700&q=70" alt="Yellow and red bell peppers" loading="lazy"></div><div class="t">Peppers <span>from $36/case</span></div></article>
-      <article class="cat"><div class="ph"><img src="https://images.unsplash.com/photo-1558818498-28c1e002b655?auto=format&fit=crop&w=700&q=70" alt="Tomatoes on a wooden plate" loading="lazy"></div><div class="t">Tomatoes <span>from $29/case</span></div></article>
-      <article class="cat"><div class="ph"><img src="https://images.unsplash.com/photo-1533321942807-08e4008b2025?auto=format&fit=crop&w=700&q=70" alt="Rows of butter lettuce in a field" loading="lazy"></div><div class="t">Greens <span>from $24/case</span></div></article>
-      <article class="cat"><div class="ph"><img src="https://images.unsplash.com/photo-1488459716781-31db52582fe9?auto=format&fit=crop&w=700&q=70" alt="Assorted fruit at a market" loading="lazy"></div><div class="t">Fruit <span>from $34/case</span></div></article>
-    </div>
-  </section>
-  <section style="padding-top:0">
-    <h2 class="h2">Farm to dock in three hops</h2>
-    <div class="how">
-      <div style="background:var(--lime)"><b>1</b><div><h3>Farms pick at dawn</h3><p>Only what was ordered, so nothing goes to waste.</p></div></div>
-      <div style="background:var(--g);color:#fff"><b>2</b><div><h3>We pack by noon</h3><p>In reusable crates, kept cool in our Oakland hub.</p></div></div>
-      <div style="background:var(--tom);color:#fff"><b>3</b><div><h3>On your dock by 7</h3><p>Refrigerated trucks, six mornings a week.</p></div></div>
-    </div>
-  </section>
-
-<!-- feature -->
-  <section class="os-sec" id="order">
-    <div class="os-head">
-      <div><span class="pill">Trade accounts · order by 10 pm, delivered by 7 am</span><h2 class="h2">Quick order sheet</h2></div>
-      <div class="os-cut"><small>Next cutoff in</small><b data-cut>--:--:--</b></div>
-    </div>
-    <div class="os-grid">
-      <div class="os-main">
-        <div class="os-tools">
-          <div class="os-tabs" data-tabs><button type="button" data-c="all" class="on">All</button><button type="button" data-c="veg">Vegetables</button><button type="button" data-c="fruit">Fruit</button><button type="button" data-c="herb">Herbs</button><button type="button" data-c="dairy">Dairy &amp; eggs</button></div>
-          <input class="os-find" type="search" placeholder="Find an item or SKU" aria-label="Find an item" data-find>
-          <button type="button" class="os-re" data-reorder>↻ Repeat last order</button>
+  </div>
+  <div class="cold ph"><img src="img/verde-coldroom.webp" fetchpriority="high" alt="Crates of tomatoes, kale, lemons, lettuce and carrots stacked in a cold room"></div>
+</header>
+<main>
+  <section id="sheet"><div class="c">
+    <div class="top"><h2 class="h2">The order sheet</h2><p>Every item on today's board, priced by the case. Five cases or more of an item and the lower price applies. Orders over $250 deliver free.</p></div>
+    <div class="sheet">
+      <div>
+        <div class="tools">
+          <div class="tabs" role="group" aria-label="Filter by category" data-tabs><button type="button" data-c="all" aria-pressed="true">All</button><button type="button" data-c="veg" aria-pressed="false">Vegetables</button><button type="button" data-c="fruit" aria-pressed="false">Fruit</button><button type="button" data-c="herb" aria-pressed="false">Herbs</button><button type="button" data-c="dairy" aria-pressed="false">Dairy and eggs</button></div>
+          <input class="find" type="search" placeholder="Search by name, farm or code" aria-label="Search the order sheet" data-find>
+          <button type="button" class="re" data-reorder>Repeat last order</button>
         </div>
-        <div class="os-tbl" role="table">
-          <div class="os-row os-th" role="row"><span>Item</span><span>Pack</span><span>Per case</span><span>5+ cases</span><span>Cases</span><span>Line</span></div>
-          <div data-rows></div>
-        </div>
+        <table>
+          <thead><tr><th>Item</th><th class="pk">Pack</th><th class="pc r">Per case</th><th class="r">5 cases or more</th><th class="r">Cases</th><th class="r">Line total</th></tr></thead>
+          <tbody data-rows></tbody>
+        </table>
       </div>
-      <aside class="os-sum">
+      <aside class="sum" aria-live="polite">
         <h3>Your order</h3>
-        <label class="os-l">Delivery day<select data-day></select></label>
-        <label class="os-l">Drop window<select data-win><option>5–7 am · back door</option><option>7–9 am</option><option>9–11 am</option></select></label>
-        <label class="os-l">PO number <small>(optional)</small><input data-po placeholder="e.g. PO-2291"></label>
-        <ul class="os-lines" data-lines></ul>
-        <dl class="os-tot">
-          <div><dt>Cases</dt><dd data-cases>0</dd></div>
-          <div><dt>Subtotal</dt><dd data-sub>$0.00</dd></div>
-          <div><dt>Volume pricing</dt><dd data-save>−$0.00</dd></div>
-          <div><dt>Delivery</dt><dd data-del>$0.00</dd></div>
-          <div class="g"><dt>Total</dt><dd data-total>$0.00</dd></div>
-        </dl>
-        <div class="os-bar"><i data-bar></i></div><p class="os-note" data-note></p>
-        <button type="button" class="os-go" data-submit disabled>Place order</button>
-        <p class="os-terms">Net 30 terms for approved accounts. Prices update daily at 6 am.</p>
+        <label>Delivery day<select data-day-sel></select></label>
+        <label>Drop window<select data-win><option>5 to 7 am, back door</option><option>7 to 9 am</option><option>9 to 11 am</option></select></label>
+        <label>Purchase order number (optional)<input data-po placeholder="PO-2291"></label>
+        <ul data-lines></ul>
+        <dl><div><dt>Cases</dt><dd class="num" data-cases>0</dd></div><div><dt>Volume savings</dt><dd class="num" data-save>$0.00</dd></div><div><dt>Delivery</dt><dd class="num" data-del>$0.00</dd></div></dl>
+        <div class="tot"><span>Total</span><b class="num" data-total>$0.00</b></div>
+        <div class="bar"><i data-bar></i></div>
+        <p class="note" data-note></p>
+        <button type="button" class="go" data-submit disabled>Place order</button>
+        <p class="terms">Net 30 terms for approved accounts.</p>
       </aside>
     </div>
+  </div></section>
+
+  <section class="crates" id="crates" aria-label="In season">
+    <figure class="crate ph"><img src="img/verde-tomatoes.webp" alt="A crate of heirloom tomatoes" loading="lazy"><div><b>Heirloom tomatoes</b><small>Petaluma, from $29 a case</small></div></figure>
+    <figure class="crate ph"><img src="img/verde-greens.webp" alt="A crate of butter lettuce and lacinato kale on ice" loading="lazy"><div><b>Lettuce and kale</b><small>Salinas and Half Moon Bay, from $24</small></div></figure>
+    <figure class="crate ph"><img src="img/verde-lemons.webp" alt="A crate of Meyer lemons with leaves" loading="lazy"><div><b>Meyer lemons</b><small>Fresno, from $37 a case</small></div></figure>
+    <figure class="crate ph"><img src="img/verde-carrots.webp" alt="A crate of rainbow carrots tied in bunches" loading="lazy"><div><b>Rainbow carrots</b><small>Watsonville, from $26 a case</small></div></figure>
   </section>
 
-<!-- /feature -->
+  <section class="dock" id="dock">
+    <div class="ph"><img src="img/verde-delivery.webp" alt="Produce crates being unloaded from a green refrigerated truck at a restaurant's back door at dawn" loading="lazy"></div>
+    <div class="in"><div class="c">
+      <h2 class="h2">At the back door before the first prep cook.</h2>
+      <p>Our refrigerated trucks leave Oakland at 4 am, six mornings a week, and drop at your back door or loading dock in the window you choose.</p>
+      <dl><div><dt>Order by</dt><dd>10 pm</dd></div><div><dt>Delivered by</dt><dd>7 am</dd></div><div><dt>Free delivery over</dt><dd>$250</dd></div></dl>
+    </div></div>
+  </section>
 </main>
-<footer class="wrap foot"><span>verde wholesale · Bay Area</span><span>Photos: Unsplash</span></footer>
-
-<script data-feature>
+<footer><div class="c"><span>Verde Wholesale Produce, Oakland, California</span><span>Concept site by JIEWEITECH</span></div></footer>
+<script>
 (function () {
+  var $ = function (s) { return document.querySelector(s); };
+  /* code, name, farm, category, pack, case price, 5+ price, change since yesterday, low stock */
   var I = [
-    ["V-101","Heirloom tomatoes","Petaluma","veg","10 lb case",34,29,"#e8452c",0],["V-114","Butter lettuce","Salinas","veg","24 heads",28,24,"#8fcf5a",0],["V-120","Rainbow carrots","Watsonville","veg","25 lb case",31,26,"#f08a24",0],
-    ["V-133","Bell peppers, mixed","Gilroy","veg","11 lb case",36,31,"#f2c12e",1],["V-140","Yellow onions","Stockton","veg","50 lb sack",29,25,"#d9a441",0],["V-152","Lacinato kale","Half Moon Bay","veg","24 bunches",33,28,"#2f6b3c",0],
-    ["F-201","Meyer lemons","Fresno","fruit","18 lb case",42,37,"#f7d943",0],["F-212","Hass avocados, 48 ct","Ventura","fruit","48 count",58,52,"#4a6b2a",1],["F-220","Strawberries","Watsonville","fruit","8 × 1 lb flats",39,34,"#e23b4b",0],
-    ["F-231","Gala apples","Sebastopol","fruit","40 lb case",44,39,"#d6402f",0],["H-301","Italian basil","Brentwood","herb","12 bunches",22,19,"#3c9a4c",0],["H-310","Cilantro","Salinas","herb","30 bunches",24,20,"#58b25a",0],
-    ["D-401","Pasture eggs, large","Petaluma","dairy","15 dozen",63,57,"#f3ead8",0],["D-410","Whole milk, glass","Marin","dairy","6 × ½ gal",27,24,"#ffffff",0],["D-422","Cultured butter","Sonoma","dairy","12 × 1 lb",68,61,"#f6dd8a",0]
+    ["V-101", "Heirloom tomatoes", "Petaluma", "veg", "10 lb case", 34, 29, -2, 0], ["V-114", "Butter lettuce", "Salinas", "veg", "24 heads", 28, 24, 0, 0],
+    ["V-120", "Rainbow carrots", "Watsonville", "veg", "25 lb case", 31, 26, 1, 0], ["V-133", "Bell peppers, mixed", "Gilroy", "veg", "11 lb case", 36, 31, 3, 1],
+    ["V-140", "Yellow onions", "Stockton", "veg", "50 lb sack", 29, 25, 0, 0], ["V-152", "Lacinato kale", "Half Moon Bay", "veg", "24 bunches", 33, 28, -1, 0],
+    ["F-201", "Meyer lemons", "Fresno", "fruit", "18 lb case", 42, 37, 2, 0], ["F-212", "Hass avocados", "Ventura", "fruit", "48 count", 58, 52, 4, 1],
+    ["F-220", "Strawberries", "Watsonville", "fruit", "8 × 1 lb flats", 39, 34, -3, 0], ["F-231", "Gala apples", "Sebastopol", "fruit", "40 lb case", 44, 39, 0, 0],
+    ["H-301", "Italian basil", "Brentwood", "herb", "12 bunches", 22, 19, 1, 0], ["H-310", "Cilantro", "Salinas", "herb", "30 bunches", 24, 20, 0, 0],
+    ["D-401", "Pasture eggs, large", "Petaluma", "dairy", "15 dozen", 63, 57, 0, 0], ["D-410", "Whole milk, glass", "Marin", "dairy", "6 × ½ gal", 27, 24, 0, 0],
+    ["D-422", "Cultured butter", "Sonoma", "dairy", "12 × 1 lb", 68, 61, 2, 0]
   ];
   var LAST = { "V-101": 4, "V-114": 3, "F-201": 2, "H-301": 2, "D-401": 1, "V-140": 2 };
   var Q = {}, cat = "all", find = "";
-  var sec = document.getElementById("order"), rows = sec.querySelector("[data-rows]");
-  function m(n) { return "$" + n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
-  function icon(c, k) {
-    var s = c === "#ffffff" || c === "#f3ead8" ? "#13261b33" : "none";
-    if (k === "herb") return '<svg viewBox="0 0 40 40"><path d="M20 36 C20 26 18 18 12 10" stroke="#13512d" stroke-width="2" fill="none"/><ellipse cx="12" cy="12" rx="8" ry="5" fill="' + c + '" transform="rotate(40 12 12)"/><ellipse cx="25" cy="17" rx="8" ry="5" fill="' + c + '" transform="rotate(-30 25 17)"/><ellipse cx="17" cy="25" rx="7" ry="4" fill="' + c + '" transform="rotate(20 17 25)"/></svg>';
-    if (k === "dairy") return '<svg viewBox="0 0 40 40"><ellipse cx="20" cy="22" rx="12" ry="15" fill="' + c + '" stroke="' + (s === "none" ? "#13261b33" : s) + '"/></svg>';
-    return '<svg viewBox="0 0 40 40"><circle cx="20" cy="22" r="14" fill="' + c + '" stroke="' + s + '"/><path d="M20 8 C22 4 26 3 28 4 C26 7 23 8 20 8Z" fill="#2f9e55"/><circle cx="15" cy="17" r="3.5" fill="#fff" opacity=".35"/></svg>';
+  var m = function (n) { return "$" + n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","); };
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- the board: letters flip into place once, on arrival ---------- */
+  var BOARD = ["V-101", "F-201", "V-152", "V-120", "F-220", "V-133", "D-401", "H-301"];
+  var GLYPHS = "ABCDEFGHIJKLMNOPRSTUVWXYZ0123456789$";
+  function tiles(text, cls) { return '<span class="flap ' + (cls || "") + '" aria-hidden="true">' + text.toUpperCase().split("").map(function (ch) { return ch === " " ? '<i class="sp"> </i>' : "<i data-ch=\"" + ch + "\">" + ch + "</i>"; }).join("") + "</span>"; }
+  var short = function (s) { return s.split(",")[0]; };
+  $("[data-board]").innerHTML = BOARD.map(function (id) {
+    var it = I.filter(function (x) { return x[0] === id; })[0], ch = it[7];
+    return '<div class="row"><div><span class="sr" style="position:absolute;left:-9999px">' + it[1] + ", " + it[4] + ", $" + it[5] + " a case</span>" + tiles(short(it[1])) + '</div><div class="meta">' + it[2] + "<br>" + it[4] + '</div><div class="price">' + tiles("$" + it[5]) + '</div><div class="chg ' + (ch > 0 ? "up" : ch < 0 ? "dn" : "eq") + '">' + (ch > 0 ? "▲ " + ch : ch < 0 ? "▼ " + -ch : "—") + "</div></div>";
+  }).join("");
+  if (!reduce) {
+    var cells = [].slice.call(document.querySelectorAll(".flap i[data-ch]"));
+    cells.forEach(function (c, k) { c.textContent = GLYPHS[(k * 7) % GLYPHS.length]; c._n = 6 + Math.floor(k / 3) % 14 + Math.floor(Math.random() * 6); });
+    var t0 = setTimeout(function tick() {
+      var busy = false;
+      cells.forEach(function (c) { if (c._n > 0) { c._n--; busy = true; c.textContent = c._n ? GLYPHS[Math.floor(Math.random() * GLYPHS.length)] : c.dataset.ch; } });
+      if (busy) setTimeout(tick, 55);
+    }, 450);
   }
+  /* clock and cutoff */
+  function tick() {
+    var n = new Date(), p = function (x) { return (x < 10 ? "0" : "") + x; }, c = new Date(n.getFullYear(), n.getMonth(), n.getDate(), 22);
+    if (n >= c) c.setDate(c.getDate() + 1);
+    var s = Math.floor((c - n) / 1000);
+    $("[data-cut]").textContent = p(Math.floor(s / 3600)) + ":" + p(Math.floor(s % 3600 / 60)) + ":" + p(s % 60);
+    $("[data-now]").textContent = p(n.getHours()) + ":" + p(n.getMinutes());
+    $("[data-day]").textContent = n.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" });
+  }
+  tick(); setInterval(tick, 1000);
+
+  /* ---------- the order sheet ---------- */
+  var rows = $("[data-rows]");
   function unit(it, q) { return q >= 5 ? it[6] : it[5]; }
   function row(it) {
     var q = Q[it[0]] || 0;
-    return '<div class="os-row' + (q ? " has" : "") + '" role="row" data-id="' + it[0] + '"><span class="it">' + icon(it[7], it[3]) + '<span>' + it[1] + (it[8] ? '<span class="low">Low stock</span>' : "") + "<small>" + it[0] + " · " + it[2] + '</small></span></span><span class="pk">' + it[4] + '</span><span class="pc">' + m(it[5]) + '</span><span class="tier">' + m(it[6]) + '</span><span class="qty"><button type="button" data-d="-1" aria-label="Fewer cases of ' + it[1] + '">−</button><input inputmode="numeric" value="' + q + '" aria-label="Cases of ' + it[1] + '"><button type="button" data-d="1" aria-label="More cases of ' + it[1] + '">+</button></span><span class="ln">' + (q ? m(q * unit(it, q)) : "–") + "</span></div>";
+    return '<tr data-id="' + it[0] + '"' + (q ? ' class="on"' : "") + '><td class="it"><b>' + it[1] + (it[8] ? '<span class="low">Low stock</span>' : "") + "</b><small>" + it[0] + ", " + it[2] + '</small></td><td class="pk">' + it[4] + '</td><td class="pc r num">' + m(it[5]) + '</td><td class="tr r num"><span class="tier">' + m(it[6]) + '</span></td><td class="q r"><span class="qty"><button type="button" data-d="-1" aria-label="One case fewer of ' + it[1] + '">−</button><input inputmode="numeric" value="' + q + '" aria-label="Cases of ' + it[1] + '"><button type="button" data-d="1" aria-label="One more case of ' + it[1] + '">+</button></span></td><td class="ln r num">' + (q ? m(q * unit(it, q)) : "") + "</td></tr>";
   }
   function list() {
-    var f = find.toLowerCase();
-    var v = I.filter(function (it) { return (cat === "all" || it[3] === cat) && (!f || (it[1] + " " + it[0] + " " + it[2]).toLowerCase().indexOf(f) > -1); });
-    rows.innerHTML = v.length ? v.map(row).join("") : '<p style="padding:30px;text-align:center;color:var(--mut)">No items match “' + find + '”.</p>';
+    var f = find.toLowerCase(), v = I.filter(function (it) { return (cat === "all" || it[3] === cat) && (!f || (it[1] + " " + it[0] + " " + it[2]).toLowerCase().indexOf(f) > -1); });
+    rows.innerHTML = v.length ? v.map(row).join("") : '<tr><td class="empty" colspan="6">Nothing on today\'s sheet matches "' + find.replace(/[<>&"]/g, "") + '". Try a farm name or a code like V-101.</td></tr>';
   }
   function totals() {
     var cases = 0, sub = 0, save = 0, lines = [];
     I.forEach(function (it) { var q = Q[it[0]] || 0; if (!q) return; cases += q; sub += q * it[5]; save += q * (it[5] - unit(it, q)); lines.push("<li><span>" + q + " × " + it[1] + "</span><span>" + m(q * unit(it, q)) + "</span></li>"); });
-    var net = sub - save, del = net === 0 ? 0 : net >= 250 ? 0 : 18, min = 150;
-    sec.querySelector("[data-lines]").innerHTML = lines.join("") || '<li class="e">Add cases from the sheet. Minimum order is $150.</li>';
-    sec.querySelector("[data-cases]").textContent = cases;
-    sec.querySelector("[data-sub]").textContent = m(sub);
-    sec.querySelector("[data-save]").textContent = "−" + m(save);
-    sec.querySelector("[data-del]").textContent = net === 0 ? "$0.00" : del ? m(del) : "Free";
-    sec.querySelector("[data-total]").textContent = m(net + del);
-    sec.querySelector("[data-bar]").style.width = Math.min(100, net / 250 * 100) + "%";
-    sec.querySelector("[data-note]").textContent = net === 0 ? "" : net < min ? m(min - net) + " more to reach the $150 minimum." : net < 250 ? m(250 - net) + " more for free delivery." : "Free delivery unlocked.";
-    sec.querySelector("[data-submit]").disabled = net < min;
+    var net = sub - save, del = net === 0 ? 0 : net >= 250 ? 0 : 18;
+    $("[data-lines]").innerHTML = lines.join("") || '<li class="e">Add cases from the sheet. The minimum order is $150.</li>';
+    $("[data-cases]").textContent = cases; $("[data-save]").textContent = m(save);
+    $("[data-del]").textContent = net === 0 ? "$0.00" : del ? m(del) : "Free";
+    $("[data-total]").textContent = m(net + del);
+    $("[data-bar]").style.width = Math.min(100, net / 250 * 100) + "%";
+    $("[data-note]").textContent = net === 0 ? "" : net < 150 ? m(150 - net) + " more to reach the $150 minimum." : net < 250 ? m(250 - net) + " more for free delivery." : "Delivery is free on this order.";
+    $("[data-submit]").disabled = net < 150;
   }
   function set(id, q) {
-    q = Math.max(0, Math.min(99, q | 0)); Q[id] = q;
-    var r = rows.querySelector('[data-id="' + id + '"]');
-    if (r) { var it = I.filter(function (x) { return x[0] === id; })[0], fresh = document.createElement("div"); fresh.innerHTML = row(it); r.replaceWith(fresh.firstChild); }
+    Q[id] = Math.max(0, Math.min(99, q | 0));
+    var r = rows.querySelector('tr[data-id="' + id + '"]');
+    if (r) { var it = I.filter(function (x) { return x[0] === id; })[0], t = document.createElement("tbody"); t.innerHTML = row(it); r.replaceWith(t.firstChild); }
     totals();
   }
-  rows.addEventListener("click", function (e) { var b = e.target.closest("[data-d]"); if (!b) return; var id = b.closest("[data-id]").dataset.id; set(id, (Q[id] || 0) + +b.dataset.d); });
-  rows.addEventListener("change", function (e) { if (e.target.matches("input")) set(e.target.closest("[data-id]").dataset.id, parseInt(e.target.value, 10) || 0); });
-  sec.querySelector("[data-tabs]").addEventListener("click", function (e) { var b = e.target.closest("button"); if (!b) return; cat = b.dataset.c; this.querySelectorAll("button").forEach(function (x) { x.classList.toggle("on", x === b); }); list(); });
-  sec.querySelector("[data-find]").addEventListener("input", function () { find = this.value.trim(); list(); });
-  sec.querySelector("[data-reorder]").addEventListener("click", function () { Q = {}; for (var k in LAST) Q[k] = LAST[k]; list(); totals(); });
-  var day = sec.querySelector("[data-day]"), now = new Date(), opts = [];
+  rows.addEventListener("click", function (e) { var b = e.target.closest("[data-d]"); if (!b) return; var id = b.closest("tr").dataset.id; set(id, (Q[id] || 0) + +b.dataset.d); });
+  rows.addEventListener("change", function (e) { if (e.target.matches("input")) set(e.target.closest("tr").dataset.id, parseInt(e.target.value, 10) || 0); });
+  $("[data-tabs]").addEventListener("click", function (e) { var b = e.target.closest("button"); if (!b) return; cat = b.dataset.c; this.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); }); list(); });
+  $("[data-find]").addEventListener("input", function () { find = this.value.trim(); list(); });
+  $("[data-reorder]").addEventListener("click", function () { Q = {}; for (var k in LAST) Q[k] = LAST[k]; list(); totals(); });
+  var day = $("[data-day-sel]"), now = new Date(), opts = [];
   for (var i = 1; opts.length < 5; i++) { var d = new Date(now.getFullYear(), now.getMonth(), now.getDate() + i); if (d.getDay() === 0) continue; opts.push("<option>" + d.toLocaleDateString("en-US", { weekday: "long", month: "short", day: "numeric" }) + "</option>"); }
   day.innerHTML = opts.join("");
-  function tick() {
-    var n = new Date(), c = new Date(n.getFullYear(), n.getMonth(), n.getDate(), 22); if (n >= c) c.setDate(c.getDate() + 1);
-    var s = Math.floor((c - n) / 1000), p = function (x) { return (x < 10 ? "0" : "") + x; };
-    sec.querySelector("[data-cut]").textContent = p(Math.floor(s / 3600)) + ":" + p(Math.floor(s % 3600 / 60)) + ":" + p(s % 60);
-  }
-  tick(); setInterval(tick, 1000);
-  sec.querySelector("[data-submit]").addEventListener("click", function () {
-    var po = sec.querySelector("[data-po]").value.trim(), n = "VW-" + Math.floor(100000 + Math.random() * 899999), o = document.createElement("div");
-    o.className = "os-done"; o.innerHTML = "<div role='dialog' aria-modal='true'><p>Order received</p><b>" + n + "</b><p>" + sec.querySelector("[data-cases]").textContent + " cases for " + day.value + ", " + sec.querySelector("[data-win]").value + (po ? " · " + po.replace(/[<>&]/g, "") : "") + ". A confirmation and invoice are on the way to your account email.</p><button type='button'>Done</button></div>";
+  $("[data-submit]").addEventListener("click", function () {
+    var po = $("[data-po]").value.trim().replace(/[<>&"]/g, ""), n = "VW-" + Math.floor(100000 + Math.random() * 899999), o = document.createElement("div");
+    o.className = "done"; o.innerHTML = "<div role='dialog' aria-modal='true' aria-labelledby='dn'><p>Order placed</p><b id='dn'>" + n + "</b><p>" + $("[data-cases]").textContent + " cases for " + day.value + ", " + $("[data-win]").value + (po ? ", " + po : "") + ". The invoice is on its way to your account email.</p><button type='button'>Done</button></div>";
     document.body.appendChild(o); o.querySelector("button").focus();
     o.addEventListener("click", function (e) { if (e.target === o || e.target.matches("button")) { o.remove(); Q = {}; list(); totals(); } });
   });
   list(); totals();
 })();
-
 </script>
 </body>
 </html>

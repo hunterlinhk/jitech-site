@@ -17,6 +17,15 @@
 @font-face{font-family:"DM Serif Display";font-display:swap;src:url("../../assets/fonts/pages/dm-serif-display.woff2") format("woff2")}
 @font-face{font-family:"DM Serif Display";font-display:swap;font-style:italic;src:url("../../assets/fonts/pages/dm-serif-display-italic.woff2") format("woff2")}
 
+@font-face{font-family:"Barlow";font-display:swap;font-weight:400;src:url("../../assets/fonts/pages/barlow-400.woff2") format("woff2")}
+@font-face{font-family:"Barlow";font-display:swap;font-weight:500;src:url("../../assets/fonts/pages/barlow-500.woff2") format("woff2")}
+@font-face{font-family:"Barlow";font-display:swap;font-weight:600;src:url("../../assets/fonts/pages/barlow-600.woff2") format("woff2")}
+@font-face{font-family:"Barlow Condensed";font-display:swap;font-weight:600;src:url("../../assets/fonts/pages/barlow-condensed-600.woff2") format("woff2")}
+@font-face{font-family:"Barlow Condensed";font-display:swap;font-weight:700;src:url("../../assets/fonts/pages/barlow-condensed-700.woff2") format("woff2")}
+@font-face{font-family:"Big Shoulders V";font-display:swap;font-weight:100 900;src:url("../../assets/fonts/pages/big-shoulders-display.woff2") format("woff2-variations")}
+@font-face{font-family:"Familjen V";font-display:swap;font-weight:400 700;src:url("../../assets/fonts/pages/familjen-grotesk.woff2") format("woff2-variations")}
+@font-face{font-family:"Young Serif";font-display:swap;font-weight:400;src:url("../../assets/fonts/pages/young-serif.woff2") format("woff2")}
+@font-face{font-family:"Public Sans V";font-display:swap;font-weight:100 900;src:url("../../assets/fonts/pages/public-sans.woff2") format("woff2-variations")}
 *,*::before,*::after{box-sizing:border-box}
 html,body{margin:0}
 body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}

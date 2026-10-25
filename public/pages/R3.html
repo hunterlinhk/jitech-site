@@ -3,243 +3,242 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Ridgeline Packworks | Backpacks and bags made for your brand</title>
+<title>Ridgeline Packworks | Backpacks made to your spec, in your colors</title>
 <script src="assets/base.js"></script>
 <link rel="stylesheet" href="assets/base.css">
 <style>
-:root{--sa:#ece5d6;--fo:#1e2b24;--or:#e8572a;--ol:#6f7b4e;--mut:#6b6a5f;--line:rgba(30,43,36,.14)}
+/* Ridgeline: the sample room. Familjen Grotesk throughout, unbleached bone, field olive, and one red the color of a bar-tack thread. */
+:root{--bone:#ece7dc;--bone2:#e2dccf;--olive:#2f3826;--soft:#5f6553;--red:#b33a26;--mat:#2f7a72;--line:rgba(47,56,38,.18);--w:min(1400px,100% - 56px)}
 html,body{overflow-x:clip}
-body{background:var(--sa);color:var(--fo);font-family:"Manrope V",Arial,sans-serif;font-size:16px}
-.sy{font-family:"Syne V",sans-serif}
-.wrap{width:min(1320px,100% - 56px);margin:0 auto}
-.nav{height:78px;display:flex;align-items:center;gap:28px;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.06em}
-.logo{font-family:"Syne V",sans-serif;font-weight:800;font-size:22px;letter-spacing:.02em;margin-right:auto;display:flex;align-items:center;gap:10px;text-transform:none}
-.logo svg{width:34px}
-.nav .q{background:var(--fo);color:var(--sa);padding:12px 18px;border-radius:4px}
-.hero{min-height:calc(100vh - 78px);display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center;padding-bottom:4vh;position:relative}
-.k{font-size:12px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--or)}
-h1{font-family:"Syne V",sans-serif;font-weight:800;font-size:clamp(52px,min(6.4vw,12.4vh),118px);line-height:.88;letter-spacing:-.045em;margin:clamp(14px,2.6vh,24px) 0}
-h1 i{font-style:normal;color:var(--or)}
-.lede{max-width:28em;line-height:1.6;color:var(--mut);font-size:clamp(16px,1.2vw,18px)}
-.go{display:flex;gap:12px;margin-top:clamp(20px,3.6vh,34px);flex-wrap:wrap}
-.go a{font-weight:800;border-radius:4px;padding:18px 24px;text-transform:uppercase;letter-spacing:.06em;font-size:14px}
-.go a:first-child{background:var(--or);color:#fff}
-.go a:last-child{border:2px solid var(--fo)}
-.spec{display:grid;grid-template-columns:repeat(3,auto);gap:30px;margin-top:clamp(24px,4.4vh,44px);justify-content:start}
-.spec b{display:block;font-family:"Syne V",sans-serif;font-size:28px}
-.spec small{color:var(--mut);font-size:13px}
-.hpack{position:relative;justify-self:center;width:min(40vw,74vh);aspect-ratio:400/460}
-.hpack .ring{position:absolute;inset:-4% -10%;border-radius:50%;background:radial-gradient(circle,#f6f1e6 0,#e2d8c3 70%,transparent 71%)}
-.hpack .pk{position:absolute;inset:0;animation:sway 6s ease-in-out infinite alternate;transform-origin:50% 0}
-@keyframes sway{to{transform:rotate(1.6deg) translateY(-6px)}}
-.call{position:absolute;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:var(--fo);color:var(--sa);padding:7px 10px;border-radius:3px;white-space:nowrap}
-.call::before{content:"";position:absolute;top:50%;width:46px;height:1.5px;background:var(--fo)}
-.c1{left:-8%;top:10%}.c1::before{left:100%}
-.c2{right:-6%;top:40%}.c2::before{right:100%}
-.c3{left:-10%;top:72%}.c3::before{left:100%}
-.band{background:var(--fo);color:var(--sa);padding:18px 0}
-.band .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-weight:800;letter-spacing:.14em;font-size:12px;text-transform:uppercase}
-.band span{opacity:.8}
-section{padding:clamp(70px,8vw,120px) 0}
-.h2{font-family:"Syne V",sans-serif;font-weight:800;font-size:clamp(40px,4.8vw,80px);line-height:.92;letter-spacing:-.04em;margin-top:12px}
-/* pack builder */
-.pb{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:18px;margin-top:36px;align-items:start}
-.vis{background:#f6f1e6;border:1px solid var(--line);border-radius:6px;position:sticky;top:16px;padding:16px}
-.vis .tabs{display:flex;gap:6px}
-.vis .tabs button{padding:8px 14px;border-radius:3px;font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase;border:1.5px solid var(--line)}
-.vis .tabs button.on{background:var(--fo);color:var(--sa);border-color:var(--fo)}
-.vis .stage{aspect-ratio:400/430;max-height:600px;margin:0 auto;display:grid;place-items:center}
-.vis .stage svg{width:100%;height:100%}
-.vis .meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:13px;color:var(--mut);border-top:1px solid var(--line);padding-top:12px}
-.vis .meta b{color:var(--fo)}
-.ctl{display:grid;gap:4px}
-.grp{background:#f6f1e6;border:1px solid var(--line);border-radius:6px;padding:16px}
-.grp h3{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;margin-bottom:10px;display:flex;justify-content:space-between}
-.grp h3 span{color:var(--mut);letter-spacing:.04em;text-transform:none;font-weight:600}
-.opt{display:flex;flex-wrap:wrap;gap:6px}
-.opt button{border:1.5px solid var(--line);border-radius:4px;padding:9px 12px;font-weight:700;font-size:14px;text-align:left;background:#fff}
-.opt button small{display:block;font-weight:500;font-size:11.5px;color:var(--mut)}
-.opt button.on{border-color:var(--fo);box-shadow:inset 0 0 0 1px var(--fo);background:#fffaf0}
-.sw{display:flex;gap:8px;flex-wrap:wrap}
-.sw button{width:32px;height:32px;border-radius:50%;box-shadow:0 0 0 1px var(--line);border:3px solid #f6f1e6}
-.sw button.on{box-shadow:0 0 0 2px var(--fo)}
-.tg{display:grid;grid-template-columns:1fr 1fr;gap:6px}
-.tg label{display:flex;align-items:center;gap:8px;background:#fff;border:1.5px solid var(--line);border-radius:4px;padding:9px 10px;font-weight:700;font-size:13.5px;cursor:pointer}
-.tg input{accent-color:var(--or);width:17px;height:17px}
-.tg small{margin-left:auto;color:var(--mut);font-weight:600}
-.grp input[type=text]{width:100%;border:1.5px solid var(--line);border-radius:4px;padding:11px;font:inherit;font-weight:800;text-transform:uppercase;letter-spacing:.08em;margin-top:8px}
-.price{background:var(--fo);color:var(--sa);border-radius:6px;padding:18px}
-.price .row{display:flex;justify-content:space-between;font-size:14px;padding:5px 0;border-bottom:1px dashed rgba(236,229,214,.16)}
-.price input{width:100%;accent-color:var(--or);margin:10px 0 2px}
-.price .big{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-top:10px}
-.price .big b{font-family:"Syne V",sans-serif;font-size:38px;color:#fff}
-.price .big span{font-size:13px;opacity:.75}
-.price button{width:100%;margin-top:12px;background:var(--or);color:#fff;padding:15px;border-radius:4px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:13px}
-.ok{margin-top:10px;font-size:13.5px;color:#cfe6b5;min-height:1.3em}
-.mats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:36px}
-.mat{border-radius:6px;overflow:hidden;background:#f6f1e6;border:1px solid var(--line)}
-.mat svg{display:block;width:100%;aspect-ratio:4/3}
-.mat div{padding:14px}
-.mat b{font-family:"Syne V",sans-serif;font-size:19px}
-.mat p{color:var(--mut);font-size:14px;line-height:1.45;margin-top:4px}
-.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:30px 0 40px;color:var(--mut);font-size:14px;font-weight:600}
-@media (max-width:1000px){.pb{grid-template-columns:minmax(0,1fr)}.vis{position:static}.mats{grid-template-columns:1fr 1fr}}
-@media (max-width:860px){.nav a:not(.logo):not(.q){display:none}.hero{grid-template-columns:1fr;padding:20px 0 50px}.hpack{width:70vw;margin-top:20px}.call{display:none}}
-@media (max-width:520px){.nav{gap:10px}.logo{font-size:13px;white-space:nowrap;gap:6px}.logo svg{width:26px}.nav .q{white-space:nowrap;padding:10px 10px;font-size:11px}.wrap{width:calc(100% - 32px)}.tg{grid-template-columns:1fr}.spec{gap:18px}.spec b{font-size:22px}}
+body{background:var(--bone);color:var(--olive);font-family:"Familjen V",Arial,sans-serif;font-size:17px;line-height:1.5}
+.c{width:var(--w);margin:0 auto}
+.num{font-variant-numeric:tabular-nums}
+.btn{display:inline-block;background:var(--olive);color:var(--bone);font-weight:600;padding:15px 22px;font-size:16px;border-radius:2px}
+.btn:hover{background:#3d4931}
+.lnk{text-decoration:underline;text-underline-offset:.25em;text-decoration-thickness:1px;font-weight:500}
+.nav .c{display:flex;align-items:center;gap:30px;height:72px;font-size:15.5px}
+.mark{font-weight:700;font-size:20px;letter-spacing:-.01em;margin-right:auto}
+.mark span{color:var(--soft);font-weight:400}
+.nav .q{border:1.5px solid var(--olive);padding:8px 14px;border-radius:2px;white-space:nowrap}
+/* hero: headline band, then the pack taken apart */
+.band .c{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:40px;align-items:end;padding:clamp(18px,4vh,48px) 0 clamp(22px,4vh,40px)}
+h1{font-weight:700;font-size:clamp(50px,min(6.2vw,11vh),112px);line-height:.92;letter-spacing:-.045em}
+.band p{color:var(--soft);font-size:clamp(16px,1.2vw,18.5px);max-width:26em}
+.band .acts{display:flex;gap:22px;align-items:center;margin-top:18px;flex-wrap:wrap}
+.table{position:relative;background:var(--mat)}
+.table img{display:block;width:100%;height:auto}
+.photo{position:relative}
+.pin{position:absolute;transform:translate(-50%,-50%);width:30px;height:30px;border-radius:50%;background:var(--bone);color:var(--olive);font-weight:700;font-size:14px;display:grid;place-items:center;box-shadow:0 2px 0 rgba(0,0,0,.25);transition:background .2s,color .2s,transform .2s}
+.pin.on{background:var(--red);color:#fff;transform:translate(-50%,-50%) scale(1.18)}
+.parts{position:absolute;left:max(28px,calc((100vw - 1400px) / 2));top:clamp(28px,4vw,64px);width:min(23%,300px);background:var(--bone);padding:16px 18px 10px;border-radius:2px;box-shadow:0 18px 40px rgba(0,0,0,.25)}
+.parts h2{font-size:15px;font-weight:600;margin-bottom:10px}
+.parts ol{counter-reset:p}
+.parts li{display:grid;grid-template-columns:22px 1fr;gap:6px;padding:6px 0;border-top:1px solid var(--line);font-size:15px;line-height:1.35;cursor:default}
+.parts li::before{counter-increment:p;content:counter(p);font-weight:700}
+.parts li small{display:block;color:var(--soft);font-size:13px;line-height:1.3}
+.parts li.on{color:var(--red)}
+/* builder */
+section{padding:clamp(80px,9vw,140px) 0}
+.h2{font-weight:700;font-size:clamp(46px,5.4vw,88px);line-height:.95;letter-spacing:-.04em}
+.intro{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:clamp(30px,4vw,56px)}
+.intro p{color:var(--soft);max-width:32em}
+.bld{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(24px,4vw,64px);align-items:start}
+.stage{position:sticky;top:20px;background:var(--bone2);aspect-ratio:4/4.3;display:grid;place-items:center;overflow:hidden}
+.pack{position:relative;height:88%;aspect-ratio:820/1025;transition:height .4s cubic-bezier(.2,.8,.2,1)}
+.pack canvas{position:absolute;inset:0;width:100%;height:100%}
+.pack .patch{position:absolute;left:39.5%;top:36.1%;width:20.3%;height:6.7%;display:grid;place-items:center;font-weight:700;font-size:clamp(9px,1vw,14px);letter-spacing:.06em;overflow:hidden;white-space:nowrap;border-radius:1px;transition:background .3s,color .3s}
+.stage .cap{position:absolute;left:18px;bottom:14px;font-size:14px;color:var(--soft)}
+.stage .cap b{color:var(--olive);font-weight:600}
+.opts>div{padding:18px 0;border-top:1px solid var(--line)}
+.opts>div:first-child{border-top:1.5px solid var(--olive)}
+.opts h3{font-size:15.5px;font-weight:600;margin-bottom:10px;display:flex;justify-content:space-between;gap:10px}
+.opts h3 span{font-weight:400;color:var(--soft)}
+.ch{display:flex;flex-wrap:wrap;gap:6px}
+.ch button{border:1.5px solid var(--line);padding:9px 13px;border-radius:2px;text-align:left;font-size:15px;font-weight:500}
+.ch button small{display:block;font-size:12.5px;color:var(--soft);font-weight:400}
+.ch button[aria-pressed=true]{border-color:var(--olive);background:var(--olive);color:var(--bone)}
+.ch button[aria-pressed=true] small{color:#c9cbb9}
+.sw{display:flex;flex-wrap:wrap;gap:10px}
+.sw button{width:38px;height:38px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.12)}
+.sw button[aria-pressed=true]{outline:2px solid var(--olive);outline-offset:3px}
+.opts input[type=text]{width:100%;margin-top:10px;border:0;border-bottom:1.5px solid var(--olive);background:transparent;padding:9px 2px;font:inherit;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.feats{display:grid;grid-template-columns:1fr 1fr;gap:4px 16px}
+.feats label{display:flex;align-items:center;gap:10px;padding:6px 0;font-size:15px;cursor:pointer}
+.feats input{width:18px;height:18px;accent-color:var(--red)}
+.feats small{margin-left:auto;color:var(--soft)}
+.price{margin-top:8px;border-top:1.5px solid var(--olive);padding-top:18px}
+.price .r{display:flex;justify-content:space-between;gap:12px;padding:5px 0;font-size:15.5px}
+.price .r span{color:var(--soft)}
+.price input[type=range]{width:100%;accent-color:var(--red);margin:12px 0 4px}
+.price .tot{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:10px;flex-wrap:wrap}
+.price .tot b{font-weight:700;font-size:clamp(40px,4vw,56px);letter-spacing:-.04em;line-height:1}
+.price .btn{margin-top:18px;width:100%;text-align:center}
+.ok{margin-top:10px;font-size:15px;color:#3f6b2e;min-height:1.4em}
+/* sewing room */
+.sew{background:var(--olive);color:var(--bone)}
+.sew .g{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(30px,5vw,80px);align-items:center}
+.sew .ph{aspect-ratio:3/2;--ph:#4a523d}
+.sew p{color:#d8d6c8;max-width:30em;margin-top:18px}
+.sew dl{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:34px;border-top:1px solid rgba(236,231,220,.25);padding-top:20px}
+.sew dt{font-size:14px;color:#b9bba8}
+.sew dd{margin:4px 0 0;font-weight:700;font-size:clamp(28px,2.6vw,38px);letter-spacing:-.03em;line-height:1}
+/* fabrics */
+.fab{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,1.6vw,24px)}
+.fab i{display:block;aspect-ratio:5/4}
+.fab b{display:block;margin-top:12px;font-weight:600}
+.fab p{color:var(--soft);font-size:15px;margin-top:4px}
+footer{padding:34px 0 42px;color:var(--soft);font-size:14.5px;border-top:1px solid var(--line)}
+footer .c{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+@media (max-width:1100px){.table{background:var(--bone)}.parts{position:static;width:auto;box-shadow:none;padding:20px 0 0;background:transparent;margin:0 auto;width:var(--w)}.parts ol{columns:2;column-gap:28px}.parts li{break-inside:avoid}}
+@media (max-width:980px){.bld,.sew .g,.intro,.band .c{grid-template-columns:minmax(0,1fr)}.stage{position:relative;top:0}.fab{grid-template-columns:1fr 1fr}.nav a:not(.mark):not(.q){display:none}}
+@media (max-width:600px){:root{--w:calc(100% - 32px)}body{font-size:16px}.mark span{display:none}.pin{width:24px;height:24px;font-size:12px}.parts ol{columns:1}.feats{grid-template-columns:1fr}.sew dl{grid-template-columns:1fr 1fr}}
+@media (prefers-reduced-motion:reduce){.pack,.pack .tint,.pin{transition:none}}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header class="nav"><a class="logo" href="#"><svg viewBox="0 0 34 24"><path d="M1 22 L11 6 L17 14 L22 8 L33 22 Z" fill="#1e2b24"/><path d="M9 9 L11 6 L13 9" fill="#ece5d6"/></svg>Ridgeline Packworks</a><a href="#builder">Pack builder</a><a href="#materials">Materials</a><a href="#">Factory</a><a class="q" href="#builder">Get a quote</a></header>
-  <section class="hero" style="padding-top:0">
-    <div>
-      <p class="k" data-in>OEM &amp; private-label backpacks</p>
-      <h1 data-in style="--d:1">Packs built for <i>your</i> brand.</h1>
-      <p class="lede" data-in style="--d:2">We design, sample and sew technical backpacks, duffels and travel bags for outdoor and lifestyle brands. Configure a pack below and get a unit price in seconds.</p>
-      <div class="go" data-in style="--d:3"><a href="#builder">Build your pack</a><a href="#materials">See materials</a></div>
-      <div class="spec" data-in style="--d:4"><div><b>500 pcs</b><small>MOQ per style</small></div><div><b>10 days</b><small>to sample</small></div><div><b>1.2M</b><small>bags a year</small></div></div>
+<nav class="nav" aria-label="Main"><div class="c">
+  <a class="mark" href="#">Ridgeline Packworks <span>Portland and Dongguan</span></a>
+  <a href="#build">Build a pack</a><a href="#sewing">How we make them</a><a href="#fabrics">Fabrics</a><a class="q" href="#build">Request a sample</a>
+</div></nav>
+<header>
+  <div class="band"><div class="c">
+    <h1 data-in>Every pack starts as 31 flat pieces.</h1>
+    <div data-in style="--d:1">
+      <p>We pattern, cut and sew technical backpacks for outdoor and travel brands, from your sketch or from our base designs. Samples in 10 days, production from 500 pieces.</p>
+      <div class="acts"><a class="btn" href="#build">Build your pack</a><a class="lnk" href="#sewing">How we make them</a></div>
     </div>
-    <div class="hpack" data-fade style="--d:2">
-      <div class="ring"></div>
-      <div class="pk" data-hero></div>
-      <span class="call c1">Hypalon logo patch</span><span class="call c2">500D Cordura</span><span class="call c3">YKK #8 zips</span>
+  </div></div>
+  <div class="table" data-fade style="--d:1">
+    <div class="photo"><img src="img/ridgeline-knolling.webp" fetchpriority="high" alt="A roll-top backpack taken apart and laid out on a cutting mat: olive fabric panels, shoulder straps, back panel, zips, buckles, webbing, thread, shears and fabric swatches">
+    <div data-pins></div></div>
+    <div class="parts" data-in style="--d:3">
+      <h2>In order of assembly</h2>
+      <ol data-parts></ol>
     </div>
-  </section>
-</div>
-<div class="band"><div class="wrap"><span>Recycled fabrics</span><span>Bluesign® partner mills</span><span>Bar-tacked stress points</span><span>Lifetime seam warranty</span></div></div>
-<main class="wrap">
-  <section id="builder">
-    <p class="k">Pack builder</p>
-    <h2 class="h2">Spec it like a product manager.</h2>
-    <div class="pb">
-      <div class="vis">
-        <div class="tabs" role="tablist"><button type="button" data-view="front" class="on">Front</button><button type="button" data-view="back">Back</button></div>
-        <div class="stage" data-stage></div>
-        <div class="meta"><span>Volume <b data-vol></b></span><span>Est. weight <b data-wt></b></span><span>Fabric <b data-fab></b></span></div>
+  </div>
+</header>
+<main>
+  <section id="build"><div class="c">
+    <div class="intro"><h2 class="h2">Build your pack</h2><p>Pick a size, fabric, color and branding. The photo changes as you go, and the price updates for every order quantity. Your spec sheet goes straight to our pattern room.</p></div>
+    <div class="bld">
+      <div class="stage">
+        <div class="pack" data-pack><canvas data-canvas role="img" aria-label="Your backpack in the chosen color"></canvas><div class="patch" data-patch></div></div>
+        <p class="cap"><b data-cname></b>, <span data-fname></span></p>
       </div>
-      <div class="ctl">
-        <div class="grp"><h3>Style</h3><div class="opt" data-g="model"></div></div>
-        <div class="grp"><h3>Main fabric</h3><div class="opt" data-g="fabric"></div></div>
-        <div class="grp"><h3>Body color <span data-cname></span></h3><div class="sw" data-sw="body"></div><h3 style="margin-top:14px">Webbing &amp; zip pulls</h3><div class="sw" data-sw="acc"></div></div>
-        <div class="grp"><h3>Branding</h3><div class="opt" data-g="logo"></div><input type="text" data-brand maxlength="10" value="SUMMIT" aria-label="Brand name"></div>
-        <div class="grp"><h3>Features</h3><div class="tg" data-feats></div></div>
+      <div class="opts">
+        <div><h3>Size</h3><div class="ch" data-g="size"></div></div>
+        <div><h3>Fabric</h3><div class="ch" data-g="fabric"></div></div>
+        <div><h3>Color <span data-cname2></span></h3><div class="sw" data-sw></div></div>
+        <div><h3>Branding</h3><div class="ch" data-g="logo"></div><input type="text" data-brand maxlength="10" value="SUMMIT" aria-label="Brand name on the patch"></div>
+        <div><h3>Features</h3><div class="feats" data-feats></div></div>
         <div class="price" aria-live="polite">
-          <div class="row"><span>Unit price at <b data-qn></b> pcs</span><b data-unit></b></div>
-          <div class="row"><span>Sample (2 pcs, courier)</span><b data-sample></b></div>
-          <div class="row"><span>Lead time after sample approval</span><b data-lead></b></div>
+          <div class="r"><span>Price per pack at <b class="num" data-qn></b></span><b class="num" data-unit></b></div>
+          <div class="r"><span>Weight</span><b class="num" data-wt></b></div>
+          <div class="r"><span>Sample, 2 packs by courier</span><b class="num" data-sample></b></div>
+          <div class="r"><span>Production after sample approval</span><b class="num" data-lead></b></div>
           <input type="range" data-qty min="500" max="10000" step="250" value="1500" aria-label="Order quantity">
-          <div class="big"><span>Estimated order, FOB Xiamen</span><b data-total></b></div>
-          <button type="button" data-req>Request sample &amp; quote</button>
+          <div class="tot"><span>Order total, free on board</span><b class="num" data-total></b></div>
+          <button type="button" class="btn" data-req>Request a sample and quote</button>
           <p class="ok" data-ok></p>
         </div>
       </div>
     </div>
-  </section>
-  <section id="materials" style="padding-top:0">
-    <p class="k">Materials library</p>
-    <h2 class="h2">Fabrics we stock.</h2>
-    <div class="mats" data-mats></div>
-  </section>
+  </div></section>
+
+  <section class="sew" id="sewing"><div class="c g">
+    <div>
+      <h2 class="h2">Sewn by people who have done it for 20 years.</h2>
+      <p>Every stress point gets a bar-tack, every seam is bound, and every pack is checked against the approved sample before it is bagged. Our Portland studio handles design and patterns; our own factory in Dongguan cuts and sews.</p>
+      <dl><div><dt>Sewing lines</dt><dd>14</dd></div><div><dt>Packs a year</dt><dd>1.2 m</dd></div><div><dt>Seam warranty</dt><dd>Lifetime</dd></div></dl>
+    </div>
+    <div class="ph"><img src="img/ridgeline-sewing.webp" alt="Hands guiding olive webbing under the needle of an industrial sewing machine" loading="lazy"></div>
+  </div></section>
+
+  <section id="fabrics"><div class="c">
+    <div class="intro"><h2 class="h2">Fabrics we stock</h2><p>Swatch cards ship free with every sample. Recycled and bluesign-approved options in every weight.</p></div>
+    <div class="fab" data-fabs></div>
+  </div></section>
 </main>
-<footer class="wrap foot"><span>Ridgeline Packworks · bags OEM</span><span>Concept site by JIEWEITECH</span></footer>
+<footer><div class="c"><span>Ridgeline Packworks, Portland, Oregon</span><span>Concept site by JIEWEITECH</span></div></footer>
 <script>
 (function () {
   var $ = function (s) { return document.querySelector(s); };
-  function sh(hex, amt) { var n = parseInt(hex.slice(1), 16), r = n >> 16, g = (n >> 8) & 255, b = n & 255, f = function (c) { return Math.max(0, Math.min(255, Math.round(amt > 0 ? c + (255 - c) * amt : c * (1 + amt)))); }; return "#" + ((1 << 24) + (f(r) << 16) + (f(g) << 8) + f(b)).toString(16).slice(1); }
-  var MODELS = { day: ["Daypack", "22 L", 9.80, 0.62], roll: ["Roll-top", "28 L", 12.40, 0.78], travel: ["Travel pack", "35 L", 16.90, 1.15] };
-  var FABRICS = { nylon: ["Recycled nylon", "420D ripstop", 0], cordura: ["Cordura®", "500D, abrasion-proof", 1.6], xpac: ["X-Pac®", "VX21, waterproof", 4.2], canvas: ["Waxed canvas", "16 oz cotton", 2.4] };
-  var LOGOS = { emb: ["Embroidered patch", 0.35], rubber: ["Rubber patch", 0.55], woven: ["Woven label", 0.22], hyp: ["Hypalon patch", 0.80] };
-  var BODY = [["#1e2b24", "Forest"], ["#2b2f36", "Graphite"], ["#c9b48e", "Sand"], ["#6f7b4e", "Olive"], ["#a8432b", "Rust"], ["#2f4f7a", "Navy"], ["#d9d2c0", "Bone"]];
-  var ACC = ["#e8572a", "#f2c14e", "#1e2b24", "#ece5d6", "#5fa8d3"];
-  var FEATS = { laptop: ["Laptop sleeve", 1.2], bottle: ["Bottle pockets", 0.6], hip: ["Hip belt", 2.1], chest: ["Chest strap", 0.45], rain: ["Rain cover", 1.8], reflect: ["Reflective tabs", 0.3] };
-  var S = { model: "roll", fabric: "cordura", body: "#a8432b", acc: "#f2c14e", logo: "hyp", view: "front", qty: 1500, f: { laptop: 1, bottle: 1, chest: 1 } };
+  /* the knolling photo: parts in order of assembly, with where each one lies (% of the photo) */
+  var PARTS = [["Front panel", "zip pocket set in first", 46.5, 39], ["Side panels", "with stretch bottle pockets", 32.5, 41], ["Back panel", "8 mm ventilated foam", 58.8, 74], ["Shoulder straps", "bar-tacked at both ends", 38, 67], ["Base", "doubled 1000D nylon", 82.5, 88], ["Roll-top closure", "three rolls and a buckle", 39, 16], ["Lid pocket", "for keys and a wallet", 68, 14], ["Zips and buckles", "YKK #8 coil, Duraflex", 77.5, 28]];
+  $("[data-parts]").innerHTML = PARTS.map(function (p, i) { return '<li data-i="' + i + '"><span>' + p[0] + "<small>" + p[1] + "</small></span></li>"; }).join("");
+  $("[data-pins]").innerHTML = PARTS.map(function (p, i) { return '<span class="pin" data-i="' + i + '" style="left:' + p[2] + "%;top:" + p[3] + '%" aria-hidden="true">' + (i + 1) + "</span>"; }).join("");
+  function hi(i) { document.querySelectorAll(".pin,.parts li").forEach(function (el) { el.classList.toggle("on", el.dataset.i === String(i)); }); }
+  document.querySelectorAll(".parts li,.pin").forEach(function (el) { el.addEventListener("mouseenter", function () { hi(el.dataset.i); }); el.addEventListener("mouseleave", function () { hi(-1); }); });
 
-  function tex(id, fab, c) {
-    var d = sh(c, -0.18), l = sh(c, 0.12);
-    if (fab === "nylon") return '<pattern id="' + id + '" width="14" height="14" patternUnits="userSpaceOnUse"><rect width="14" height="14" fill="' + c + '"/><path d="M0 0H14M0 0V14" stroke="' + d + '" stroke-width="1" opacity=".6"/></pattern>';
-    if (fab === "xpac") return '<pattern id="' + id + '" width="16" height="16" patternUnits="userSpaceOnUse"><rect width="16" height="16" fill="' + c + '"/><path d="M0 0L16 16M16 0L0 16" stroke="' + l + '" stroke-width=".8" opacity=".7"/></pattern>';
-    if (fab === "canvas") return '<pattern id="' + id + '" width="6" height="6" patternUnits="userSpaceOnUse"><rect width="6" height="6" fill="' + c + '"/><path d="M0 3H6" stroke="' + d + '" stroke-width="1" opacity=".35"/><path d="M3 0V6" stroke="' + l + '" stroke-width="1" opacity=".3"/></pattern>';
-    return '<pattern id="' + id + '" width="5" height="5" patternUnits="userSpaceOnUse"><rect width="5" height="5" fill="' + c + '"/><path d="M0 5L5 0" stroke="' + d + '" stroke-width=".9" opacity=".45"/></pattern>';
-  }
-  var uid = 0;
-  function pack(o) {
-    var id = "fx" + (++uid), c = o.body, a = o.acc, d = sh(c, -0.28), hi = sh(c, 0.16), tall = o.model === "travel" ? 26 : 0, roll = o.model === "roll";
-    var top = 74 - tall, bot = 418;
-    var s = '<svg viewBox="0 0 400 440" xmlns="http://www.w3.org/2000/svg"><defs>' + tex(id, o.fabric, c) + '<linearGradient id="' + id + 's" x1="0" x2="1"><stop offset="0" stop-color="#000" stop-opacity=".18"/><stop offset=".25" stop-color="#000" stop-opacity="0"/><stop offset=".8" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".22"/></linearGradient></defs>';
-    s += '<ellipse cx="200" cy="426" rx="130" ry="10" fill="rgba(30,43,36,.18)"/>';
-    var body = "M96 " + (top + 40) + " Q96 " + top + " 140 " + top + " L260 " + top + " Q304 " + top + " 304 " + (top + 40) + " L314 " + (bot - 26) + " Q314 " + bot + " 286 " + bot + " L114 " + bot + " Q86 " + bot + " 86 " + (bot - 26) + " Z";
-    if (o.view === "back") {
-      s += '<path d="' + body + '" fill="url(#' + id + ')"/><path d="' + body + '" fill="url(#' + id + 's)"/>';
-      s += '<rect x="122" y="' + (top + 34) + '" width="156" height="' + (bot - top - 90) + '" rx="26" fill="#2a2e2c"/>';
-      [0, 1, 2].forEach(function (i) { s += '<rect x="136" y="' + (top + 52 + i * ((bot - top - 120) / 3)) + '" width="128" height="' + ((bot - top - 150) / 3) + '" rx="18" fill="#3a3f3c"/>'; });
-      if (o.f.laptop) s += '<rect x="146" y="' + (top + 40) + '" width="108" height="' + (bot - top - 120) + '" rx="8" fill="none" stroke="' + a + '" stroke-width="2" stroke-dasharray="6 5" opacity=".9"/><text x="200" y="' + (top + 60) + '" text-anchor="middle" font-family="Manrope V,Arial" font-weight="800" font-size="10" fill="' + a + '" letter-spacing="1.5">16" LAPTOP</text>';
-      s += '<path d="M150 ' + (top + 6) + ' C110 ' + (top + 80) + ' 120 300 112 ' + (bot - 40) + '" stroke="#202322" stroke-width="30" fill="none" stroke-linecap="round"/><path d="M250 ' + (top + 6) + ' C290 ' + (top + 80) + ' 280 300 288 ' + (bot - 40) + '" stroke="#202322" stroke-width="30" fill="none" stroke-linecap="round"/>';
-      s += '<path d="M150 ' + (top + 6) + ' C110 ' + (top + 80) + ' 120 300 112 ' + (bot - 40) + '" stroke="#3c403e" stroke-width="20" fill="none" stroke-linecap="round"/><path d="M250 ' + (top + 6) + ' C290 ' + (top + 80) + ' 280 300 288 ' + (bot - 40) + '" stroke="#3c403e" stroke-width="20" fill="none" stroke-linecap="round"/>';
-      if (o.f.chest) s += '<rect x="122" y="' + (top + 118) + '" width="156" height="9" rx="3" fill="' + a + '"/><rect x="186" y="' + (top + 113) + '" width="28" height="19" rx="4" fill="#151716"/>';
-      if (o.f.hip) s += '<path d="M60 ' + (bot - 70) + ' Q120 ' + (bot - 92) + ' 200 ' + (bot - 86) + ' Q280 ' + (bot - 92) + ' 340 ' + (bot - 70) + ' L336 ' + (bot - 34) + ' Q270 ' + (bot - 52) + ' 200 ' + (bot - 48) + ' Q130 ' + (bot - 52) + ' 64 ' + (bot - 34) + ' Z" fill="#2a2e2c"/><rect x="188" y="' + (bot - 76) + '" width="24" height="22" rx="4" fill="#151716"/><path d="M64 ' + (bot - 52) + 'H120M280 ' + (bot - 52) + 'H336" stroke="' + a + '" stroke-width="6"/>';
-      if (o.f.reflect) s += '<rect x="191" y="' + (top + 20) + '" width="18" height="8" rx="2" fill="#e9eef0"/>';
-      return s + "</svg>";
-    }
-    if (o.f.bottle) s += '<path d="M76 ' + (bot - 140) + ' Q70 ' + (bot - 60) + ' 86 ' + (bot - 18) + ' L104 ' + (bot - 18) + ' L104 ' + (bot - 150) + ' Z" fill="' + sh(c, -0.1) + '"/><path d="M324 ' + (bot - 140) + ' Q330 ' + (bot - 60) + ' 314 ' + (bot - 18) + ' L296 ' + (bot - 18) + ' L296 ' + (bot - 150) + ' Z" fill="' + sh(c, -0.1) + '"/>' + [0, 1, 2, 3].map(function (i) { return '<path d="M78 ' + (bot - 130 + i * 28) + 'L104 ' + (bot - 136 + i * 28) + 'M322 ' + (bot - 130 + i * 28) + 'L296 ' + (bot - 136 + i * 28) + '" stroke="' + d + '" stroke-width="1.5" opacity=".6"/>'; }).join("");
-    s += '<path d="M178 ' + (top + 2) + ' Q200 ' + (top - 22) + ' 222 ' + (top + 2) + '" stroke="' + a + '" stroke-width="7" fill="none"/>';
-    if (roll) {
-      s += '<path d="M104 ' + (top - 20) + ' L296 ' + (top - 20) + ' L304 ' + (top + 40) + ' L96 ' + (top + 40) + ' Z" fill="url(#' + id + ')"/><rect x="96" y="' + (top - 34) + '" width="208" height="26" rx="12" fill="' + d + '"/><path d="M106 ' + (top - 21) + 'H294" stroke="' + hi + '" stroke-width="2" opacity=".6"/>';
-    }
-    s += '<path d="' + body + '" fill="url(#' + id + ')"/><path d="' + body + '" fill="url(#' + id + 's)"/>';
-    if (!roll) s += '<path d="M106 ' + (top + 54) + ' Q200 ' + (top - 2 - tall / 2) + ' 294 ' + (top + 54) + '" stroke="' + d + '" stroke-width="3" fill="none"/><path d="M106 ' + (top + 54) + ' Q200 ' + (top - 2 - tall / 2) + ' 294 ' + (top + 54) + '" stroke="' + a + '" stroke-width="1.5" fill="none" stroke-dasharray="2 3"/><rect x="284" y="' + (top + 44) + '" width="8" height="22" rx="3" fill="' + a + '"/>';
-    if (o.model === "travel") s += '<path d="M100 ' + (top + 80) + ' L100 ' + (bot - 30) + '" stroke="' + d + '" stroke-width="2.5"/>';
-    var py = bot - 150;
-    s += '<path d="M120 ' + py + ' Q120 ' + (py - 14) + ' 136 ' + (py - 14) + ' L264 ' + (py - 14) + ' Q280 ' + (py - 14) + ' 280 ' + py + ' L284 ' + (bot - 28) + ' Q284 ' + (bot - 14) + ' 270 ' + (bot - 14) + ' L130 ' + (bot - 14) + ' Q116 ' + (bot - 14) + ' 116 ' + (bot - 28) + ' Z" fill="' + sh(c, -0.08) + '" stroke="' + d + '" stroke-width="2"/>';
-    s += '<path d="M126 ' + (py + 2) + ' H274" stroke="' + d + '" stroke-width="3"/><path d="M126 ' + (py + 2) + ' H274" stroke="' + a + '" stroke-width="1.4" stroke-dasharray="2 3"/><rect x="262" y="' + (py - 6) + '" width="8" height="20" rx="3" fill="' + a + '"/>';
-    [140, 260].forEach(function (x) { s += '<rect x="' + (x - 6) + '" y="' + (top + 70) + '" width="12" height="' + (bot - top - 100) + '" fill="' + a + '" opacity=".95"/><rect x="' + (x - 10) + '" y="' + (top + 150) + '" width="20" height="16" rx="3" fill="#151716"/>'; });
-    if (roll) s += '<rect x="194" y="' + (top - 34) + '" width="12" height="' + 100 + '" fill="' + a + '"/><rect x="188" y="' + (top + 52) + '" width="24" height="18" rx="4" fill="#151716"/>';
-    var lx = 200, ly = top + (roll ? 108 : 104), t = (o.brand || "BRAND").replace(/[<>&"]/g, "").slice(0, 10), lw = Math.max(76, t.length * 12.5 + 30), fit = ' textLength="' + (t.length * 12.5) + '" lengthAdjust="spacingAndGlyphs"';
-    if (o.logo === "woven") s += '<rect x="' + (lx - lw / 2) + '" y="' + (ly - 12) + '" width="' + lw + '" height="24" fill="#f4efe3"/><text x="' + lx + '" y="' + (ly + 5) + '" text-anchor="middle" font-family="Manrope V,Arial" font-weight="800" font-size="13" fill="#1e2b24" letter-spacing="2"' + fit + '>' + t + "</text>";
-    else if (o.logo === "rubber") s += '<rect x="' + (lx - lw / 2) + '" y="' + (ly - 18) + '" width="' + lw + '" height="36" rx="10" fill="#1b1d1c"/><text x="' + lx + '" y="' + (ly + 6) + '" text-anchor="middle" font-family="Manrope V,Arial" font-weight="800" font-size="15" fill="' + a + '" letter-spacing="1.5"' + fit + '>' + t + "</text>";
-    else if (o.logo === "emb") s += '<circle cx="' + lx + '" cy="' + ly + '" r="30" fill="' + sh(c, -0.12) + '" stroke="' + a + '" stroke-width="3" stroke-dasharray="1.5 2.5"/><path d="M' + (lx - 18) + " " + (ly + 6) + " L" + (lx - 6) + " " + (ly - 12) + " L" + lx + " " + (ly - 2) + " L" + (lx + 6) + " " + (ly - 8) + " L" + (lx + 18) + " " + (ly + 6) + ' Z" fill="' + a + '"/><text x="' + lx + '" y="' + (ly + 52) + '" text-anchor="middle" font-family="Syne V,Arial" font-weight="800" font-size="13" fill="' + a + '" letter-spacing="2">' + t + "</text>";
-    else s += '<rect x="' + (lx - lw / 2 - 4) + '" y="' + (ly - 20) + '" width="' + (lw + 8) + '" height="40" rx="6" fill="#2a2a28"/><rect x="' + (lx - lw / 2) + '" y="' + (ly - 16) + '" width="' + lw + '" height="32" rx="4" fill="none" stroke="#575754" stroke-width="1" stroke-dasharray="3 2"/><text x="' + lx + '" y="' + (ly + 6) + '" text-anchor="middle" font-family="Manrope V,Arial" font-weight="800" font-size="15" fill="#f4efe3" letter-spacing="1.5"' + fit + '>' + t + "</text>";
-    if (o.f.reflect) s += '<rect x="134" y="' + (top + 200) + '" width="12" height="18" fill="#e9eef0"/><rect x="254" y="' + (top + 200) + '" width="12" height="18" fill="#e9eef0"/>';
-    if (o.f.rain) s += '<rect x="166" y="' + (bot - 8) + '" width="68" height="14" rx="6" fill="#f2c14e"/><text x="200" y="' + (bot + 3) + '" text-anchor="middle" font-family="Manrope V,Arial" font-weight="800" font-size="8" fill="#1e2b24">RAIN COVER</text>';
-    return s + "</svg>";
-  }
-  function opts(sel, map, key, sub) { $(sel).innerHTML = Object.keys(map).map(function (k) { return '<button type="button" data-k="' + key + '" data-v="' + k + '">' + map[k][0] + "<small>" + sub(map[k]) + "</small></button>"; }).join(""); }
-  opts("[data-g=model]", MODELS, "model", function (m) { return m[1] + " · from $" + m[2].toFixed(2); });
-  opts("[data-g=fabric]", FABRICS, "fabric", function (m) { return m[1] + (m[2] ? " · +$" + m[2].toFixed(2) : ""); });
+  /* the builder */
+  var SIZES = { s: ["22 litres", 9.80, 0.62, 0.84], m: ["28 litres", 12.40, 0.78, 0.94], l: ["35 litres", 16.90, 1.05, 1] };
+  var FABRICS = { nylon: ["Recycled nylon", "420D ripstop", 0, "ripstop"], cordura: ["Cordura", "500D, abrasion resistant", 1.6, "cordura"], xpac: ["X-Pac", "VX21, waterproof", 4.2, "xpac"], canvas: ["Waxed canvas", "16 oz cotton", 2.4, "canvas"] };
+  var LOGOS = { woven: ["Woven label", 0.22], emb: ["Embroidered", 0.35], rubber: ["Rubber patch", 0.55], leather: ["Leather patch", 0.80] };
+  var COLORS = [["#4a5536", "Field olive"], ["#2b2f33", "Graphite"], ["#c9b48e", "Sand"], ["#a8432b", "Rust"], ["#2f4f7a", "Harbor blue"], ["#e9e4d8", "Bone"], ["#7d2f2f", "Oxblood"]];
+  var FEATS = { laptop: ["Laptop sleeve", 1.2, 0.08], bottle: ["Bottle pockets", 0.6, 0.04], hip: ["Hip belt", 2.1, 0.14], chest: ["Chest strap", 0.45, 0.02], rain: ["Rain cover", 1.8, 0.1], reflect: ["Reflective tabs", 0.3, 0] };
+  var S = { size: "m", fabric: "cordura", logo: "leather", color: "#a8432b", qty: 1500, f: { laptop: 1, bottle: 1, chest: 1 } };
+  var TEX = {
+    ripstop: "repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0 1px,transparent 1px 9px),repeating-linear-gradient(90deg,rgba(0,0,0,.18) 0 1px,transparent 1px 9px)",
+    cordura: "repeating-linear-gradient(45deg,rgba(0,0,0,.1) 0 1px,transparent 1px 3px)",
+    xpac: "repeating-linear-gradient(60deg,rgba(0,0,0,.2) 0 1px,transparent 1px 14px),repeating-linear-gradient(-60deg,rgba(0,0,0,.2) 0 1px,transparent 1px 14px)",
+    canvas: "linear-gradient(160deg,rgba(255,255,255,.0),rgba(0,0,0,.12)),repeating-linear-gradient(90deg,rgba(0,0,0,.08) 0 1px,transparent 1px 3px)"
+  };
+  function opts(sel, map, key, sub) { $(sel).innerHTML = Object.keys(map).map(function (k) { return '<button type="button" data-k="' + key + '" data-v="' + k + '">' + map[k][0] + (sub ? "<small>" + sub(map[k]) + "</small>" : "") + "</button>"; }).join(""); }
+  opts("[data-g=size]", SIZES, "size", function (m) { return "from $" + m[1].toFixed(2); });
+  opts("[data-g=fabric]", FABRICS, "fabric", function (m) { return m[1] + (m[2] ? ", +$" + m[2].toFixed(2) : ""); });
   opts("[data-g=logo]", LOGOS, "logo", function (m) { return "+$" + m[1].toFixed(2); });
-  $("[data-sw=body]").innerHTML = BODY.map(function (b) { return '<button type="button" data-k="body" data-v="' + b[0] + '" style="background:' + b[0] + '" aria-label="' + b[1] + '"></button>'; }).join("");
-  $("[data-sw=acc]").innerHTML = ACC.map(function (b) { return '<button type="button" data-k="acc" data-v="' + b + '" style="background:' + b + '" aria-label="Accent ' + b + '"></button>'; }).join("");
+  $("[data-sw]").innerHTML = COLORS.map(function (c) { return '<button type="button" data-k="color" data-v="' + c[0] + '" style="background:' + c[0] + '" aria-label="' + c[1] + '"></button>'; }).join("");
   $("[data-feats]").innerHTML = Object.keys(FEATS).map(function (k) { return '<label><input type="checkbox" data-f="' + k + '">' + FEATS[k][0] + "<small>+$" + FEATS[k][1].toFixed(2) + "</small></label>"; }).join("");
-  function unit() {
-    var u = MODELS[S.model][2] + FABRICS[S.fabric][2] + LOGOS[S.logo][1];
-    for (var k in S.f) if (S.f[k]) u += FEATS[k][1];
-    return u * (S.qty >= 5000 ? 0.84 : S.qty >= 3000 ? 0.9 : S.qty >= 1500 ? 0.95 : 1);
+  var m = function (n) { return "$" + n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","); };
+  function unit() { var u = SIZES[S.size][1] + FABRICS[S.fabric][2] + LOGOS[S.logo][1]; for (var k in S.f) if (S.f[k]) u += FEATS[k][1]; return u * (S.qty >= 5000 ? 0.84 : S.qty >= 3000 ? 0.9 : S.qty >= 1500 ? 0.95 : 1); }
+  function brand() { return ($("[data-brand]").value.trim().toUpperCase() || "BRAND").replace(/[<>&"]/g, ""); }
+  /* recolor the white sample pack photo: each pixel is multiplied by the chosen color, so folds, stitching and shadows stay real */
+  var src = new Image(), cv = $("[data-canvas]"), ctx = cv.getContext("2d"), base = null;
+  src.onload = function () { cv.width = src.naturalWidth; cv.height = src.naturalHeight; ctx.drawImage(src, 0, 0); base = ctx.getImageData(0, 0, cv.width, cv.height); draw(); };
+  src.src = "img/ridgeline-pack.webp";
+  var WEAVE = { ripstop: [9, 0.16], cordura: [3, 0.08], xpac: [14, 0.14], canvas: [3, 0.06] };
+  function draw() {
+    if (!base) return;
+    var h = S.color.slice(1), cr = parseInt(h.substr(0, 2), 16) / 255, cg = parseInt(h.substr(2, 2), 16) / 255, cb = parseInt(h.substr(4, 2), 16) / 255;
+    var out = ctx.createImageData(base.width, base.height), d = base.data, o = out.data, W = base.width, wv = WEAVE[FABRICS[S.fabric][3]], k = FABRICS[S.fabric][3];
+    for (var i = 0; i < d.length; i += 4) {
+      var x = (i / 4) % W, y = (i / 4 / W) | 0, f = 1;
+      if (k === "ripstop") f = (x % wv[0] === 0 || y % wv[0] === 0) ? 1 - wv[1] : 1;
+      else if (k === "xpac") f = ((x + y) % wv[0] === 0 || (x - y + 10000) % wv[0] === 0) ? 1 - wv[1] : 1;
+      else f = ((x + y) % wv[0] === 0) ? 1 - wv[1] : 1;
+      o[i] = d[i] * cr * f; o[i + 1] = d[i + 1] * cg * f; o[i + 2] = d[i + 2] * cb * f; o[i + 3] = d[i + 3];
+    }
+    ctx.putImageData(out, 0, 0);
   }
-  function m(n) { return "$" + n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
-  function brand() { return $("[data-brand]").value.trim().toUpperCase() || "BRAND"; }
   function paint() {
-    document.querySelectorAll("[data-k]").forEach(function (b) { b.classList.toggle("on", S[b.dataset.k] === b.dataset.v); });
+    document.querySelectorAll("[data-k]").forEach(function (b) { b.setAttribute("aria-pressed", String(S[b.dataset.k] === b.dataset.v)); });
     document.querySelectorAll("[data-f]").forEach(function (b) { b.checked = !!S.f[b.dataset.f]; });
-    document.querySelectorAll("[data-view]").forEach(function (b) { b.classList.toggle("on", b.dataset.view === S.view); });
-    $("[data-stage]").innerHTML = pack({ model: S.model, fabric: S.fabric, body: S.body, acc: S.acc, logo: S.logo, brand: brand(), view: S.view, f: S.f });
-    $("[data-cname]").textContent = BODY.filter(function (b) { return b[0] === S.body; })[0][1];
-    var wt = MODELS[S.model][3] + (S.fabric === "canvas" ? 0.32 : S.fabric === "xpac" ? -0.08 : 0) + (S.f.hip ? 0.14 : 0) + (S.f.laptop ? 0.08 : 0) + (S.f.rain ? 0.1 : 0);
-    $("[data-vol]").textContent = MODELS[S.model][1]; $("[data-wt]").textContent = wt.toFixed(2) + " kg"; $("[data-fab]").textContent = FABRICS[S.fabric][0];
+    var cname = COLORS.filter(function (c) { return c[0] === S.color; })[0][1];
+    draw();
+    $("[data-pack]").style.height = SIZES[S.size][3] * 88 + "%";
+    var p = $("[data-patch]"), light = S.color === "#e9e4d8" || S.color === "#c9b48e";
+    var look = { woven: ["#f4efe3", "#2f3826"], emb: ["transparent", light ? "#2f3826" : "#f4efe3"], rubber: ["#1d1f1c", "#e9e4d8"], leather: ["#8a5a35", "#f1dfc4"] }[S.logo];
+    p.style.background = look[0]; p.style.color = look[1]; p.textContent = brand();
+    p.style.boxShadow = S.logo === "leather" ? "inset 0 0 0 2px rgba(0,0,0,.18),inset 0 0 0 4px rgba(255,255,255,.18)" : "none";
+    $("[data-cname]").textContent = cname; $("[data-cname2]").textContent = cname;
+    $("[data-fname]").textContent = SIZES[S.size][0] + " in " + FABRICS[S.fabric][0].toLowerCase();
+    var wt = SIZES[S.size][2] + (S.fabric === "canvas" ? 0.32 : S.fabric === "xpac" ? -0.08 : 0); for (var k in S.f) if (S.f[k]) wt += FEATS[k][2];
     $("[data-qn]").textContent = S.qty.toLocaleString("en-US"); $("[data-unit]").textContent = m(unit());
-    $("[data-sample]").textContent = m(60 + MODELS[S.model][2] * 4) + " · 10 days";
+    $("[data-wt]").textContent = wt.toFixed(2) + " kg";
+    $("[data-sample]").textContent = m(60 + SIZES[S.size][1] * 4) + ", 10 days";
     $("[data-lead]").textContent = (S.qty > 5000 ? 50 : S.qty > 2500 ? 40 : 32) + (S.fabric === "xpac" ? 10 : 0) + " days";
     $("[data-total]").textContent = m(unit() * S.qty);
   }
   document.addEventListener("click", function (e) {
-    var b = e.target.closest("[data-k]"); if (b) { S[b.dataset.k] = b.dataset.v; $("[data-ok]").textContent = ""; if (b.dataset.k !== "acc" && b.dataset.k !== "body") S.view = "front"; return paint(); }
-    var v = e.target.closest("[data-view]"); if (v) { S.view = v.dataset.view; return paint(); }
-    if (e.target.closest("[data-req]")) $("[data-ok]").textContent = "✓ Spec sheet SR-" + Math.floor(10000 + Math.random() * 89999) + " saved. Our merchandiser will email a tech pack and sample invoice within 24 hours.";
+    var b = e.target.closest("[data-k]"); if (b) { S[b.dataset.k] = b.dataset.v; $("[data-ok]").textContent = ""; return paint(); }
+    if (e.target.closest("[data-req]")) $("[data-ok]").textContent = "Requested. Spec sheet SR-" + Math.floor(10000 + Math.random() * 89999) + " is with our pattern room; you will get a tech pack and sample invoice within one working day.";
   });
-  document.addEventListener("change", function (e) { var f = e.target.closest("[data-f]"); if (f) { S.f[f.dataset.f] = f.checked; if (f.dataset.f === "hip" || f.dataset.f === "laptop" || f.dataset.f === "chest") S.view = "back"; paint(); } });
+  document.addEventListener("change", function (e) { var f = e.target.closest("[data-f]"); if (f) { S.f[f.dataset.f] = f.checked; paint(); } });
   $("[data-qty]").addEventListener("input", function () { S.qty = +this.value; paint(); });
-  $("[data-brand]").addEventListener("input", function () { S.view = "front"; paint(); });
-  $("[data-hero]").innerHTML = pack({ model: "roll", fabric: "cordura", body: "#a8432b", acc: "#f2c14e", logo: "hyp", brand: "RIDGELINE", view: "front", f: { bottle: 1, reflect: 1 } });
-  var MAT = [["nylon", "#2f4f7a", "Recycled nylon 420D", "Ripstop grid stops tears spreading. GRS-certified, from bottle waste."], ["cordura", "#a8432b", "Cordura® 500D", "Air-textured yarn, a classic for packs that get dragged over rock."], ["xpac", "#2b2f36", "X-Pac® VX21", "Laminated sailcloth. Fully waterproof and stiff enough to hold shape."], ["canvas", "#c9b48e", "Waxed canvas 16 oz", "Ages like leather. Water resistant and reproofable with wax."]];
-  $("[data-mats]").innerHTML = MAT.map(function (x, i) { return '<div class="mat"><svg viewBox="0 0 120 90"><defs>' + tex("mt" + i, x[0], x[1]) + '</defs><rect width="120" height="90" fill="url(#mt' + i + ')"/></svg><div><b>' + x[2] + "</b><p>" + x[3] + "</p></div></div>"; }).join("");
+  $("[data-brand]").addEventListener("input", paint);
+  var FAB = [["ripstop", "#4a5536", "Recycled nylon 420D", "Ripstop grid stops tears from spreading. Made from bottle waste."], ["cordura", "#a8432b", "Cordura 500D", "Air-textured yarn for packs that get dragged over rock."], ["xpac", "#2b2f33", "X-Pac VX21", "Laminated sailcloth. Fully waterproof and holds its shape."], ["canvas", "#c9b48e", "Waxed canvas, 16 oz", "Ages like leather and can be re-waxed at home."]];
+  $("[data-fabs]").innerHTML = FAB.map(function (f) { return '<div><i style="background:' + TEX[f[0]] + "," + f[1] + '"></i><b>' + f[2] + "</b><p>" + f[3] + "</p></div>"; }).join("");
   paint();
 })();
 </script>
