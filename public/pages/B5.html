@@ -8,16 +8,18 @@
 <link rel="stylesheet" href="assets/base.css">
 <style>
 /* PawPro: the proof is on the shelf. Young Serif for the voice, Inter for the work; warm shop-wall grey, charcoal, and the safety orange of collar webbing on the factory floor. */
-:root{--wall:#e7e1d9;--paper:#f6f3ee;--ink:#25221f;--soft:#6a635b;--orange:#e0592a;--green:#24503f;--line:rgba(37,34,31,.15);--w:min(1360px,100% - 64px)}
+:root{--wall:#e7e1d9;--paper:#f4f5fb;--ink:#0b1650;--soft:#4b5480;--orange:#2643ff;--green:#24503f;--line:rgba(11,22,80,.15);--w:min(1360px,100% - 64px)}
 html,body{overflow-x:clip}
 body{background:var(--paper);color:var(--ink);font-family:"Inter V",Arial,sans-serif;font-size:17px;line-height:1.5}
 .ys{font-family:"Young Serif",Georgia,serif;font-weight:400;letter-spacing:-.015em}
 .c{width:var(--w);margin:0 auto}
 .num{font-variant-numeric:tabular-nums}
 .btn{display:inline-block;background:var(--ink);color:#fff;font-weight:600;padding:15px 22px;font-size:16px;border-radius:999px}
-.btn:hover{background:#3b3631}
+.btn:hover{background:#1c2a78}
 .btn.o{background:var(--orange)}
-.btn.o:hover{background:#c94b1f}
+.btn.w{background:#fff;color:var(--ink)}
+.btn.w:hover{background:#ffd84a}
+.btn.o:hover{background:#1530e0}
 /* hero: the shop wall, the headline on it, the shelf below */
 .hero{position:relative;background:#e4ddd5}
 .shelf{position:relative;aspect-ratio:2200/1238;overflow:hidden;margin-top:calc(-1 * clamp(40px,9vw,150px));-webkit-mask:linear-gradient(180deg,transparent 0,#000 22%);mask:linear-gradient(180deg,transparent 0,#000 22%)}
@@ -39,7 +41,7 @@ body{background:var(--paper);color:var(--ink);font-family:"Inter V",Arial,sans-s
 .try input{width:100%;border:0;border-bottom:2px solid var(--ink);background:transparent;font-family:"Young Serif",Georgia,serif;font-size:28px;padding:2px 0 6px;color:var(--ink)}
 .try input:focus{outline:none;border-bottom-color:var(--orange)}
 .try p{font-size:14px;color:var(--soft);margin-top:8px}
-.under{background:var(--ink);color:#efe9e1}
+.under{background:var(--orange);color:#e9ecff}
 .under .c{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;padding:20px 0}
 .under p{max-width:44em;font-size:16px}
 .under b{color:#fff}
@@ -49,7 +51,7 @@ section{padding:clamp(80px,9vw,140px) 0}
 .intro{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:clamp(30px,4vw,56px)}
 .intro p{color:var(--soft);max-width:32em}
 .bld{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(24px,4vw,64px);align-items:start}
-.stage{position:sticky;top:20px;background:var(--wall);border-radius:20px;aspect-ratio:1.05;overflow:hidden;display:grid;grid-template-columns:1.25fr .75fr;align-items:center;padding:6%}
+.stage{position:sticky;top:20px;background:#dfe3fb;border-radius:20px;aspect-ratio:1.05;overflow:hidden;display:grid;grid-template-columns:1.25fr .75fr;align-items:center;padding:6%}
 .stage canvas{width:100%;height:auto;display:block;filter:drop-shadow(0 18px 18px rgba(37,34,31,.18))}
 .pack{justify-self:center;width:90%;aspect-ratio:3/4;border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:12%;box-shadow:0 18px 30px -12px rgba(37,34,31,.35);transition:background .3s,color .3s;position:relative}
 .pack b{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:clamp(16px,1.8vw,26px);line-height:1;word-break:break-word}
@@ -67,7 +69,7 @@ section{padding:clamp(80px,9vw,140px) 0}
 .ch button{border:1.5px solid var(--line);padding:9px 14px;border-radius:999px;font-size:15px;font-weight:500}
 .ch button small{color:var(--soft);font-weight:400;margin-left:4px}
 .ch button[aria-pressed=true]{border-color:var(--ink);background:var(--ink);color:#fff}
-.ch button[aria-pressed=true] small{color:#cfc8bf}
+.ch button[aria-pressed=true] small{color:#c9d0ff}
 .sw{display:flex;flex-wrap:wrap;gap:10px}
 .sw button{width:36px;height:36px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.12)}
 .sw button[aria-pressed=true]{outline:2px solid var(--ink);outline-offset:3px}
@@ -75,7 +77,7 @@ section{padding:clamp(80px,9vw,140px) 0}
 .tiers div{padding:10px 8px;text-align:center;font-size:13.5px;color:var(--soft)}
 .tiers div+div{border-left:1px solid var(--line)}
 .tiers b{display:block;font-size:17px;color:var(--ink)}
-.tiers div.on{background:var(--ink);color:#d9d2c9}
+.tiers div.on{background:var(--ink);color:#c9d0ff}
 .tiers div.on b{color:#fff}
 input[type=range]{width:100%;accent-color:var(--orange);margin-top:12px}
 .price{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:6px;flex-wrap:wrap}
@@ -89,14 +91,14 @@ input[type=range]{width:100%;accent-color:var(--orange);margin-top:12px}
 .list li{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid var(--line)}
 .list button{color:var(--soft);text-decoration:underline;text-underline-offset:.2em;font-size:14px;margin-left:10px}
 /* factory */
-.fac{background:var(--ink);color:#efe9e1}
+.fac{background:var(--orange);color:#e9ecff}
 .fac .g{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(30px,5vw,80px);align-items:center}
 .fac .ph{aspect-ratio:3/2;border-radius:20px;--ph:#4a443e}
 .fac ol{margin-top:28px;counter-reset:s}
-.fac li{display:grid;grid-template-columns:44px 1fr;padding:14px 0;border-top:1px solid rgba(239,233,225,.18)}
-.fac li::before{counter-increment:s;content:counter(s);font-family:"Young Serif",Georgia,serif;font-size:26px;line-height:1;color:var(--orange)}
+.fac li{display:grid;grid-template-columns:44px 1fr;padding:14px 0;border-top:1px solid rgba(255,255,255,.25)}
+.fac li::before{counter-increment:s;content:counter(s);font-family:"Young Serif",Georgia,serif;font-size:26px;line-height:1;color:#ffd84a}
 .fac li b{display:block}
-.fac li span{color:#cfc8bf;font-size:15.5px}
+.fac li span{color:#dfe4ff;font-size:15.5px}
 footer{padding:34px 0 42px;color:var(--soft);font-size:14.5px}
 footer .c{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .dlg{position:fixed;inset:0;z-index:20;background:rgba(37,34,31,.55);display:grid;place-items:center;padding:16px}
@@ -138,7 +140,7 @@ footer .c{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <div class="label" aria-hidden="true"><b data-shelfname>Barkley</b><i></i><small>DUCK TREATS</small></div>
   </div></div>
 </header>
-<div class="under"><div class="c"><p>Every product on that shelf, from six different brands, came out of our factory in Ningbo. <b>Collars, harnesses, beds, toys, bowls and treat pouches</b>, from 300 pieces, with your logo and packaging.</p><a class="btn o" href="#build">Build your first product</a></div></div>
+<div class="under"><div class="c"><p>Every product on that shelf, from six different brands, came out of our factory in Ningbo. <b>Collars, harnesses, beds, toys, bowls and treat pouches</b>, from 300 pieces, with your logo and packaging.</p><a class="btn w" href="#build">Build your first product</a></div></div>
 <main>
   <section id="build"><div class="c">
     <div class="intro"><h2 class="ys h2">Pick a product. Make it yours.</h2><p>Choose the product, color, logo and packaging. You see it right away, with the unit price at every order quantity, before you talk to anyone in sales.</p></div>

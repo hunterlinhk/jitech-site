@@ -7,7 +7,7 @@
 <script src="assets/base.js"></script>
 <link rel="stylesheet" href="assets/base.css">
 <style>
-:root{--bg:#0d0f10;--tx:#f3f1ec;--mut:#9a9890;--acc:#ff6b2c;--line:rgba(255,255,255,.18)}
+:root{--bg:#0d0f10;--tx:#f3f1ec;--mut:#9a9890;--acc:#74d1ff;--line:rgba(255,255,255,.18)}
 body{background:var(--bg);color:var(--tx);font-family:"Archivo V",Arial,sans-serif;font-size:15px}
 .wide{font-family:"Archivo V",sans-serif;font-stretch:125%;font-weight:900;text-transform:uppercase;letter-spacing:-.02em}
 .wrap{width:min(1380px,100% - 56px);margin:0 auto}
@@ -27,7 +27,7 @@ body{background:var(--bg);color:var(--tx);font-family:"Archivo V",Arial,sans-ser
 .bar h1{font-size:clamp(30px,min(3.4vw,6.4vh),56px);line-height:.95;max-width:12em}
 .bar p{color:#d6d3cb;line-height:1.55;max-width:26em}
 .shop{display:flex;align-items:center;gap:16px;background:var(--tx);color:#111;border-radius:999px;padding:8px 8px 8px 22px;font-weight:700;white-space:nowrap}
-.shop span{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--acc);color:#fff}
+.shop span{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--acc);color:#0d0f10}
 section{padding:clamp(80px,9vw,130px) 0}
 .sh{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px}
 .sh h2{font-size:clamp(40px,5vw,84px);line-height:.88}
@@ -99,7 +99,7 @@ section{padding:clamp(80px,9vw,130px) 0}
     <div class="wrap">
       <div class="sh"><h2 class="wide">The kit,<br>pared back.</h2><a href="#">All gear</a></div>
       <div class="gear">
-        <article class="g"><div class="im" style="--c:#ff6b2c;color:#1b1b1b"><em>NEW</em><svg><use href="#jacket"/></svg></div><div class="t"><div><h3>Summit Shell</h3><small>3-layer · 340 g</small></div><b>$420</b></div></article>
+        <article class="g"><div class="im" style="--c:#74d1ff;color:#1b1b1b"><em>NEW</em><svg><use href="#jacket"/></svg></div><div class="t"><div><h3>Summit Shell</h3><small>3-layer · 340 g</small></div><b>$420</b></div></article>
         <article class="g"><div class="im" style="--c:#c9cfc8;color:#2c3a33"><svg><use href="#jacket"/></svg></div><div class="t"><div><h3>Ridge Fleece</h3><small>Grid fleece · 280 g</small></div><b>$180</b></div></article>
         <article class="g"><div class="im" style="--c:#24343f;color:#e9e4d8"><svg><use href="#jacket"/></svg></div><div class="t"><div><h3>Bivouac Down</h3><small>900 fill · 410 g</small></div><b>$520</b></div></article>
       </div>
@@ -130,8 +130,8 @@ section{padding:clamp(80px,9vw,130px) 0}
 <script data-feature>
 (function () {
   var T = [
-    { id: "a1", name: "Ridge UL 1", cap: 1, kg: 0.98, packed: "38 × 13 cm", floor: 1.9, peak: 102, season: "3-season", hh: 1500, wind: 2, poles: "1 DAC, freestanding", vest: 1, price: 389, col: "#ff6b2c" },
-    { id: "a2", name: "Ridge UL 2", cap: 2, kg: 1.32, packed: "46 × 15 cm", floor: 2.7, peak: 107, season: "3-season", hh: 1500, wind: 2, poles: "2 DAC, freestanding", vest: 2, price: 469, col: "#ff6b2c" },
+    { id: "a1", name: "Ridge UL 1", cap: 1, kg: 0.98, packed: "38 × 13 cm", floor: 1.9, peak: 102, season: "3-season", hh: 1500, wind: 2, poles: "1 DAC, freestanding", vest: 1, price: 389, col: "#74d1ff" },
+    { id: "a2", name: "Ridge UL 2", cap: 2, kg: 1.32, packed: "46 × 15 cm", floor: 2.7, peak: 107, season: "3-season", hh: 1500, wind: 2, poles: "2 DAC, freestanding", vest: 2, price: 469, col: "#74d1ff" },
     { id: "a3", name: "Summit 2 Expedition", cap: 2, kg: 2.75, packed: "50 × 20 cm", floor: 2.9, peak: 112, season: "4-season", hh: 5000, wind: 4, poles: "4 aluminum, geodesic", vest: 2, price: 829, col: "#e8c547" },
     { id: "a4", name: "Basecamp 3", cap: 3, kg: 2.4, packed: "55 × 18 cm", floor: 3.8, peak: 122, season: "3-season", hh: 3000, wind: 3, poles: "3 aluminum, freestanding", vest: 2, price: 549, col: "#6fb38f" },
     { id: "a5", name: "Basecamp 4 Family", cap: 4, kg: 3.9, packed: "62 × 22 cm", floor: 5.6, peak: 152, season: "3-season", hh: 3000, wind: 2, poles: "3 aluminum, tunnel", vest: 2, price: 649, col: "#6fb38f" },

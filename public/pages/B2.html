@@ -7,7 +7,7 @@
 <script src="assets/base.js"></script>
 <link rel="stylesheet" href="assets/base.css">
 <style>
-:root{--bg:#efe6dc;--bg2:#e4d6c6;--ink:#3b2a22;--mut:#8a7565;--clay:#b8765a;--line:rgba(59,42,34,.15)}
+:root{--bg:#e7dff3;--bg2:#d6c9ea;--ink:#2f1f3d;--mut:#6f5d82;--clay:#8a56b8;--line:rgba(47,31,61,.15)}
 body{background:var(--bg);color:var(--ink);font-family:"Manrope V",Arial,sans-serif;font-size:15px}
 .cg{font-family:"Cormorant V",Georgia,serif}
 .wrap{width:min(1300px,100% - 56px);margin:0 auto}
@@ -28,7 +28,7 @@ body{background:var(--bg);color:var(--ink);font-family:"Manrope V",Arial,sans-se
 .shop a{background:var(--ink);color:var(--bg);border-radius:999px;padding:17px 26px;font-weight:700;font-size:14px}
 .shop span{font-size:13px;color:var(--mut)}
 .shop span b{color:var(--ink)}
-.pic{position:relative;border-radius:28px;--ph:linear-gradient(160deg,#e9ddcf,#c9b29b)}
+.pic{position:relative;border-radius:28px;--ph:linear-gradient(160deg,#ded2ee,#bfaedb)}
 .pic>img{animation:zoom 14s ease-out both}
 @keyframes zoom{from{transform:scale(1.12)}to{transform:scale(1)}}
 .pic .label{position:absolute;left:22px;bottom:22px;z-index:1;background:rgba(239,230,220,.86);backdrop-filter:blur(10px);border-radius:18px;padding:14px 18px;display:flex;gap:18px;align-items:center}
@@ -86,9 +86,9 @@ section{padding:clamp(80px,9vw,130px) 0}
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
   <linearGradient id="amber" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8a4b2a"/><stop offset=".45" stop-color="#c98a5c"/><stop offset="1" stop-color="#7a3f22"/></linearGradient>
-  <symbol id="drop" viewBox="0 0 80 200"><rect x="30" y="2" width="20" height="40" rx="8" fill="#3b2a22"/><rect x="26" y="40" width="28" height="12" rx="3" fill="#2b1d17"/><rect x="10" y="50" width="60" height="146" rx="14" fill="url(#amber)"/><rect x="18" y="98" width="44" height="56" rx="3" fill="#efe6dc"/><rect x="16" y="56" width="8" height="132" rx="4" fill="#fff" opacity=".22"/></symbol>
-  <symbol id="jar" viewBox="0 0 140 120"><rect x="16" y="6" width="108" height="30" rx="8" fill="#3b2a22"/><rect x="8" y="34" width="124" height="82" rx="20" fill="#f5efe7"/><rect x="34" y="62" width="72" height="30" rx="3" fill="#e4d6c6"/></symbol>
-  <symbol id="tube" viewBox="0 0 70 200"><path d="M8 6 H62 L54 160 H16Z" fill="#f5efe7"/><rect x="18" y="158" width="34" height="38" rx="5" fill="#b8765a"/><rect x="18" y="40" width="34" height="70" rx="2" fill="#e4d6c6"/></symbol>
+  <symbol id="drop" viewBox="0 0 80 200"><rect x="30" y="2" width="20" height="40" rx="8" fill="#2f1f3d"/><rect x="26" y="40" width="28" height="12" rx="3" fill="#2b1d17"/><rect x="10" y="50" width="60" height="146" rx="14" fill="url(#amber)"/><rect x="18" y="98" width="44" height="56" rx="3" fill="#e7dff3"/><rect x="16" y="56" width="8" height="132" rx="4" fill="#fff" opacity=".22"/></symbol>
+  <symbol id="jar" viewBox="0 0 140 120"><rect x="16" y="6" width="108" height="30" rx="8" fill="#2f1f3d"/><rect x="8" y="34" width="124" height="82" rx="20" fill="#f1ecf8"/><rect x="34" y="62" width="72" height="30" rx="3" fill="#d6c9ea"/></symbol>
+  <symbol id="tube" viewBox="0 0 70 200"><path d="M8 6 H62 L54 160 H16Z" fill="#f1ecf8"/><rect x="18" y="158" width="34" height="38" rx="5" fill="#8a56b8"/><rect x="18" y="40" width="34" height="70" rx="2" fill="#d6c9ea"/></symbol>
 </defs></svg>
 <div class="bar">Free shipping on orders over $60 · Samples with every order</div>
 <div class="wrap">
@@ -151,10 +151,10 @@ section{padding:clamp(80px,9vw,130px) 0}
 (function () {
   var S = { type: "combo", concern: "glow", steps: "3", time: "both" };
   var PR = {
-    cleanserMilk: ["Cloud milk cleanser", "Soft, non-foaming, for dry skin", 32, "pump", "#f4efe7"], cleanserGel: ["Clarifying gel cleanser", "With 2% salicylic acid", 32, "pump", "#cfe3df"],
+    cleanserMilk: ["Cloud milk cleanser", "Soft, non-foaming, for dry skin", 32, "pump", "#f1ecf8"], cleanserGel: ["Clarifying gel cleanser", "With 2% salicylic acid", 32, "pump", "#cfe3df"],
     toner: ["Rose water essence", "Hydrating, alcohol-free", 34, "bottle", "#f1d9d2"], vitc: ["15% vitamin C serum", "Brightens dull skin", 58, "dropper", "#f2c879"], retinol: ["Night retinal serum", "Smooths fine lines", 64, "dropper", "#e9d9b4"],
     niacin: ["Niacinamide 10% serum", "Calms breakouts, refines pores", 44, "dropper", "#dfe7f2"], azelaic: ["Azelaic tone serum", "Fades dark spots", 52, "dropper", "#efe1d0"],
-    cream: ["Barrier repair cream", "Ceramides and squalane", 48, "jar", "#f6f1ea"], gelcream: ["Water gel moisturizer", "Light, oil-free", 44, "jar", "#e3f0ee"], spf: ["Daily mineral SPF 40", "No white cast", 38, "tube", "#fbefd9"], oil: ["Night rescue oil", "For dry or tired skin", 54, "dropper", "#e8c58a"]
+    cream: ["Barrier repair cream", "Ceramides and squalane", 48, "jar", "#f1ecf8"], gelcream: ["Water gel moisturizer", "Light, oil-free", 44, "jar", "#e3f0ee"], spf: ["Daily mineral SPF 40", "No white cast", 38, "tube", "#fbefd9"], oil: ["Night rescue oil", "For dry or tired skin", 54, "dropper", "#e8c58a"]
   };
   function pick() {
     var clean = S.type === "oily" || S.concern === "breakouts" ? "cleanserGel" : "cleanserMilk";
@@ -170,12 +170,12 @@ section{padding:clamp(80px,9vw,130px) 0}
     return r;
   }
   function bottle(k) {
-    var p = PR[k], c = p[4], t = p[3], lab = '<rect x="22" y="__Y__" width="56" height="44" fill="#fff" opacity=".85"/><text x="50" y="__T__" text-anchor="middle" font-family="Cormorant V,serif" font-size="11" fill="#3b2a22">SABLE</text>';
-    if (t === "pump") return '<svg viewBox="0 0 100 220"><rect x="44" y="6" width="12" height="30" fill="#3b2a22"/><rect x="34" y="4" width="34" height="8" rx="3" fill="#3b2a22"/><rect x="18" y="36" width="64" height="180" rx="12" fill="' + c + '" stroke="#3b2a22" stroke-opacity=".2"/>' + lab.replace("__Y__", 100).replace("__T__", 126) + "</svg>";
-    if (t === "dropper") return '<svg viewBox="0 0 100 220"><ellipse cx="50" cy="40" rx="12" ry="18" fill="#3b2a22"/><rect x="34" y="56" width="32" height="20" fill="#b8765a"/><rect x="20" y="76" width="60" height="140" rx="16" fill="' + c + '" opacity=".95" stroke="#3b2a22" stroke-opacity=".2"/>' + lab.replace("__Y__", 120).replace("__T__", 146) + "</svg>";
-    if (t === "jar") return '<svg viewBox="0 0 120 220"><rect x="14" y="120" width="92" height="20" rx="4" fill="#b8765a"/><rect x="10" y="140" width="100" height="76" rx="14" fill="' + c + '" stroke="#3b2a22" stroke-opacity=".2"/><text x="60" y="184" text-anchor="middle" font-family="Cormorant V,serif" font-size="13" fill="#3b2a22">SABLE</text></svg>';
-    if (t === "tube") return '<svg viewBox="0 0 90 220"><path d="M14 30 L76 30 L66 190 L24 190 Z" fill="' + c + '" stroke="#3b2a22" stroke-opacity=".2"/><rect x="26" y="190" width="38" height="26" rx="4" fill="#3b2a22"/><text x="45" y="100" text-anchor="middle" font-family="Cormorant V,serif" font-size="11" fill="#3b2a22">SPF 40</text></svg>';
-    return '<svg viewBox="0 0 100 220"><rect x="38" y="20" width="24" height="30" rx="4" fill="#3b2a22"/><rect x="22" y="50" width="56" height="166" rx="10" fill="' + c + '" stroke="#3b2a22" stroke-opacity=".2"/>' + lab.replace("__Y__", 110).replace("__T__", 136) + "</svg>";
+    var p = PR[k], c = p[4], t = p[3], lab = '<rect x="22" y="__Y__" width="56" height="44" fill="#fff" opacity=".85"/><text x="50" y="__T__" text-anchor="middle" font-family="Cormorant V,serif" font-size="11" fill="#2f1f3d">SABLE</text>';
+    if (t === "pump") return '<svg viewBox="0 0 100 220"><rect x="44" y="6" width="12" height="30" fill="#2f1f3d"/><rect x="34" y="4" width="34" height="8" rx="3" fill="#2f1f3d"/><rect x="18" y="36" width="64" height="180" rx="12" fill="' + c + '" stroke="#2f1f3d" stroke-opacity=".2"/>' + lab.replace("__Y__", 100).replace("__T__", 126) + "</svg>";
+    if (t === "dropper") return '<svg viewBox="0 0 100 220"><ellipse cx="50" cy="40" rx="12" ry="18" fill="#2f1f3d"/><rect x="34" y="56" width="32" height="20" fill="#8a56b8"/><rect x="20" y="76" width="60" height="140" rx="16" fill="' + c + '" opacity=".95" stroke="#2f1f3d" stroke-opacity=".2"/>' + lab.replace("__Y__", 120).replace("__T__", 146) + "</svg>";
+    if (t === "jar") return '<svg viewBox="0 0 120 220"><rect x="14" y="120" width="92" height="20" rx="4" fill="#8a56b8"/><rect x="10" y="140" width="100" height="76" rx="14" fill="' + c + '" stroke="#2f1f3d" stroke-opacity=".2"/><text x="60" y="184" text-anchor="middle" font-family="Cormorant V,serif" font-size="13" fill="#2f1f3d">SABLE</text></svg>';
+    if (t === "tube") return '<svg viewBox="0 0 90 220"><path d="M14 30 L76 30 L66 190 L24 190 Z" fill="' + c + '" stroke="#2f1f3d" stroke-opacity=".2"/><rect x="26" y="190" width="38" height="26" rx="4" fill="#2f1f3d"/><text x="45" y="100" text-anchor="middle" font-family="Cormorant V,serif" font-size="11" fill="#2f1f3d">SPF 40</text></svg>';
+    return '<svg viewBox="0 0 100 220"><rect x="38" y="20" width="24" height="30" rx="4" fill="#2f1f3d"/><rect x="22" y="50" width="56" height="166" rx="10" fill="' + c + '" stroke="#2f1f3d" stroke-opacity=".2"/>' + lab.replace("__Y__", 110).replace("__T__", 136) + "</svg>";
   }
   var sec = document.querySelector(".rt-sec");
   function paint() {

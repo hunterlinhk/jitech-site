@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="assets/base.css">
 <link rel="stylesheet" href="assets/shop.css">
 <style>
-:root{--bg:#f4f0e8;--fg:#1d1a16;--muted:#6f675c;--line:rgba(29,26,22,.14);--card:#ebe5d9;--soft:#ece6da;--accent:#1d1a16;--accent-fg:#f4f0e8;--rust:#b4532a;--radius:2px;--head:"Fraunces V",Georgia,serif;--body:"Inter V",Arial,sans-serif;--wrap:1360px}
+:root{--bg:#e2e6f8;--fg:#10175a;--muted:#4a5288;--line:rgba(16,23,90,.14);--card:#d3d9f3;--soft:#d9def5;--accent:#10175a;--accent-fg:#e2e6f8;--rust:#2f40e0;--radius:2px;--head:"Fraunces V",Georgia,serif;--body:"Inter V",Arial,sans-serif;--wrap:1360px}
 body{font-size:15px}
 .topbar{background:var(--fg);color:#e9e2d4;font-size:12.5px;letter-spacing:.04em}
 .topbar .wrap{display:flex;justify-content:space-between;gap:20px;height:36px;align-items:center}
@@ -36,7 +36,7 @@ body{font-size:15px}
 .stats b{display:block;font:500 clamp(24px,2.2vw,34px)/1 var(--head);letter-spacing:-.02em}
 .stats span{font-size:12.5px;color:var(--muted)}
 .hero-art{position:relative;background:#e6dfd1;overflow:hidden}
-.rail{position:absolute;left:3%;right:3%;top:13%;height:6px;border-radius:3px;background:linear-gradient(#8a7d6a,#5a5044);box-shadow:0 2px 0 rgba(0,0,0,.08)}
+.rail{position:absolute;left:3%;right:3%;top:13%;height:6px;border-radius:3px;background:linear-gradient(#8a7d6a,#3b437a);box-shadow:0 2px 0 rgba(0,0,0,.08)}
 .hang{position:absolute;top:calc(13% - 2px);width:27%;transform-origin:50% 0;animation:sway 6s ease-in-out infinite alternate}
 .hang svg.h{display:block;width:30%;margin:0 auto -9%;height:auto}
 .hang .g{filter:drop-shadow(0 18px 18px rgba(60,40,20,.18));transform:scale(1.32);transform-origin:50% 0}
@@ -44,8 +44,8 @@ body{font-size:15px}
 @keyframes sway{from{transform:rotate(-1.6deg)}to{transform:rotate(1.6deg)}}
 .swatches{position:absolute;left:6%;bottom:7%;display:flex;gap:10px}
 .swatches i{width:52px;height:68px;border-radius:2px;box-shadow:0 6px 14px rgba(40,30,20,.18);position:relative}
-.swatches i::after{content:"";position:absolute;inset:auto 0 0 0;height:16px;background:#f7f3ec}
-.tagcard{position:absolute;right:6%;bottom:8%;width:240px;padding:18px;background:#fbf8f2;box-shadow:0 18px 40px rgba(40,30,20,.18);font-size:13px}
+.swatches i::after{content:"";position:absolute;inset:auto 0 0 0;height:16px;background:#eef0fb}
+.tagcard{position:absolute;right:6%;bottom:8%;width:240px;padding:18px;background:#eef0fb;box-shadow:0 18px 40px rgba(40,30,20,.18);font-size:13px}
 .tagcard b{display:block;font:500 20px/1.1 var(--head);margin:6px 0 10px}
 .tagcard dl{display:grid;grid-template-columns:auto 1fr;gap:5px 12px;color:var(--muted)}
 .tagcard dd{color:var(--fg);font-weight:600;margin:0}
@@ -67,11 +67,11 @@ body{font-size:15px}
 .steps b{display:block;font:400 22px/1.15 var(--head);margin:14px 0 10px}
 .steps span{font-size:12px;letter-spacing:.12em;color:var(--rust);font-weight:700}
 .steps p{color:var(--muted);line-height:1.6;font-size:14.5px}
-.band{display:grid;grid-template-columns:1fr 1fr;background:var(--fg);color:#efe8dc}
+.band{display:grid;grid-template-columns:1fr 1fr;background:var(--fg);color:#d6dcf4}
 .band .bc{padding:clamp(40px,6vw,90px)}
 .band h2{font:400 clamp(34px,4vw,56px)/1.02 var(--head);letter-spacing:-.03em;margin-bottom:18px}
 .band p{color:#b9b0a1;line-height:1.65;max-width:30em;margin-bottom:26px}
-.band .sh-btn{background:#efe8dc;color:var(--fg);border-color:#efe8dc}
+.band .sh-btn{background:#d6dcf4;color:var(--fg);border-color:#d6dcf4}
 .band .ba{position:relative;background:#2a2621;min-height:340px}
 .foot{border-top:1px solid var(--line);padding:46px 0 34px;font-size:13.5px;color:var(--muted)}
 .foot .wrap{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:30px}
@@ -95,7 +95,7 @@ body{font-size:15px}
 .qty{display:flex;align-items:center;gap:14px}
 .qty input[type=range]{flex:1;accent-color:var(--rust)}
 .qty output{min-width:84px;font:500 22px/1 var(--head)}
-.est{margin-top:20px;padding:20px;background:var(--fg);color:#efe8dc;display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.est{margin-top:20px;padding:20px;background:var(--fg);color:#d6dcf4;display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
 .est span{display:block;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:#a99f90}
 .est b{font:400 26px/1.1 var(--head)}
 /* capabilities */
@@ -126,7 +126,7 @@ body{font-size:15px}
 <div class="topbar"><div class="wrap"><span><b>OEM &amp; ODM apparel</b> · MOQ from 300 pieces per style · Samples in 7 days</span><span>FOB Ho Chi Minh City · DDP to the US and EU</span></div></div>
 <header class="head">
   <div class="wrap">
-    <a class="logo" href="#/"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="#1d1a16"/><path d="M8 11h16M8 16h16M8 21h16" stroke="#f0b48f" stroke-width="2"/><path d="M11 7v18M21 7v18" stroke="#f4f0e8" stroke-width="1.4"/></svg>Loomline</a>
+    <a class="logo" href="#/"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="#10175a"/><path d="M8 11h16M8 16h16M8 21h16" stroke="#f0b48f" stroke-width="2"/><path d="M11 7v18M21 7v18" stroke="#e2e6f8" stroke-width="1.4"/></svg>Loomline</a>
     <nav class="nav"><a href="#/shop" data-nav="shop">Catalog</a><a href="#/builder" data-nav="builder">Sample builder</a><a href="#/capabilities" data-nav="capabilities">Capabilities</a><a href="#/quote" data-nav="quote">Request a quote</a></nav>
     <a class="rfq" href="#" data-cart><span data-cart-label>Inquiry list</span><span data-cart-count>0</span></a>
     <button class="burger" data-menu aria-label="Menu">Menu</button>
@@ -146,10 +146,10 @@ body{font-size:15px}
     <div class="hero-art" aria-hidden="true">
       <div class="rail"></div>
       <div class="hang" data-g="hoodie|#3d5a4c"></div>
-      <div class="hang" data-g="shirt|#e7dccb"></div>
-      <div class="hang" data-g="bomber|#b4532a"></div>
+      <div class="hang" data-g="shirt|#c9d1f0"></div>
+      <div class="hang" data-g="bomber|#2f40e0"></div>
       <div class="hang" data-g="tee|#24324a"></div>
-      <div class="swatches"><i style="background:#24324a"></i><i style="background:#b4532a"></i><i style="background:#3d5a4c"></i><i style="background:#d8c6a6"></i></div>
+      <div class="swatches"><i style="background:#24324a"></i><i style="background:#2f40e0"></i><i style="background:#3d5a4c"></i><i style="background:#aab6ec"></i></div>
       <div class="tagcard"><span class="muted">Style LL-2041</span><b>Heavyweight hoodie</b><dl><dt>Fabric</dt><dd>420 gsm cotton fleece</dd><dt>MOQ</dt><dd>300 pcs / color</dd><dt>FOB</dt><dd>from $11.40</dd></dl></div>
     </div>
   </div>
@@ -157,9 +157,9 @@ body{font-size:15px}
     <div class="sec-h"><h2>Four product families, <i>one factory</i> floor.</h2><a href="#/shop">See all 14 styles</a></div>
     <div class="cats">
       <a class="cat" href="#/shop?cat=Knits"><h3>Knits</h3><div class="art" data-g="tee|#24324a"></div><p>Tees, polos, sweatshirts · 160–420 gsm</p></a>
-      <a class="cat" href="#/shop?cat=Wovens"><h3>Wovens</h3><div class="art" data-g="shirt|#d8c6a6"></div><p>Shirts, chinos, workwear · poplin to twill</p></a>
+      <a class="cat" href="#/shop?cat=Wovens"><h3>Wovens</h3><div class="art" data-g="shirt|#aab6ec"></div><p>Shirts, chinos, workwear · poplin to twill</p></a>
       <a class="cat" href="#/shop?cat=Outerwear"><h3>Outerwear</h3><div class="art" data-g="puffer|#3d5a4c"></div><p>Bombers, puffers, coach jackets</p></a>
-      <a class="cat" href="#/shop?cat=Activewear"><h3>Activewear</h3><div class="art" data-g="legging|#b4532a"></div><p>Leggings, joggers, performance tops</p></a>
+      <a class="cat" href="#/shop?cat=Activewear"><h3>Activewear</h3><div class="art" data-g="legging|#2f40e0"></div><p>Leggings, joggers, performance tops</p></a>
     </div>
   </div></section>
   <section class="sec" style="padding-top:0"><div class="wrap">
@@ -177,7 +177,7 @@ body{font-size:15px}
   </div></section>
   <section class="band">
     <div class="bc"><p class="kicker" style="color:#f0b48f">Sample builder</p><h2>Build your sample before you call us.</h2><p>Pick a garment, fabric and color, place your logo, choose labels and packaging, and see a price estimate for your quantity. Then send it to us as a request.</p><a class="sh-btn" href="#/builder">Open the sample builder</a></div>
-    <div class="ba" data-g="hoodie|#e7dccb|LOOMLINE"></div>
+    <div class="ba" data-g="hoodie|#c9d1f0|LOOMLINE"></div>
   </section>
 </section>
 
@@ -218,8 +218,8 @@ body{font-size:15px}
 <script>
 (function () {
   var C = {
-    navy: { name: "Midnight navy", hex: "#24324a" }, rust: { name: "Rust", hex: "#b4532a" }, forest: { name: "Forest", hex: "#3d5a4c" }, oat: { name: "Oatmeal", hex: "#e7dccb" },
-    black: { name: "Black", hex: "#22201d" }, sand: { name: "Sand", hex: "#d8c6a6" }, white: { name: "Optic white", hex: "#f6f4ef" }, sky: { name: "Sky", hex: "#9fb9d6" },
+    navy: { name: "Midnight navy", hex: "#24324a" }, rust: { name: "Rust", hex: "#2f40e0" }, forest: { name: "Forest", hex: "#3d5a4c" }, oat: { name: "Oatmeal", hex: "#c9d1f0" },
+    black: { name: "Black", hex: "#22201d" }, sand: { name: "Sand", hex: "#aab6ec" }, white: { name: "Optic white", hex: "#eef0fb" }, sky: { name: "Sky", hex: "#9fb9d6" },
     olive: { name: "Olive", hex: "#6b6a3f" }, plum: { name: "Plum", hex: "#5c3a4f" }, heather: { name: "Heather grey", hex: "#a9a6a0" }, coral: { name: "Coral", hex: "#e57d5f" }
   };
   var col = function () { return Array.prototype.map.call(arguments, function (k) { return C[k]; }); };
@@ -252,8 +252,8 @@ body{font-size:15px}
   /* decorative garments on the home page */
   Array.prototype.forEach.call(document.querySelectorAll("[data-g]"), function (el) {
     var a = el.getAttribute("data-g").split("|");
-    var g = Garment.draw(a[0], a[1], a[2] ? { logo: { text: a[2], place: "Center front", color: "#1d1a16" } } : {});
-    if (el.classList.contains("hang")) el.innerHTML = '<svg class="h" viewBox="0 0 60 40"><path d="M30 2 Q38 2 38 9 Q38 14 30 16 L4 36 L56 36 Z" fill="none" stroke="#5a5044" stroke-width="2.5"/></svg><div class="g">' + g + "</div>";
+    var g = Garment.draw(a[0], a[1], a[2] ? { logo: { text: a[2], place: "Center front", color: "#10175a" } } : {});
+    if (el.classList.contains("hang")) el.innerHTML = '<svg class="h" viewBox="0 0 60 40"><path d="M30 2 Q38 2 38 9 Q38 14 30 16 L4 36 L56 36 Z" fill="none" stroke="#3b437a" stroke-width="2.5"/></svg><div class="g">' + g + "</div>";
     else el.innerHTML = g;
   });
 
@@ -285,7 +285,7 @@ body{font-size:15px}
       '<div class="sh-addrow"><button class="sh-btn grow" type="button" data-send>Add to inquiry list</button></div><p class="sh-fine">Estimate in USD, FOB Ho Chi Minh City. Final price confirmed after sampling.</p></div></div>';
     var paint = function () {
       var c = COLORS[B.color];
-      var st = { type: B.type, hex: c.hex, fabric: FABRICS[B.fabric][0], view: B.view, logo: B.method === "None" ? null : { text: B.text, place: B.place, method: B.method, color: (parseInt(c.hex.slice(1), 16) > 0xbbbbbb ? "#1d1a16" : "#f4f0e8") } };
+      var st = { type: B.type, hex: c.hex, fabric: FABRICS[B.fabric][0], view: B.view, logo: B.method === "None" ? null : { text: B.text, place: B.place, method: B.method, color: (parseInt(c.hex.slice(1), 16) > 0xbbbbbb ? "#10175a" : "#e2e6f8") } };
       el.querySelector("[data-stage]").innerHTML = art({ id: "custom" }, st) + '<div class="views"><button type="button" data-view="0" class="' + (B.view === 0 ? "on" : "") + '">Front</button><button type="button" data-view="1" class="' + (B.view === 1 ? "on" : "") + '">Back</button><button type="button" data-view="2" class="' + (B.view === 2 ? "on" : "") + '">Fabric</button></div>';
       el.querySelector("[data-colname]").textContent = c.name;
       el.querySelector("[data-qo]").textContent = B.qty.toLocaleString("en-US");
