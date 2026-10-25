@@ -39,9 +39,9 @@ body{font-size:15px}
 .step .ph img{transition:transform 1.2s cubic-bezier(.2,.8,.2,1);transform:scale(1.06)}
 .step.on .ph img{transform:scale(1)}
 .step .g{position:absolute;left:50%;top:44%;width:min(58%,260px);transform:translate(-50%,-50%);opacity:.9}
-.step .ph img:not(.broken)~.g{display:none}
+.step .ph img:not(.broken)~.g,.step .ph img:not(.broken)~.weave{display:none}
 .step .weave{position:absolute;inset:0;opacity:.18;background:repeating-linear-gradient(45deg,rgba(255,255,255,.5) 0 1px,transparent 1px 7px),repeating-linear-gradient(-45deg,rgba(255,255,255,.35) 0 1px,transparent 1px 7px)}
-.step::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,14,50,0) 45%,rgba(10,14,50,.82) 100%)}
+.step::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,14,50,0) 30%,rgba(10,14,50,.55) 60%,rgba(10,14,50,.92) 100%)}
 .step .cap{position:absolute;left:18px;right:18px;bottom:16px;z-index:1;color:#eef0fb}
 .step .cap span{font:600 12px/1 "JetBrains Mono V",monospace;letter-spacing:.06em;color:#f0b48f}
 .step .cap b{display:block;font:700 clamp(20px,1.8vw,28px)/1.05 "Syne V",sans-serif;letter-spacing:-.02em;margin:6px 0 0;white-space:nowrap}

@@ -56,7 +56,13 @@ body{font-size:15px;background:var(--bg)}
 .stage{position:relative;overflow:hidden;background:radial-gradient(60% 70% at 50% 45%,rgba(255,255,255,.05),transparent 70%)}
 .stage .ph{position:absolute;inset:0;background:transparent}
 .stage .ph svg{position:absolute;left:54%;top:58%;width:min(60%,330px);transform:translate(-50%,-50%)}
-.stage .ph img{object-fit:contain;transform:scale(1.25)}
+.stage .ph img{object-fit:cover;object-position:50% 52%;transform:scale(1.04);-webkit-mask:radial-gradient(60% 62% at 50% 54%,#000 55%,transparent 100%);mask:radial-gradient(60% 62% at 50% 54%,#000 55%,transparent 100%);transition:filter .5s}
+.stage .ph img[data-mat="Stainless 304"]{filter:saturate(.5) contrast(1.12) brightness(.9)}
+.stage .ph img[data-mat="Brass C360"]{filter:sepia(.85) saturate(2.1) hue-rotate(-10deg) brightness(.97)}
+.stage .ph img[data-mat="POM (Delrin)"]{filter:grayscale(1) brightness(1.55) contrast(.72)}
+.stage .ph img[data-mat="Titanium Gr5"]{filter:sepia(.18) brightness(.74) contrast(1.18)}
+.endbg{position:absolute;inset:0;z-index:-2;opacity:.42;--ph:#0b0c0e}
+.endbg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--bg) 0%,rgba(8,9,11,.55) 40%,rgba(8,9,11,.6) 70%,var(--bg) 100%)}
 .stage .meas{position:absolute;left:14px;top:12px;font:500 11.5px/1.7 var(--mono);color:#7d838c}
 .stage .meas b{color:#e8ebef;font-weight:500}
 .stage .chip{position:absolute;padding:6px 10px;border:1px solid rgba(255,106,19,.45);border-radius:8px;font:500 11.5px/1 var(--mono);color:#ffc9a6;background:rgba(255,106,19,.08)}
@@ -91,7 +97,7 @@ body{font-size:15px;background:var(--bg)}
 .mini{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .mini div{padding:16px;border:1px solid var(--line);border-radius:14px;font:500 12px/1.5 var(--mono);color:var(--muted);background:rgba(255,255,255,.02)}
 .mini b{display:block;color:var(--fg);font:600 24px/1.1 var(--head);letter-spacing:-.02em;margin-bottom:4px}
-.end{text-align:center;padding:clamp(80px,10vw,140px) 0;position:relative;overflow:hidden}
+.end{text-align:center;padding:clamp(100px,12vw,180px) 0;position:relative;overflow:hidden;isolation:isolate}
 .end h2{font:600 clamp(40px,5.4vw,80px)/.98 var(--head);letter-spacing:-.045em;max-width:12em;margin:0 auto}
 .end p{color:var(--muted);margin:16px auto 28px;max-width:30em;line-height:1.6}
 .end::before{content:"";position:absolute;left:50%;top:60%;width:700px;height:300px;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(255,106,19,.3),transparent);filter:blur(20px);z-index:-1}
@@ -189,7 +195,7 @@ body{font-size:15px;background:var(--bg)}
     <div class="sec-h"><h2>Standard parts, ready to order.</h2><a href="#/shop" style="border-bottom:1px solid">All standard parts</a></div>
     <div class="sh-grid" data-products="featured" data-limit="4"></div>
   </div></section>
-  <section class="end"><div class="wrap"><p class="tag">// Engineers reply within 4 hours</p><h2 style="margin-top:16px">Send a drawing. Get a part.</h2><p>Every request is checked by a manufacturing engineer before it reaches a machine, so the price you see is the price you pay.</p><a class="sh-btn" href="#/instant-quote">Start an instant quote</a></div></section>
+  <section class="end"><div class="endbg ph"><img src="img/ferro-machine.webp" alt="A CNC mill cutting an aluminum block under coolant spray" loading="lazy"></div><div class="wrap"><p class="tag">// Engineers reply within 4 hours</p><h2 style="margin-top:16px">Send a drawing. Get a part.</h2><p>Every request is checked by a manufacturing engineer before it reaches a machine, so the price you see is the price you pay.</p><a class="sh-btn" href="#/instant-quote">Start an instant quote</a></div></section>
 </section>
 <section data-view="shop" hidden></section>
 <section data-view="p" hidden></section>
@@ -293,6 +299,7 @@ body{font-size:15px;background:var(--bg)}
     document.querySelector("[data-hship]").textContent = ship;
     document.querySelector("[data-hbars]").innerHTML = ps.map(function (p, i) { return '<span class="' + (qs[i] === hq ? "on" : "") + '" style="height:' + Math.max(8, p / mx * 100).toFixed(0) + '%" title="' + qs[i] + ' pcs"></span>'; }).join("");
     Array.prototype.forEach.call(document.querySelectorAll("[data-mats] button"), function (b) { b.classList.toggle("on", b.dataset.m === hm); });
+    if (img0) img0.setAttribute("data-mat", hm);
     Array.prototype.forEach.call(document.querySelectorAll("[data-hqty] button"), function (b) { b.classList.toggle("on", +b.dataset.v === hq); });
     var svg = heroArt.querySelector("svg"); if (svg && svg.style.display !== "none") svg.outerHTML = partSVG("hero", MAT[hm].hex, { noShadow: true });
   }
