@@ -7,252 +7,289 @@
 <script src="assets/base.js"></script>
 <link rel="stylesheet" href="assets/base.css">
 <style>
-:root{--bg:#f4f1ea;--nv:#0d2340;--sea:#1f6f8b;--or:#ef6a2b;--sk:#cfe3ea;--mut:#5e6876;--line:rgba(13,35,64,.13)}
+/* Meridian: one family (Archivo) from condensed display to normal-width text; harbor ink on fog, crane yellow for the one action color. */
+:root{--ink:#13202b;--steel:#45535e;--fog:#e3e7e9;--paper:#f6f7f7;--crane:#f0b323;--oxide:#9b3b26;--line:rgba(19,32,43,.16);--w:min(1360px,100% - 64px)}
 html,body{overflow-x:clip}
-body{background:var(--bg);color:var(--nv);font-family:"Inter V",Arial,sans-serif;font-size:15.5px}
-.un{font-family:"Unbounded V",sans-serif}
-.wrap{width:min(1320px,100% - 56px);margin:0 auto}
-.nav{height:76px;display:flex;align-items:center;gap:28px;font-weight:600;font-size:14.5px}
-.logo{font-family:"Unbounded V",sans-serif;font-weight:700;font-size:19px;margin-right:auto;display:flex;align-items:center;gap:10px}
-.logo i{width:30px;height:30px;border-radius:50%;background:var(--nv);position:relative;overflow:hidden}
-.logo i::after{content:"";position:absolute;left:-10%;right:-10%;top:52%;height:3px;background:var(--or);box-shadow:0 -7px 0 #fff,0 7px 0 #fff}
-.nav .cta{background:var(--nv);color:#fff;border-radius:999px;padding:12px 18px}
-.hero{min-height:calc(100vh - 76px);display:grid;grid-template-columns:1fr 1.1fr;gap:30px;align-items:center;padding-bottom:4vh}
-.k{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--or)}
-h1{font-family:"Unbounded V",sans-serif;font-weight:700;font-size:clamp(46px,min(5.6vw,10.8vh),98px);line-height:.98;letter-spacing:-.04em;margin:clamp(14px,2.6vh,24px) 0}
-h1 em{font-style:normal;color:var(--sea)}
-.lede{max-width:29em;line-height:1.6;color:var(--mut);font-size:clamp(15.5px,1.15vw,18px)}
-.go{display:flex;gap:12px;margin-top:clamp(20px,3.6vh,34px);flex-wrap:wrap}
-.go a{font-weight:700;border-radius:999px;padding:17px 26px}
-.go a:first-child{background:var(--or);color:#fff}
-.go a:last-child{border:2px solid var(--nv)}
-.nums{display:flex;gap:34px;margin-top:clamp(24px,4.4vh,44px);flex-wrap:wrap}
-.nums b{display:block;font-family:"Unbounded V",sans-serif;font-size:26px}
-.nums small{color:var(--mut);font-size:13px}
-.port{position:relative;aspect-ratio:1.15;border-radius:28px;background:linear-gradient(180deg,#cfe3ea 0,#e8f1f4 58%,#1f6f8b 58%,#174f66 100%);overflow:hidden}
-.port svg{position:absolute;inset:0;width:100%;height:100%}
-@keyframes lower{0%,15%{transform:none}50%,70%{transform:translateY(90px)}100%{transform:none}}
-.hook{animation:lower 6s cubic-bezier(.6,0,.3,1) infinite}
-@keyframes bob{to{transform:translateY(5px)}}
-.ship{animation:bob 3s ease-in-out infinite alternate}
-@keyframes wave{to{transform:translateX(-120px)}}
-.wave{animation:wave 5s linear infinite}
-.strip{background:var(--nv);color:#fff;padding:18px 0}
-.strip .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-weight:600;font-size:14px}
-.strip span{opacity:.85}
-.strip b{color:var(--or)}
-section{padding:clamp(70px,8vw,120px) 0}
-.h2{font-family:"Unbounded V",sans-serif;font-weight:700;font-size:clamp(34px,3.9vw,64px);line-height:1;letter-spacing:-.04em;margin-top:12px}
+body{background:var(--paper);color:var(--ink);font-family:"Archivo V",Arial,sans-serif;font-size:17px;line-height:1.5}
+.disp{font-family:"Archivo V",Arial,sans-serif;font-stretch:64%;font-weight:800;letter-spacing:-.01em;line-height:.88}
+.num{font-variant-numeric:tabular-nums}
+.c{width:var(--w);margin:0 auto}
+.u{text-decoration:underline;text-underline-offset:.25em;text-decoration-thickness:1px}
+/* hero */
+.hero{position:relative;height:100vh;min-height:620px;color:#fff;overflow:hidden;background:#1b2631}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 50%;z-index:1}
+.hero>img.broken{display:none}
+.hero::after{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(90deg,rgba(10,16,22,.78) 0%,rgba(10,16,22,.45) 38%,rgba(10,16,22,0) 62%),linear-gradient(0deg,rgba(10,16,22,.6),rgba(10,16,22,0) 40%)}
+/* stand-in until the photo arrives: the open end of a container at a dock */
+.box{position:absolute;right:6%;top:16%;width:52%;aspect-ratio:2.44/2.9;max-height:76%;background:repeating-linear-gradient(90deg,#2d4a5c 0 14px,#3a5a6e 14px 22px,#27404f 22px 34px);box-shadow:0 0 0 10px #22394a,0 40px 80px rgba(0,0,0,.5)}
+.box::before{content:"";position:absolute;inset:7% 5% 0;background:repeating-linear-gradient(0deg,transparent 0 46px,rgba(0,0,0,.4) 46px 48px),repeating-linear-gradient(90deg,#8b6a44 0 70px,#5e4529 70px 72px),#0e1419;box-shadow:inset 0 30px 60px rgba(0,0,0,.6)}
+.box::after{content:"";position:absolute;left:5%;right:5%;top:7%;height:22%;background:linear-gradient(180deg,#0e1419,rgba(14,20,25,0))}
+.nav{position:absolute;z-index:5;left:0;right:0;top:0}
+.nav .c{display:flex;align-items:center;gap:34px;height:84px;font-size:15px}
+.mark{display:flex;align-items:center;gap:12px;font-stretch:72%;font-weight:800;font-size:26px;letter-spacing:.01em;margin-right:auto}
+.mark svg{width:30px;height:30px}
+.nav a:not(.mark):not(.login){opacity:.88}
+.login{border:1px solid rgba(255,255,255,.5);padding:10px 16px}
+.hero .txt{position:absolute;z-index:3;left:0;right:0;bottom:clamp(40px,8vh,90px)}
+.hero h1{font-size:clamp(60px,min(7.4vw,13vh),136px);max-width:min(7.2em,52vw)}
+.hero p{max-width:min(31em,48vw);margin-top:clamp(18px,3vh,30px);font-size:clamp(17px,1.25vw,19px);color:rgba(255,255,255,.86)}
+.acts{display:flex;align-items:center;gap:28px;margin-top:clamp(22px,3.6vh,36px);flex-wrap:wrap}
+.go{display:inline-block;background:var(--crane);color:var(--ink);font-weight:700;padding:17px 26px;font-size:16px}
+.go:hover{background:#ffc53a}
+/* range */
+section{padding:clamp(80px,10vw,150px) 0}
+.h2{font-size:clamp(48px,6vw,96px)}
+.lead{max-width:34em;color:var(--steel);margin-top:18px}
+.top{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:clamp(36px,5vw,64px)}
+.range{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,1.6vw,24px)}
+.range figure{margin:0}
+.range .ph{aspect-ratio:4/5;--ph:linear-gradient(180deg,#dadfe2,#cfd5d9)}
+.range .ph img:not(.broken)+span{display:none}
+.range .ph span{position:absolute;inset:auto 0 18px;text-align:center;color:var(--steel);font-size:14px}
+.range figcaption{display:grid;grid-template-columns:1fr auto;gap:2px 12px;margin-top:14px}
+.range b{font-size:19px;font-weight:700}
+.range small{color:var(--steel);font-size:14.5px}
+.range em{font-style:normal;grid-row:span 2;align-self:center;font-size:15px}
 /* planner */
-.pl{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:18px;margin-top:34px;align-items:start}
-.cat{background:#fff;border-radius:20px;border:1px solid var(--line);overflow:hidden}
-.ct-h{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:16px 18px;border-bottom:1px solid var(--line);flex-wrap:wrap}
-.ct-h b{font-size:17px}
-.ct-h .bt{display:flex;gap:6px;flex-wrap:wrap}
-.ct-h button{border:1.5px solid var(--line);border-radius:999px;padding:8px 14px;font-weight:600;font-size:13.5px}
-.ct-h button.p{background:var(--sea);color:#fff;border-color:var(--sea)}
-.sku{display:grid;grid-template-columns:56px minmax(0,1fr) auto 118px;gap:14px;align-items:center;padding:12px 18px;border-bottom:1px solid var(--line)}
-.sku:last-child{border:0}
-.sku .ic{width:56px;height:56px;border-radius:14px;display:grid;place-items:center}
-.sku .ic svg{width:40px;height:40px}
-.sku b{display:block;font-size:15px}
-.sku small{color:var(--mut);font-size:12.5px;display:block;line-height:1.5}
-.sku .pr{text-align:right;font-weight:700;font-size:14px;font-variant-numeric:tabular-nums}
-.sku .pr small{font-weight:500}
-.st{display:flex;align-items:center;border:1.5px solid var(--line);border-radius:999px;overflow:hidden}
-.st button{width:32px;height:34px;font-weight:700;font-size:17px;color:var(--sea)}
-.st input{width:50px;border:0;text-align:center;font:inherit;font-weight:700;-moz-appearance:textfield}
+.plan{background:var(--fog)}
+.draw{background:var(--paper);border:1px solid var(--line);padding:clamp(18px,2.4vw,34px)}
+.draw-top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap;margin-bottom:18px}
+.types{display:flex;border:1px solid var(--ink)}
+.types button{padding:10px 18px;font-weight:600;font-size:15px}
+.types button+button{border-left:1px solid var(--ink)}
+.types button[aria-pressed=true]{background:var(--ink);color:#fff}
+.meters{display:flex;gap:clamp(20px,3vw,48px)}
+.meter b{display:block;font-stretch:64%;font-weight:800;font-size:clamp(34px,3.6vw,52px);line-height:1}
+.meter small{color:var(--steel);font-size:14px}
+.meter b.over{color:var(--oxide)}
+.elev{display:block;width:100%;height:auto}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:12px;font-size:13.5px;color:var(--steel)}
+.legend i{display:inline-block;width:11px;height:11px;margin-right:6px;vertical-align:-1px}
+.over-note{margin-top:14px;padding:12px 16px;background:#f3e1db;color:var(--oxide);display:none;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:15px}
+.over-note.on{display:flex}
+.over-note button{border:1px solid var(--oxide);padding:8px 14px;font-weight:600}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:clamp(20px,2.4vw,36px);margin-top:clamp(20px,2.4vw,36px);align-items:start}
+table{width:100%;border-collapse:collapse;font-size:15px}
+thead th{font-weight:600;text-align:left;color:var(--steel);font-size:13.5px;padding:0 10px 10px;border-bottom:1px solid var(--ink)}
+tbody td{padding:14px 10px;border-bottom:1px solid var(--line);vertical-align:middle}
+tbody tr.on{background:rgba(19,32,43,.045)}
+td.p b{display:block;font-weight:600}
+td.p small{color:var(--steel)}
+td.sw i{display:block;width:12px;height:36px}
+td.r,th.r{text-align:right}
+.st{display:inline-flex;align-items:center;border:1px solid var(--ink)}
+.st button{width:34px;height:36px;font-size:18px}
+.st input{width:56px;height:36px;border:0;border-inline:1px solid var(--line);text-align:center;font:inherit;font-weight:600;background:transparent;-moz-appearance:textfield}
 .st input::-webkit-inner-spin-button{display:none}
-.sku.on{background:#f3f9fb}
-.side{position:sticky;top:14px;display:grid;gap:12px}
-.cont{background:var(--nv);color:#fff;border-radius:20px;padding:18px}
-.ctype{display:flex;gap:6px;margin-bottom:14px}
-.ctype button{flex:1;border-radius:12px;padding:10px 6px;background:rgba(255,255,255,.08);font-weight:700;font-size:14px}
-.ctype button small{display:block;font-weight:500;font-size:11.5px;opacity:.7}
-.ctype button.on{background:#fff;color:var(--nv)}
-.cvis{background:#091a31;border-radius:12px;padding:12px}
-.cvis svg{width:100%;display:block}
-.bars{display:grid;gap:10px;margin-top:14px}
-.bar p{display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px}
-.bar p b{font-variant-numeric:tabular-nums}
-.bar div{height:9px;border-radius:9px;background:rgba(255,255,255,.12);overflow:hidden}
-.bar i{display:block;height:100%;border-radius:9px;background:#5fd0a5;transition:width .35s}
-.bar i.hi{background:var(--or)}
-.over{background:#3b1d14;color:#ffd2bf;border-radius:10px;padding:10px 12px;font-size:13px;margin-top:12px;display:none;gap:10px;align-items:center;justify-content:space-between}
-.over.on{display:flex}
-.over button{background:var(--or);color:#fff;border-radius:999px;padding:7px 12px;font-weight:700;font-size:12.5px;white-space:nowrap}
-.sum{background:#fff;border-radius:20px;border:1px solid var(--line);padding:18px}
-.sum label{display:flex;justify-content:space-between;align-items:center;gap:10px;font-weight:600;font-size:14px;margin-bottom:10px}
-.sum select{border:1.5px solid var(--line);border-radius:10px;padding:8px 10px;font:inherit;font-size:14px}
-.sum .r{display:flex;justify-content:space-between;padding:6px 0;font-size:14px;border-bottom:1px dashed var(--line)}
-.sum .r b{font-variant-numeric:tabular-nums}
-.sum .t{display:flex;justify-content:space-between;align-items:baseline;margin-top:10px}
-.sum .t b{font-family:"Unbounded V",sans-serif;font-size:26px}
-.sum .lc{background:var(--sk);border-radius:12px;padding:10px 12px;font-size:13.5px;margin-top:12px}
-.sum>button{width:100%;margin-top:12px;background:var(--or);color:#fff;border-radius:999px;padding:15px;font-weight:700}
-.sum>button:disabled{opacity:.4;cursor:not-allowed}
-.ok{font-size:13.5px;color:#13704a;margin-top:8px;min-height:1.2em}
-.legend{display:flex;flex-wrap:wrap;gap:6px 12px;margin-top:10px;font-size:12px;opacity:.85}
-.legend span{display:flex;align-items:center;gap:5px}
-.legend i{width:10px;height:10px;border-radius:2px;display:block}
-.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:30px 0 40px;color:var(--mut);font-size:14px}
-@media (max-width:1040px){.pl{grid-template-columns:minmax(0,1fr)}.side{position:static}}
-@media (max-width:860px){.nav a:not(.logo):not(.cta){display:none}.hero{grid-template-columns:1fr;padding:10px 0 50px}}
-@media (max-width:560px){.logo{font-size:16px;white-space:nowrap}.nav .cta{padding:10px 14px;white-space:nowrap;font-size:13px}.wrap{width:calc(100% - 32px)}.sku{grid-template-columns:48px minmax(0,1fr) auto;row-gap:8px}.sku .ic{width:48px;height:48px}.sku .st{grid-column:2/-1;justify-self:start}.nums{gap:20px}}
+.tools{display:flex;gap:22px;margin-top:16px;font-size:15px}
+.sum{background:var(--ink);color:#fff;padding:26px}
+.sum h3{font-stretch:64%;font-weight:800;font-size:34px;line-height:1;margin-bottom:18px}
+.sum label{display:block;font-size:14px;color:rgba(255,255,255,.7);margin-bottom:18px}
+.sum select{display:block;width:100%;margin-top:6px;padding:11px;font:inherit;background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4)}
+.sum select option{color:var(--ink)}
+.sum dl{margin:0}
+.sum dl div{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.14);font-size:15px}
+.sum dt{color:rgba(255,255,255,.72)}
+.sum .tot{display:flex;justify-content:space-between;align-items:baseline;margin-top:18px}
+.sum .tot b{font-stretch:64%;font-weight:800;font-size:46px;line-height:1}
+.sum .unit{margin-top:12px;font-size:15px;color:rgba(255,255,255,.82)}
+.sum .go{width:100%;text-align:center;margin-top:20px;border:0}
+.sum .go:disabled{opacity:.35;cursor:not-allowed}
+.sum .ok{min-height:1.4em;margin-top:12px;font-size:14.5px;color:#d9f2c4}
+/* shipping */
+.ship{padding:0;position:relative;color:#fff;background:#152230}
+.ship .ph{height:clamp(420px,46vw,620px);--ph:linear-gradient(180deg,#1d3346 0%,#28455c 55%,#0f1a24 100%)}
+.ship .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,16,22,.85) 0%,rgba(10,16,22,.4) 45%,rgba(10,16,22,0) 70%)}
+.ship .in{position:absolute;inset:0;z-index:2;display:flex;align-items:center}
+.ship ol{display:grid;gap:26px;max-width:470px;margin-top:30px;counter-reset:s}
+.ship li{display:grid;grid-template-columns:44px 1fr;gap:0 14px}
+.ship li::before{counter-increment:s;content:counter(s);grid-row:span 2;font-stretch:64%;font-weight:800;font-size:44px;line-height:.9;color:var(--crane)}
+.ship li b{font-size:19px}
+.ship li span{color:rgba(255,255,255,.78);font-size:16px}
+footer{padding:36px 0 44px;font-size:14.5px;color:var(--steel)}
+footer .c{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+:focus-visible{outline:2px solid var(--crane);outline-offset:2px}
+@media (max-width:1060px){.grid2{grid-template-columns:minmax(0,1fr)}.range{grid-template-columns:1fr 1fr}.top{grid-template-columns:1fr}}
+@media (max-width:860px){.nav a:not(.mark):not(.login){display:none}.box{width:80%;right:-10%;top:12%}}
+@media (max-width:640px){:root{--w:calc(100% - 32px)}body{font-size:16px}.hero h1{max-width:none}.hero p{max-width:none}.hero{min-height:560px}.hero::after{background:linear-gradient(0deg,rgba(10,16,22,.88) 0%,rgba(10,16,22,.5) 55%,rgba(10,16,22,.2) 100%)}
+  thead{display:none}tbody tr{display:grid;grid-template-columns:10px 1fr auto;gap:4px 12px;padding:12px 0;border-bottom:1px solid var(--line)}tbody td{border:0;padding:0}td.sw{grid-row:span 3}td.sw i{height:100%}td.d,td.n{display:none}td.f{grid-column:2;text-align:left!important;color:var(--steel)}td.q{grid-column:3;grid-row:1/3;align-self:center}
+  .meters{width:100%;justify-content:space-between}.range figcaption{grid-template-columns:1fr}.range em{grid-row:auto;order:3;color:var(--steel)}.ship .ph{height:300px}.ship .ph::after{background:linear-gradient(0deg,#152230,rgba(21,34,48,0) 55%)}.ship .ph img{object-position:72% 50%}.hero>img{object-position:72% 50%}.ship .in{position:relative;inset:auto;display:block;padding:4px 0 60px}}
+@media (prefers-reduced-motion:reduce){.hero>img{transition:none}}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header class="nav"><a class="logo" href="#"><i></i>Meridian Trading</a><a href="#planner">Load planner</a><a href="#">Catalog</a><a href="#">Private label</a><a href="#">Logistics</a><a class="cta" href="#planner">Wholesale login</a></header>
-  <section class="hero" style="padding-top:0">
-    <div>
-      <p class="k" data-in>Wholesale housewares · Ningbo &amp; Shenzhen</p>
-      <h1 data-in style="--d:1">Kitchen to closet, <em>by the container.</em></h1>
-      <p class="lede" data-in style="--d:2">3,800 houseware SKUs from 40 audited factories, consolidated into one shipment. Mix products in a single container and see the fill, weight and landed cost before you order.</p>
-      <div class="go" data-in style="--d:3"><a href="#planner">Plan a container</a><a href="#">Request the catalog</a></div>
-      <div class="nums" data-in style="--d:4"><div><b>3,800</b><small>SKUs in stock</small></div><div><b>1 CBM</b><small>minimum per SKU</small></div><div><b>60</b><small>destination countries</small></div></div>
+<header class="hero">
+  <div class="box" aria-hidden="true"></div>
+  <img src="img/meridian-hero.webp" fetchpriority="high" alt="An open shipping container at a loading dock, packed to the roof with cartons">
+  <nav class="nav" aria-label="Main"><div class="c">
+    <a class="mark" href="#"><svg viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="13.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15 1.5V28.5M3 15h24" stroke="currentColor" stroke-width="2"/><path d="M7 8.5c4.5 2.2 11.5 2.2 16 0M7 21.5c4.5-2.2 11.5-2.2 16 0" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>Meridian</a>
+    <a href="#range">Range</a><a href="#plan">Load planner</a><a href="#ship">How it ships</a><a class="login" href="#plan">Wholesale login</a>
+  </div></nav>
+  <div class="txt"><div class="c">
+    <h1 class="disp" data-in>Forty feet of housewares, packed to the roof.</h1>
+    <p data-in style="--d:1">We consolidate kitchen, storage and tableware from 40 audited factories around Ningbo into one container for your warehouse. Mix products freely and see the landed cost before you order.</p>
+    <div class="acts" data-in style="--d:2"><a class="go" href="#plan">Plan a container</a><a class="u" href="#">Request the catalog</a></div>
+  </div></div>
+</header>
+<main>
+  <section id="range"><div class="c">
+    <div class="top"><h2 class="disp h2">The range</h2><p class="lead">3,800 products in four families, all packed for export and ready to mix in one load. Every price is per piece, free on board at Ningbo.</p></div>
+    <div class="range">
+      <figure><div class="ph"><img src="img/meridian-glass.webp" alt="Glass storage jars with bamboo lids" loading="lazy"><span>Kitchen glass</span></div><figcaption><b>Kitchen glass</b><em>from $0.85</em><small>640 products</small></figcaption></figure>
+      <figure><div class="ph"><img src="img/meridian-cookware.webp" alt="A stack of non-stick frying pans" loading="lazy"><span>Cookware</span></div><figcaption><b>Cookware</b><em>from $3.40</em><small>410 products</small></figcaption></figure>
+      <figure><div class="ph"><img src="img/meridian-storage.webp" alt="A collapsible laundry hamper and a woven basket" loading="lazy"><span>Storage and laundry</span></div><figcaption><b>Storage and laundry</b><em>from $1.10</em><small>1,120 products</small></figcaption></figure>
+      <figure><div class="ph"><img src="img/meridian-tableware.webp" alt="A stack of stoneware plates and bowls" loading="lazy"><span>Tableware</span></div><figcaption><b>Tableware</b><em>from $0.62</em><small>1,630 products</small></figcaption></figure>
     </div>
-    <div class="port" data-fade style="--d:2">
-      <svg viewBox="0 0 600 520" aria-hidden="true">
-        <g class="wave" opacity=".35"><path d="M0 340 q30 -10 60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0" stroke="#fff" stroke-width="3" fill="none"/><path d="M0 420 q30 -10 60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0" stroke="#fff" stroke-width="3" fill="none"/></g>
-        
-        <g class="ship">
-          <path d="M70 300 L540 300 L500 370 L110 370 Z" fill="#0d2340"/><rect x="70" y="292" width="470" height="10" fill="#ef6a2b"/>
-          <rect x="460" y="226" width="60" height="66" fill="#f4f1ea"/><rect x="468" y="236" width="44" height="10" fill="#1f6f8b"/>
-          <g data-stack></g>
-        </g>
-        <defs><clipPath id="below"><rect x="0" y="56" width="600" height="470"/></clipPath></defs>
-        <g clip-path="url(#below)"><g class="hook"><rect x="302" y="-200" width="3" height="336" fill="#0d2340"/><rect x="284" y="132" width="40" height="6" fill="#0d2340"/><rect x="276" y="138" width="56" height="30" fill="#ef6a2b"/><path d="M287 141V165M298 141V165M309 141V165M320 141V165" stroke="rgba(0,0,0,.18)" stroke-width="2"/></g></g>
-        <rect x="438" y="40" width="14" height="260" fill="#0d2340"/><rect x="250" y="40" width="300" height="16" fill="#0d2340"/>
-      </svg>
-    </div>
-  </section>
-</div>
-<div class="strip"><div class="wrap"><span><b>FOB</b> Ningbo, Shenzhen</span><span><b>LCL</b> from 1 CBM</span><span><b>QC</b> on every order</span><span><b>30-day</b> sample turnaround</span></div></div>
-<main class="wrap">
-  <section id="planner">
-    <p class="k">Container load planner</p>
-    <h2 class="h2">Mix it, fill it, ship it.</h2>
-    <div class="pl">
-      <div class="cat">
-        <div class="ct-h"><b>Best sellers · cartons</b><div class="bt"><button type="button" data-clear>Clear</button><button type="button" class="p" data-auto>Auto-fill container</button></div></div>
-        <div data-skus></div>
-      </div>
-      <div class="side">
-        <div class="cont">
-          <div class="ctype" data-ctype></div>
-          <div class="cvis" data-vis></div>
-          <div class="legend" data-legend></div>
-          <div class="bars"><div class="bar"><p><span>Volume</span><b data-vt></b></p><div><i data-vb></i></div></div><div class="bar"><p><span>Weight</span><b data-wt></b></p><div><i data-wb></i></div></div></div>
-          <div class="over" data-over><span data-otext></span><button type="button" data-up>Switch</button></div>
-        </div>
-        <div class="sum" aria-live="polite">
-          <label>Destination port<select data-port><option value="2350">Los Angeles, US</option><option value="2900">New York, US</option><option value="1950">Rotterdam, NL</option><option value="2050">Hamburg, DE</option><option value="1600">Sydney, AU</option><option value="3100">Santos, BR</option></select></label>
-          <div class="r"><span>Cartons</span><b data-cartons></b></div>
-          <div class="r"><span>Units</span><b data-units></b></div>
-          <div class="r"><span>Goods value, FOB</span><b data-fob></b></div>
-          <div class="r"><span>Ocean freight (indicative)</span><b data-fr></b></div>
-          <div class="t"><span>Estimated CFR total</span><b data-total></b></div>
-          <div class="lc" data-lc></div>
-          <button type="button" data-pi disabled>Request proforma invoice</button>
-          <p class="ok" data-ok></p>
+  </div></section>
+
+  <section class="plan" id="plan"><div class="c">
+    <div class="top"><h2 class="disp h2">Plan a container</h2><p class="lead">Add cartons of our best sellers. The load plan fills as you go, and the total shows what each piece costs once it reaches your port.</p></div>
+    <div class="draw">
+      <div class="draw-top">
+        <div class="types" role="group" aria-label="Container size" data-types></div>
+        <div class="meters" aria-live="polite">
+          <div class="meter"><b class="num" data-vp>0%</b><small data-vt>of the space</small></div>
+          <div class="meter"><b class="num" data-wp>0%</b><small data-wt>of the weight limit</small></div>
+          <div class="meter"><b class="num" data-cartons>0</b><small>cartons</small></div>
         </div>
       </div>
+      <div data-elev></div>
+      <div class="legend" data-legend></div>
+      <div class="over-note" data-over><span data-otext></span><button type="button" data-up></button></div>
     </div>
+    <div class="grid2">
+      <div>
+        <table>
+          <thead><tr><th></th><th>Product</th><th class="d">Carton</th><th class="n r">Pieces</th><th class="r">Per piece</th><th class="r">Cartons</th></tr></thead>
+          <tbody data-rows></tbody>
+        </table>
+        <div class="tools"><button type="button" class="u" data-auto>Fill the rest of the container</button><button type="button" class="u" data-clear>Clear</button></div>
+      </div>
+      <aside class="sum" aria-live="polite">
+        <h3>Your load</h3>
+        <label>Destination port<select data-port><option value="2350">Los Angeles</option><option value="2900">New York</option><option value="1950">Rotterdam</option><option value="2050">Hamburg</option><option value="1600">Sydney</option><option value="3100">Santos</option></select></label>
+        <dl>
+          <div><dt>Pieces</dt><dd class="num" data-units>0</dd></div>
+          <div><dt>Goods, free on board</dt><dd class="num" data-fob>$0</dd></div>
+          <div><dt>Ocean freight, estimated</dt><dd class="num" data-fr>$0</dd></div>
+        </dl>
+        <div class="tot"><span>Total to your port</span><b class="num" data-total>$0</b></div>
+        <p class="unit" data-lc>Add cartons to see the cost per piece.</p>
+        <button type="button" class="go" data-pi disabled>Request a proforma invoice</button>
+        <p class="ok" data-ok></p>
+      </aside>
+    </div>
+  </div></section>
+
+  <section class="ship" id="ship">
+    <div class="ph"><img src="img/meridian-port.webp" alt="A container terminal at dusk with gantry cranes" loading="lazy"></div>
+    <div class="in"><div class="c">
+      <h2 class="disp h2">From our floor to your door</h2>
+      <ol>
+        <li><b>Order by Friday</b><span>Confirm your mix and pay a 30% deposit. We book space on the next sailing.</span></li>
+        <li><b>Loaded in Ningbo</b><span>Goods arrive at our warehouse, are inspected and loaded within 21 days. You get photos of the packed container.</span></li>
+        <li><b>At sea</b><span>14 to 32 days depending on your port, with tracking from the day it sails.</span></li>
+      </ol>
+    </div></div>
   </section>
 </main>
-<footer class="wrap foot"><span>Meridian Trading · wholesale housewares</span><span>Concept site by JIEWEITECH</span></footer>
+<footer><div class="c"><span>Meridian Trading Co., Ningbo</span><span>Concept site by JIEWEITECH</span></div></footer>
 <script>
 (function () {
   var $ = function (s) { return document.querySelector(s); };
-  /* id, name, carton cm [l,w,h], units/carton, carton kg, unit FOB, color, icon */
+  /* id, name, carton cm, pieces per carton, carton kg, FOB per piece, plan color */
   var P = [
-    ["MT-1042", "Borosilicate storage jars, set of 3", [52, 38, 34], 12, 14.2, 4.10, "#1f6f8b", "jar"],
-    ["MT-2210", "Bamboo cutting board, 3 sizes", [46, 32, 30], 10, 16.8, 5.60, "#c58b4a", "board"],
-    ["MT-3307", "Stainless insulated bottle 750 ml", [48, 36, 28], 24, 11.6, 3.85, "#ef6a2b", "bottle"],
-    ["MT-4120", "Linen-look table runner", [60, 40, 30], 50, 9.4, 1.95, "#9aa67b", "cloth"],
-    ["MT-5021", "Ceramic dinner plate 27 cm", [56, 30, 30], 24, 19.5, 2.40, "#e4dccb", "plate"],
-    ["MT-6088", "Collapsible laundry hamper", [60, 45, 40], 20, 8.1, 3.20, "#6f86c9", "basket"],
-    ["MT-7003", "Non-stick frying pan 28 cm", [62, 33, 35], 10, 15.3, 7.90, "#8a96a8", "pan"],
-    ["MT-8114", "Glass food containers, 10 pc", [54, 40, 38], 6, 17.9, 9.50, "#5fd0a5", "box"]
+    ["MT-1042", "Borosilicate storage jars, set of 3", [52, 38, 34], 12, 14.2, 4.10, "#2c4a5e"],
+    ["MT-2210", "Bamboo cutting boards, 3 sizes", [46, 32, 30], 10, 16.8, 5.60, "#b98b2e"],
+    ["MT-3307", "Insulated steel bottle, 750 ml", [48, 36, 28], 24, 11.6, 3.85, "#5d7a8c"],
+    ["MT-4120", "Linen-look table runner", [60, 40, 30], 50, 9.4, 1.95, "#9db2bf"],
+    ["MT-5021", "Stoneware dinner plate, 27 cm", [56, 30, 30], 24, 19.5, 2.40, "#d8cdb9"],
+    ["MT-6088", "Collapsible laundry hamper", [60, 45, 40], 20, 8.1, 3.20, "#6e5a3e"],
+    ["MT-7003", "Non-stick frying pan, 28 cm", [62, 33, 35], 10, 15.3, 7.90, "#13202b"],
+    ["MT-8114", "Glass food containers, 10 pieces", [54, 40, 38], 6, 17.9, 9.50, "#f0b323"]
   ];
-  var C = { "20": ["20′ GP", 28, 25000, 1], "40": ["40′ GP", 58, 26500, 1.75], "40hq": ["40′ HQ", 68, 26500, 1.85] };
+  /* name, usable m³, payload kg, freight factor, inside length mm, inside height mm */
+  var C = { "20": ["20 ft", 28, 25000, 1, 5898, 2393], "40": ["40 ft", 58, 26500, 1.75, 12032, 2393], "40hq": ["40 ft high cube", 68, 26500, 1.85, 12032, 2698] };
   var Q = {}, ct = "40hq";
   P.forEach(function (p) { Q[p[0]] = 0; });
   [["MT-1042", 220], ["MT-3307", 300], ["MT-5021", 180], ["MT-7003", 140]].forEach(function (x) { Q[x[0]] = x[1]; });
-  function cbm(p) { return p[2][0] * p[2][1] * p[2][2] / 1e6; }
-  function m(n) { return "$" + Math.round(n).toLocaleString("en-US"); }
-  function icon(k, c) {
-    var I = {
-      jar: '<rect x="12" y="10" width="16" height="6" rx="2" fill="#0d2340"/><rect x="10" y="15" width="20" height="20" rx="5" fill="' + c + '" opacity=".85"/>',
-      board: '<rect x="6" y="12" width="26" height="18" rx="5" fill="' + c + '"/><circle cx="29" cy="21" r="2" fill="#f4f1ea"/>',
-      bottle: '<rect x="16" y="4" width="8" height="5" rx="1" fill="#0d2340"/><rect x="13" y="9" width="14" height="27" rx="5" fill="' + c + '"/>',
-      cloth: '<path d="M6 12 H34 V28 H6 Z" fill="' + c + '"/><path d="M6 16H34M6 24H34" stroke="#fff" stroke-width="1.5" opacity=".6"/>',
-      plate: '<circle cx="20" cy="20" r="15" fill="' + c + '" stroke="#bfb39a"/><circle cx="20" cy="20" r="9" fill="none" stroke="#bfb39a"/>',
-      basket: '<path d="M8 12 H32 L29 34 H11 Z" fill="' + c + '"/><path d="M10 18H30M10 24H30" stroke="#fff" stroke-width="1.5" opacity=".5"/>',
-      pan: '<circle cx="16" cy="22" r="11" fill="' + c + '"/><rect x="26" y="20" width="12" height="4" rx="2" fill="#0d2340"/>',
-      box: '<rect x="7" y="16" width="26" height="16" rx="3" fill="' + c + '" opacity=".8"/><rect x="6" y="12" width="28" height="5" rx="2" fill="#0d2340"/>'
-    };
-    return '<svg viewBox="0 0 40 40">' + I[k] + "</svg>";
-  }
-  $("[data-skus]").innerHTML = P.map(function (p) {
-    return '<div class="sku" data-id="' + p[0] + '"><span class="ic" style="background:' + p[6] + '22">' + icon(p[7], p[6]) + '</span><div><b>' + p[1] + "</b><small>" + p[0] + " · " + p[3] + " pcs/ctn · " + p[2].join("×") + " cm · " + cbm(p).toFixed(3) + " m³ · " + p[4] + ' kg</small></div><div class="pr">$' + p[5].toFixed(2) + "<small> /pc</small></div>" + '<div class="st"><button type="button" data-d="-10" aria-label="10 fewer cartons">−</button><input inputmode="numeric" aria-label="Cartons of ' + p[1] + '"><button type="button" data-d="10" aria-label="10 more cartons">+</button></div></div>';
+  var cbm = function (p) { return p[2][0] * p[2][1] * p[2][2] / 1e6; };
+  var m = function (n) { return "$" + Math.round(n).toLocaleString("en-US"); };
+  var mm = function (n) { return n.toLocaleString("en-US") + " mm"; };
+
+  $("[data-types]").innerHTML = Object.keys(C).map(function (k) { return '<button type="button" data-c="' + k + '">' + C[k][0] + "</button>"; }).join("");
+  $("[data-legend]").innerHTML = P.map(function (p) { return '<span><i style="background:' + p[6] + '"></i>' + p[1].split(",")[0] + "</span>"; }).join("");
+  $("[data-rows]").innerHTML = P.map(function (p) {
+    return '<tr data-id="' + p[0] + '"><td class="sw"><i style="background:' + p[6] + '"></i></td><td class="p"><b>' + p[1] + "</b><small>" + p[0] + '</small></td><td class="d num">' + p[2].join(" × ") + ' cm</td><td class="n r num">' + p[3] + '</td><td class="f r num">$' + p[5].toFixed(2) + '</td><td class="q r"><span class="st"><button type="button" data-d="-10" aria-label="10 fewer cartons of ' + p[1] + '">−</button><input inputmode="numeric" aria-label="Cartons of ' + p[1] + '"><button type="button" data-d="10" aria-label="10 more cartons of ' + p[1] + '">+</button></span></td></tr>';
   }).join("");
-  $("[data-ctype]").innerHTML = Object.keys(C).map(function (k) { return '<button type="button" data-c="' + k + '">' + C[k][0] + "<small>" + C[k][1] + " m³ · " + (C[k][2] / 1000).toFixed(1) + " t</small></button>"; }).join("");
-  $("[data-legend]").innerHTML = P.map(function (p) { return '<span><i style="background:' + p[6] + '"></i>' + p[0] + "</span>"; }).join("");
+
   function totals() { var v = 0, w = 0, u = 0, f = 0, n = 0; P.forEach(function (p) { var q = Q[p[0]]; n += q; v += q * cbm(p); w += q * p[4]; u += q * p[3]; f += q * p[3] * p[5]; }); return { v: v, w: w, u: u, f: f, n: n }; }
-  function vis(t) {
-    var c = C[ct], cols = Math.round(26 * c[3] / 1.85), rows = ct === "40hq" ? 7 : 6, cells = cols * rows, W = 560, H = 190, cw = (W - 24) / cols, ch = (H - 24) / rows;
-    var s = '<svg viewBox="0 0 ' + W + " " + H + '"><rect x="2" y="2" width="' + (W - 4) + '" height="' + (H - 4) + '" rx="6" fill="#132b4b" stroke="#ef6a2b" stroke-width="4"/>';
-    for (var i = 1; i < 14; i++) s += '<path d="M' + (i * W / 14) + ' 4V' + (H - 4) + '" stroke="#1d3a60" stroke-width="2"/>';
+
+  /* the load plan: a side elevation drawn to scale, filled back to front */
+  function elevation() {
+    var c = C[ct], W = 1200, maxLen = 12032, x0 = 70, y0 = 46, L = (W - 140) * c[4] / maxLen, H = 250 * c[5] / 2698, base = y0 + 250;
+    var top = base - H, cols = Math.round(36 * c[4] / maxLen), rows = c[5] > 2500 ? 7 : 6, cw = L / cols, rh = H / rows, cells = cols * rows;
+    var s = '<svg class="elev" viewBox="0 0 ' + W + ' 360" role="img" aria-label="Load plan for a ' + c[0] + ' container">';
+    s += '<rect x="' + x0 + '" y="' + top + '" width="' + L + '" height="' + H + '" fill="#fff" stroke="#13202b" stroke-width="2"/>';
     var idx = 0;
     P.forEach(function (p) {
       var n = Math.round(Q[p[0]] * cbm(p) / c[1] * cells);
-      for (var k = 0; k < n && idx < cells; k++, idx++) { var col = Math.floor(idx / rows), row = idx % rows; s += '<rect x="' + (12 + col * cw + 1) + '" y="' + (H - 12 - (row + 1) * ch + 1) + '" width="' + (cw - 2) + '" height="' + (ch - 2) + '" rx="2" fill="' + p[6] + '"/>'; }
+      for (var k = 0; k < n && idx < cells; k++, idx++) {
+        var col = Math.floor(idx / rows), row = idx % rows;
+        s += '<rect x="' + (x0 + col * cw + 1.5).toFixed(1) + '" y="' + (base - (row + 1) * rh + 1.5).toFixed(1) + '" width="' + (cw - 3).toFixed(1) + '" height="' + (rh - 3).toFixed(1) + '" fill="' + p[6] + '"/>';
+      }
     });
-    if (t.v > c[1]) s += '<rect x="2" y="2" width="' + (W - 4) + '" height="' + (H - 4) + '" rx="6" fill="none" stroke="#ff4d4d" stroke-width="6" stroke-dasharray="10 8"/>';
-    s += "</svg>";
-    return s;
+    for (var i = 1; i < 26; i++) { var xx = x0 + L * i / 26; s += '<path d="M' + xx.toFixed(1) + " " + top + "V" + (top + 6) + "M" + xx.toFixed(1) + " " + base + "V" + (base - 6) + '" stroke="#13202b" stroke-width="1"/>'; }
+    s += '<rect x="' + (x0 + L) + '" y="' + (top - 4) + '" width="10" height="' + (H + 8) + '" fill="#13202b"/>';
+    s += '<rect x="' + (x0 - 6) + '" y="' + (top - 4) + '" width="6" height="' + (H + 8) + '" fill="#13202b"/>';
+    s += '<text x="' + (x0 + L - 14) + '" y="' + (top + 26) + '" text-anchor="end" font-family="Archivo V,Arial" font-stretch="64%" font-weight="800" font-size="22" fill="#13202b" opacity=".18">MRDU 482193 7  ' + (ct === "20" ? "22G1" : ct === "40" ? "42G1" : "45G1") + "</text>";
+    // dimension lines
+    s += '<path d="M' + x0 + " " + (base + 34) + "H" + (x0 + L) + "M" + x0 + " " + (base + 26) + "V" + (base + 42) + "M" + (x0 + L) + " " + (base + 26) + "V" + (base + 42) + '" stroke="#45535e" stroke-width="1.2"/>';
+    s += '<text x="' + (x0 + L / 2) + '" y="' + (base + 58) + '" text-anchor="middle" font-family="Archivo V,Arial" font-size="15" fill="#45535e">' + mm(c[4]) + " inside length</text>";
+    s += '<path d="M' + (x0 - 30) + " " + top + "V" + base + "M" + (x0 - 38) + " " + top + "H" + (x0 - 22) + "M" + (x0 - 38) + " " + base + "H" + (x0 - 22) + '" stroke="#45535e" stroke-width="1.2"/>';
+    s += '<text transform="translate(' + (x0 - 44) + " " + (top + H / 2) + ') rotate(-90)" text-anchor="middle" font-family="Archivo V,Arial" font-size="15" fill="#45535e">' + mm(c[5]) + "</text>";
+    if (idx >= cells && totals().v > c[1]) s += '<rect x="' + x0 + '" y="' + top + '" width="' + L + '" height="' + H + '" fill="none" stroke="#9b3b26" stroke-width="5" stroke-dasharray="14 10"/>';
+    return s + "</svg>";
   }
   function paint() {
     var t = totals(), c = C[ct], vp = t.v / c[1] * 100, wp = t.w / c[2] * 100;
-    document.querySelectorAll("[data-c]").forEach(function (b) { b.classList.toggle("on", b.dataset.c === ct); });
-    document.querySelectorAll(".sku").forEach(function (r) { var q = Q[r.dataset.id]; r.classList.toggle("on", q > 0); var i = r.querySelector("input"); if (document.activeElement !== i) i.value = q; });
-    $("[data-vis]").innerHTML = vis(t);
-    $("[data-vt]").textContent = t.v.toFixed(1) + " / " + c[1] + " m³ · " + Math.round(vp) + "%";
-    $("[data-wt]").textContent = Math.round(t.w).toLocaleString("en-US") + " / " + c[2].toLocaleString("en-US") + " kg · " + Math.round(wp) + "%";
-    $("[data-vb]").style.width = Math.min(100, vp) + "%"; $("[data-vb]").classList.toggle("hi", vp > 100);
-    $("[data-wb]").style.width = Math.min(100, wp) + "%"; $("[data-wb]").classList.toggle("hi", wp > 100);
-    var over = $("[data-over]"), next = ct === "20" ? "40" : ct === "40" ? "40hq" : null;
-    if (vp > 100 || wp > 100) { over.classList.add("on"); $("[data-otext]").textContent = (vp > 100 ? "Over volume by " + (t.v - c[1]).toFixed(1) + " m³." : "Over the weight limit.") + (next ? " A " + C[next][0] + " fits more." : " Split into two containers."); over.querySelector("button").style.display = next ? "" : "none"; over.querySelector("button").textContent = next ? "Switch to " + C[next][0] : ""; }
-    else over.classList.remove("on");
+    document.querySelectorAll("[data-c]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.c === ct)); });
+    document.querySelectorAll("tbody tr").forEach(function (r) { var q = Q[r.dataset.id], i = r.querySelector("input"); r.classList.toggle("on", q > 0); if (document.activeElement !== i) i.value = q; });
+    $("[data-elev]").innerHTML = elevation();
+    $("[data-vp]").textContent = Math.round(vp) + "%"; $("[data-vp]").classList.toggle("over", vp > 100);
+    $("[data-wp]").textContent = Math.round(wp) + "%"; $("[data-wp]").classList.toggle("over", wp > 100);
+    $("[data-vt]").textContent = "of the space, " + t.v.toFixed(1) + " of " + c[1] + " m³";
+    $("[data-wt]").textContent = "of the weight limit, " + (t.w / 1000).toFixed(1) + " of " + (c[2] / 1000).toFixed(1) + " t";
+    $("[data-cartons]").textContent = t.n.toLocaleString("en-US");
+    var next = ct === "20" ? "40" : ct === "40" ? "40hq" : null, over = $("[data-over]"), up = $("[data-up]");
+    if (vp > 100 || wp > 100) {
+      over.classList.add("on");
+      $("[data-otext]").textContent = (vp > 100 ? "This mix needs " + (t.v - c[1]).toFixed(1) + " m³ more than a " + c[0] + " container holds." : "This mix is over the weight limit.") + (next ? "" : " Split it into two containers or remove some cartons.");
+      up.hidden = !next; if (next) up.textContent = "Use a " + C[next][0] + " container";
+    } else over.classList.remove("on");
     var fr = Math.round(+$("[data-port]").value * c[3]);
-    $("[data-cartons]").textContent = t.n.toLocaleString("en-US"); $("[data-units]").textContent = t.u.toLocaleString("en-US");
+    $("[data-units]").textContent = t.u.toLocaleString("en-US");
     $("[data-fob]").textContent = m(t.f); $("[data-fr]").textContent = t.n ? m(fr) : "$0";
     $("[data-total]").textContent = m(t.n ? t.f + fr : 0);
-    $("[data-lc]").innerHTML = t.u ? "Freight adds <b>$" + (fr / t.u).toFixed(2) + "</b> per unit. " + (vp < 85 ? "Fill the remaining " + (c[1] - t.v).toFixed(1) + " m³ to bring that down." : "Well packed, nice.") : "Add cartons to see cost per unit.";
+    $("[data-lc]").textContent = t.u ? "Freight adds $" + (fr / t.u).toFixed(2) + " to each piece." + (vp < 85 ? " Filling the remaining " + (c[1] - t.v).toFixed(1) + " m³ would bring that down." : "") : "Add cartons to see the cost per piece.";
     $("[data-pi]").disabled = !t.n || vp > 100 || wp > 100;
   }
-  $("[data-skus]").addEventListener("click", function (e) { var b = e.target.closest("[data-d]"); if (!b) return; var id = b.closest("[data-id]").dataset.id; Q[id] = Math.max(0, Q[id] + +b.dataset.d); $("[data-ok]").textContent = ""; paint(); });
-  $("[data-skus]").addEventListener("input", function (e) { var id = e.target.closest("[data-id]").dataset.id; Q[id] = Math.max(0, Math.min(9999, parseInt(e.target.value, 10) || 0)); paint(); });
-  $("[data-ctype]").addEventListener("click", function (e) { var b = e.target.closest("[data-c]"); if (b) { ct = b.dataset.c; paint(); } });
+  var tbody = $("[data-rows]");
+  tbody.addEventListener("click", function (e) { var b = e.target.closest("[data-d]"); if (!b) return; var id = b.closest("tr").dataset.id; Q[id] = Math.max(0, Q[id] + +b.dataset.d); $("[data-ok]").textContent = ""; paint(); });
+  tbody.addEventListener("input", function (e) { var id = e.target.closest("tr").dataset.id; Q[id] = Math.max(0, Math.min(9999, parseInt(e.target.value, 10) || 0)); paint(); });
+  $("[data-types]").addEventListener("click", function (e) { var b = e.target.closest("[data-c]"); if (b) { ct = b.dataset.c; paint(); } });
   $("[data-up]").addEventListener("click", function () { ct = ct === "20" ? "40" : "40hq"; paint(); });
   $("[data-port]").addEventListener("change", paint);
-  $("[data-clear]").addEventListener("click", function () { P.forEach(function (p) { Q[p[0]] = 0; }); paint(); });
+  $("[data-clear]").addEventListener("click", function () { P.forEach(function (p) { Q[p[0]] = 0; }); $("[data-ok]").textContent = ""; paint(); });
   $("[data-auto]").addEventListener("click", function () {
     var c = C[ct], t = totals(), free = c[1] * 0.97 - t.v, wfree = c[2] * 0.97 - t.w;
     if (free <= 0.2) { $("[data-ok]").textContent = "The container is already full."; return; }
     var picks = P.filter(function (p) { return Q[p[0]] > 0; }); if (!picks.length) picks = P;
-    var per = free / picks.length;
-    picks.forEach(function (p) { var add = Math.floor(per / cbm(p)); add = Math.min(add, Math.floor(wfree / picks.length / p[4])); Q[p[0]] += Math.max(0, add); });
-    $("[data-ok]").textContent = "Topped up " + picks.length + " product" + (picks.length > 1 ? "s" : "") + " to fill the " + c[0] + ".";
+    picks.forEach(function (p) { var add = Math.min(Math.floor(free / picks.length / cbm(p)), Math.floor(wfree / picks.length / p[4])); Q[p[0]] += Math.max(0, add); });
+    $("[data-ok]").textContent = "Filled the rest of the " + c[0] + " container with more of the same products.";
     paint();
   });
-  $("[data-pi]").addEventListener("click", function () { $("[data-ok]").textContent = "✓ Proforma PI-" + Math.floor(20000 + Math.random() * 79999) + " requested. Your account manager will send it with stock dates within one working day."; });
-  /* hero: containers stacked on the ship */
-  var cols = ["#ef6a2b", "#1f6f8b", "#0d2340", "#e4dccb", "#5fd0a5", "#ef6a2b", "#6f86c9", "#1f6f8b", "#0d2340", "#ef6a2b", "#c58b4a", "#1f6f8b"], st = "";
-  for (var i = 0; i < 12; i++) { var x = 96 + (i % 6) * 60, y = 262 - Math.floor(i / 6) * 34; if (i === 9) continue; st += '<g><rect x="' + x + '" y="' + y + '" width="56" height="30" fill="' + cols[i] + '"/>' + [1, 2, 3, 4].map(function (k) { return '<path d="M' + (x + k * 11) + " " + (y + 3) + "V" + (y + 27) + '" stroke="rgba(0,0,0,.18)" stroke-width="2"/>'; }).join("") + "</g>"; }
-  $("[data-stack]").innerHTML = st;
+  $("[data-pi]").addEventListener("click", function () { $("[data-ok]").textContent = "Requested. Proforma PI-" + Math.floor(20000 + Math.random() * 79999) + " will reach your inbox within one working day, with stock dates."; });
   paint();
 })();
 </script>

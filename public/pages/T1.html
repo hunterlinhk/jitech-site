@@ -3,191 +3,232 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Wag &amp; Co. | Fresh food and good gear for dogs and cats</title>
+<title>Wag &amp; Co. | Fresh food, cooked and portioned for your dog</title>
 <script src="assets/base.js"></script>
-<script src="assets/pets.js"></script>
 <link rel="stylesheet" href="assets/base.css">
 <style>
-:root{--cr:#fff4e4;--ink:#1f1b3d;--co:#ff6a45;--mi:#9fe0c6;--bu:#ffd166;--li:#c9b8ff;--mut:#6c6681}
-body{background:var(--cr);color:var(--ink);font-family:"Inter V",Arial,sans-serif;font-size:16px}
+/* Wag & Co.: Instrument Serif for the voice, Manrope for the working text; spruce ink on white, a cool sky panel, collar red for actions. */
+:root{--ink:#1f3a31;--soft:#5b6f67;--white:#fff;--sky:#d6e4ec;--sky2:#eaf1f5;--red:#d2302a;--line:rgba(31,58,49,.16);--w:min(1320px,100% - 64px)}
 html,body{overflow-x:clip}
-.bq{font-family:"Bricolage V",Arial,sans-serif}
-.wrap{width:min(1320px,100% - 56px);margin:0 auto}
-.nav{height:80px;display:flex;align-items:center;gap:26px;font-weight:600;font-size:15px}
-.logo{font-family:"Bricolage V",sans-serif;font-weight:800;font-size:32px;letter-spacing:-.05em;margin-right:auto;display:flex;align-items:center;gap:8px}
-.logo i{width:34px;height:34px;border-radius:50%;background:var(--co);display:grid;place-items:center}
-.logo i svg{width:22px}
-.nav .cart{background:var(--ink);color:var(--cr);border-radius:999px;padding:12px 18px;display:flex;gap:8px;align-items:center}
-.nav .cart b{background:var(--co);border-radius:99px;min-width:22px;height:22px;display:grid;place-items:center;font-size:12px}
-.hero{height:calc(100vh - 80px);min-height:520px;display:grid;grid-template-columns:1.05fr 1fr;gap:20px;align-items:center;padding-bottom:4vh}
-.tag{display:inline-flex;gap:8px;align-items:center;background:#fff;border-radius:99px;padding:8px 14px 8px 8px;font-weight:700;font-size:14px;box-shadow:0 4px 0 var(--ink)}
-.tag span{background:var(--mi);border-radius:99px;padding:3px 10px}
-h1{font-family:"Bricolage V",sans-serif;font-weight:800;font-size:clamp(60px,min(8vw,14vh),142px);line-height:.86;letter-spacing:-.06em;margin:clamp(16px,3vh,28px) 0}
-h1 em{font-style:normal;color:var(--co);display:inline-block;transform:rotate(-3deg)}
-.lede{max-width:27em;line-height:1.55;color:var(--mut);font-size:clamp(16px,1.25vw,19px)}
-.cta{display:flex;gap:12px;margin-top:clamp(20px,3.6vh,34px);flex-wrap:wrap}
-.b1{background:var(--co);color:#fff;font-weight:800;border-radius:999px;padding:18px 28px;box-shadow:0 5px 0 var(--ink)}
-.b2{border:2px solid var(--ink);font-weight:700;border-radius:999px;padding:16px 24px}
-.stage{position:relative;justify-self:center;width:min(44vw,76vh);aspect-ratio:1}
-.sun{position:absolute;inset:8%;border-radius:50%;background:var(--bu)}
-.sun::after{content:"";position:absolute;inset:-7%;border-radius:50%;border:3px dashed var(--ink);opacity:.25;animation:spin 40s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.dog{position:absolute;left:10%;top:12%;width:80%;animation:wag 3.2s ease-in-out infinite alternate}
-@keyframes wag{to{transform:translateY(-10px) rotate(1.5deg)}}
-.fl{position:absolute;width:24%;filter:drop-shadow(0 12px 14px rgba(31,27,61,.18));animation:fl 5s ease-in-out infinite alternate}
-@keyframes fl{to{transform:translateY(-16px) rotate(8deg)}}
-.f1{left:-4%;top:58%}.f2{right:-2%;top:6%;animation-delay:-2s}.f3{right:-6%;top:62%;width:20%;animation-delay:-3.4s}
-.chip{position:absolute;left:2%;top:8%;background:#fff;border-radius:18px;padding:12px 16px;font-weight:700;box-shadow:0 5px 0 var(--ink);font-size:14px}
-.chip small{display:block;color:var(--mut);font-weight:500;font-size:12px}
-.strip{background:var(--ink);color:var(--cr);overflow:hidden;white-space:nowrap;padding:14px 0;font-family:"Bricolage V",sans-serif;font-weight:700;font-size:20px}
-.strip div{display:inline-block;animation:mq 30s linear infinite}
-.strip span{color:var(--bu);margin:0 18px}
-@keyframes mq{to{transform:translateX(-50%)}}
-section{padding:clamp(70px,8vw,120px) 0}
-.h2{font-family:"Bricolage V",sans-serif;font-weight:800;font-size:clamp(42px,5vw,80px);letter-spacing:-.05em;line-height:.92}
-.cats{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:40px}
-.cat{background:#fff;border-radius:24px;padding:14px 14px 18px;border:2px solid var(--ink);transition:transform .35s cubic-bezier(.16,1,.3,1)}
-.cat:hover{transform:translateY(-6px) rotate(-1.5deg)}
-.cat .pic{border-radius:16px;aspect-ratio:1}
-.cat b{display:block;margin-top:12px;font-size:17px}
-.cat small{color:var(--mut)}
-/* food finder */
-.ff{background:var(--li);border-radius:36px;padding:clamp(24px,4vw,56px);display:grid;grid-template-columns:minmax(0,1.1fr) minmax(300px,.9fr);gap:clamp(24px,4vw,60px)}
-.ff .k{font-weight:800;font-size:13px;letter-spacing:.14em;text-transform:uppercase}
-.ff .h2{margin:10px 0 24px}
-.q{padding:16px 0;border-top:2px solid rgba(31,27,61,.14)}
-.q>p{font-weight:800;margin-bottom:10px;display:flex;justify-content:space-between}
-.q>p output{font-family:"Bricolage V",sans-serif}
-.op{display:flex;flex-wrap:wrap;gap:8px}
-.op button{background:#fff;border-radius:999px;padding:10px 16px;font-weight:700;font-size:14.5px;border:2px solid transparent}
-.op button.on{border-color:var(--ink);box-shadow:0 3px 0 var(--ink);background:var(--bu)}
-.op button[aria-pressed=true]{background:var(--mi);border-color:var(--ink)}
-input[type=range]{width:100%;accent-color:var(--co)}
-.res{background:var(--cr);border-radius:28px;padding:24px;border:2px solid var(--ink);box-shadow:0 8px 0 var(--ink);align-self:start;position:sticky;top:20px}
-.res .bag{width:62%;margin:-8px auto 0;display:block}
-.res h3{font-family:"Bricolage V",sans-serif;font-size:30px;letter-spacing:-.04em;line-height:1}
-.res .why{color:var(--mut);font-size:14px;margin:6px 0 14px;line-height:1.45}
-.stat{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
-.stat div{background:#fff;border-radius:14px;padding:10px;text-align:center}
-.stat b{display:block;font-family:"Bricolage V",sans-serif;font-size:22px}
-.stat small{color:var(--mut);font-size:12px}
-.sz{display:flex;gap:6px;margin-bottom:12px}
-.sz button{flex:1;background:#fff;border-radius:12px;padding:10px 4px;font-weight:700;font-size:14px;border:2px solid transparent}
-.sz button.on{border-color:var(--ink)}
-.auto{display:flex;align-items:center;gap:10px;font-weight:600;font-size:14px;margin-bottom:14px}
-.auto input{width:20px;height:20px;accent-color:var(--co)}
-.buy{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.buy .p{font-family:"Bricolage V",sans-serif;font-weight:800;font-size:34px;letter-spacing:-.03em}
-.buy .p s{font-size:18px;opacity:.45;margin-right:6px}
-.buy{flex-wrap:wrap}.buy button{white-space:nowrap;background:var(--co);color:#fff;font-weight:800;border-radius:999px;padding:15px 22px;box-shadow:0 4px 0 var(--ink)}
-.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,200%);opacity:0;background:var(--ink);color:var(--cr);padding:14px 20px;border-radius:99px;font-weight:700;transition:transform .4s cubic-bezier(.16,1,.3,1);z-index:9}
+body{background:var(--white);color:var(--ink);font-family:"Manrope V",Arial,sans-serif;font-size:17px;line-height:1.55}
+.serif{font-family:"Instrument Serif",Georgia,serif;font-weight:400;letter-spacing:-.01em}
+.c{width:var(--w);margin:0 auto}
+.num{font-variant-numeric:tabular-nums}
+.btn{display:inline-block;background:var(--red);color:#fff;font-weight:700;padding:17px 26px;border-radius:4px;font-size:16px}
+.btn:hover{background:#b8231e}
+.lnk{text-decoration:underline;text-underline-offset:.25em;text-decoration-thickness:1px;font-weight:600}
+/* hero */
+.hero{position:relative;height:100vh;min-height:620px;overflow:hidden;background:linear-gradient(110deg,#eef3f6 0%,#dbe7ee 55%,#c8d9e3 100%)}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:72% 40%}
+.hero>img.broken{display:none}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.88) 0%,rgba(255,255,255,.55) 34%,rgba(255,255,255,0) 58%);pointer-events:none}
+/* stand-in until the photo arrives: an empty steel bowl waiting on the floor */
+.bowl{position:absolute;right:16%;bottom:16%;width:min(30vw,360px);aspect-ratio:2.6;border-radius:50%;background:radial-gradient(ellipse at 50% 38%,#f4f7f9 0 30%,#aebbc4 31% 46%,#7f8d97 47% 60%,#c9d3da 61% 100%);box-shadow:0 30px 40px -18px rgba(31,58,49,.35)}
+.nav{position:absolute;z-index:3;left:0;right:0;top:0}
+.nav .c{display:flex;align-items:center;gap:34px;height:86px;font-weight:600;font-size:15.5px}
+.word{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:34px;letter-spacing:-.01em;margin-right:18px;line-height:1}
+.nav .cart{margin-left:auto;background:rgba(255,255,255,.82)}
+.nw{white-space:nowrap}
+.cart{display:flex;align-items:center;gap:8px;border:1.5px solid var(--ink);border-radius:4px;padding:9px 14px}
+.cart b{min-width:20px;height:20px;border-radius:10px;background:var(--ink);color:#fff;font-size:12px;display:grid;place-items:center;padding:0 5px}
+.hero .txt{position:absolute;z-index:2;left:0;right:0;top:50%;transform:translateY(-44%)}
+.hero h1{font-size:clamp(68px,min(8.6vw,15vh),150px);line-height:.92;max-width:6.2em}
+.hero p{max-width:25em;margin-top:clamp(18px,3vh,28px);font-size:clamp(17px,1.3vw,20px);color:#2f4a40}
+.acts{display:flex;align-items:center;gap:26px;margin-top:clamp(22px,3.6vh,34px);flex-wrap:wrap}
+/* plan builder */
+section{padding:clamp(80px,10vw,150px) 0}
+.h2{font-size:clamp(52px,6.2vw,96px);line-height:.95}
+.plan{background:var(--sky2)}
+.pgrid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr);gap:clamp(30px,5vw,80px);align-items:start;margin-top:clamp(30px,4vw,56px)}
+.sentence{font-family:"Instrument Serif",Georgia,serif;font-size:clamp(34px,3.6vw,54px);line-height:1.45}
+.sentence input,.sentence select{font:inherit;color:var(--red);background:transparent;border:0;border-bottom:2px solid currentColor;padding:0 2px;margin:0 2px;border-radius:0;-webkit-appearance:none;appearance:none;cursor:pointer}
+.sentence select{padding-right:.9em;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23d2302a' stroke-width='1.6'/%3E%3C/svg%3E") right .1em center/.42em no-repeat}
+.sentence input[type=number]{-moz-appearance:textfield;text-align:center}
+.sentence input::-webkit-inner-spin-button{display:none}
+.sentence :focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+.note{margin-top:22px;color:var(--soft);font-size:15.5px;max-width:34em}
+.card{background:var(--white);padding:clamp(22px,2.4vw,34px);border-radius:6px;position:sticky;top:24px}
+.pouch{position:relative;width:min(260px,64%);margin:-4px auto 18px;aspect-ratio:4/5;filter:drop-shadow(0 18px 22px rgba(31,58,49,.18))}
+.pouch>img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:1}
+.pouch>img.broken{display:none}
+.pouch>img:not(.broken)~.shape{display:none}
+.pouch>img:not(.broken)~.label{background:transparent}
+.pouch .shape{position:absolute;left:12%;right:12%;top:6%;bottom:2%;background:linear-gradient(90deg,#b08a5c,#c9a576 45%,#a98153);border-radius:4px 4px 8px 8px;box-shadow:0 18px 30px -16px rgba(31,58,49,.45)}
+.pouch .shape::before{content:"";position:absolute;left:0;right:0;top:0;height:22%;background:#f3f1ec;border-radius:4px 4px 0 0}
+.pouch .label{position:absolute;z-index:2;left:21.5%;right:21.5%;top:39%;height:27%;border-radius:3%/5%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:#fff;color:var(--ink);line-height:1}
+.pouch .label b{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(20px,2.2vw,30px);max-width:92%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pouch .label small{font-size:9.5px;font-weight:700;letter-spacing:.04em;margin-top:5px;color:var(--soft)}
+.card h3{font-size:clamp(34px,3vw,44px);line-height:1}
+.recipe{color:var(--soft);margin-top:4px}
+.daily{display:flex;align-items:baseline;gap:14px;margin:20px 0 4px;flex-wrap:wrap}
+.daily b{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(64px,6vw,88px);line-height:.85}
+.daily span{color:var(--soft)}
+.lasts{color:var(--soft);font-size:15.5px}
+.sizes{display:flex;margin:22px 0 14px;border:1.5px solid var(--ink);border-radius:4px;overflow:hidden}
+.sizes button{flex:1;padding:11px 6px;font-weight:700;font-size:15px}
+.sizes button+button{border-left:1.5px solid var(--ink)}
+.sizes button[aria-pressed=true]{background:var(--ink);color:#fff}
+.auto{display:flex;gap:10px;align-items:flex-start;font-size:15.5px;cursor:pointer}
+.auto input{width:19px;height:19px;margin-top:2px;accent-color:var(--red)}
+.buy{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:22px;flex-wrap:wrap}
+.price{font-size:30px;font-weight:800}
+.price s{font-size:17px;font-weight:600;color:var(--soft);margin-right:8px}
+/* the bowl: the photo runs edge to edge and the words sit on the clean wood beside it */
+.bowlsec{position:relative;padding:0;min-height:clamp(560px,56vw,860px);display:flex;align-items:center}
+.bowlsec .ph{position:absolute;inset:0;--ph:linear-gradient(135deg,#e7d9c4,#cdb48f)}
+.bowlsec .ph img{object-position:100% 50%}
+.bowlsec .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,250,243,.55),rgba(255,250,243,.2) 40%,rgba(255,250,243,0) 55%)}
+.bowlsec .g{position:relative;z-index:1;padding:clamp(70px,8vw,120px) 0}
+.bowlsec .g>div{max-width:min(460px,42%)}
+.ing li{border-bottom-color:rgba(31,58,49,.22)}
+.bowlsec .why{color:#3b5249}
+.ing{margin-top:26px;display:grid;gap:0}
+.ing li{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid var(--line)}
+.ing li span:last-child{color:var(--soft)}
+.bowlsec .why{margin-top:22px;color:var(--soft);max-width:30em}
+/* supplies */
+.supplies{padding-top:clamp(80px,10vw,150px)}
+.supplies .head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:clamp(28px,4vw,48px)}
+.prod{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,28px)}
+.prod .ph{aspect-ratio:1;border-radius:6px;--ph:var(--sky)}
+.prod .meta{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:14px}
+.prod b{font-weight:700}
+.prod small{display:block;color:var(--soft);font-size:15px}
+.prod button{margin-top:12px;border:1.5px solid var(--ink);border-radius:4px;padding:10px 16px;font-weight:700;font-size:15px}
+.prod button:hover{background:var(--ink);color:#fff}
+footer{padding:40px 0 48px;color:var(--soft);font-size:15px;border-top:1px solid var(--line)}
+footer .c{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.toast{position:fixed;left:50%;bottom:24px;z-index:9;transform:translate(-50%,180%);opacity:0;background:var(--ink);color:#fff;padding:14px 20px;border-radius:4px;font-weight:600;transition:transform .35s cubic-bezier(.16,1,.3,1),opacity .35s}
 .toast.on{transform:translate(-50%,0);opacity:1}
-.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:30px 0 40px;color:var(--mut);font-weight:600}
-@media (max-width:1000px){.cats{grid-template-columns:repeat(3,1fr)}.ff{grid-template-columns:minmax(0,1fr)}.res{position:static}}
-@media (max-width:860px){.nav a:not(.logo):not(.cart){display:none}.hero{grid-template-columns:1fr;height:auto;padding:20px 0 50px}.stage{width:84vw}}
-@media (max-width:520px){.cats{grid-template-columns:1fr 1fr}.wrap{width:calc(100% - 32px)}}
+:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+@media (max-width:980px){.bowlsec{display:block;min-height:0}.bowlsec .ph{position:relative;height:62vw}.bowlsec .ph::after{display:none}.bowlsec .ph img{object-position:85% 50%}.bowlsec .g>div{max-width:none}.bowlsec .g{padding:48px 0 0}.pgrid{grid-template-columns:minmax(0,1fr)}.card{position:static}.prod{grid-template-columns:1fr 1fr}}
+@media (max-width:760px){.nav a:not(.word):not(.cart){display:none}.hero{height:auto;min-height:0;background:#fff}.hero::after{display:none}.hero>img{position:relative;display:block;height:min(62vh,520px);object-position:70% 30%}.hero .txt{position:relative;top:auto;transform:none;padding:28px 0 52px}.bowl{right:8%;bottom:auto;top:24%;width:56vw}}
+@media (max-width:560px){:root{--w:calc(100% - 32px)}body{font-size:16px}.prod{grid-template-columns:1fr 1fr}.prod>div:last-child{grid-column:1/-1}.sentence{line-height:1.6}}
+@media (prefers-reduced-motion:reduce){.toast{transition:none}}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header class="nav"><a class="logo" href="#"><i><svg viewBox="-16 -18 32 32" fill="#fff"><ellipse cx="0" cy="6" rx="9" ry="7.5"/><ellipse cx="-10" cy="-6" rx="4" ry="5"/><ellipse cx="-3.5" cy="-11" rx="4" ry="5"/><ellipse cx="3.5" cy="-11" rx="4" ry="5"/><ellipse cx="10" cy="-6" rx="4" ry="5"/></svg></i>wag&amp;co.</a><a href="#shop">Dogs</a><a href="#shop">Cats</a><a href="#finder">Food finder</a><a href="#finder">Autoship</a><a class="cart" href="#">Cart <b data-count>0</b></a></header>
-  <section class="hero" style="padding-top:0">
-    <div>
-      <span class="tag" data-in><span>New</span> Fresh-cooked recipes, delivered cold</span>
-      <h1 data-in style="--d:1">Good food for <em>good boys.</em></h1>
-      <p class="lede" data-in style="--d:2">Vet-built recipes, sturdy toys and comfy beds for dogs and cats. Answer five quick questions and we’ll portion their food to the gram.</p>
-      <div class="cta" data-in style="--d:3"><a class="b1" href="#finder">Find their food</a><a class="b2" href="#shop">Shop all</a></div>
-    </div>
-    <div class="stage" data-fade style="--d:1">
-      <div class="sun"></div>
-      <div class="dog" data-art="dog"></div>
-      <div class="fl f1" data-art="ball"></div>
-      <div class="fl f2" data-art="treats"></div>
-      <div class="fl f3" data-art="tag"></div>
-      <div class="chip">★ 4.9 from 18,200 pet parents<small>Free delivery over $49</small></div>
-    </div>
-  </section>
-</div>
-<div class="strip" aria-hidden="true"><div>Free delivery over $49 <span>✦</span> Save 10% on autoship <span>✦</span> Vet-approved recipes <span>✦</span> 60-day happy-tail guarantee <span>✦</span> Free delivery over $49 <span>✦</span> Save 10% on autoship <span>✦</span> Vet-approved recipes <span>✦</span> 60-day happy-tail guarantee <span>✦</span></div></div>
-<main class="wrap">
-  <section id="shop">
-    <h2 class="h2">Shop by what they love</h2>
-    <div class="cats" data-cats></div>
-  </section>
-  <section id="finder" style="padding-top:0">
-    <div class="ff">
+<header class="hero">
+  <img src="img/wag-hero.webp" fetchpriority="high" alt="A wire-haired terrier sitting on a kitchen floor, looking up and waiting for dinner">
+  <nav class="nav" aria-label="Main"><div class="c">
+    <a class="word" href="#">Wag &amp; Co.</a>
+    <a href="#plan">Meal plans</a><a href="#bowl">What’s in it</a><a href="#supplies">Supplies</a>
+    <a class="cart" href="#">Cart <b data-count>0</b></a>
+  </div></nav>
+  <div class="txt"><div class="c">
+    <h1 class="serif" data-in>Dinner, cooked for one dog.</h1>
+    <p data-in style="--d:1">Fresh meals made in small batches in Oakland, portioned to the gram for your dog’s weight, age and day. Delivered frozen, every few weeks.</p>
+    <div class="acts" data-in style="--d:2"><a class="btn" href="#plan">Build a meal plan</a><a class="lnk" href="#bowl">See what’s in it</a></div>
+  </div></div>
+</header>
+<main>
+  <section class="plan" id="plan"><div class="c">
+    <h2 class="serif h2">Tell us about your dog.</h2>
+    <div class="pgrid">
       <div>
-        <p class="k">Food finder · about a minute</p>
-        <h2 class="h2">What should they eat?</h2>
-        <div class="q"><p>Who’s eating?</p><div class="op" data-g="pet"><button type="button" data-v="dog">🐶 Dog</button><button type="button" data-v="cat">🐱 Cat</button></div></div>
-        <div class="q"><p>Name <small style="font-weight:500;color:var(--mut)">(goes on the bag)</small></p><input data-name maxlength="12" value="Biscuit" style="width:100%;border:0;border-radius:14px;padding:12px 14px;font:inherit;font-weight:700"></div>
-        <div class="q"><p>Age</p><div class="op" data-g="age"><button type="button" data-v="young">Puppy · under 1</button><button type="button" data-v="adult">Adult</button><button type="button" data-v="senior">Senior · 8+</button></div></div>
-        <div class="q"><p>Weight <output data-wout></output></p><input type="range" data-w min="2" max="60" step="0.5" aria-label="Weight in kilograms"></div>
-        <div class="q"><p>Activity</p><div class="op" data-g="act"><button type="button" data-v="low">Couch expert</button><button type="button" data-v="mid">Daily walks</button><button type="button" data-v="high">Always running</button></div></div>
-        <div class="q"><p>Anything to avoid?</p><div class="op" data-t><button type="button" data-v="chicken" aria-pressed="false">No chicken</button><button type="button" data-v="grain" aria-pressed="false">Grain-free</button><button type="button" data-v="tummy" aria-pressed="false">Sensitive tummy</button></div></div>
+        <p class="sentence">
+          <input type="text" data-name value="Biscuit" maxlength="14" aria-label="Your pet's name"> is
+          <select data-k="age" aria-label="Age"><option value="young">a young</option><option value="adult" selected>an adult</option><option value="senior">a senior</option></select>
+          <select data-k="pet" aria-label="Dog or cat"><option value="dog" selected>dog</option><option value="cat">cat</option></select>
+          who weighs <input type="number" data-w min="1" max="80" step="0.5" value="14" aria-label="Weight in kilograms"> kg and
+          <span class="nw"><select data-k="act" aria-label="How active"><option value="low">mostly naps</option><option value="mid" selected>goes on daily walks</option><option value="high">never stops running</option></select>.</span>
+          Please leave out
+          <span class="nw"><select data-k="avoid" aria-label="Ingredients to leave out"><option value="none" selected>nothing</option><option value="chicken">chicken</option><option value="grain">grains</option><option value="both">chicken and grains</option><option value="tummy">anything rich</option></select>.</span>
+        </p>
+        <p class="note">Portions follow the resting energy formula vets use, adjusted for age and activity. Your vet can always change them, and so can you, any time before the next delivery.</p>
       </div>
-      <aside class="res" aria-live="polite">
-        <div class="bag" data-bag></div>
-        <h3 data-rname></h3>
-        <p class="why" data-why></p>
-        <div class="stat"><div><b data-g1></b><small>grams a day</small></div><div><b data-kc></b><small>kcal a day</small></div><div><b data-days></b><small>days per bag</small></div></div>
-        <div class="sz" data-sz><button type="button" data-v="2">2 kg</button><button type="button" data-v="6" class="on">6 kg</button><button type="button" data-v="12">12 kg</button></div>
-        <label class="auto"><input type="checkbox" data-auto checked><span>Autoship every <span data-every></span> and save 10%</span></label>
-        <div class="buy"><span class="p" data-price></span><button type="button" data-add>Add to cart</button></div>
+      <aside class="card" aria-live="polite">
+        <div class="pouch"><img src="img/wag-pouch.webp" alt=""><div class="shape" aria-hidden="true"></div><div class="label"><b data-lname>Biscuit</b><small data-lrec></small></div></div>
+        <h3 class="serif" data-title>Biscuit’s plan</h3>
+        <p class="recipe" data-recipe></p>
+        <div class="daily"><b class="num" data-grams>0</b><span>grams a day, <span class="num" data-kcal>0</span> kcal</span></div>
+        <p class="lasts" data-lasts></p>
+        <div class="sizes" role="group" aria-label="Bag size"><button type="button" data-size="2">2 kg</button><button type="button" data-size="6">6 kg</button><button type="button" data-size="12">12 kg</button></div>
+        <label class="auto"><input type="checkbox" data-auto checked><span data-autotext></span></label>
+        <div class="buy"><span class="price num" data-price></span><button type="button" class="btn" data-add>Add to cart</button></div>
       </aside>
     </div>
+  </div></section>
+
+  <section class="bowlsec" id="bowl">
+    <div class="ph"><img src="img/wag-bowl.webp" alt="A steel bowl of cooked turkey, sweet potato, peas and carrots, seen from above" loading="lazy"></div>
+    <div class="c g"><div>
+      <h2 class="serif h2">What’s in the bowl</h2>
+      <ul class="ing" data-ing></ul>
+      <p class="why">Cooked gently at 80 °C, then frozen the same day. Nothing is extruded, sprayed or shelf-stable, so it smells like dinner, not kibble.</p>
+    </div></div>
   </section>
+
+  <section class="supplies" id="supplies"><div class="c">
+    <div class="head"><h2 class="serif h2">For the rest of the day</h2></div>
+    <div class="prod">
+      <div><div class="ph"><img src="img/wag-bed.webp" alt="A round bolster dog bed in oatmeal boucle fabric" loading="lazy"></div><div class="meta"><div><b>Bolster bed</b><small>Washable boucle cover</small></div><span class="num">$84</span></div><button type="button" data-buy="Bolster bed">Add to cart</button></div>
+      <div><div class="ph"><img src="img/wag-lead.webp" alt="A brown leather collar and coiled leash" loading="lazy"></div><div class="meta"><div><b>Leather collar and leash</b><small>Full-grain, solid brass</small></div><span class="num">$62</span></div><button type="button" data-buy="Collar and leash">Add to cart</button></div>
+      <div><div class="ph"><img src="img/wag-toys.webp" alt="A rope toy, a ball and a canvas carrot toy" loading="lazy"></div><div class="meta"><div><b>Toy box</b><small>Rope tug, ball and a squeaky carrot</small></div><span class="num">$24</span></div><button type="button" data-buy="Toy box">Add to cart</button></div>
+    </div>
+  </div></section>
 </main>
-<footer class="wrap foot"><span>wag&amp;co. · pet supplies</span><span>Concept site by JIEWEITECH</span></footer>
+<footer><div class="c"><span>Wag &amp; Co., Oakland, California</span><span>Concept site by JIEWEITECH</span></div></footer>
 <div class="toast" data-toast role="status"></div>
 <script>
 (function () {
   var $ = function (s) { return document.querySelector(s); };
-  document.querySelectorAll("[data-art]").forEach(function (el) {
-    var k = el.dataset.art;
-    el.innerHTML = Pets.draw(k, k === "dog" ? { color: "#d9924a", accent: "#ff6a45" } : k === "ball" ? { color: "#9fe0c6", accent: "#1f1b3d" } : k === "tag" ? { color: "#ffd166", text: "BISCUIT" } : { color: "#ff6a45" });
-  });
-  var CATS = [["foodbag", "Dry food", "from $18", "#ff6a45", "#ffe3d9"], ["treats", "Treats & chews", "from $6", "#ffd166", "#fff3cc"], ["bed", "Beds", "from $48", "#c9b8ff", "#efe9ff"], ["collar", "Collars & leads", "from $14", "#1f1b3d", "#e3e1ee"], ["ball", "Toys", "from $5", "#9fe0c6", "#e1f7ee"], ["cattree", "Cat trees", "from $79", "#ff6a45", "#ffe3d9"]];
-  $("[data-cats]").innerHTML = CATS.map(function (c) { return '<a class="cat" href="#finder"><div class="pic" style="background:' + c[4] + '">' + Pets.draw(c[0], { color: c[3], text: "WAG", brand: "wag&co" }) + "</div><b>" + c[1] + "</b><small>" + c[2] + "</small></a>"; }).join("");
-
-  var S = { pet: "dog", age: "adult", act: "mid", w: 14, size: 6, avoid: {} }, cart = 0;
+  var S = { pet: "dog", age: "adult", act: "mid", avoid: "none", w: 14, size: 6 }, cart = 0;
+  /* name, price per kg, ingredients */
   var REC = {
-    dog: [["Turkey & sweet potato", "#ff6a45", 7.4], ["Salmon & pumpkin", "#3c7fd1", 8.1], ["Lamb & brown rice", "#7b5cd6", 7.0], ["Chicken & oats", "#e4a92b", 6.6]],
-    cat: [["Ocean fish feast", "#3c7fd1", 9.5], ["Turkey & liver", "#ff6a45", 8.8], ["Chicken & cranberry", "#e4a92b", 8.4]]
+    turkey: ["Turkey and sweet potato", 7.4, [["Ground turkey", "52%"], ["Sweet potato", "22%"], ["Peas", "9%"], ["Carrots", "8%"], ["Spinach", "4%"], ["Fish oil, vitamins and minerals", "5%"]]],
+    salmon: ["Salmon and pumpkin", 8.1, [["Atlantic salmon", "48%"], ["Pumpkin", "24%"], ["Green beans", "12%"], ["Quinoa", "9%"], ["Kale", "3%"], ["Vitamins and minerals", "4%"]]],
+    lamb: ["Lamb and brown rice", 7.0, [["Lamb shoulder", "50%"], ["Brown rice", "22%"], ["Carrots", "12%"], ["Zucchini", "8%"], ["Parsley", "2%"], ["Fish oil, vitamins and minerals", "6%"]]],
+    chicken: ["Chicken and oats", 6.6, [["Chicken thigh", "51%"], ["Rolled oats", "20%"], ["Squash", "12%"], ["Peas", "8%"], ["Apple", "4%"], ["Vitamins and minerals", "5%"]]],
+    fish: ["Whitefish supper", 9.5, [["Cod and pollock", "62%"], ["Sardine", "14%"], ["Pumpkin", "12%"], ["Peas", "6%"], ["Taurine, vitamins and minerals", "6%"]]],
+    cturkey: ["Turkey and liver", 8.8, [["Turkey thigh", "64%"], ["Chicken liver", "14%"], ["Pumpkin", "10%"], ["Green beans", "6%"], ["Taurine, vitamins and minerals", "6%"]]]
   };
   function recipe() {
-    var a = S.avoid, list = REC[S.pet];
-    if (S.pet === "dog") { if (a.tummy) return list[1]; if (a.grain) return a.chicken ? list[1] : list[0]; if (a.chicken) return list[2]; return S.act === "high" ? list[0] : list[3]; }
-    if (a.tummy || a.grain) return list[0]; return a.chicken ? list[1] : list[2];
+    var a = S.avoid;
+    if (S.pet === "cat") return REC[a === "tummy" ? "fish" : "cturkey"];
+    if (a === "tummy" || a === "both") return REC.salmon;
+    if (a === "grain") return REC.turkey;
+    if (a === "chicken") return REC.lamb;
+    return S.act === "high" ? REC.turkey : REC.chicken;
   }
+  function name() { return ($("[data-name]").value.trim() || (S.pet === "cat" ? "Your cat" : "Your dog")).replace(/[<>&"]/g, ""); }
   function paint() {
-    document.querySelectorAll("[data-g]").forEach(function (g) { g.querySelectorAll("button").forEach(function (b) { b.classList.toggle("on", S[g.dataset.g] === b.dataset.v); }); });
-    document.querySelector('[data-g=age] [data-v=young]').textContent = S.pet === "cat" ? "Kitten · under 1" : "Puppy · under 1";
-    var wr = $("[data-w]"); wr.max = S.pet === "cat" ? 10 : 60; if (S.w > +wr.max) S.w = +wr.max; wr.value = S.w;
-    $("[data-wout]").textContent = S.w + " kg · " + Math.round(S.w * 2.2046) + " lb";
-    var r = recipe(), name = ($("[data-name]").value.trim() || (S.pet === "cat" ? "Your cat" : "Your dog")).replace(/[<>&"]/g, "");
-    var rer = 70 * Math.pow(S.w, 0.75);
+    fit();
+    var r = recipe(), n = name(), w = Math.max(1, Math.min(S.pet === "cat" ? 12 : 80, +S.w || 1));
     var f = S.age === "young" ? 2.5 : S.age === "senior" ? 1.2 : (S.pet === "cat" ? { low: 1.1, mid: 1.3, high: 1.5 } : { low: 1.4, mid: 1.7, high: 2.2 })[S.act];
-    var kcal = Math.round(rer * f), grams = Math.round(kcal / 3.75), days = Math.floor(S.size * 1000 / grams);
-    var per = r[2] * (S.size === 2 ? 1.25 : S.size === 12 ? 0.88 : 1), price = per * S.size, auto = $("[data-auto]").checked;
-    $("[data-bag]").innerHTML = Pets.draw("foodbag", { color: r[1], text: name.toUpperCase().slice(0, 10), sub: r[0], weight: S.size + " KG", brand: "wag&co" });
-    $("[data-rname]").textContent = r[0];
-    $("[data-why]").textContent = "For " + name + ": " + (S.age === "young" ? "growth formula with extra DHA" : S.age === "senior" ? "lower calorie, with joint support" : "complete adult nutrition") + (S.avoid.chicken ? ", no chicken" : "") + (S.avoid.grain ? ", grain-free" : "") + (S.avoid.tummy ? ", gentle single protein" : "") + ".";
-    $("[data-g1]").textContent = grams; $("[data-kc]").textContent = kcal; $("[data-days]").textContent = days;
-    var wk = Math.max(1, Math.round(days / 7)); $("[data-every]").textContent = wk === 1 ? "week" : wk + " weeks";
+    var kcal = Math.round(70 * Math.pow(w, 0.75) * f), grams = Math.round(kcal / 1.35), days = Math.max(1, Math.floor(S.size * 1000 / grams));
+    var per = r[1] * (S.size === 2 ? 1.25 : S.size === 12 ? 0.88 : 1), price = per * S.size, auto = $("[data-auto]").checked, weeks = Math.max(1, Math.round(days / 7));
+    $("[data-lname]").textContent = n; $("[data-lrec]").textContent = r[0].toUpperCase();
+    $("[data-title]").textContent = n + (/s$/i.test(n) ? "’" : "’s") + " plan";
+    $("[data-recipe]").textContent = r[0] + (S.age === "young" ? ", growth portions" : S.age === "senior" ? ", lighter senior portions" : "");
+    $("[data-grams]").textContent = grams.toLocaleString("en-US"); $("[data-kcal]").textContent = kcal.toLocaleString("en-US");
+    $("[data-lasts]").textContent = "A " + S.size + " kg box lasts about " + days + " days.";
+    $("[data-autotext]").textContent = "Deliver every " + (weeks === 1 ? "week" : weeks + " weeks") + " and save 10%";
     $("[data-price]").innerHTML = auto ? "<s>$" + price.toFixed(2) + "</s>$" + (price * 0.9).toFixed(2) : "$" + price.toFixed(2);
-    document.querySelectorAll("[data-sz] button").forEach(function (b) { b.classList.toggle("on", +b.dataset.v === S.size); });
+    document.querySelectorAll("[data-size]").forEach(function (b) { b.setAttribute("aria-pressed", String(+b.dataset.size === S.size)); });
+    $("[data-ing]").innerHTML = r[2].map(function (x) { return "<li><span>" + x[0] + "</span><span class=\"num\">" + x[1] + "</span></li>"; }).join("");
   }
-  document.addEventListener("click", function (e) {
-    var b = e.target.closest("[data-g] button"); if (b) { S[b.parentNode.dataset.g] = b.dataset.v; if (b.dataset.v === "cat") S.w = Math.min(S.w, 4.5); if (b.dataset.v === "dog" && S.w < 6) S.w = 14; paint(); }
-    var t = e.target.closest("[data-t] button"); if (t) { var on = t.getAttribute("aria-pressed") !== "true"; t.setAttribute("aria-pressed", on); S.avoid[t.dataset.v] = on; paint(); }
-    var z = e.target.closest("[data-sz] button"); if (z) { S.size = +z.dataset.v; paint(); }
-    if (e.target.closest("[data-add]")) { cart++; $("[data-count]").textContent = cart; var ts = $("[data-toast]"); ts.textContent = "Added " + recipe()[0] + " · " + S.size + " kg to your cart"; ts.classList.add("on"); clearTimeout(ts._t); ts._t = setTimeout(function () { ts.classList.remove("on"); }, 2400); }
-  });
-  $("[data-w]").addEventListener("input", function () { S.w = +this.value; paint(); });
+  /* the sentence's blanks grow and shrink with what's in them, like handwriting on a form */
+  var meas = document.createElement("span"); meas.className = "sentence"; meas.style.cssText = "position:absolute;visibility:hidden;white-space:pre;left:-9999px;top:0";
+  document.body.appendChild(meas);
+  function fit() {
+    document.querySelectorAll(".sentence select, .sentence input").forEach(function (el) {
+      meas.textContent = el.tagName === "SELECT" ? el.options[el.selectedIndex].text : (el.value || el.placeholder || " ");
+      el.style.width = (meas.getBoundingClientRect().width / parseFloat(getComputedStyle(meas).fontSize) + (el.tagName === "SELECT" ? 1.02 : 0.35)) + "em";
+    });
+  }
+  function toast(t) { var el = $("[data-toast]"); el.textContent = t; el.classList.add("on"); clearTimeout(el._t); el._t = setTimeout(function () { el.classList.remove("on"); }, 2400); }
+  function add(t) { cart++; $("[data-count]").textContent = cart; toast("Added to cart: " + t); }
+  document.querySelectorAll("[data-k]").forEach(function (s) { s.addEventListener("change", function () { S[s.dataset.k] = s.value; if (s.dataset.k === "pet") { var wi = $("[data-w]"); if (s.value === "cat" && +wi.value > 12) { wi.value = 4.5; S.w = 4.5; } if (s.value === "dog" && +wi.value < 3) { wi.value = 14; S.w = 14; } } paint(); }); });
+  $("[data-w]").addEventListener("input", function () { S.w = parseFloat(this.value) || 0; paint(); });
   $("[data-name]").addEventListener("input", paint);
   $("[data-auto]").addEventListener("change", paint);
+  document.querySelectorAll("[data-size]").forEach(function (b) { b.addEventListener("click", function () { S.size = +b.dataset.size; paint(); }); });
+  $("[data-add]").addEventListener("click", function () { add(name() + "’s plan, " + recipe()[0].toLowerCase() + ", " + S.size + " kg"); });
+  document.querySelectorAll("[data-buy]").forEach(function (b) { b.addEventListener("click", function () { add(b.dataset.buy); }); });
   paint();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+  addEventListener("resize", fit);
 })();
 </script>
 </body>
