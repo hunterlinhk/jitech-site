@@ -18,18 +18,27 @@ body{background:var(--bg);color:var(--tx);font-family:"Manrope V",Arial,sans-ser
 .nav .l{display:flex;gap:30px}
 .nav .r{display:flex;gap:30px;justify-content:flex-end}
 .logo{font-family:"Cormorant V",serif;font-size:26px;letter-spacing:.42em;color:var(--tx);text-indent:.42em;font-weight:500}
-.hero{position:relative;min-height:calc(100vh - 84px);min-height:max(500px,calc(100vh - 84px));margin-top:0;overflow:hidden;display:flex;align-items:center;background:radial-gradient(55% 75% at 66% 52%,#163027 0%,#0b1512 38%,var(--bg) 72%)}
-.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(30% 40% at 68% 30%,rgba(239,217,167,.10),transparent 70%)}
-.hero .wrap{position:relative;display:grid;grid-template-columns:1fr 1.05fr;align-items:center;gap:40px;padding-top:0}
+.hero{position:relative;height:calc(100vh - 84px);min-height:600px;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:radial-gradient(40% 55% at 50% 50%,#173328 0%,#0b1512 45%,var(--bg) 75%)}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(22% 30% at 50% 26%,rgba(239,217,167,.10),transparent 70%);pointer-events:none}
 .eb{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--g)}
-.hero h1{font-weight:400;font-size:clamp(54px,min(7vw,13vh),118px);line-height:.9;letter-spacing:-.01em;margin:22px 0 26px}
-.hero h1 i{color:var(--g2);font-weight:300}
-.hero p{max-width:27em;color:var(--mut);line-height:1.75}
-.btn{display:inline-flex;align-items:center;gap:14px;margin-top:clamp(24px,4.5vh,44px);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--tx)}
+.stage{position:relative;z-index:1;width:100%;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:clamp(18px,3vw,56px);padding:0 max(32px,calc((100% - 1380px)/2));margin:clamp(44px,8vh,80px) 0 clamp(40px,7vh,72px)}
+.stage h1{font-weight:400;font-size:clamp(48px,min(6.4vw,12vh),124px);line-height:.92;letter-spacing:-.01em}
+.stage h1.a{text-align:right}
+.stage h1.b{text-align:left}
+.stage h1 i{color:var(--g2);font-weight:300}
+.stage h1 small{display:block;font-family:"Manrope V",sans-serif;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--mut);margin-top:18px}
+.under{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:6px}
+.under p{max-width:34em;color:var(--mut);line-height:1.7;font-size:14.5px}
+.under .ctas{display:flex;gap:30px;justify-content:center}
+.btn{display:inline-flex;align-items:center;gap:14px;margin-top:clamp(12px,2.4vh,26px);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--tx)}
 .btn::after{content:"";width:56px;height:1px;background:var(--g)}
-.num{position:absolute;right:-1vw;bottom:-6vh;font-family:"Cormorant V",serif;font-size:min(34vw,62vh);line-height:.8;color:rgba(239,217,167,.035);font-weight:300;pointer-events:none}
+.num{position:absolute;left:50%;bottom:-8vh;transform:translateX(-50%);font-family:"Cormorant V",serif;font-size:min(30vw,52vh);line-height:.8;color:rgba(239,217,167,.03);font-weight:300;pointer-events:none;white-space:nowrap}
+.wphoto{position:absolute;inset:-24% -6%;z-index:2;opacity:0;transition:opacity .8s;-webkit-mask:linear-gradient(180deg,transparent 0,#000 22%,#000 78%,transparent 100%);mask:linear-gradient(180deg,transparent 0,#000 22%,#000 78%,transparent 100%)}
+.wphoto img{width:100%;height:100%;object-fit:contain}
+.watch.photo .wphoto{opacity:1}
+.watch.photo>span,.watch.photo>svg{visibility:hidden}
 /* the watch */
-.watch{position:relative;width:min(40vw,74vh);aspect-ratio:1;margin-left:auto;filter:drop-shadow(0 50px 70px rgba(0,0,0,.65))}
+.watch{position:relative;width:min(30vw,46vh);aspect-ratio:1;filter:drop-shadow(0 50px 70px rgba(0,0,0,.65));transition:transform .5s cubic-bezier(.2,.8,.2,1);transform-style:preserve-3d}
 .watch .lug{position:absolute;left:50%;width:34%;height:16%;transform:translateX(-50%);background:linear-gradient(90deg,#3a352c,#bfae86 30%,#f4e6c2 50%,#a8946a 70%,#2e2a23);border-radius:6px}
 .watch .lug.t{top:-9%}.watch .lug.b{bottom:-9%}
 .watch .case{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 210deg,#6e6047,#f6e7c3,#9b8762,#3d362a,#c9b386,#f6e7c3,#6e6047)}
@@ -63,7 +72,7 @@ body{background:var(--bg);color:var(--tx);font-family:"Manrope V",Arial,sans-ser
 .specs span{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}
 .foot{padding:50px 0;border-top:1px solid var(--line);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}
 .foot .wrap{display:flex;justify-content:space-between}
-@media (max-width:900px){.nav .l,.nav .r{display:none}.nav{grid-template-columns:1fr}.hero .wrap,.intro{grid-template-columns:1fr}.watch{width:80vw;margin:0 auto}.trio,.specs{grid-template-columns:1fr 1fr}}
+@media (max-width:900px){.nav .l,.nav .r{display:none}.nav{grid-template-columns:1fr}.intro{grid-template-columns:1fr}.trio,.specs{grid-template-columns:1fr 1fr}.hero{height:auto;padding:36px 0 48px!important}.stage{grid-template-columns:1fr;gap:16px}.stage .watch{order:-1;width:min(70vw,42vh);margin:10px auto 34px}.stage h1.a,.stage h1.b{text-align:center}.stage h1 small{display:none}.under .ctas{flex-direction:column;gap:0}}
 
 .btn{margin-right:22px}
 .burger{display:none}
@@ -117,14 +126,11 @@ body{background:var(--bg);color:var(--tx);font-family:"Manrope V",Arial,sans-ser
 <section data-view="home" class="home-v">
   <section class="hero" style="padding:0">
     <span class="num" aria-hidden="true">N°01</span>
-    <div class="wrap">
-      <div>
-        <p class="eb" data-in>Calibre N.01 · Geneva</p>
-        <h1 class="serif" data-in style="--d:1">Time, kept<br><i>in the dark.</i></h1>
-        <p data-in style="--d:2">A hand-wound movement beneath a forest-green sunburst dial. Grade-A luminova, a 72-hour reserve, and only 300 pieces each year.</p>
-        <a class="btn" href="#/shop" data-in style="--d:3">Discover the collection</a> &nbsp; <a class="btn" href="#/configure" data-in style="--d:3">Configure yours</a>
-      </div>
-      <div class="watch" data-fade style="--d:1" aria-hidden="true">
+    <p class="eb" data-in style="position:relative;z-index:1">Calibre N.01 · Geneva · 300 pieces a year</p>
+    <div class="stage">
+      <h1 class="serif a" data-in style="--d:1">Time,<br>kept<small>Hand-wound · 72 h reserve</small></h1>
+      <div class="watch" data-fade style="--d:1" aria-hidden="true" data-watch>
+        <div class="wphoto"><img src="img/nocturne-watch.webp" alt=""></div>
         <span class="lug t"></span><span class="lug b"></span><span class="case"></span><span class="crown"></span><span class="bez"></span><span class="dial"></span>
         <svg viewBox="0 0 400 400">
           <g id="ticks"></g>
@@ -137,6 +143,11 @@ body{background:var(--bg);color:var(--tx);font-family:"Manrope V",Arial,sans-ser
         </svg>
         <span class="glass"></span>
       </div>
+      <h1 class="serif b" data-in style="--d:2"><i>in the</i><br><i>dark.</i><small>Grade-A luminova</small></h1>
+    </div>
+    <div class="under" data-in style="--d:3">
+      <p>A forest-green sunburst dial in a 39 mm case, finished by one watchmaker from the first screw to the last.</p>
+      <div class="ctas"><a class="btn" href="#/shop">Discover the collection</a><a class="btn" href="#/configure">Configure yours</a></div>
     </div>
   </section>
   <section>
@@ -257,6 +268,18 @@ body{background:var(--bg);color:var(--tx);font-family:"Manrope V",Arial,sans-ser
     priceAdjust:function(p,price,o){if(p.cat!=="Watches")return price;var k=Object.keys(STRAPS).filter(function(k){return STRAPS[k].name===o.strapPick;})[0];var base=p.cfg?STRAPS[p.cfg.strap].add:0;return price+(k?STRAPS[k].add-base:0)+(o.text?90:0);},
     views:{configure:configure},labels:{shop:"Watches",all:"All watches"}
   });
+})();
+
+(function () {
+  var w = document.querySelector("[data-watch]"); if (!w) return;
+  var img = w.querySelector(".wphoto img");
+  if (img) { var ok = function () { if (img.naturalWidth) w.classList.add("photo"); }; if (img.complete) ok(); else img.addEventListener("load", ok); }
+  // the watch leans a little toward the pointer
+  var hero = document.querySelector(".hero");
+  if (matchMedia("(hover:hover) and (prefers-reduced-motion:no-preference)").matches) {
+    hero.addEventListener("pointermove", function (e) { var r = hero.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; w.style.transform = "perspective(1200px) rotateY(" + (x * 10).toFixed(2) + "deg) rotateX(" + (-y * 8).toFixed(2) + "deg)"; });
+    hero.addEventListener("pointerleave", function () { w.style.transform = ""; });
+  }
 })();
 </script>
 </body>

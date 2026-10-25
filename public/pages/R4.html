@@ -15,25 +15,29 @@ body{background:var(--cr);color:var(--br);font-family:"Manrope V",Arial,sans-ser
 .logo{font-family:"Fraunces V",serif;font-weight:900;font-size:30px;letter-spacing:-.03em;margin-right:auto;font-variation-settings:"SOFT" 100,"WONK" 1}
 .logo span{color:var(--tc)}
 .cart{background:var(--br);color:var(--cr);border-radius:999px;padding:11px 18px}
-.hero{height:100vh;min-height:520px;display:flex;flex-direction:column;overflow:hidden}
-.stage{flex:1;display:grid;grid-template-columns:1.25fr 1fr;align-items:center;gap:20px;min-height:0}
-.hero h1{font-weight:800;font-size:clamp(64px,min(9.6vw,16vh),168px);line-height:.86;letter-spacing:-.045em}
-.hero h1 .t{color:var(--tc);font-style:italic;font-weight:600}
-.hero h1 .u{position:relative;display:inline-block}
-.hero h1 .u::after{content:"";position:absolute;left:2%;right:2%;bottom:.04em;height:.12em;background:var(--mu);border-radius:999px;z-index:-1;transform-origin:left;animation:ul 1s .9s cubic-bezier(.16,1,.3,1) both}
-@keyframes ul{from{transform:scaleX(0)}}
-.sub{display:flex;align-items:center;gap:22px;margin-top:clamp(16px,3.4vh,32px)}
-.sub p{max-width:23em;line-height:1.55;color:var(--mut);font-weight:500}
-.btn{display:inline-flex;align-items:center;gap:10px;background:var(--tc);color:#fff;font-weight:800;padding:18px 26px;border-radius:999px;white-space:nowrap;box-shadow:0 6px 0 var(--br)}
-.art{position:relative;height:min(78vh,620px);aspect-ratio:1/1.05;justify-self:center}
-.blob{position:absolute;inset:6% 2% 2% 6%;background:var(--mu);border-radius:46% 54% 42% 58%/52% 44% 56% 48%;animation:morph 9s ease-in-out infinite alternate}
-@keyframes morph{to{transform:rotate(14deg) scale(1.04,.97)}}
-.bag{position:absolute;left:22%;top:12%;width:56%;transform:rotate(-7deg);filter:drop-shadow(14px 22px 0 rgba(42,23,14,.9));animation:bob 5s ease-in-out infinite alternate}
-@keyframes bob{to{transform:rotate(-3deg) translateY(-12px)}}
-.badge{position:absolute;right:0;top:0;width:30%;aspect-ratio:1;animation:spin 18s linear infinite}
+/* hero: a poster. Two giant lines, the bag standing in front of them */
+.hero{position:relative;height:100vh;min-height:600px;display:flex;flex-direction:column;overflow:hidden;background:var(--hbg,var(--cr));transition:background-color .6s}
+.hero .wrap{position:relative;z-index:4}
+.poster{position:absolute;left:0;right:0;top:50%;transform:translateY(-54%);z-index:1;text-align:center;font-family:"Bricolage V","Manrope V",sans-serif;font-weight:800;font-stretch:75%;font-variation-settings:"wdth" 75,"opsz" 96;text-transform:uppercase;line-height:.8;letter-spacing:-.035em;color:var(--hfg,var(--br));pointer-events:none;white-space:nowrap;transition:color .6s}
+.poster span{display:block;font-size:min(15vw,26vh)}
+.poster span:last-child{color:var(--hac,var(--tc));transition:color .6s}
+.bagwrap{position:absolute;left:50%;top:50%;z-index:2;height:min(60vh,540px);aspect-ratio:260/340;transform:translate(-50%,-46%)}
+.bagwrap .bag{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-6deg);filter:drop-shadow(18px 26px 0 rgba(42,23,14,.92));animation:bob 5s ease-in-out infinite alternate;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.bagwrap .bag.swap{transform:rotate(8deg) translateY(-30px) scale(.94)}
+.bagwrap img.bag{object-fit:contain}
+@keyframes bob{to{transform:rotate(-2deg) translateY(-14px)}}
+.badge{position:absolute;right:-22%;top:-4%;width:38%;aspect-ratio:1;z-index:3;animation:spin 18s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.bean{position:absolute;width:9%;animation:float 6s ease-in-out infinite alternate}
+.bean{position:absolute;z-index:3;width:clamp(26px,3vw,46px);animation:float 6s ease-in-out infinite alternate}
 @keyframes float{to{transform:translateY(-18px) rotate(40deg)}}
+.hbot{position:absolute;left:0;right:0;bottom:0;z-index:4;padding:0 0 clamp(20px,4vh,40px)}
+.hbot .wrap{display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
+.hbot p{max-width:22em;line-height:1.5;color:var(--mut);font-weight:600}
+.picks{display:flex;gap:8px;flex-wrap:wrap}
+.picks button{display:flex;align-items:center;gap:8px;border:2px solid var(--br);border-radius:999px;padding:9px 14px 9px 9px;font-weight:800;font-size:13.5px;background:rgba(255,255,255,.35)}
+.picks button i{width:18px;height:18px;border-radius:50%;background:var(--c);border:2px solid var(--br)}
+.picks button.on{background:var(--br);color:var(--cr)}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--br);color:var(--cr);font-weight:800;padding:18px 26px;border-radius:999px;white-space:nowrap;box-shadow:0 6px 0 var(--tc)}
 .ticker{background:var(--br);color:var(--cr);white-space:nowrap;overflow:hidden;padding:14px 0;font-family:"Fraunces V",serif;font-size:22px;font-weight:700;font-style:italic}
 .ticker div{display:inline-block;animation:mq 26s linear infinite}
 .ticker span{color:var(--mu);margin:0 18px}
@@ -56,7 +60,7 @@ section{padding:clamp(80px,9vw,130px) 0}
 .club .h2 i{color:var(--mu)}
 .club ul li{display:flex;justify-content:space-between;padding:16px 0;border-bottom:1.5px solid rgba(244,234,215,.3);font-weight:700;font-size:18px}
 .foot{padding:30px 0 40px;display:flex;justify-content:space-between;color:var(--mut);font-weight:600}
-@media (max-width:900px){.nav a:not(.logo):not(.cart){display:none}.stage{grid-template-columns:1fr}.art{display:none}.blends,.club{grid-template-columns:1fr}}
+@media (max-width:900px){.nav a:not(.logo):not(.cart){display:none}.blends,.club{grid-template-columns:1fr}.poster{top:96px;transform:none}.poster span{font-size:15.4vw}.bagwrap{height:min(40vh,330px);top:auto;bottom:200px;transform:translateX(-50%)}.hbot .wrap{flex-direction:column;align-items:stretch}.hbot p{display:none}.picks{justify-content:center}.btn{justify-content:center}.badge{right:-30%}}
 
 /* feature */
 .sub-sec{padding:clamp(80px,9vw,130px) 0;background:#f3bdb4}
@@ -100,34 +104,35 @@ section{padding:clamp(80px,9vw,130px) 0}
   <symbol id="bean" viewBox="0 0 40 52"><ellipse cx="20" cy="26" rx="17" ry="23" fill="#4a2a17"/><path d="M20 4 C10 18 30 34 20 48" stroke="#2a170e" stroke-width="3.2" fill="none" stroke-linecap="round"/><ellipse cx="13" cy="16" rx="4" ry="7" fill="#fff" opacity=".12"/></symbol>
 </defs></svg>
 <section class="hero" style="padding:0">
-  <div class="wrap" style="height:100%;display:flex;flex-direction:column">
-    <header class="nav"><a class="logo" href="#">kiln<span>.</span></a><a href="#">Shop</a><a href="#subscribe">Subscriptions</a><a href="#">Cafés</a><a href="#">Wholesale</a><a class="cart" href="#">Bag (2)</a></header>
-    <div class="stage">
-      <div>
-        <h1 class="fr" data-in>Roasted <span class="t">slow,</span><br>poured <span class="u">loud.</span></h1>
-        <div class="sub" data-in style="--d:2"><a class="btn" href="#">Shop beans →</a><p>Small-batch coffee from twelve farms we know by name, roasted every Tuesday in Portland.</p></div>
-      </div>
-      <div class="art" aria-hidden="true">
-        <div class="blob"></div>
-        <svg class="bag" viewBox="0 0 260 340">
-          <path d="M30 40 L230 40 L250 330 L10 330Z" fill="#c9a074"/>
-          <path d="M30 40 L230 40 L226 62 L34 62Z" fill="#b58b5f"/>
-          <path d="M42 10 L218 10 L230 40 L30 40Z" fill="#d7b38a"/>
-          <path d="M70 20 h120" stroke="#8f6a43" stroke-width="3" stroke-dasharray="6 6"/>
-          <rect x="52" y="104" width="156" height="170" rx="12" fill="#f8cfc8"/>
-          <text x="130" y="152" text-anchor="middle" font-family="Fraunces V, serif" font-weight="900" font-size="46" fill="#2a170e" letter-spacing="-2">kiln.</text>
-          <rect x="72" y="166" width="116" height="2" fill="#2a170e"/>
-          <text x="130" y="198" text-anchor="middle" font-family="Manrope V, sans-serif" font-weight="800" font-size="13" letter-spacing="2" fill="#dd5a2c">NO. 7 · ETHIOPIA</text>
-          <text x="130" y="222" text-anchor="middle" font-family="Fraunces V, serif" font-style="italic" font-size="15" fill="#6e3f38">jasmine, peach, honey</text>
-          <circle cx="130" cy="250" r="9" fill="#f2b33d"/>
-        </svg>
-        <svg class="badge" viewBox="0 0 200 200"><defs><path id="c" d="M100 100 m-74 0 a74 74 0 1 1 148 0 a74 74 0 1 1 -148 0"/></defs><circle cx="100" cy="100" r="98" fill="#dd5a2c"/><text font-family="Manrope V, sans-serif" font-weight="800" font-size="17" letter-spacing="3.4" fill="#f8cfc8"><textPath href="#c">FRESH ROASTED · EVERY TUESDAY · </textPath></text><circle cx="100" cy="100" r="22" fill="#f8cfc8"/></svg>
-        <svg class="bean" style="left:4%;top:20%"><use href="#bean"/></svg>
-        <svg class="bean" style="left:82%;top:62%;animation-delay:-2s"><use href="#bean"/></svg>
-        <svg class="bean" style="left:12%;top:76%;width:7%;animation-delay:-4s"><use href="#bean"/></svg>
-      </div>
+  <div class="wrap"><header class="nav"><a class="logo" href="#">kiln<span>.</span></a><a href="#">Shop</a><a href="#subscribe">Subscriptions</a><a href="#">Cafés</a><a href="#">Wholesale</a><a class="cart" href="#">Bag (2)</a></header></div>
+  <h1 class="poster" aria-label="Roasted slow, poured loud."><span data-in>Roasted slow,</span><span data-in style="--d:1">poured loud.</span></h1>
+  <div class="bagwrap" aria-hidden="true"><div data-in style="--d:2;position:absolute;inset:0">
+    <svg class="bag" viewBox="0 0 260 340" data-bag>
+      <path d="M30 40 L230 40 L250 330 L10 330Z" fill="#c9a074"/>
+      <path d="M30 40 L230 40 L226 62 L34 62Z" fill="#b58b5f"/>
+      <path d="M42 10 L218 10 L230 40 L30 40Z" fill="#d7b38a"/>
+      <path d="M70 20 h120" stroke="#8f6a43" stroke-width="3" stroke-dasharray="6 6"/>
+      <rect x="52" y="104" width="156" height="170" rx="12" fill="#f8cfc8" data-lab/>
+      <text x="130" y="152" text-anchor="middle" font-family="Fraunces V, serif" font-weight="900" font-size="46" fill="#2a170e" letter-spacing="-2">kiln.</text>
+      <rect x="72" y="166" width="116" height="2" fill="#2a170e"/>
+      <text x="130" y="198" text-anchor="middle" font-family="Manrope V, sans-serif" font-weight="800" font-size="13" letter-spacing="2" fill="#dd5a2c" data-t1>NO. 7 · ETHIOPIA</text>
+      <text x="130" y="222" text-anchor="middle" font-family="Fraunces V, serif" font-style="italic" font-size="15" fill="#6e3f38" data-t2>jasmine, peach, honey</text>
+      <circle cx="130" cy="250" r="9" fill="#f2b33d"/>
+    </svg>
+    <svg class="badge" viewBox="0 0 200 200"><defs><path id="c" d="M100 100 m-74 0 a74 74 0 1 1 148 0 a74 74 0 1 1 -148 0"/></defs><circle cx="100" cy="100" r="98" fill="#2a170e"/><text font-family="Manrope V, sans-serif" font-weight="800" font-size="17" letter-spacing="3.4" fill="#f8cfc8"><textPath href="#c">FRESH ROASTED · EVERY TUESDAY · </textPath></text><circle cx="100" cy="100" r="22" fill="#dd5a2c"/></svg>
+    <svg class="bean" style="left:-18%;top:16%"><use href="#bean"/></svg>
+    <svg class="bean" style="left:104%;top:66%;animation-delay:-2s"><use href="#bean"/></svg>
+    <svg class="bean" style="left:-10%;top:80%;animation-delay:-4s"><use href="#bean"/></svg>
+  </div></div>
+  <div class="hbot" data-in style="--d:3"><div class="wrap">
+    <p>Small-batch coffee from twelve farms we know by name, roasted every Tuesday in Portland.</p>
+    <div class="picks" data-picks>
+      <button type="button" class="on" data-k="0" style="--c:#f8cfc8"><i></i>No. 7 Ethiopia</button>
+      <button type="button" data-k="1" style="--c:#dd5a2c"><i></i>House Fire</button>
+      <button type="button" data-k="2" style="--c:#f2b33d"><i></i>Night Shift</button>
     </div>
-  </div>
+    <a class="btn" href="#" data-shopbtn>Shop No. 7 · $19 →</a>
+  </div></div>
 </section>
 <div class="ticker" aria-hidden="true"><div>Ethiopia Guji <span>✺</span> Colombia Huila <span>✺</span> Kenya Nyeri <span>✺</span> Guatemala Acatenango <span>✺</span> Ethiopia Guji <span>✺</span> Colombia Huila <span>✺</span> Kenya Nyeri <span>✺</span> Guatemala Acatenango <span>✺</span></div></div>
 <main>
@@ -213,6 +218,24 @@ section{padding:clamp(80px,9vw,130px) 0}
   paint();
 })();
 
+
+(function () {
+  var B = [
+    { bg: "#f8cfc8", fg: "#2a170e", ac: "#dd5a2c", lab: "#f8cfc8", t1: "NO. 7 · ETHIOPIA", t2: "jasmine, peach, honey", btn: "Shop No. 7 · $19 →" },
+    { bg: "#dd5a2c", fg: "#2a170e", ac: "#f8cfc8", lab: "#dd5a2c", t1: "HOUSE FIRE · BLEND", t2: "cocoa, almond, molasses", btn: "Shop House Fire · $17 →" },
+    { bg: "#f2b33d", fg: "#2a170e", ac: "#f8f1e4", lab: "#f2b33d", t1: "NIGHT SHIFT · DECAF", t2: "toffee, plum, brown sugar", btn: "Shop Night Shift · $18 →" }
+  ];
+  var hero = document.querySelector(".hero"), bag = hero.querySelector("[data-bag]");
+  hero.querySelector("[data-picks]").addEventListener("click", function (e) {
+    var b = e.target.closest("[data-k]"); if (!b) return;
+    var k = B[+b.dataset.k];
+    hero.querySelectorAll("[data-k]").forEach(function (x) { x.classList.toggle("on", x === b); });
+    hero.style.setProperty("--hbg", k.bg); hero.style.setProperty("--hfg", k.fg); hero.style.setProperty("--hac", k.ac);
+    bag.classList.add("swap");
+    setTimeout(function () { bag.querySelector("[data-lab]").setAttribute("fill", k.lab === k.bg ? "#f8f1e4" : k.lab); bag.querySelector("[data-t1]").textContent = k.t1; bag.querySelector("[data-t2]").textContent = k.t2; bag.classList.remove("swap"); }, 300);
+    hero.querySelector("[data-shopbtn]").textContent = k.btn;
+  });
+})();
 </script>
 </body>
 </html>

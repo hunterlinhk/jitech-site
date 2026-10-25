@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="assets/base.css">
 <link rel="stylesheet" href="assets/shop.css">
 <style>
-:root{--bg:#dce8f3;--fg:#0e1a2e;--muted:#4c5d74;--line:rgba(14,26,46,.12);--card:#c9d9ea;--soft:#cfdeec;--accent:#0e1a2e;--accent-fg:#dce8f3;--clay:#e0442c;--radius:0px;--head:"Instrument Serif",Georgia,serif;--body:"Inter V",Arial,sans-serif;--wrap:1440px}
+:root{--bg:#dce8f3;--fg:#0e1a2e;--muted:#4c5d74;--line:rgba(14,26,46,.12);--card:#c9d9ea;--soft:#cfdeec;--accent:#0e1a2e;--accent-fg:#dce8f3;--clay:#e0442c;--radius:0px;--head:"DM Serif Display",Georgia,serif;--body:"Inter V",Arial,sans-serif;--wrap:1440px}
 body{font-size:14.5px}
 .ann{background:#0e1a2e;color:#d8d2c9;text-align:center;font-size:12px;letter-spacing:.08em;height:34px;display:grid;place-items:center}
 .head{position:sticky;top:0;z-index:40;background:rgba(250,248,245,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
@@ -18,23 +18,32 @@ body{font-size:14.5px}
 .brand{font:400 30px/1 var(--head);letter-spacing:.02em}
 .tools{display:flex;justify-content:flex-end;gap:22px;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:550;align-items:center}
 .burger{display:none}
-.hero{height:calc(100vh - 102px);min-height:520px;display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line)}
-.hero-l{display:flex;flex-direction:column;justify-content:space-between;padding:clamp(28px,4vw,60px) max(24px,3vw)}
-.hero-l small{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
-.hero h1{font:400 clamp(70px,min(9vw,15vh),170px)/.86 var(--head);letter-spacing:-.02em}
-.hero h1 em{display:block;padding-left:12%;color:var(--clay)}
-.hero-l p{max-width:30em;line-height:1.7;color:var(--muted);font-size:15.5px}
-.hero-l .row{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+/* hero: a magazine cover. Masthead across the top, one portrait, cover lines either side */
+.cover{position:relative;height:calc(100vh - 102px);min-height:600px;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);border-bottom:1px solid var(--line);overflow:hidden;background:linear-gradient(180deg,#e8eff6 0%,var(--bg) 100%)}
+.mast{position:absolute;left:0;right:0;top:clamp(6px,1.4vh,16px);z-index:3;text-align:center;font:400 clamp(80px,min(13.6vw,24vh),236px)/.8 var(--head);letter-spacing:-.035em;color:var(--fg);white-space:nowrap;pointer-events:none;mix-blend-mode:multiply}
+.issue{position:absolute;left:0;right:0;top:calc(clamp(6px,1.4vh,16px) + clamp(80px,min(13.6vw,24vh),236px)*.84);z-index:3;display:flex;justify-content:space-between;padding:0 max(24px,3vw);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.portrait{position:relative;height:100%;aspect-ratio:2/3;--ph:linear-gradient(180deg,#eef3f8 0%,#dfe8f0 34%,#9fb0bf 52%,#6f7f8c 64%,#8d8f8a 78%,#5d605e 100%)}
+.portrait>img{animation:settle 16s ease-out both;object-position:50% 30%}
+@keyframes settle{from{transform:scale(1.08)}to{transform:scale(1)}}
+.portrait .g{position:absolute;left:12%;right:12%;bottom:4%;}
+.portrait img:not(.broken)~.g{display:none}
+.lines{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;gap:22px;padding:0 clamp(20px,3vw,48px) clamp(28px,5vh,52px)}
+.lines.l{align-items:flex-start}
+.lines.r{align-items:flex-end;text-align:right}
+.lines h1{font:400 clamp(54px,min(6vw,11vh),112px)/.88 var(--head);letter-spacing:-.02em}
+.lines h1 em{display:block;color:var(--clay);font-style:italic}
+.lines p{max-width:24em;line-height:1.65;color:var(--muted);font-size:14.5px}
+.cl{border-top:1px solid var(--fg);padding-top:10px;max-width:15em}
+.cl small{display:block;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--clay);margin-bottom:6px}
+.cl b{font:400 clamp(22px,2vw,30px)/1.05 var(--head)}
+.look{display:flex;align-items:center;gap:14px;background:var(--fg);color:var(--bg);padding:12px 14px 12px 18px;font-size:12.5px;letter-spacing:.06em}
+.look b{font:400 20px/1 var(--head);letter-spacing:0}
+.look span{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--clay);color:#fff}
 .cta{display:inline-flex;align-items:center;gap:12px;padding:16px 26px;background:var(--fg);color:var(--bg);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
-.hero-r{display:grid;grid-template-columns:1.1fr .9fr;grid-template-rows:1fr 1fr;gap:1px;background:var(--line)}
-.panel{position:relative;overflow:hidden;display:grid;place-items:center}
-.panel:first-child{grid-row:1/3}
-.panel .g{width:84%;animation:drift 9s ease-in-out infinite alternate}
-.panel:first-child .g{width:96%}
-.panel:nth-child(2) .g{animation-delay:-3s}.panel:nth-child(3) .g{animation-delay:-6s}
-.panel span{position:absolute;left:18px;bottom:16px;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase}
-.panel span b{display:block;font:400 22px/1.1 var(--head);letter-spacing:0;text-transform:none;margin-top:3px}
-@keyframes drift{from{transform:translateY(-6px)}to{transform:translateY(6px)}}
+.head .brand{transition:opacity .4s,transform .4s}
+body.cover-on .head .brand{opacity:0;transform:translateY(6px)}
+.barcode{display:flex;align-items:flex-end;gap:10px;font:500 10px/1.3 "JetBrains Mono V",monospace;color:var(--muted)}
+.barcode i{display:block;width:84px;height:34px;background:repeating-linear-gradient(90deg,var(--fg) 0 2px,transparent 2px 4px,var(--fg) 4px 5px,transparent 5px 8px,var(--fg) 8px 11px,transparent 11px 12px)}
 .sec{padding:clamp(60px,7vw,100px) 0}
 .sec-h{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:28px;gap:20px}
 .sec-h h2{font:400 clamp(40px,4.4vw,64px)/1 var(--head)}
@@ -82,7 +91,7 @@ body{font-size:14.5px}
 .units button.on{background:var(--fg);color:var(--bg)}
 @media (max-width:900px){.nav{display:none}.burger{display:block}.head .wrap{grid-template-columns:auto 1fr auto}.brand{grid-column:2;text-align:center}
   body.menu-open .nav{display:flex;position:absolute;top:68px;left:0;right:0;flex-direction:column;background:var(--bg);padding:20px 24px;border-bottom:1px solid var(--line)}
-  .hero{grid-template-columns:1fr;height:auto}.hero-r{min-height:520px}.cats{grid-template-columns:1fr 1fr}.edit,.vals{grid-template-columns:1fr}.tools .t-acc{display:none}.finder{grid-template-columns:1fr 1fr}}
+  .cover{grid-template-columns:1fr;height:auto}.portrait{width:100%;height:auto;order:-1}.lines.r{display:none}.lines{padding-top:24px}.mast{font-size:17.5vw}.issue{top:calc(17.5vw * .84 + 8px)}.issue span:last-child{display:none}.cats{grid-template-columns:1fr 1fr}.edit,.vals{grid-template-columns:1fr}.tools .t-acc{display:none}.finder{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
@@ -96,16 +105,22 @@ body{font-size:14.5px}
 
 <main>
 <section data-view="home">
-  <div class="hero">
-    <div class="hero-l">
-      <small data-in>Autumn / Winter 2026</small>
-      <h1 data-in style="--d:1">The quiet<em>season.</em></h1>
-      <div class="row" data-in style="--d:2"><p>Wool coats, heavy knits and crisp cottons, cut to be worn for years. Made in small runs in Portugal and Italy, in natural fibers only.</p><a class="cta" href="#/shop">Shop the collection →</a></div>
+  <div class="cover">
+    <p class="mast" data-in aria-hidden="true">Atelier Nord</p>
+    <p class="issue" data-in style="--d:1"><span>No. 07 · Autumn / Winter 2026</span><span>Made in Portugal &amp; Italy</span></p>
+    <div class="lines l">
+      <small style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)" data-in style="--d:2">The collection</small>
+      <h1 data-in style="--d:2">The quiet <em>season.</em></h1>
+      <p data-in style="--d:3">Wool coats, heavy knits and crisp cottons, cut to be worn for years. Small runs, natural fibers only.</p>
+      <a class="cta" href="#/shop" data-in style="--d:4">Shop the collection →</a>
     </div>
-    <div class="hero-r" aria-hidden="true">
-      <div class="panel" style="background:#b3c7dd"><div class="g" data-g="coat|#8c6f5a"></div><span>Look 01<b>Bodil wool coat</b></span></div>
-      <div class="panel" style="background:#e6e1d7"><div class="g" data-g="knit|#d3e1ee"></div><span>Look 02<b>Saga cable knit</b></span></div>
-      <div class="panel" style="background:#2f3a36"><div class="g" data-g="skirt|#0e1a2e"></div><span style="color:#c5d6e8">Look 03<b>Ilse pleat skirt</b></span></div>
+    <div class="portrait ph"><img src="img/nord-cover.webp" alt="A woman in a camel wool coat on a rocky Norwegian shore"><div class="g" data-g="coat|#a9805f"></div></div>
+    <div class="lines r">
+      <div class="cl" data-in style="--d:3"><small>Page 12</small><b>Coats worth keeping</b></div>
+      <div class="cl" data-in style="--d:4"><small>Page 30</small><b>Knits from a 1920s mill in Biella</b></div>
+      <div class="cl" data-in style="--d:5"><small>Page 44</small><b>Why we mend for life</b></div>
+      <a class="look" href="#/p/bodil" data-in style="--d:6"><span>→</span><div>Look 01<br><b>Bodil coat · $420</b></div></a>
+      <div class="barcode" data-in style="--d:7"><span>AN-AW26<br>Free returns</span><i></i></div>
     </div>
   </div>
   <section class="sec"><div class="wrap">
@@ -194,6 +209,10 @@ body{font-size:14.5px}
   }
   new MutationObserver(function () { var m = document.querySelector(".sh-modal [data-chart] tbody:empty"); if (m) paintChart(m.closest(".sh-modal"), "cm"); }).observe(document.body, { childList: true });
 
+  // the masthead is the logo while the cover is in view; the header's logo takes over after it
+  var mast = document.querySelector(".mast");
+  if (mast && "IntersectionObserver" in window) new IntersectionObserver(function (en) { document.body.classList.toggle("cover-on", en[0].isIntersecting && !document.querySelector('[data-view="home"]').hidden); }, { rootMargin: "-80px 0px 0px 0px" }).observe(mast);
+  window.addEventListener("hashchange", function () { if (document.querySelector('[data-view="home"]').hidden) document.body.classList.remove("cover-on"); });
   var news = document.querySelector("[data-news]");
   news.addEventListener("submit", function (e) { e.preventDefault(); news.innerHTML = '<p style="font-size:16px">Welcome. Your code <b>NORD10</b> takes 10% off your first order.</p>'; });
 

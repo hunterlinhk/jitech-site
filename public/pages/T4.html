@@ -9,28 +9,46 @@
 <style>
 :root{--bg:#0d0f10;--tx:#f3f1ec;--mut:#9a9890;--acc:#74d1ff;--line:rgba(255,255,255,.18)}
 body{background:var(--bg);color:var(--tx);font-family:"Archivo V",Arial,sans-serif;font-size:15px}
-.wide{font-family:"Archivo V",sans-serif;font-stretch:125%;font-weight:900;text-transform:uppercase;letter-spacing:-.02em}
+.wide{font-family:"Anton",Impact,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.005em}
 .wrap{width:min(1380px,100% - 56px);margin:0 auto}
-.hero{position:relative;height:100vh;min-height:500px;overflow:hidden;--ph:linear-gradient(180deg,#1b2b44 0%,#c26b3c 55%,#1b1410 100%)}
-.hero>img{animation:slow 24s ease-in-out infinite alternate}
-@keyframes slow{from{transform:scale(1.04)}to{transform:scale(1.13) translateY(-1.5%)}}
-.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,10,12,.55) 0%,rgba(8,10,12,0) 30%,rgba(8,10,12,0) 55%,rgba(8,10,12,.85) 100%)}
-.nav{position:absolute;inset:0 0 auto;z-index:3;height:74px;display:flex;align-items:center;gap:30px;padding:0 max(28px,calc((100% - 1380px)/2));font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
-.logo{font-family:"Archivo V",sans-serif;font-stretch:125%;font-weight:900;font-size:22px;letter-spacing:.02em;margin-right:auto;display:flex;align-items:center;gap:10px}
-.logo svg{width:26px}
-.nav .bag{border:1.5px solid var(--tx);border-radius:999px;padding:9px 16px}
-.word{position:absolute;left:0;right:0;top:clamp(84px,15vh,150px);z-index:2;text-align:center;font-size:clamp(84px,min(15.6vw,27vh),270px);line-height:.8;mix-blend-mode:overlay;color:#fff;opacity:.95}
-.word2{position:absolute;left:0;right:0;top:clamp(84px,15vh,150px);z-index:2;text-align:center;font-size:clamp(84px,min(15.6vw,27vh),270px);line-height:.8;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.55)}
-.coords{position:absolute;left:max(28px,calc((100% - 1380px)/2));top:calc(clamp(84px,15vh,150px) + clamp(84px,min(15.6vw,27vh),270px)*.86);z-index:3;font-size:11px;letter-spacing:.2em;text-transform:uppercase;display:flex;gap:28px;opacity:.9}
-.coords span::before{content:"+ ";color:var(--acc)}
-.bar{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:0 max(28px,calc((100% - 1380px)/2)) clamp(22px,4.5vh,44px);display:grid;grid-template-columns:1.2fr 1fr auto;align-items:end;gap:30px}
-.bar h1{font-size:clamp(30px,min(3.4vw,6.4vh),56px);line-height:.95;max-width:12em}
-.bar p{color:#d6d3cb;line-height:1.55;max-width:26em}
-.shop{display:flex;align-items:center;gap:16px;background:var(--tx);color:#111;border-radius:999px;padding:8px 8px 8px 22px;font-weight:700;white-space:nowrap}
-.shop span{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--acc);color:#0d0f10}
+/* hero: night ridge, one huge line, three numbers */
+.hero{position:relative;height:100vh;min-height:560px;overflow:hidden;isolation:isolate;--ph:linear-gradient(180deg,#05080f 0%,#0b1830 45%,#16324f 72%,#2c5878 86%,#0a121b 100%)}
+.hero>img{animation:push 18s ease-out both;z-index:-3}
+@keyframes push{from{transform:scale(1.12)}to{transform:scale(1.02)}}
+.hero .stars{position:absolute;inset:0 0 40%;z-index:-3;background-image:radial-gradient(1px 1px at 12% 18%,#fff,transparent),radial-gradient(1px 1px at 28% 8%,#fff,transparent),radial-gradient(1.5px 1.5px at 44% 22%,#cfeaff,transparent),radial-gradient(1px 1px at 61% 12%,#fff,transparent),radial-gradient(1px 1px at 77% 28%,#fff,transparent),radial-gradient(1.5px 1.5px at 88% 9%,#fff,transparent),radial-gradient(1px 1px at 6% 34%,#fff,transparent),radial-gradient(1px 1px at 35% 38%,#cfeaff,transparent),radial-gradient(1px 1px at 69% 40%,#fff,transparent);opacity:.75;animation:tw 4s ease-in-out infinite alternate}
+@keyframes tw{to{opacity:.35}}
+.hero .ridge{position:absolute;left:0;right:0;bottom:0;width:100%;height:62%;z-index:-3}
+.hero img:not(.broken)~.stars,.hero img:not(.broken)~.ridge{display:none}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(5,7,10,.94) 0%,rgba(5,7,10,.4) 42%,rgba(5,7,10,.05) 68%,rgba(5,7,10,.55) 100%)}
+.nav{position:absolute;inset:0 0 auto;z-index:3;height:76px;display:flex;align-items:center;gap:32px;padding:0 max(28px,calc((100% - 1380px)/2));font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.logo{font-family:"Anton",sans-serif;font-size:26px;letter-spacing:.08em;margin-right:auto;display:flex;align-items:center;gap:10px}
+.logo svg{width:26px;color:var(--acc)}
+.nav .bag{border:1px solid rgba(255,255,255,.45);border-radius:999px;padding:10px 18px}
+.wx{position:absolute;right:max(28px,calc((100% - 1380px)/2));top:96px;z-index:2;font:500 11px/1.8 "JetBrains Mono V",monospace;letter-spacing:.08em;text-transform:uppercase;text-align:right;color:#b9c7d3}
+.wx b{color:var(--acc);font-weight:500}
+.wx i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--acc);margin-right:8px;animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.25}}
+.hin{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;padding:0 max(28px,calc((100% - 1380px)/2)) clamp(26px,5vh,54px)}
+.tagline{display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;margin-bottom:14px}
+.tagline i{width:9px;height:9px;border-radius:50%;background:var(--acc)}
+.hin h1{font-size:clamp(76px,min(12.5vw,22vh),230px);line-height:.84;margin-bottom:clamp(18px,3.4vh,34px)}
+.hin h1 span{color:transparent;-webkit-text-stroke:2px var(--tx)}
+.slide{transition:opacity .45s,transform .6s cubic-bezier(.2,.8,.2,1)}
+.slide.out{opacity:0;transform:translateY(14px)}
+.row{display:flex;align-items:flex-end;justify-content:space-between;gap:28px;border-top:1px solid var(--line);padding-top:clamp(14px,2.6vh,24px)}
+.stats{display:flex;gap:clamp(28px,4vw,64px)}
+.stats b{display:block;white-space:nowrap;font-family:"Anton",sans-serif;font-weight:400;font-size:clamp(28px,2.8vw,42px);letter-spacing:.01em}
+.stats span{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#a8b4bf}
+.shop{display:inline-flex;align-items:center;gap:16px;background:var(--acc);color:#071017;border-radius:999px;padding:8px 8px 8px 24px;font-weight:700;white-space:nowrap}
+.shop span{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:#071017;color:var(--acc)}
+.dots{position:absolute;right:max(28px,calc((100% - 1380px)/2));top:50%;z-index:3;transform:translateY(-50%);display:flex;flex-direction:column;gap:14px}
+.dots button{width:12px;height:12px;border-radius:50%;border:1px solid #fff;position:relative}
+.dots button.on{background:#fff}
+.dots button::after{content:attr(data-n);position:absolute;right:22px;top:50%;transform:translateY(-50%);font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;opacity:0;transition:opacity .2s}
+.dots button:hover::after,.dots button.on::after{opacity:.85}
 section{padding:clamp(80px,9vw,130px) 0}
 .sh{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px}
-.sh h2{font-size:clamp(40px,5vw,84px);line-height:.88}
+.sh h2{font-size:clamp(44px,5.6vw,96px);line-height:.88}
 .sh a{border-bottom:2px solid var(--acc);padding-bottom:4px;font-weight:700}
 .gear{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .g{background:#191c1e;border-radius:6px;overflow:hidden}
@@ -40,13 +58,13 @@ section{padding:clamp(80px,9vw,130px) 0}
 .g .t{display:flex;justify-content:space-between;padding:18px}
 .g h3{font-size:18px;font-weight:700}
 .g small{color:var(--mut);display:block;margin-top:4px}
-.exp{position:relative;border-radius:8px;overflow:hidden;min-height:540px;--ph:linear-gradient(180deg,#5c86a8,#dfe9f0)}
+.exp{position:relative;border-radius:8px;overflow:hidden;min-height:540px;--ph:radial-gradient(30% 24% at 72% 70%,rgba(255,170,90,.55),transparent 70%),linear-gradient(180deg,#081322 0%,#163252 60%,#0b1724 100%)}
 .exp::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,10,12,.75),rgba(8,10,12,0) 60%)}
 .exp .in{position:absolute;inset:0;z-index:1;padding:clamp(28px,4vw,60px);display:flex;flex-direction:column;justify-content:space-between;max-width:620px}
-.exp h2{font-size:clamp(40px,4.6vw,76px);line-height:.9}
+.exp h2{font-size:clamp(44px,5.2vw,88px);line-height:.88}
 .exp ul li{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line);font-weight:600}
 .foot{display:flex;justify-content:space-between;padding:40px 0;color:var(--mut);font-size:13px}
-@media (max-width:900px){.nav a:not(.logo):not(.bag){display:none}.bar{grid-template-columns:1fr}.bar p{display:none}.gear{grid-template-columns:1fr}.coords{display:none}}
+@media (max-width:900px){.nav a:not(.logo):not(.bag){display:none}.gear{grid-template-columns:1fr}.wx{display:none}.row{flex-direction:column;align-items:flex-start}.stats{gap:24px}.dots{top:auto;bottom:auto;top:100px;flex-direction:row;transform:none}.dots button::after{display:none}.hin h1 span{-webkit-text-stroke-width:1.5px}.stats b{font-size:24px}.stats{gap:20px}.stats span{font-size:10px;letter-spacing:.1em}}
 
 /* feature */
 .cmp-sec{padding:clamp(80px,9vw,130px) 0;border-top:1px solid var(--line)}
@@ -68,7 +86,7 @@ section{padding:clamp(80px,9vw,130px) 0}
 .cmp-grid .pic svg{height:100%;width:100%}
 .cmp-grid .best{color:var(--acc);font-weight:800}
 .cmp-grid .best::after{content:" ★";font-size:11px}
-.cmp-grid .price{font-family:"Archivo V";font-stretch:125%;font-weight:900;font-size:26px}
+.cmp-grid .price{font-family:"Anton";font-size:28px}
 .cmp-grid .buy{width:100%;height:44px;background:var(--tx);color:#0d0f10;font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:12.5px;margin-top:10px}
 .cmp-grid .buy.done{background:var(--acc)}
 .cmp-grid .bar{height:6px;background:rgba(255,255,255,.1);margin-top:8px}
@@ -83,15 +101,19 @@ section{padding:clamp(80px,9vw,130px) 0}
   <symbol id="jacket" viewBox="0 0 200 200"><path d="M70 30 L100 22 L130 30 L170 50 L188 120 L166 126 L156 92 L156 180 L44 180 L44 92 L34 126 L12 120 L30 50Z" fill="currentColor"/><path d="M100 22 V180" stroke="rgba(0,0,0,.35)" stroke-width="3"/><path d="M84 26 Q100 50 116 26" fill="none" stroke="rgba(0,0,0,.3)" stroke-width="4"/><rect x="60" y="110" width="26" height="4" rx="2" fill="rgba(0,0,0,.25)"/><rect x="114" y="110" width="26" height="4" rx="2" fill="rgba(0,0,0,.25)"/></symbol>
 </defs></svg>
 <section class="hero ph" style="padding:0">
-  <img src="https://images.unsplash.com/photo-1780042426982-cb794203ea1d?auto=format&fit=crop&w=2200&q=72" alt="A snow-covered mountain peak glowing orange at dawn under a dark sky">
+  <img src="img/atlas-ridge.webp" alt="A climber in an orange shell on a snowy summit ridge at blue hour">
+  <div class="stars" aria-hidden="true"></div>
+  <svg class="ridge" viewBox="0 0 1440 560" preserveAspectRatio="none" aria-hidden="true"><path d="M0 560 L0 360 L180 300 L330 330 L520 210 L640 250 L760 160 L880 120 L960 180 L1080 140 L1220 250 L1440 230 L1440 560Z" fill="#0d1b2c"/><path d="M760 160 L880 120 L960 180 L920 175 L880 150 L830 170Z" fill="#cfe6f5" opacity=".55"/><path d="M0 560 L0 450 L260 400 L470 430 L700 340 L900 380 L1140 300 L1440 360 L1440 560Z" fill="#081220"/><circle cx="1035" cy="164" r="3" fill="#ff7a2e"/><circle cx="1035" cy="164" r="14" fill="#fff3c4" opacity=".12"/></svg>
   <header class="nav"><a class="logo" href="#"><svg viewBox="0 0 26 22"><path d="M1 21 L9 5 L13 12 L17 1 L25 21Z" fill="currentColor"/></svg>ATLAS</a><a href="#">Men</a><a href="#">Women</a><a href="#compare">Compare tents</a><a href="#">Journal</a><a class="bag" href="#">Bag · 0</a></header>
-  <div class="word wide" aria-hidden="true">Altitude</div>
-  <div class="word2 wide" aria-hidden="true">Altitude</div>
-  <div class="coords"><span>47°14′57″N 9°20′36″E</span><span>2,502 m</span><span>−14 °C</span></div>
-  <div class="bar">
-    <h1 class="wide" data-in>Built for the last hour before the summit.</h1>
-    <p data-in style="--d:1">The Summit Shell weighs 340 g, packs into its own pocket and shrugs off 40 mm of rain an hour. Field-tested on 61 peaks.</p>
-    <a class="shop" href="#" data-in style="--d:2">Shop the Summit Shell <span>→</span></a>
+  <p class="wx" data-in style="--d:4"><i></i>Live from the test team<br>Dôme de Neige · <b>4,015 m</b><br>−14 °C · wind 42 km/h</p>
+  <div class="dots" data-dots><button type="button" class="on" data-s="0" data-n="Summit Shell" aria-label="Summit Shell"></button><button type="button" data-s="1" data-n="Ridge Fleece" aria-label="Ridge Fleece"></button><button type="button" data-s="2" data-n="Bivouac Down" aria-label="Bivouac Down"></button></div>
+  <div class="hin">
+    <p class="tagline slide" data-in data-tag><i></i>Summit Shell · 3-layer · Autumn 2027</p>
+    <h1 class="wide slide" data-in style="--d:1" data-h>The last<br><span>hour.</span></h1>
+    <div class="row" data-in style="--d:2">
+      <div class="stats slide" data-stats><div><b>340 g</b><span>Packs into its pocket</span></div><div><b>40 mm/h</b><span>Rain, shrugged off</span></div><div><b>61</b><span>Peaks of field testing</span></div></div>
+      <a class="shop" href="#" data-buy>Shop the Summit Shell <span>→</span></a>
+    </div>
   </div>
 </section>
 <main>
@@ -107,7 +129,7 @@ section{padding:clamp(80px,9vw,130px) 0}
   </section>
   <section style="padding-top:0">
     <div class="wrap">
-      <div class="exp ph"><img src="https://images.unsplash.com/photo-1768185595034-69de2bfe7848?auto=format&fit=crop&w=1800&q=70" alt="A snow-capped peak rising above clouds" loading="lazy">
+      <div class="exp ph"><img src="img/atlas-tent.webp" alt="A tent glowing on a ridge at night" loading="lazy">
         <div class="in"><h2 class="wide">Expeditions<br>2027</h2><ul><li><span>Mont Blanc traverse</span><span>Jun · 6 days</span></li><li><span>Lofoten ski touring</span><span>Mar · 8 days</span></li><li><span>Patagonia ice field</span><span>Nov · 14 days</span></li></ul></div></div>
     </div>
   </section>
@@ -125,8 +147,33 @@ section{padding:clamp(80px,9vw,130px) 0}
 
 <!-- /feature -->
 </main>
-<footer class="wrap foot"><span>ATLAS Mountain Equipment</span><span>Photos: Unsplash</span><span>© Atlas</span></footer>
+<footer class="wrap foot"><span>ATLAS Mountain Equipment</span><span>A website concept by JIEWEITECH</span><span>© Atlas</span></footer>
 
+<script>
+(function () {
+  var S = [
+    { tag: "Summit Shell · 3-layer · Autumn 2027", h: "The last<br><span>hour.</span>", st: [["340 g", "Packs into its pocket"], ["40 mm/h", "Rain, shrugged off"], ["61", "Peaks of field testing"]], buy: "Shop the Summit Shell" },
+    { tag: "Ridge Fleece · grid fleece · all year", h: "Warm<br><span>enough.</span>", st: [["280 g", "Grid fleece, no bulk"], ["4×", "Faster drying than wool"], ["100%", "Recycled polyester"]], buy: "Shop the Ridge Fleece" },
+    { tag: "Bivouac Down · 900 fill · winter", h: "Minus<br><span>twenty.</span>", st: [["410 g", "Total weight"], ["−20 °C", "Comfort rating"], ["900", "Fill power, RDS down"]], buy: "Shop the Bivouac Down" }
+  ];
+  var hero = document.querySelector(".hero"), cur = 0, timer;
+  function show(i) {
+    if (i === cur) return; cur = i;
+    var parts = hero.querySelectorAll(".slide"); parts.forEach(function (p) { p.classList.add("out"); });
+    setTimeout(function () {
+      var s = S[i];
+      hero.querySelector("[data-tag]").innerHTML = "<i></i>" + s.tag;
+      hero.querySelector("[data-h]").innerHTML = s.h;
+      hero.querySelector("[data-stats]").innerHTML = s.st.map(function (x) { return "<div><b>" + x[0] + "</b><span>" + x[1] + "</span></div>"; }).join("");
+      hero.querySelector("[data-buy]").innerHTML = s.buy + " <span>→</span>";
+      parts.forEach(function (p) { p.classList.remove("out"); });
+    }, 380);
+    hero.querySelectorAll("[data-dots] button").forEach(function (b) { b.classList.toggle("on", +b.dataset.s === i); });
+  }
+  hero.querySelector("[data-dots]").addEventListener("click", function (e) { var b = e.target.closest("button"); if (b) { clearInterval(timer); show(+b.dataset.s); } });
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) timer = setInterval(function () { if (!document.documentElement.classList.contains("wall-paused")) show((cur + 1) % S.length); }, 6500);
+})();
+</script>
 <script data-feature>
 (function () {
   var T = [

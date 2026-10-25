@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="assets/base.css">
 <link rel="stylesheet" href="assets/shop.css">
 <style>
-:root{--bg:#e2e6f8;--fg:#10175a;--muted:#4a5288;--line:rgba(16,23,90,.14);--card:#d3d9f3;--soft:#d9def5;--accent:#10175a;--accent-fg:#e2e6f8;--rust:#2f40e0;--radius:2px;--head:"Fraunces V",Georgia,serif;--body:"Inter V",Arial,sans-serif;--wrap:1360px}
+:root{--bg:#e2e6f8;--fg:#10175a;--muted:#4a5288;--line:rgba(16,23,90,.14);--card:#d3d9f3;--soft:#d9def5;--accent:#10175a;--accent-fg:#e2e6f8;--rust:#2f40e0;--radius:2px;--head:"Syne V",Arial,sans-serif;--body:"Inter V",Arial,sans-serif;--wrap:1360px}
 body{font-size:15px}
 .topbar{background:var(--fg);color:#e9e2d4;font-size:12.5px;letter-spacing:.04em}
 .topbar .wrap{display:flex;justify-content:space-between;gap:20px;height:36px;align-items:center}
@@ -23,32 +23,39 @@ body{font-size:15px}
 .rfq{display:flex;align-items:center;gap:6px;height:42px;padding:0 16px;border:1px solid var(--fg);font-weight:650;font-size:14px}
 .rfq:hover{background:var(--fg);color:var(--bg)}
 .burger{display:none}
-/* hero */
-.hero{min-height:calc(100vh - 108px);min-height:max(500px,calc(100vh - 108px));display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);align-items:stretch;border-bottom:1px solid var(--line)}
-.hero-copy{display:flex;flex-direction:column;justify-content:center;padding:clamp(28px,4vw,72px) clamp(24px,4vw,64px) clamp(28px,4vw,64px) max(24px,calc((100vw - 1360px) / 2))}
+/* hero: one line of type over a reel of the factory floor, step by step */
+.hero{min-height:calc(100vh - 108px);min-height:max(620px,calc(100vh - 108px));display:flex;flex-direction:column;padding:clamp(22px,4vh,44px) 0 clamp(20px,3.4vh,34px);border-bottom:1px solid var(--line)}
+.hero .wrap{width:min(1440px,100% - 48px)}
+.htop{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:30px}
 .kicker{display:inline-flex;align-items:center;gap:10px;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--rust)}
 .kicker::before{content:"";width:26px;height:1px;background:currentColor}
-.hero h1{font-family:var(--head);font-weight:400;font-size:clamp(46px,min(5.4vw,9.6vh),96px);line-height:.98;letter-spacing:-.035em;margin:22px 0 22px;font-variation-settings:"opsz" 144}
-.hero h1 i{font-style:italic;color:var(--rust)}
-.hero p.lede{font-size:clamp(16px,1.25vw,19px);line-height:1.6;color:var(--muted);max-width:33em}
-.ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
-.stats{display:grid;grid-template-columns:repeat(4,auto);gap:28px;margin-top:clamp(28px,5vh,56px);padding-top:22px;border-top:1px solid var(--line)}
-.stats b{display:block;font:500 clamp(24px,2.2vw,34px)/1 var(--head);letter-spacing:-.02em}
+.hero h1{font-family:"Syne V",Arial,sans-serif;font-weight:700;font-size:clamp(44px,min(6.3vw,11.5vh),112px);line-height:.92;letter-spacing:-.045em;margin-top:14px}
+.hero h1 i{font-style:normal;color:var(--rust)}
+.hero p.lede{font-size:15.5px;line-height:1.6;color:var(--muted);max-width:27em;padding-bottom:6px}
+.reel{flex:1;min-height:300px;display:flex;gap:10px;margin:clamp(18px,3.4vh,32px) 0 clamp(16px,2.8vh,26px)}
+.step{position:relative;flex:1;min-width:0;overflow:hidden;border-radius:4px;cursor:pointer;transition:flex .8s cubic-bezier(.2,.8,.2,1);background:var(--c)}
+.step.on{flex:2.7}
+.step .ph{position:absolute;inset:0;background:var(--c)}
+.step .ph img{transition:transform 1.2s cubic-bezier(.2,.8,.2,1);transform:scale(1.06)}
+.step.on .ph img{transform:scale(1)}
+.step .g{position:absolute;left:50%;top:44%;width:min(58%,260px);transform:translate(-50%,-50%);opacity:.9}
+.step .ph img:not(.broken)~.g{display:none}
+.step .weave{position:absolute;inset:0;opacity:.18;background:repeating-linear-gradient(45deg,rgba(255,255,255,.5) 0 1px,transparent 1px 7px),repeating-linear-gradient(-45deg,rgba(255,255,255,.35) 0 1px,transparent 1px 7px)}
+.step::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,14,50,0) 45%,rgba(10,14,50,.82) 100%)}
+.step .cap{position:absolute;left:18px;right:18px;bottom:16px;z-index:1;color:#eef0fb}
+.step .cap span{font:600 12px/1 "JetBrains Mono V",monospace;letter-spacing:.06em;color:#f0b48f}
+.step .cap b{display:block;font:700 clamp(20px,1.8vw,28px)/1.05 "Syne V",sans-serif;letter-spacing:-.02em;margin:6px 0 0;white-space:nowrap}
+.step .cap p{max-width:30em;font-size:13.5px;line-height:1.5;color:#cfd4f0;max-height:0;opacity:0;overflow:hidden;transition:max-height .6s,opacity .4s,margin .6s}
+.step.on .cap p{max-height:70px;opacity:1;margin-top:8px}
+.step .bar{position:absolute;left:0;top:0;height:3px;width:0;background:#f0b48f;z-index:2}
+.step.on .bar{animation:fill 5.5s linear forwards}
+html.wall-paused .step.on .bar{animation-play-state:paused}
+@keyframes fill{to{width:100%}}
+.hbot{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.ctas{display:flex;gap:12px;flex-wrap:wrap}
+.stats{display:flex;gap:clamp(20px,3vw,44px)}
+.stats b{display:block;font:700 clamp(22px,2vw,30px)/1 "Syne V",sans-serif;letter-spacing:-.03em}
 .stats span{font-size:12.5px;color:var(--muted)}
-.hero-art{position:relative;background:#e6dfd1;overflow:hidden}
-.rail{position:absolute;left:3%;right:3%;top:13%;height:6px;border-radius:3px;background:linear-gradient(#8a7d6a,#3b437a);box-shadow:0 2px 0 rgba(0,0,0,.08)}
-.hang{position:absolute;top:calc(13% - 2px);width:27%;transform-origin:50% 0;animation:sway 6s ease-in-out infinite alternate}
-.hang svg.h{display:block;width:30%;margin:0 auto -9%;height:auto}
-.hang .g{filter:drop-shadow(0 18px 18px rgba(60,40,20,.18));transform:scale(1.32);transform-origin:50% 0}
-.hang:nth-child(2){left:2%;animation-delay:-1s}.hang:nth-child(3){left:25%;animation-delay:-3s}.hang:nth-child(4){left:48%;animation-delay:-2s}.hang:nth-child(5){left:71%;animation-delay:-4s}
-@keyframes sway{from{transform:rotate(-1.6deg)}to{transform:rotate(1.6deg)}}
-.swatches{position:absolute;left:6%;bottom:7%;display:flex;gap:10px}
-.swatches i{width:52px;height:68px;border-radius:2px;box-shadow:0 6px 14px rgba(40,30,20,.18);position:relative}
-.swatches i::after{content:"";position:absolute;inset:auto 0 0 0;height:16px;background:#eef0fb}
-.tagcard{position:absolute;right:6%;bottom:8%;width:240px;padding:18px;background:#eef0fb;box-shadow:0 18px 40px rgba(40,30,20,.18);font-size:13px}
-.tagcard b{display:block;font:500 20px/1.1 var(--head);margin:6px 0 10px}
-.tagcard dl{display:grid;grid-template-columns:auto 1fr;gap:5px 12px;color:var(--muted)}
-.tagcard dd{color:var(--fg);font-weight:600;margin:0}
 /* sections */
 .sec{padding:clamp(64px,8vw,110px) 0}
 .sec-h{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:36px;flex-wrap:wrap}
@@ -119,6 +126,7 @@ body{font-size:15px}
   .cats,.steps,.capgrid{grid-template-columns:1fr 1fr}.stats{grid-template-columns:1fr 1fr}
   .foot .wrap{grid-template-columns:1fr 1fr}.topbar span:last-child{display:none}
   .rfq [data-cart-label]{display:none}.head .wrap{gap:14px}
+  .htop{grid-template-columns:1fr;gap:14px}.reel{flex-direction:column;min-height:0}.step{flex:none;height:74px}.step.on{flex:none;height:300px}.step .cap b{font-size:20px}.stats{flex-wrap:wrap;gap:18px 28px}.hbot{flex-direction:column;align-items:stretch}.step .g{width:40%}
 }
 </style>
 </head>
@@ -135,24 +143,23 @@ body{font-size:15px}
 
 <main>
 <section data-view="home">
-  <div class="hero">
-    <div class="hero-copy">
-      <p class="kicker" data-in>Garment manufacturer &amp; exporter since 2006</p>
-      <h1 data-in style="--d:1">Your designs, cut, sewn and <i>shipped</i> to spec.</h1>
-      <p class="lede" data-in style="--d:2">Knits, wovens, outerwear and activewear for brands and distributors in 40 countries. Send a tech pack, approve a sample, and we handle production, quality checks and freight.</p>
-      <div class="ctas" data-in style="--d:3"><a class="sh-btn" href="#/shop">Browse the catalog</a><a class="sh-btn ghost" href="#/builder">Build a sample</a></div>
-      <div class="stats" data-in style="--d:4"><div><b>2.4M</b><span>pieces a year</span></div><div><b>300</b><span>minimum per style</span></div><div><b>7 days</b><span>sample turnaround</span></div><div><b>40+</b><span>export markets</span></div></div>
+  <div class="hero"><div class="wrap" style="display:flex;flex-direction:column;flex:1">
+    <div class="htop">
+      <div><p class="kicker" data-in>Garment manufacturer &amp; exporter since 2006</p>
+      <h1 data-in style="--d:1">Cut, sewn and <i>shipped</i><br>to your spec.</h1></div>
+      <p class="lede" data-in style="--d:2">Knits, wovens, outerwear and activewear for brands in 40 countries. Send a tech pack, approve a sample, and we run production, quality checks and freight.</p>
     </div>
-    <div class="hero-art" aria-hidden="true">
-      <div class="rail"></div>
-      <div class="hang" data-g="hoodie|#3d5a4c"></div>
-      <div class="hang" data-g="shirt|#c9d1f0"></div>
-      <div class="hang" data-g="bomber|#2f40e0"></div>
-      <div class="hang" data-g="tee|#24324a"></div>
-      <div class="swatches"><i style="background:#24324a"></i><i style="background:#2f40e0"></i><i style="background:#3d5a4c"></i><i style="background:#aab6ec"></i></div>
-      <div class="tagcard"><span class="muted">Style LL-2041</span><b>Heavyweight hoodie</b><dl><dt>Fabric</dt><dd>420 gsm cotton fleece</dd><dt>MOQ</dt><dd>300 pcs / color</dd><dt>FOB</dt><dd>from $11.40</dd></dl></div>
+    <div class="reel" data-reel data-in style="--d:3">
+      <div class="step on" style="--c:#1b2470"><div class="ph"><img src="img/loom-cut.webp" alt="Cutting stacked fleece on a factory cutting table"><span class="weave"></span><div class="g" data-g="hoodie|#2f40e0"></div></div><i class="bar"></i><div class="cap"><span>01 · Day 1</span><b>Cut</b><p>Your pattern, marked by computer and cut through 120 layers at once, so every size matches the sample.</p></div></div>
+      <div class="step" style="--c:#2f40e0"><div class="ph"><img src="img/loom-sew.webp" alt="An overlock machine sewing an indigo hoodie"><span class="weave"></span><div class="g" data-g="tee|#c9d1f0"></div></div><i class="bar"></i><div class="cap"><span>02 · Days 2–20</span><b>Sew</b><p>Thirty-two lines on two floors. Each operator signs the bundle, so we can trace any seam back to a person.</p></div></div>
+      <div class="step" style="--c:#3d5a4c"><div class="ph"><img src="img/loom-print.webp" alt="Screen printing a mark on a navy T-shirt"><span class="weave"></span><div class="g" data-g="shirt|#e2e6f8"></div></div><i class="bar"></i><div class="cap"><span>03 · Days 12–24</span><b>Print &amp; trim</b><p>Screen print, embroidery, woven labels and hang tags, all in house, all matched to your Pantone.</p></div></div>
+      <div class="step" style="--c:#24324a"><div class="ph"><img src="img/loom-pack.webp" alt="Folded garments on a quality-control table"><span class="weave"></span><div class="g" data-g="bomber|#f0b48f"></div></div><i class="bar"></i><div class="cap"><span>04 · Days 25–30</span><b>Check &amp; ship</b><p>AQL 2.5 inspection, photos of every carton, then FOB Ho Chi Minh City or delivered to your door.</p></div></div>
     </div>
-  </div>
+    <div class="hbot" data-in style="--d:4">
+      <div class="stats"><div><b>2.4M</b><span>pieces a year</span></div><div><b>300</b><span>minimum per style</span></div><div><b>7 days</b><span>sample turnaround</span></div><div><b>40+</b><span>export markets</span></div></div>
+      <div class="ctas"><a class="sh-btn" href="#/shop">Browse the catalog</a><a class="sh-btn ghost" href="#/builder">Build a sample</a></div>
+    </div>
+  </div></div>
   <section class="sec"><div class="wrap">
     <div class="sec-h"><h2>Four product families, <i>one factory</i> floor.</h2><a href="#/shop">See all 14 styles</a></div>
     <div class="cats">
@@ -324,6 +331,15 @@ body{font-size:15px}
     detail: function (p) { return '<p class="sh-fine">Need a fabric or detail that isn\'t listed? <a href="#/builder" style="text-decoration:underline">Build a custom sample</a> or describe it in your quote request.</p>'; },
     views: { builder: builder }
   });
+})();
+
+(function () {
+  var reel = document.querySelector("[data-reel]"); if (!reel) return;
+  var steps = reel.querySelectorAll(".step"), cur = 0, t;
+  function go(i) { cur = i; steps.forEach(function (x, k) { x.classList.toggle("on", k === i); }); }
+  function next() { go((cur + 1) % steps.length); }
+  steps.forEach(function (x, k) { x.addEventListener("click", function () { go(k); }); x.addEventListener("mouseenter", function () { go(k); }); x.querySelector(".bar").addEventListener("animationend", function () { if (x.classList.contains("on")) next(); }); });
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) reel.querySelectorAll(".bar").forEach(function (b) { b.style.display = "none"; });
 })();
 </script>
 </body>
