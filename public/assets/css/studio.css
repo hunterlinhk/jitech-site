@@ -224,3 +224,5 @@
   .review div{grid-template-columns:90px 1fr auto}
 }
 .ds-send [hidden],.ds-nav [hidden],.ds-doc [hidden]{display:none!important}
+
+html[lang^="zh"] .sh,html[lang^="zh"] .paper h1,html[lang^="zh"] .ds-send h2{letter-spacing:0;font-stretch:100%;line-height:1.2}

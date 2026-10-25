@@ -3,7 +3,7 @@
 The website of Jieweitech, Inc. (an entrance screen, then a homepage whose hero is a wall of monitors), its
 inquiry system, and the admin dashboard where the team handles inquiries.
 
-- **Website:** plain HTML, CSS and JavaScript in `public/`, with GSAP vendored. English and Spanish.
+- **Website:** plain HTML, CSS and JavaScript in `public/`, with GSAP vendored. English, Spanish and Simplified Chinese.
 - **Server:** Node.js (Express) in `server/`. It serves the website, takes inquiries at `/api/inquiries`,
   and runs the dashboard API.
 - **Database:** SQLite, one file in `data/`. Nothing else to install or run.
@@ -63,13 +63,13 @@ Health check: `GET /api/health`.
 | `public/assets/css/site.css` | Homepage styles, plus the navigation and footer every page shares |
 | `public/assets/css/inner.css` | Styles for the service, contact and privacy pages |
 | `public/assets/js/site.js` | Homepage: entrance, monitor wall, intro sequence, full-page scrolling |
-| `public/assets/js/i18n.js` | English / Spanish switching |
+| `public/assets/js/i18n.js` | English / Spanish / Chinese switching |
 | `public/assets/js/ui.js` | Every page: the language menu, the round cursor, and where a visit came from |
 | `public/assets/js/inner.js` | Service and contact pages: mobile menu, scroll reveals, the inquiry form |
 | `public/pages/*.html` | The 13 concept websites shown on the monitors |
 | `server/` | The server: `app.js` (routes), `store.js` (database queries), `auth.js` (sign-in), `notify.js` (alerts and emails), `routes/` (the two APIs) |
 | `admin/` | The dashboard (`js/app.js`, `js/inquiries.js`, `js/overview.js`, `js/pages.js`) |
-| `tools/build.mjs` | Builds `dist/`: Spanish pages, search tags, sitemap. Runs on `npm start` / `npm run dev` |
+| `tools/build.mjs` | Builds `dist/`: Spanish and Chinese pages, search tags, sitemap. Runs on `npm start` / `npm run dev` |
 | `scripts/` | Account commands and the backup |
 | `test/` | API tests |
 | `dist/` | Built site (generated, not in git) |
@@ -141,24 +141,34 @@ delete inquiries and change settings.
 
 ## Languages and search engines
 
-The site is in English and Spanish. Spanish lives in the HTML next to the English
+The site is in English, Spanish and Simplified Chinese. Spanish lives in the HTML next to the English
 (`<h2 data-es="Lo que hacemos">What we do</h2>`; attributes with `data-attr="aria-label" data-attr-es="…"`),
-and text written by scripts is in `STR` in `public/assets/js/i18n.js`. The copy uses friendly, neutral
-Latin American Spanish addressed as "tú".
+and text written by scripts is in `STR` in `public/assets/js/i18n.js` or passed through
+`I18N.pick(english, spanish)`. The copy uses friendly, neutral Latin American Spanish addressed as "tú".
 
-`npm run build` turns that into two sets of pages: English at `/…` and Spanish at `/es/…`, each with the right
-language already in the HTML, so search engines index both. Every page gets:
-- `canonical` and `hreflang` links (English, Spanish, and English as the default)
+Chinese is kept in one dictionary, `i18n/zh.json`, keyed by the English text (HTML included), so pages don't need
+a third attribute. `node tools/zh-dict.mjs` turns it into `public/assets/js/i18n-zh.js`, which every page loads
+before `i18n.js` (the build runs it for you). `node tools/zh-dict.mjs --missing` lists page text with no
+translation yet; anything missing simply shows in English. When you change English text, add the new sentence to
+the dictionary too. Script text (the Design Studio, its preview and document, the plan finder) goes through the same
+dictionary. A key starting with `{n}` matches text that starts with a number, e.g. `"{n} languages: …"`.
+The Chinese is written for Mandarin readers in the US, Taiwan and Malaysia: polite "您", plain business wording.
+
+`npm run build` turns that into three sets of pages: English at `/…`, Spanish at `/es/…` and Chinese at `/zh/…`,
+each with the right language already in the HTML, so search engines index all of them. Every page gets:
+- `canonical` and `hreflang` links (`en`, `es`, `zh-Hans`, and English as the default)
 - Open Graph tags in its language, with a social preview image
 - structured data: the company (with address and phone), the website, the page, each service with its starting
   prices, the FAQs, and breadcrumbs
-- plus `sitemap.xml` (with both languages), `robots.txt` (keeps `/admin` and `/api` out) and `llms.txt`,
+- plus `sitemap.xml` (with all three languages), `robots.txt` (keeps `/admin` and `/api` out) and `llms.txt`,
   a short summary for AI tools. The concept websites on the monitors are marked `noindex`.
 
 Choosing a language opens the matching address (the homepage swaps its text in place so the wall keeps its state,
-and updates the address bar). The choice is remembered. A first-time visitor whose browser prefers Spanish gets
-Spanish. `?lang=es` or `?lang=en` forces one. Spanish headlines are set slightly smaller and tighter, because
-Spanish runs about a fifth longer than English. The concept websites on the monitors stay in English, since they
+and updates the address bar). The choice is remembered. A first-time visitor whose browser prefers Spanish or Chinese gets
+that language. `?lang=es`, `?lang=zh` or `?lang=en` forces one. Spanish headlines are set slightly smaller and
+tighter, because Spanish runs about a fifth longer than English; Chinese headlines drop the Latin letter-spacing and
+use a CJK font stack (PingFang, Microsoft YaHei, Noto Sans CJK). Confirmation emails and the dashboard's reply
+drafts follow the visitor's language. The concept websites on the monitors stay in English, since they
 are design examples.
 
 Opening `public/index.html` without the server still works for previewing the design: languages switch in place,

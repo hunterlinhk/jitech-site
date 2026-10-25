@@ -778,3 +778,8 @@ html[lang="es"] .contact h2{font-size:clamp(2.2rem,min(5.6vw,9svh),7.4rem)}
 /* five menu items: keep them on one line on smaller laptops */
 @media (min-width:900px) and (max-width:1199px){.nav-links{gap:clamp(.9rem,1.6vw,1.5rem);font-size:.85rem}.nav-links a{white-space:nowrap}}
 @media (min-width:900px) and (max-width:1079px){.nav-links{gap:.7rem;font-size:.8rem}.nav-links .nav-cta{padding-left:.8rem;padding-right:.8rem}}
+
+/* Simplified Chinese: system CJK fonts after our Latin ones, no negative tracking or condensed widths on Chinese text, roomier line height */
+html[lang^="zh"] body{font-family:"Inter Variable",Inter,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC","Source Han Sans SC",sans-serif}
+html[lang^="zh"] :is(h1,h2,h3,.pg-h,.hx-title,.big,.lede,.mega-title){letter-spacing:0!important;font-stretch:100%!important;line-height:1.18!important}
+html[lang^="zh"] .eyebrow,html[lang^="zh"] small{letter-spacing:.04em}

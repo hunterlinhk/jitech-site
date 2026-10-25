@@ -94,6 +94,20 @@ test("visitor inquiries: validation, saving, honeypot and the no-JavaScript fall
       body: new URLSearchParams({ name: "Sin JS", email: "nojs@example.com", message: "Mensaje sin JavaScript.", lang: "es" }) });
     assert.equal(form.status, 303);
     assert.match(form.headers.get("location"), /^\/es\/contact\.html\?sent=JW-\d+#form$/);
+    const formZh = await fetch(t.base + "/api/inquiries", { method: "POST", redirect: "manual", headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({ name: "王小明", email: "wang@example.com", message: "我们想做一个公司网站。", lang: "zh" }) });
+    assert.equal(formZh.status, 303);
+    assert.match(formZh.headers.get("location"), /^\/zh\/contact\.html\?sent=JW-\d+#form$/);
+    const zhRow = t.store.getInquiry(t.store.idFromRef(/sent=(JW-\d+)/.exec(formZh.headers.get("location"))[1]));
+    assert.equal(zhRow.lang, "zh");
+    // the visitor's confirmation email is in Chinese too
+    const mail = t.notifier.customerEmail(zhRow);
+    assert.match(mail.subject, /我们已收到您的信息/);
+    assert.match(mail.text, /^王小明，您好：/);
+    assert.match(mail.html, /<html lang="zh-Hans"/);
+    // an unknown language falls back to English
+    r = await c.post("/api/inquiries", inquiry({ email: "fr@example.com", lang: "fr" }));
+    assert.equal(t.store.getInquiry(t.store.idFromRef(r.data.ref)).lang, "en");
 
     // posts from another website are refused
     r = await c.call("POST", "/api/inquiries", inquiry(), { Origin: "https://evil.example" });
@@ -256,6 +270,18 @@ test("the website: pages, Spanish addresses, headers and the dashboard", async (
       assert.equal(r.status, 200);
       assert.match(html, /<html lang="es"/);
       assert.match(html, /hreflang="en"/);
+      assert.match(html, /hreflang="zh-Hans" href="[^"]*\/zh\/contact\.html"/);
+    }
+    if (fs.existsSync(path.join(__dirname, "..", "dist", "zh", "index.html"))) {
+      r = await fetch(t.base + "/zh/contact.html");
+      const html = await r.text();
+      assert.equal(r.status, 200);
+      assert.match(html, /<html lang="zh-Hans"/);
+      assert.match(html, /<title[^>]*>联系我们 \| JIEWEITECH<\/title>/);
+      assert.match(html, /name="lang" value="zh"/);
+      r = await fetch(t.base + "/zh/does-not-exist");
+      assert.equal(r.status, 404);
+      assert.match(await r.text(), /这个页面不存在/);
     }
   } finally { t.stop(); }
 });

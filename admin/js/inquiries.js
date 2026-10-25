@@ -319,14 +319,14 @@ async function save(p, msg) {
    Replies are written here and sent by the server, so they work whatever email app (or webmail) the team uses.
    Replies from the customer go straight to the inbox of the person who wrote. */
 function draftFor(d) {
-  const es = d.lang === "es";
+  const es = d.lang === "es", zh = d.lang === "zh";
   const first = String(d.name).trim().split(/\s+/)[0];
   const co = state.meta.company || {};
   const site = String(state.meta.siteUrl || "").replace(/^https?:\/\//, "");
   return {
-    subject: es ? `Re: Tu consulta a JIEWEITECH (${d.ref})` : `Re: Your inquiry to JIEWEITECH (${d.ref})`,
-    greeting: es ? `Hola, ${first}:\n\nGracias por escribir a JIEWEITECH.\n\n` : `Hi ${first},\n\nThanks for reaching out to JIEWEITECH.\n\n`,
-    signature: (es ? "\n\nSaludos cordiales,\n" : "\n\nBest regards,\n") + `${state.user.name}\nJIEWEITECH · ${co.legalName || "Jieweitech, Inc."}\n${co.phone || ""}\n${site}`
+    subject: zh ? `Re: 您向 JIEWEITECH 的咨询（${d.ref}）` : es ? `Re: Tu consulta a JIEWEITECH (${d.ref})` : `Re: Your inquiry to JIEWEITECH (${d.ref})`,
+    greeting: zh ? `${first}，您好：\n\n感谢您联系 JIEWEITECH。\n\n` : es ? `Hola, ${first}:\n\nGracias por escribir a JIEWEITECH.\n\n` : `Hi ${first},\n\nThanks for reaching out to JIEWEITECH.\n\n`,
+    signature: (zh ? "\n\n祝好！\n" : es ? "\n\nSaludos cordiales,\n" : "\n\nBest regards,\n") + `${state.user.name}\nJIEWEITECH · ${co.legalName || "Jieweitech, Inc."}\n${co.phone || ""}\n${site}`
   };
 }
 function mailLinks(d, subject, body) {

@@ -24,7 +24,7 @@ function validate(body) {
     service: clean(body.service, 40) || "not-sure",
     plan: clean(body.plan, 40),
     message: clean(body.message, 5000),
-    lang: body.lang === "es" ? "es" : "en",
+    lang: ["es", "zh"].includes(body.lang) ? body.lang : "en",
     sourcePage: clean(body.page, 200),
     referrer: clean(body.referrer, 500),
     utmSource: clean(body.utm_source, 100),
@@ -89,8 +89,8 @@ function inquiryRoutes({ cfg, store, notifier, log = console }) {
   r.post("/inquiries", express.json({ limit: "24kb" }), express.urlencoded({ extended: false, limit: "24kb" }), async (req, res) => {
     const body = req.body || {};
     const wantsJson = req.is("application/json") || (req.get("accept") || "").includes("application/json");
-    const lang = body.lang === "es" ? "es" : "en";
-    const back = (q) => (lang === "es" ? "/es/contact.html" : "/contact.html") + "?" + q + "#form";
+    const lang = ["es", "zh"].includes(body.lang) ? body.lang : "en";
+    const back = (q) => (lang === "en" ? "/contact.html" : "/" + lang + "/contact.html") + "?" + q + "#form";
     const fail = (status, payload) => (wantsJson ? res.status(status).json(Object.assign({ ok: false }, payload)) : res.redirect(303, back("error=" + (payload.error || "invalid"))));
 
     if (!sameSite(req)) return fail(403, { error: "forbidden" });

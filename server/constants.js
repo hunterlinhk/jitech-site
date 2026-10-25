@@ -2,17 +2,17 @@
 /* Shared lists. The dashboard reads these from /admin/api/meta, so a change here shows up everywhere. */
 
 const SERVICES = {
-  "website-development": { en: "Website Development", es: "Desarrollo web" },
-  "geo-optimization": { en: "GEO Optimization", es: "Optimización GEO" },
-  "standalone-websites": { en: "Standalone Website", es: "Sitio web independiente" },
-  "not-sure": { en: "Not sure yet", es: "Aún no lo sé" }
+  "website-development": { en: "Website Development", es: "Desarrollo web", zh: "网站开发" },
+  "geo-optimization": { en: "GEO Optimization", es: "Optimización GEO", zh: "GEO 优化" },
+  "standalone-websites": { en: "Standalone Website", es: "Sitio web independiente", zh: "独立站" },
+  "not-sure": { en: "Not sure yet", es: "Aún no lo sé", zh: "还不确定" }
 };
 
 const PLANS = {
-  "not-sure": { en: "Not sure yet", es: "Aún no lo sé" },
-  basic: { en: "Basic ($200)", es: "Básico ($200)" },
-  standard: { en: "Standard ($500)", es: "Estándar ($500)" },
-  premium: { en: "Premium ($800)", es: "Premium ($800)" }
+  "not-sure": { en: "Not sure yet", es: "Aún no lo sé", zh: "还不确定" },
+  basic: { en: "Basic ($200)", es: "Básico ($200)", zh: "基础版 ($200)" },
+  standard: { en: "Standard ($500)", es: "Estándar ($500)", zh: "标准版 ($500)" },
+  premium: { en: "Premium ($800)", es: "Premium ($800)", zh: "高级版 ($800)" }
 };
 
 // The sales pipeline, in order. "open" statuses show in the Inbox.
@@ -32,7 +32,7 @@ const PRIORITIES = [
   { id: "urgent", label: "Urgent" }
 ];
 
-const LANGS = { en: "English", es: "Español" };
+const LANGS = { en: "English", es: "Español", zh: "中文" };
 
 module.exports = {
   SERVICES, PLANS, STATUSES, PRIORITIES, LANGS,

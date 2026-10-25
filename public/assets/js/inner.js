@@ -163,12 +163,12 @@
       if (v("langs") === "yes") { lvl = Math.max(lvl, 1); why.push("lang"); }
       var ai = v("ai");
       if (ai === "high") { lvl = 2; why.push("aiHigh"); } else if (ai === "mid") { lvl = Math.max(lvl, 1); why.push("aiMid"); } else why.push("aiLow");
-      var id = RANK[lvl], es = I18N.lang === "es" ? 1 : 0;
-      finder.querySelector("[data-fname]").textContent = P[id].name[es];
+      var id = RANK[lvl], tr = function (a) { return I18N.pick(a[0], a[1]); };
+      finder.querySelector("[data-fname]").textContent = tr(P[id].name);
       finder.querySelector("[data-fprice]").textContent = P[id].price + " USD";
       var ul = finder.querySelector("[data-fwhy]");
       ul.textContent = "";
-      why.forEach(function (k) { var li = document.createElement("li"); li.textContent = WHY[k][es]; ul.appendChild(li); });
+      why.forEach(function (k) { var li = document.createElement("li"); li.textContent = tr(WHY[k]); ul.appendChild(li); });
       var cta = finder.querySelector("[data-fcta]");
       cta.setAttribute("href", (cta.getAttribute("href") || "").split("?")[0] + "?service=website-development&plan=" + id);
     };

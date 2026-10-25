@@ -10,7 +10,7 @@
 <style>
 /* The sample website drawn by the JIEWEITECH Design Studio. Every choice arrives as a CSS variable or a class on <html>. */
 :root{--bg:#fff;--sf:#f4f4f5;--ink:#18181b;--mut:#6b6b72;--line:rgba(0,0,0,.12);--pri:#1d4ed8;--on:#fff;--acc:#f59e0b;--r:10px;--rb:10px;--hf:"Inter V";--bf:"Inter V";--hw:750;--hst:100%;--hls:-.03em;--hsc:1;--bs:16px;--pad:96px;--spd:1}
-html{background:var(--bg);color:var(--ink);font-family:var(--bf),Arial,sans-serif;font-size:var(--bs);scroll-behavior:smooth}
+html{background:var(--bg);color:var(--ink);font-family:var(--bf),Arial,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",sans-serif;font-size:var(--bs);scroll-behavior:smooth}
 body{background:var(--bg);overflow-x:hidden;transition:background .4s,color .4s}
 .h{font-family:var(--hf),Arial,sans-serif;font-weight:var(--hw);font-stretch:var(--hst);letter-spacing:var(--hls);line-height:1;text-wrap:balance}
 html.upper .h{text-transform:uppercase;letter-spacing:max(var(--hls),0em)}
@@ -205,6 +205,8 @@ html.parallax .hero .vis{will-change:transform}
 /* responsive (the preview really changes width for tablet and phone) */
 @media (max-width:980px){.hero .c,html.hero-editorial .hero .c{grid-template-columns:1fr}.vis{max-width:520px}.why,.revs,.news{grid-template-columns:1fr 1fr}.form,.cfg{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.grid{--cols:2!important}.links{display:none}.burger{display:grid}.tools{margin-left:auto}html.nav-center .hd .c{grid-template-columns:auto 1fr}html.nav-center .logo{justify-self:start}html.hero-full .hero .vis{width:100%;opacity:.25}.ft .c{grid-template-columns:1fr 1fr}}
 @media (max-width:560px){.c{width:calc(100% - 32px)}.why,.revs,.news,.form .fs{grid-template-columns:1fr}.hero .c{padding-top:28px;gap:28px}.hero .acts .btn{flex:1;justify-content:center}.lng{display:none}.nl,.cfg{padding:24px}.chip{display:none}.sh h2{font-size:calc(30px * var(--hsc))}.grid{gap:10px}.card .meta{padding:4px 12px 14px}.card .row{flex-direction:column;align-items:flex-start;gap:8px}.hd .btn{display:none}}
+html[lang^="zh"] .h{letter-spacing:0;line-height:1.2;text-transform:none!important}
+html[lang^="zh"] .ey{letter-spacing:.04em}
 </style>
 </head>
 <body>
@@ -213,7 +215,10 @@ html.parallax .hero .vis{will-change:transform}
 (function () {
   "use strict";
   var L = "en";
-  var T = function (en, es) { return L === "es" ? es : en; };
+  /* the parent page's dictionary supplies Chinese; this page has none of its own */
+  var ZHP = function (en) { try { return window.parent.I18N.zh(en); } catch (e) { return en; } };
+  var SV = function (v) { return L === "zh" ? ZHP(v) : v; };
+    var T = function (en, es) { return L === "es" ? es : L === "zh" ? ZHP(en) : en; };
   var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
   function shade(hex, amt) { var h = String(hex).replace("#", ""); if (h.length === 3) h = h.replace(/./g, "$&$&"); var n = parseInt(h, 16), r = n >> 16, g = (n >> 8) & 255, b = n & 255, f = function (c) { return Math.max(0, Math.min(255, Math.round(amt > 0 ? c + (255 - c) * amt : c * (1 + amt)))); }; return "#" + ((1 << 24) + (f(r) << 16) + (f(g) << 8) + f(b)).toString(16).slice(1); }
 
@@ -284,7 +289,7 @@ html.parallax .hero .vis{will-change:transform}
     return S.industry === "trading" ? "FOB $" + n.toFixed(2) : T("MOQ ", "MOQ ") + (S.industry === "mfg" ? "50" : "300") + T(" pcs", " pzas");
   }
   function render(S) {
-    L = S.lang === "es" ? "es" : "en";
+    L = S.lang === "es" || S.lang === "zh" ? S.lang : "en";
     var I = IND[S.industry] || IND.mfg, name = esc(S.name || I.name), root = document.documentElement;
     var shop = S.goal === "shop" && S.industry !== "services", F = S.feats || {}, P = S.pages || {};
     var cta1 = S.industry === "services" ? T("Book a consultation", "Agenda una consulta") : shop ? T("Shop now", "Comprar ahora") : S.goal === "brand" ? T("Discover the range", "Descubre la colección") : T("Request a quote", "Solicitar cotización");
@@ -295,11 +300,11 @@ html.parallax .hero .vis{will-change:transform}
     var h = "";
     h += '<header class="hd"><div class="c"><a class="logo"><i>' + esc((S.name || I.name).trim().charAt(0).toUpperCase()) + "</i>" + name + '</a><nav class="links">' + nav + '</nav><div class="tools">' + (langs.length > 1 ? '<span class="lng">' + langs.slice(0, 3).map(function (x) { return x.toUpperCase(); }).join(" · ") + "</span>" : "") + (shop ? '<span class="cart">🛒<b>2</b></span>' : "") + '<a class="btn p sm">' + (shop ? T("Shop", "Tienda") : S.industry === "services" ? T("Book a call", "Agendar") : T("Get a quote", "Cotizar")) + '</a><span class="burger"></span></div></div></header>';
     var vis = "";
-    if (S.visual === "product") vis = '<div class="panel tint"></div><div class="art">' + art(S.industry, 0, S) + '</div><div class="chip a"><i>★</i><div>' + I.stats[0][0] + "<small>" + T(I.stats[0][1], I.stats[0][2]) + '</small></div></div><div class="chip b"><i>✓</i><div>' + I.stats[2][0] + "<small>" + T(I.stats[2][1], I.stats[2][2]) + "</small></div></div>";
-    else if (S.visual === "scene") vis = '<div class="scene"><div class="s1">' + art(S.industry, 0, S) + '</div><div class="s2">' + art(S.industry, 1, S) + '</div><div class="s3">' + art(S.industry, 2, S) + '</div></div><div class="chip b"><i>★</i><div>' + I.stats[3][0] + "<small>" + T(I.stats[3][1], I.stats[3][2]) + "</small></div></div>";
+    if (S.visual === "product") vis = '<div class="panel tint"></div><div class="art">' + art(S.industry, 0, S) + '</div><div class="chip a"><i>★</i><div>' + SV(I.stats[0][0]) + "<small>" + T(I.stats[0][1], I.stats[0][2]) + '</small></div></div><div class="chip b"><i>✓</i><div>' + SV(I.stats[2][0]) + "<small>" + T(I.stats[2][1], I.stats[2][2]) + "</small></div></div>";
+    else if (S.visual === "scene") vis = '<div class="scene"><div class="s1">' + art(S.industry, 0, S) + '</div><div class="s2">' + art(S.industry, 1, S) + '</div><div class="s3">' + art(S.industry, 2, S) + '</div></div><div class="chip b"><i>★</i><div>' + SV(I.stats[3][0]) + "<small>" + T(I.stats[3][1], I.stats[3][2]) + "</small></div></div>";
     else if (S.visual === "abstract") vis = '<div class="abs"><div class="grid"></div><div class="o o1"></div><div class="o o2"></div><div class="o o3"></div></div>';
     h += '<section class="hero"><div class="deco"></div><div class="c"><div class="txt"><span class="ey" data-a>' + (tag || T(I.ey[0], I.ey[1])) + '</span><h1 class="h" data-a style="--i:1">' + T(I.h[0], I.h[1]) + '</h1><p class="l" data-a style="--i:2">' + T(I.p[0], I.p[1]) + '</p><div class="acts" data-a style="--i:3"><a class="btn p">' + cta1 + ' →</a><a class="btn s">' + cta2 + '</a></div><div class="proof" data-a style="--i:4">' + I.stats.slice(0, 3).map(function (s) { return "<div><b>" + s[0] + "</b><small>" + T(s[1], s[2]) + "</small></div>"; }).join("") + '</div></div><div class="vis" data-a style="--i:2">' + vis + "</div></div></section>";
-    if (S.scroll && S.scroll.marquee) { var words = I.items.map(function (x) { return T(x[0], x[1]); }).concat(I.stats.map(function (s) { return s[0] + " " + T(s[1], s[2]); })); h += '<div class="marq"><div>' + words.map(function (w) { return "<span>✦ " + w + "</span>"; }).join("") + "</div><div>" + words.map(function (w) { return "<span>✦ " + w + "</span>"; }).join("") + "</div></div>"; }
+    if (S.scroll && S.scroll.marquee) { var words = I.items.map(function (x) { return T(x[0], x[1]); }).concat(I.stats.map(function (s) { return SV(s[0]) + " " + T(s[1], s[2]); })); h += '<div class="marq"><div>' + words.map(function (w) { return "<span>✦ " + w + "</span>"; }).join("") + "</div><div>" + words.map(function (w) { return "<span>✦ " + w + "</span>"; }).join("") + "</div></div>"; }
     // products
     var cols = Math.max(2, Math.min(4, +S.cols || 3)), items = I.items.slice(0, cols === 2 ? 2 : cols === 3 ? 3 : 4);
     if (cols === 3 && !F.filters) items = I.items.slice(0, 3);
@@ -311,7 +316,7 @@ html.parallax .hero .vis{will-change:transform}
       : S.goal === "brand" ? [["✦", "Our story", "Nuestra historia", "How a small workshop became a brand people love.", "Cómo un pequeño taller se convirtió en una marca querida."], ["◎", "Made with care", "Hecho con cuidado", "Materials we can trace and people we know by name.", "Materiales que podemos rastrear y personas que conocemos."], ["♥", "Community", "Comunidad", "Events, stories and the people who use what we make.", "Eventos, historias y las personas que usan lo que hacemos."]]
       : [["⚡", "Fast quotes", "Cotizaciones rápidas", "Send a drawing or a spec and get a price within 48 hours.", "Envía un plano o una especificación y recibe precio en 48 horas."], ["🏭", "Factory direct", "Directo de fábrica", "No middlemen, so you get better prices and clear lead times.", "Sin intermediarios: mejores precios y plazos claros."], ["✓", "Quality checked", "Calidad verificada", "Every order is inspected before it ships, with a report.", "Cada pedido se inspecciona antes del envío, con informe."]];
     h += '<section class="sec alt"><div class="c"><div class="sh" data-a><h2 class="h">' + T("Why " + name, "Por qué " + name) + '</h2></div><div class="why">' + why.map(function (w, i) { return '<div data-a style="--i:' + i + '"><i>' + w[0] + '</i><h3 class="h">' + T(w[1], w[2]) + "</h3><p>" + T(w[3], w[4]) + "</p></div>"; }).join("") + "</div></div></section>";
-    h += '<section class="sec"><div class="c stats">' + I.stats.map(function (s, i) { return '<div data-a style="--i:' + i + '"><b data-count="' + esc(s[0]) + '">' + s[0] + "</b><small>" + T(s[1], s[2]) + "</small></div>"; }).join("") + "</div></section>";
+    h += '<section class="sec"><div class="c stats">' + I.stats.map(function (s, i) { return '<div data-a style="--i:' + i + '"><b data-count="' + esc(SV(s[0])) + '">' + SV(s[0]) + "</b><small>" + T(s[1], s[2]) + "</small></div>"; }).join("") + "</div></section>";
     if (F.config) h += '<section class="sec" style="padding-top:0"><div class="c"><div class="cfg" data-a><div><span class="ey">' + T("Configurator", "Configurador") + '</span><h2 class="h" style="font-size:calc(38px * var(--hsc));margin-top:12px">' + T("Make it yours", "Hazlo tuyo") + '</h2><div class="sw"><i style="background:' + S.pri + '"></i><i style="background:' + S.acc + '"></i><i style="background:#222"></i><i style="background:#ddd"></i></div><a class="btn p">' + T("Start customizing", "Empezar a personalizar") + '</a></div><div class="pic">' + art(S.industry, 1, S) + "</div></div></div></section>";
     if (F.reviews) h += '<section class="sec alt"><div class="c"><div class="sh" data-a><h2 class="h">' + T("What customers say", "Lo que dicen los clientes") + '</h2></div><div class="revs">' + [["Fast, clear and exactly to spec. Our go-to supplier.", "Rápidos, claros y exactos. Nuestro proveedor de confianza.", "M. Chen, Procurement"], ["The samples arrived in a week and looked perfect.", "Las muestras llegaron en una semana y se veían perfectas.", "L. Ortega, Brand owner"], ["Great communication from quote to delivery.", "Gran comunicación desde la cotización hasta la entrega.", "J. Patel, Operations"]].map(function (r, i) { return '<div data-a style="--i:' + i + '"><span class="st">★★★★★</span><p>“' + T(r[0], r[1]) + "”</p><small>" + r[2] + "</small></div>"; }).join("") + "</div></div></section>";
     if (P.news) h += '<section class="sec"><div class="c"><div class="sh" data-a><h2 class="h">' + T("Latest news", "Últimas noticias") + '</h2><a class="btn s sm">' + T("All news", "Todas las noticias") + '</a></div><div class="news">' + [["New production line now open", "Nueva línea de producción en marcha"], ["Meet us at the trade show in March", "Visítanos en la feria de marzo"], ["How to plan your next order", "Cómo planear tu próximo pedido"]].map(function (n, i) { return '<div data-a style="--i:' + i + '"><div class="im"></div><small>' + T("Oct " + (12 - i * 4) + ", 2026", (12 - i * 4) + " oct 2026") + "</small><b>" + T(n[0], n[1]) + "</b></div>"; }).join("") + "</div></div></section>";
@@ -330,7 +335,7 @@ html.parallax .hero .vis{will-change:transform}
     root.className = cls.join(" ");
     var V = S.vars || {};
     for (var k in V) root.style.setProperty(k, V[k]);
-    root.lang = L;
+    root.lang = L === "zh" ? "zh-Hans" : L;
     observe(S);
   }
   /* ---------- motion ---------- */

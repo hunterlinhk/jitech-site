@@ -94,6 +94,15 @@ ${rows(inq).filter((r) => !["Reference", "Name", "Company"].includes(r[0])).map(
       copy: "Esta es una copia de lo que nos enviaste:",
       sign: "El equipo de JIEWEITECH",
       note: "Recibes este correo porque esta dirección se escribió en el formulario de contacto de"
+    },
+    zh: {
+      subject: (r) => `我们已收到您的信息（${r}）`,
+      hi: (n) => `${n}，您好：`,
+      body: "感谢您联系 JIEWEITECH。我们已收到您的信息，通常会在一个工作日内回复。",
+      ref: "您的参考编号",
+      copy: "以下是您发送内容的副本：",
+      sign: "JIEWEITECH 团队",
+      note: "您收到这封邮件，是因为有人在以下网站的联系表单中填写了这个邮箱地址："
     }
   };
   function customerEmail(inq) {
@@ -101,7 +110,7 @@ ${rows(inq).filter((r) => !["Reference", "Name", "Company"].includes(r[0])).map(
     const first = String(inq.name).trim().split(/\s+/)[0];
     const sig = [L.sign, co.legalName, co.street, `${co.city}, ${co.region} ${co.postalCode}`, co.phone];
     const text = [L.hi(first), "", L.body, "", `${L.ref}: ${inq.ref}`, "", L.copy, "", inq.message, "", ...sig, "", `${L.note} ${cfg.siteUrl}`].join("\n");
-    const html = `<!doctype html><html lang="${inq.lang === "es" ? "es" : "en"}"><body style="margin:0;background:#f3f5f9;font-family:Inter,Segoe UI,Arial,sans-serif;color:#0b0d12">
+    const html = `<!doctype html><html lang="${inq.lang === "zh" ? "zh-Hans" : inq.lang === "es" ? "es" : "en"}"><body style="margin:0;background:#f3f5f9;font-family:Inter,Segoe UI,Arial,sans-serif;color:#0b0d12">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:28px 12px">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#fff;border-radius:14px;overflow:hidden;border:1px solid #e3e7ee">
 <tr><td style="background:#050505;color:#fff;padding:18px 24px;font-weight:800;letter-spacing:.04em">JIEWEITECH</td></tr>
@@ -185,11 +194,12 @@ ${rows(inq).filter((r) => !["Reference", "Name", "Company"].includes(r[0])).map(
 
   /** A reply written in the dashboard, sent to the customer. Replies from the customer go to the team member who wrote it. */
   function replyEmail(inq, user, subject, body, quote) {
-    const es = inq.lang === "es";
-    const wrote = es ? `El ${new Date(inq.createdAt).toLocaleDateString("es-MX", { day: "numeric", month: "long", year: "numeric" })}, ${inq.name} escribió:`
+    const es = inq.lang === "es", zh = inq.lang === "zh";
+    const wrote = zh ? `${inq.name} 于 ${new Date(inq.createdAt).toLocaleDateString("zh-CN", { year: "numeric", month: "long", day: "numeric" })}写道：`
+      : es ? `El ${new Date(inq.createdAt).toLocaleDateString("es-MX", { day: "numeric", month: "long", year: "numeric" })}, ${inq.name} escribió:`
       : `On ${new Date(inq.createdAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}, ${inq.name} wrote:`;
     const quoted = quote ? "\n\n" + wrote + "\n" + String(inq.message).split("\n").map((l) => "> " + l).join("\n") : "";
-    const html = `<!doctype html><html lang="${es ? "es" : "en"}"><body style="margin:0;background:#ffffff;font-family:Inter,Segoe UI,Arial,sans-serif;color:#0b0d12">
+    const html = `<!doctype html><html lang="${zh ? "zh-Hans" : es ? "es" : "en"}"><body style="margin:0;background:#ffffff;font-family:Inter,Segoe UI,Arial,sans-serif;color:#0b0d12">
 <div style="max-width:620px;padding:24px 20px;font-size:15px;line-height:1.6;white-space:pre-wrap">${esc(body)}</div>
 ${quote ? `<div style="max-width:620px;padding:0 20px 24px;color:#5b6472;font-size:14px;line-height:1.55"><p style="margin:0 0 6px">${esc(wrote)}</p><div style="border-left:3px solid #d5dbe5;padding:2px 0 2px 12px;white-space:pre-wrap">${esc(inq.message)}</div></div>` : ""}
 </body></html>`;

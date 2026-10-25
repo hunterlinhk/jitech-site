@@ -77,7 +77,7 @@ function createApp(cfg, { log = console } = {}) {
   /* ---------- not found / errors ---------- */
   app.use((req, res) => {
     if (req.path.startsWith("/api/")) return res.status(404).json({ error: "not_found" });
-    const page = path.join(siteDir, req.path.startsWith("/es/") ? "es" : "", "404.html");
+    const page = path.join(siteDir, (/^\/(es|zh)\//.exec(req.path) || [, ""])[1], "404.html");
     res.status(404);
     if (fs.existsSync(page)) { res.setHeader("Cache-Control", "no-cache"); return res.sendFile(page); }
     res.type("text").send("Not found");
