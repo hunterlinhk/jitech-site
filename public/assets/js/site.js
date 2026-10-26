@@ -28,10 +28,11 @@ var HERO = [
 ];
 // "What we do": the image shown on the right while each service is hovered (in the same order as the services).
 // These are stand-ins taken from the concept pages; put your own images in assets/img/services/ and list them here.
+/* A photo for each service ("photo": fills the frame), or, until one exists, a homepage screenshot shown whole ("shot") */
 var SERVICE_IMAGES = [
-  {src:ROOT + "assets/img/shots/L2.jpg", alt:"Website development example"},
-  {src:ROOT + "assets/img/shots/B3.jpg", alt:"GEO optimization example"},
-  {src:ROOT + "assets/img/shots/R4.jpg", alt:"Standalone website example"}
+  {src:ROOT + "assets/img/shots/B6.jpg", alt:"Website development example", kind:"shot"},
+  {src:ROOT + "assets/img/shots/L3.jpg", alt:"GEO optimization example", kind:"shot"},
+  {src:ROOT + "assets/img/shots/R4.jpg", alt:"Standalone website example", kind:"shot"}
 ];
 var WORK = [
   {file:"T1.jpg", variant:3, ratio:1.6, caption:"Wag & Co.", concept:true},
@@ -110,7 +111,7 @@ var WORK = [
   /* ---------- "What we do": a picture for each service, swapped as the services are hovered ---------- */
   var svcRows = q(".services .row"), svcFrame = $("#svcFrame"), svcNum = $("#svcNum"), svcName = $("#svcName");
   var svcImgs = SERVICE_IMAGES.map(function (o, i) {
-    var w = document.createElement("div"); w.className = "svc-img" + (i === 0 ? " is-on" : "");
+    var w = document.createElement("div"); w.className = "svc-img" + (o.kind === "shot" ? " is-shot" : "") + (i === 0 ? " is-on" : "");
     var img = new Image(); img.alt = ""; img.decoding = "async"; img.src = o.src;
     img.onerror = function () { w.classList.add("missing"); w.setAttribute("data-file", o.src); };
     w.appendChild(img); svcFrame.appendChild(w);

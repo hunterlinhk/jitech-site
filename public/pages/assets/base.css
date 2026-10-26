@@ -41,6 +41,8 @@ html.on-wall::-webkit-scrollbar{display:none}
 
 /* Paused by the homepage wall: every animation holds its current frame */
 html.wall-paused *,html.wall-paused *::before,html.wall-paused *::after{animation-play-state:paused!important}
+/* on the homepage wall the content is shown at once: an entrance paused halfway would leave the headline invisible */
+html.on-wall [data-in],html.on-wall [data-fade]{animation:none!important;opacity:1!important}
 
 /* Photos: a soft tone shows until (or instead of) the picture */
 .ph{position:relative;overflow:hidden;background:var(--ph,linear-gradient(135deg,#2a2d33,#14161a))}

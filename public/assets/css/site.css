@@ -642,6 +642,9 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
 .svc-img{position:absolute;inset:0;clip-path:inset(100% 0% 0% 0%)}
 .svc-img:first-child{clip-path:inset(0% 0% 0% 0%)}
 .svc-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:0 0;display:block;will-change:transform}
+.svc-img.is-shot{background:radial-gradient(90% 70% at 50% 40%,#1b2230 0%,#050505 75%)}
+.svc-img.is-shot img{inset:9% 7%;width:86%;height:82%;object-fit:contain;object-position:50% 50%;filter:drop-shadow(0 24px 40px rgba(0,0,0,.6))}
+.svc-img:not(.is-shot) img{object-position:50% 50%}
 .svc-img.missing img{display:none}
 .svc-img.missing::after{content:"Image: " attr(data-file);position:absolute;left:1rem;bottom:1rem;color:var(--sky);font-size:.8125rem}
 .svc-cap{display:flex;align-items:baseline;gap:.9rem;overflow:hidden;font-size:.9375rem;line-height:1.3}
