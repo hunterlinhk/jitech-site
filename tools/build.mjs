@@ -211,7 +211,7 @@ fs.writeFileSync(path.join(OUT, "llms.txt"), `# ${CO.brand}
 ## Services
 
 - [Website Development](${url("en", "website-development.html")}): websites for manufacturers, trading companies and B2B service providers. Plans: Basic $200 (up to 6 main pages and 15 product or service subpages, a digital business card site), Standard $500 (up to 11 main pages and 40 subpages, inquiry forms, product and news dashboard, multiple languages, analytics), Premium $800 (up to 15 main pages and 75 subpages, advanced GEO, industry media promotion).
-- [GEO Optimization](${url("en", "geo-optimization.html")}): helps AI tools such as ChatGPT, Gemini, Perplexity and Google's AI Overviews describe and recommend a business correctly.
+- [GEO Optimization](${url("en", "geo-optimization.html")}): helps AI tools such as ChatGPT, Gemini, Perplexity and Google's AI Overviews discover, understand and recommend a business, through a complete and well-structured business profile, tailored media articles submitted to online platforms and industry media, answer-ready website content and monthly visibility reports.
 - [Standalone Websites](${url("en", "standalone-websites.html")}): branded sites on a company's own domain, built for export and direct inquiries.
 - [Design Studio](${url("en", "design-studio.html")}): an interactive tool where visitors choose layout, colors, fonts, style and animation, see a live preview of their website, and get a design requirements document with a plan recommendation.
 
