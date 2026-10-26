@@ -107,6 +107,13 @@ var WORK = [
     fig.appendChild(cap);
   }
   q("[data-work]").forEach(function (f) { makeShotFrame(f, WORK[+f.dataset.work]); });
+  /* "Selected work": strike out "template" once the note is on screen */
+  (function () {
+    var note = $("[data-strike]"); if (!note) return;
+    if (!("IntersectionObserver" in window)) { note.classList.add("is-in"); return; }
+    var io = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { note.classList.add("is-in"); io.disconnect(); } }, { threshold: 0.6 });
+    io.observe(note);
+  })();
 
   /* ---------- "What we do": a picture for each service, swapped as the services are hovered ---------- */
   var svcRows = q(".services .row"), svcFrame = $("#svcFrame"), svcNum = $("#svcNum"), svcName = $("#svcName");
