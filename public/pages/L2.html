@@ -9,17 +9,17 @@
 <link rel="stylesheet" href="assets/base.css">
 <link rel="stylesheet" href="assets/shop.css">
 <style>
-:root{--bg:#dce8f3;--fg:#0e1a2e;--muted:#4c5d74;--line:rgba(14,26,46,.12);--card:#c9d9ea;--soft:#cfdeec;--accent:#0e1a2e;--accent-fg:#dce8f3;--clay:#e0442c;--radius:0px;--head:"DM Serif Display",Georgia,serif;--body:"Inter V",Arial,sans-serif;--wrap:1440px}
+:root{--bg:#e2e8e4;--fg:#18221f;--muted:#4f5d57;--line:rgba(24,34,31,.13);--card:#d0dbd5;--soft:#d7e0db;--accent:#18221f;--accent-fg:#e2e8e4;--clay:#b4233c;--radius:0px;--head:"DM Serif Display",Georgia,serif;--body:"Inter V",Arial,sans-serif;--wrap:1440px}
 body{font-size:14.5px}
-.ann{background:#0e1a2e;color:#d8d2c9;text-align:center;font-size:12px;letter-spacing:.08em;height:34px;display:grid;place-items:center}
-.head{position:sticky;top:0;z-index:40;background:rgba(250,248,245,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.ann{background:#18221f;color:#d5ded9;text-align:center;font-size:12px;letter-spacing:.08em;height:34px;display:grid;place-items:center}
+.head{position:sticky;top:0;z-index:40;background:rgba(243,247,245,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 .head .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:68px}
 .nav{display:flex;gap:26px;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:550}
 .brand{font:400 30px/1 var(--head);letter-spacing:.02em}
 .tools{display:flex;justify-content:flex-end;gap:22px;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:550;align-items:center}
 .burger{display:none}
 /* hero: a magazine cover. Masthead across the top, one portrait, cover lines either side */
-.cover{position:relative;height:calc(100vh - 102px);min-height:600px;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);border-bottom:1px solid var(--line);overflow:hidden;background:linear-gradient(180deg,#e8eff6 0%,var(--bg) 100%)}
+.cover{position:relative;height:calc(100vh - 102px);min-height:600px;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);border-bottom:1px solid var(--line);overflow:hidden;background:linear-gradient(180deg,#edf2ef 0%,var(--bg) 100%)}
 .mast{position:absolute;left:0;right:0;top:clamp(6px,1.4vh,16px);z-index:3;text-align:center;font:400 clamp(80px,min(13.6vw,24vh),236px)/.8 var(--head);letter-spacing:-.035em;color:var(--fg);white-space:nowrap;pointer-events:none;mix-blend-mode:multiply}
 .issue{position:absolute;left:0;right:0;top:calc(clamp(6px,1.4vh,16px) + clamp(80px,min(13.6vw,24vh),236px)*.84);z-index:3;display:flex;justify-content:space-between;padding:0 max(24px,3vw);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
 .portrait{position:relative;height:100%;aspect-ratio:2/3;--ph:linear-gradient(180deg,#eef3f8 0%,#dfe8f0 34%,#9fb0bf 52%,#6f7f8c 64%,#8d8f8a 78%,#5d605e 100%)}
@@ -54,12 +54,12 @@ body.cover-on .head .brand{opacity:0;transform:translateY(6px)}
 .cat:hover .g{transform:scale(1.05)}
 .cat b{position:absolute;left:16px;bottom:14px;font:400 26px/1 var(--head)}
 .edit{display:grid;grid-template-columns:1fr 1fr;min-height:560px}
-.edit .pic{background:#b3c7dd;display:grid;place-items:center}
+.edit .pic{background:#c3d0c9;display:grid;place-items:center}
 .edit .pic .g{width:62%}
-.edit .txt{display:flex;flex-direction:column;justify-content:center;padding:clamp(36px,6vw,100px);background:#2a2724;color:#c5d6e8}
+.edit .txt{display:flex;flex-direction:column;justify-content:center;padding:clamp(36px,6vw,100px);background:#1f2b27;color:#cfded6}
 .edit h2{font:400 clamp(44px,5vw,76px)/.95 var(--head);margin:14px 0 20px}
-.edit p{color:#b5ada2;line-height:1.7;max-width:32em;margin-bottom:28px}
-.edit .cta{background:#c5d6e8;color:#2a2724;align-self:flex-start}
+.edit p{color:#a9b8b1;line-height:1.7;max-width:32em;margin-bottom:28px}
+.edit .cta{background:#cfded6;color:#1f2b27;align-self:flex-start}
 .vals{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
 .vals div{padding:30px 26px 0 0}
 .vals b{font:400 26px/1.1 var(--head);display:block;margin-bottom:10px}
@@ -126,10 +126,10 @@ body.cover-on .head .brand{opacity:0;transform:translateY(6px)}
   <section class="sec"><div class="wrap">
     <div class="sec-h"><h2>Shop by category</h2><a href="#/shop">View all</a></div>
     <div class="cats">
-      <a class="cat" href="#/shop?cat=Coats" style="background:#ddd4c8"><div class="g" data-g="coat|#3b3a37"></div><b>Coats</b></a>
-      <a class="cat" href="#/shop?cat=Knitwear" style="background:#e9e4dc"><div class="g" data-g="knit|#e0442c"></div><b>Knitwear</b></a>
+      <a class="cat" href="#/shop?cat=Coats" style="background:#d3dcd6"><div class="g" data-g="coat|#3b3a37"></div><b>Coats</b></a>
+      <a class="cat" href="#/shop?cat=Knitwear" style="background:#e6ebe7"><div class="g" data-g="knit|#b4233c"></div><b>Knitwear</b></a>
       <a class="cat" href="#/shop?cat=Shirts" style="background:#dfe3e2"><div class="g" data-g="shirt|#e6eef6"></div><b>Shirts</b></a>
-      <a class="cat" href="#/shop?cat=Trousers%20%26%20skirts" style="background:#e3ddd2"><div class="g" data-g="chino|#5e5a4b"></div><b>Trousers &amp; skirts</b></a>
+      <a class="cat" href="#/shop?cat=Trousers%20%26%20skirts" style="background:#dde4df"><div class="g" data-g="chino|#5e5a4b"></div><b>Trousers &amp; skirts</b></a>
     </div>
   </div></section>
   <section class="sec" style="padding-top:0"><div class="wrap">
@@ -161,7 +161,7 @@ body.cover-on .head .brand{opacity:0;transform:translateY(6px)}
   var c = function (name, hex) { return { name: name, hex: hex }; };
   var CAMEL = c("Camel", "#a9805f"), CHAR = c("Charcoal", "#3b3a37"), OAT = c("Oat", "#e4dccd"), BLACK = c("Black", "#0e1a2e"), CLAY = c("Clay", "#e0442c"), NAVY = c("Navy", "#26324a"), WHITE = c("White", "#e6eef6"), SAGE = c("Sage", "#8f9c86"), MOSS = c("Moss", "#5e5a4b"), BLUE = c("Pale blue", "#bfd0e0"), RUST = c("Rust", "#9b4a2c");
   var W = ["XS", "S", "M", "L", "XL"], M = ["S", "M", "L", "XL", "XXL"];
-  var BG = { Coats: "#e2d9cd", Knitwear: "#ebe6de", Shirts: "#e2e6e5", "Trousers & skirts": "#e6e0d5", Dresses: "#e9e2da", "T-shirts": "#e7e5e1" };
+  var BG = { Coats: "#d9e1dc", Knitwear: "#e8ece9", Shirts: "#e2e6e5", "Trousers & skirts": "#e0e6e2", Dresses: "#ebe4e6", "T-shirts": "#e5e9e7" };
   var P = [
     { id: "bodil", name: "Bodil wool-cashmere coat", type: "coat", dept: "Women", cat: "Coats", price: 420, colors: [CAMEL, CHAR, OAT], sizes: W, soldOut: ["XS"], featured: true, isNew: true, rating: 4.8, reviews: 126, desc: "A double-breasted coat in Italian wool and cashmere, cut long with a softly dropped shoulder. Fully lined in cupro.", specs: { Fabric: "90% wool, 10% cashmere", Lining: "100% cupro", Fit: "Relaxed. Model is 5'9\" and wears S", Origin: "Made in Portugal" }, care: "Dry clean only. Brush after wearing and hang on a wide hanger." },
     { id: "arvid", name: "Arvid overcoat", type: "coat", dept: "Men", cat: "Coats", price: 460, colors: [CHAR, NAVY, CAMEL], sizes: M, rating: 4.7, reviews: 88, desc: "Single-breasted overcoat with a notch lapel, in a dense melton wool.", specs: { Fabric: "80% wool, 20% polyamide melton", Fit: "Regular", Origin: "Made in Portugal" }, care: "Dry clean only." },
@@ -182,7 +182,7 @@ body.cover-on .head .brand{opacity:0;transform:translateY(6px)}
   var art = function (p, st) {
     st = st || {};
     var col = p.colors[st.color || 0].hex;
-    return '<div style="width:100%;height:100%;display:grid;place-items:center;background:' + (BG[p.cat] || "#d0deec") + '"><div style="width:' + (st.thumb ? 86 : 82) + '%">' + Garment.draw(p.type, col, { view: st.view || 0, fabric: st.view === 2 ? p.specs.Fabric : null }) + "</div></div>";
+    return '<div style="width:100%;height:100%;display:grid;place-items:center;background:' + (BG[p.cat] || "#d7e0db") + '"><div style="width:' + (st.thumb ? 86 : 82) + '%">' + Garment.draw(p.type, col, { view: st.view || 0, fabric: st.view === 2 ? p.specs.Fabric : null }) + "</div></div>";
   };
   Array.prototype.forEach.call(document.querySelectorAll("[data-g]"), function (el) { var a = el.getAttribute("data-g").split("|"); el.innerHTML = Garment.draw(a[0], a[1]); });
 

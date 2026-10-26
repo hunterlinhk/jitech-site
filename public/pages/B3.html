@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="assets/base.css">
 <style>
 /* Halden Flow: an engineering drawing come to life. Barlow (a DIN-style family) throughout, concrete grey, graphite, and the gentian blue the valves are painted. */
-:root{--conc:#e4e3df;--paper:#f3f2ef;--ink:#232628;--steel:#62676c;--blue:#0e4c92;--brass:#a9854e;--rule:rgba(35,38,40,.22);--w:min(1360px,100% - 64px)}
+:root{--conc:#e1e7ee;--paper:#f1f4f8;--ink:#162231;--steel:#62676c;--blue:#0e4c92;--brass:#c42f25;--rule:rgba(22,34,49,.22);--w:min(1360px,100% - 64px)}
 html,body{overflow-x:clip}
 body{background:var(--paper);color:var(--ink);font-family:"Barlow",Arial,sans-serif;font-size:17px;line-height:1.5}
 .cond{font-family:"Barlow Condensed","Barlow",Arial,sans-serif;font-weight:700;letter-spacing:-.005em;line-height:.92}
@@ -18,7 +18,7 @@ body{background:var(--paper);color:var(--ink);font-family:"Barlow",Arial,sans-se
 .btn:hover{background:#0b3f7a}
 .lnk{text-decoration:underline;text-underline-offset:.25em;text-decoration-thickness:1px;font-weight:500}
 /* hero */
-.hero{position:relative;background:#d9d8d4;height:min(calc(100vh - 82px),56.25vw);min-height:560px;overflow:hidden}
+.hero{position:relative;background:#d6dee8;height:min(calc(100vh - 82px),56.25vw);min-height:560px;overflow:hidden}
 .hero .shot{position:absolute;inset:0}
 .hero .shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:100% 50%}
 .hero .notes{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
@@ -86,14 +86,14 @@ input[type=range]{width:100%;accent-color:var(--blue)}
 .vel{padding:14px 20px;border-bottom:1px solid var(--rule)}
 .vel p{display:flex;justify-content:space-between;gap:12px;font-size:15px}
 .vel p span{color:var(--steel)}
-.gauge{position:relative;height:8px;background:#e9e8e4;margin-top:10px}
+.gauge{position:relative;height:8px;background:#e2e8ef;margin-top:10px}
 .gauge i{position:absolute;left:0;top:0;bottom:0;background:var(--blue);transition:width .3s}
 .gauge i.hi{background:#b4462f}
 .gauge em{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--ink);left:80%}
 .why{padding:14px 20px 4px;font-size:15px;color:#3c4145}
 .why li{margin-bottom:8px;padding-left:16px;position:relative}
 .why li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:1.5px;background:var(--ink)}
-.warn{margin:6px 20px 12px;padding:10px 14px;border-left:3px solid var(--brass);background:#f6f0e4;font-size:14.5px;display:none}
+.warn{margin:6px 20px 12px;padding:10px 14px;border-left:3px solid var(--brass);background:#fdeceb;font-size:14.5px;display:none}
 .warn.on{display:block}
 .sh-acts{display:flex;gap:0;border-top:1.5px solid var(--ink)}
 .sh-acts button{flex:1;padding:16px;font-weight:600;font-size:15.5px}
@@ -107,7 +107,7 @@ input[type=range]{width:100%;accent-color:var(--blue)}
 .test .steps li{border-bottom-color:rgba(255,255,255,.25)}
 .test .steps span{color:#d5e1f3}
 .test .g{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:clamp(30px,4vw,64px);align-items:center}
-.test .ph{aspect-ratio:3/2;--ph:#cfd2d4}
+.test .ph{aspect-ratio:3/2;--ph:#cbd5df}
 .steps{margin-top:28px;border-top:1.5px solid var(--ink)}
 .steps li{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:16px 0;border-bottom:1px solid var(--rule)}
 .steps b{font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:30px;line-height:1}
