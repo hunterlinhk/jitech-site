@@ -52,7 +52,10 @@ body.cover-on .head .brand{opacity:0;transform:translateY(6px)}
 .cat{position:relative;aspect-ratio:4/5;display:grid;place-items:center;overflow:hidden}
 .cat .g{width:78%;transition:transform .6s cubic-bezier(.16,1,.3,1)}
 .cat:hover .g{transform:scale(1.05)}
-.cat b{position:absolute;left:16px;bottom:14px;font:400 26px/1 var(--head)}
+.cimg{position:absolute;inset:0;--ph:#d3dcd6}
+.cimg img{transition:transform .8s cubic-bezier(.16,1,.3,1)}
+.cat:hover .cimg img{transform:scale(1.04)}
+.cat b{z-index:1;background:rgba(243,247,245,.9);padding:6px 10px 8px;position:absolute;left:16px;bottom:14px;font:400 26px/1 var(--head)}
 .edit{display:grid;grid-template-columns:1fr 1fr;min-height:560px}
 .edit .pic{background:#c3d0c9;display:grid;place-items:center}
 .edit .pic .g{width:62%}
@@ -126,10 +129,10 @@ body.cover-on .head .brand{opacity:0;transform:translateY(6px)}
   <section class="sec"><div class="wrap">
     <div class="sec-h"><h2>Shop by category</h2><a href="#/shop">View all</a></div>
     <div class="cats">
-      <a class="cat" href="#/shop?cat=Coats" style="background:#d3dcd6"><div class="g" data-g="coat|#3b3a37"></div><b>Coats</b></a>
-      <a class="cat" href="#/shop?cat=Knitwear" style="background:#e6ebe7"><div class="g" data-g="knit|#b4233c"></div><b>Knitwear</b></a>
-      <a class="cat" href="#/shop?cat=Shirts" style="background:#dfe3e2"><div class="g" data-g="shirt|#e6eef6"></div><b>Shirts</b></a>
-      <a class="cat" href="#/shop?cat=Trousers%20%26%20skirts" style="background:#dde4df"><div class="g" data-g="chino|#5e5a4b"></div><b>Trousers &amp; skirts</b></a>
+      <a class="cat" href="#/shop?cat=Coats" style="background:#d3dcd6"><div class="ph cimg"><img src="img/nord-coat.webp" alt="Camel wool coat on a hanger" loading="lazy"></div><b>Coats</b></a>
+      <a class="cat" href="#/shop?cat=Knitwear" style="background:#e6ebe7"><div class="ph cimg"><img src="img/nord-knit.webp" alt="Red cable-knit sweater on a hanger" loading="lazy"></div><b>Knitwear</b></a>
+      <a class="cat" href="#/shop?cat=Shirts" style="background:#dfe3e2"><div class="ph cimg"><img src="img/nord-shirt.webp" alt="White poplin shirt on a hanger" loading="lazy"></div><b>Shirts</b></a>
+      <a class="cat" href="#/shop?cat=Trousers%20%26%20skirts" style="background:#dde4df"><div class="ph cimg"><img src="img/nord-trousers.webp" alt="Charcoal wide-leg trousers on a hanger" loading="lazy"></div><b>Trousers &amp; skirts</b></a>
     </div>
   </div></section>
   <section class="sec" style="padding-top:0"><div class="wrap">
@@ -137,7 +140,7 @@ body.cover-on .head .brand{opacity:0;transform:translateY(6px)}
     <div class="sh-grid" data-products="featured" data-limit="4"></div>
   </div></section>
   <section class="edit">
-    <div class="pic"><div class="g" data-g="coat|#8c6f5a"></div></div>
+    <div class="pic ph"><img src="img/nord-detail.webp" alt="Lapel and horn buttons of the camel wool coat" loading="lazy"></div>
     <div class="txt"><small style="letter-spacing:.16em;text-transform:uppercase;font-size:12px">The wool edit</small><h2>Coats worth keeping.</h2><p>Every coat is cut from Italian wool-cashmere, fully lined, and finished by hand. Find your size with our fit finder, and if it isn't right, returns are free.</p><a class="cta" href="#/shop?cat=Coats">Shop coats →</a></div>
   </section>
   <section class="sec"><div class="wrap"><div class="vals">
@@ -159,28 +162,31 @@ body.cover-on .head .brand{opacity:0;transform:translateY(6px)}
 <script>
 (function () {
   var c = function (name, hex) { return { name: name, hex: hex }; };
-  var CAMEL = c("Camel", "#a9805f"), CHAR = c("Charcoal", "#3b3a37"), OAT = c("Oat", "#e4dccd"), BLACK = c("Black", "#0e1a2e"), CLAY = c("Clay", "#e0442c"), NAVY = c("Navy", "#26324a"), WHITE = c("White", "#e6eef6"), SAGE = c("Sage", "#8f9c86"), MOSS = c("Moss", "#5e5a4b"), BLUE = c("Pale blue", "#bfd0e0"), RUST = c("Rust", "#9b4a2c");
+  var CAMEL = c("Camel", "#a9805f"), CHAR = c("Charcoal", "#3b3a37"), OAT = c("Oat", "#e4dccd"), BLACK = c("Black", "#0e1a2e"), CLAY = c("Lingonberry", "#a3232f"), NAVY = c("Navy", "#26324a"), WHITE = c("White", "#e6eef6"), SAGE = c("Sage", "#8f9c86"), MOSS = c("Moss", "#5e5a4b"), BLUE = c("Pale blue", "#bfd0e0"), RUST = c("Rust", "#9b4a2c");
   var W = ["XS", "S", "M", "L", "XL"], M = ["S", "M", "L", "XL", "XXL"];
   var BG = { Coats: "#d9e1dc", Knitwear: "#e8ece9", Shirts: "#e2e6e5", "Trousers & skirts": "#e0e6e2", Dresses: "#ebe4e6", "T-shirts": "#e5e9e7" };
   var P = [
     { id: "bodil", name: "Bodil wool-cashmere coat", type: "coat", dept: "Women", cat: "Coats", price: 420, colors: [CAMEL, CHAR, OAT], sizes: W, soldOut: ["XS"], featured: true, isNew: true, rating: 4.8, reviews: 126, desc: "A double-breasted coat in Italian wool and cashmere, cut long with a softly dropped shoulder. Fully lined in cupro.", specs: { Fabric: "90% wool, 10% cashmere", Lining: "100% cupro", Fit: "Relaxed. Model is 5'9\" and wears S", Origin: "Made in Portugal" }, care: "Dry clean only. Brush after wearing and hang on a wide hanger." },
     { id: "arvid", name: "Arvid overcoat", type: "coat", dept: "Men", cat: "Coats", price: 460, colors: [CHAR, NAVY, CAMEL], sizes: M, rating: 4.7, reviews: 88, desc: "Single-breasted overcoat with a notch lapel, in a dense melton wool.", specs: { Fabric: "80% wool, 20% polyamide melton", Fit: "Regular", Origin: "Made in Portugal" }, care: "Dry clean only." },
     { id: "runa", name: "Runa quilted jacket", type: "puffer", dept: "Women", cat: "Coats", price: 260, was: 325, sale: "Sale", colors: [MOSS, BLACK], sizes: W, rating: 4.6, reviews: 54, desc: "Lightweight channel-quilted jacket with recycled down-alternative fill.", specs: { Shell: "Recycled nylon", Fill: "Recycled polyester", Origin: "Made in Portugal" } },
-    { id: "saga", name: "Saga cable knit", type: "knit", dept: "Women", cat: "Knitwear", price: 185, colors: [OAT, CLAY, CHAR], sizes: W, featured: true, isNew: true, rating: 4.9, reviews: 211, desc: "Hand-finished cable sweater in undyed lambswool with a relaxed, cropped body.", specs: { Fabric: "100% lambswool", Gauge: "7 gauge", Origin: "Knitted in Italy" }, care: "Hand wash cold, dry flat." },
-    { id: "eskil", name: "Eskil merino crew", type: "crew", dept: "Men", cat: "Knitwear", price: 145, colors: [NAVY, CHAR, SAGE, RUST], sizes: M, featured: true, rating: 4.7, reviews: 164, desc: "Fine-gauge extra-fine merino crewneck. Light enough to layer, warm enough to wear alone.", specs: { Fabric: "100% extra-fine merino", Gauge: "14 gauge", Origin: "Knitted in Italy" }, care: "Machine wash wool cycle, dry flat." },
+    { id: "saga", name: "Saga cable knit", type: "knit", dept: "Women", cat: "Knitwear", price: 185, colors: [CLAY, OAT, CHAR], sizes: W, featured: true, isNew: true, rating: 4.9, reviews: 211, desc: "Hand-finished cable sweater in undyed lambswool with a relaxed, cropped body.", specs: { Fabric: "100% lambswool", Gauge: "7 gauge", Origin: "Knitted in Italy" }, care: "Hand wash cold, dry flat." },
+    { id: "eskil", name: "Eskil merino crew", type: "crew", dept: "Men", cat: "Knitwear", price: 145, colors: [NAVY, CHAR, SAGE, RUST], sizes: M, featured: false, rating: 4.7, reviews: 164, desc: "Fine-gauge extra-fine merino crewneck. Light enough to layer, warm enough to wear alone.", specs: { Fabric: "100% extra-fine merino", Gauge: "14 gauge", Origin: "Knitted in Italy" }, care: "Machine wash wool cycle, dry flat." },
     { id: "tova", name: "Tova cardigan", type: "bomber", dept: "Women", cat: "Knitwear", price: 165, was: 210, sale: "Sale", colors: [CLAY, OAT], sizes: W, rating: 4.5, reviews: 47, desc: "Ribbed cardigan in a soft wool-alpaca blend.", specs: { Fabric: "60% wool, 40% alpaca" } },
-    { id: "linnea", name: "Linnea poplin shirt", type: "shirt", dept: "Women", cat: "Shirts", price: 98, colors: [WHITE, BLUE], sizes: W, rating: 4.6, reviews: 98, desc: "Oversized shirt in crisp organic cotton poplin with a longer back hem.", specs: { Fabric: "100% organic cotton poplin", Fit: "Oversized" }, care: "Machine wash 30°C." },
-    { id: "henrik", name: "Henrik oxford shirt", type: "shirt", dept: "Men", cat: "Shirts", price: 105, colors: [BLUE, WHITE, OAT], sizes: M, featured: true, rating: 4.8, reviews: 143, desc: "Button-down oxford shirt, garment-washed for a soft, lived-in feel.", specs: { Fabric: "100% organic cotton oxford", Fit: "Regular" } },
+    { id: "linnea", name: "Linnea poplin shirt", type: "shirt", dept: "Women", cat: "Shirts", price: 98, colors: [WHITE, BLUE], sizes: W, featured: true, rating: 4.6, reviews: 98, desc: "Oversized shirt in crisp organic cotton poplin with a longer back hem.", specs: { Fabric: "100% organic cotton poplin", Fit: "Oversized" }, care: "Machine wash 30°C." },
+    { id: "henrik", name: "Henrik oxford shirt", type: "shirt", dept: "Men", cat: "Shirts", price: 105, colors: [BLUE, WHITE, OAT], sizes: M, featured: false, rating: 4.8, reviews: 143, desc: "Button-down oxford shirt, garment-washed for a soft, lived-in feel.", specs: { Fabric: "100% organic cotton oxford", Fit: "Regular" } },
     { id: "nils", name: "Nils heavyweight tee", type: "tee", dept: "Men", cat: "T-shirts", price: 48, colors: [WHITE, BLACK, SAGE, OAT], sizes: M, rating: 4.7, reviews: 302, desc: "Boxy 240 gsm tee in organic cotton with a tight rib collar.", specs: { Fabric: "100% organic cotton, 240 gsm" } },
-    { id: "frida", name: "Frida wide trouser", type: "chino", dept: "Women", cat: "Trousers & skirts", price: 155, colors: [MOSS, BLACK, OAT], sizes: W, isNew: true, rating: 4.6, reviews: 71, desc: "High-rise wide-leg trouser with front pleats, in a fluid wool twill.", specs: { Fabric: "100% wool twill", Rise: "High" } },
+    { id: "frida", name: "Frida wide trouser", type: "chino", dept: "Women", cat: "Trousers & skirts", price: 155, colors: [CHAR, MOSS, BLACK, OAT], sizes: W, featured: true, isNew: true, rating: 4.6, reviews: 71, desc: "High-rise wide-leg trouser with front pleats, in a fluid wool twill.", specs: { Fabric: "100% wool twill", Rise: "High" } },
     { id: "ilse", name: "Ilse pleat skirt", type: "skirt", dept: "Women", cat: "Trousers & skirts", price: 135, colors: [BLACK, CAMEL], sizes: W, rating: 4.5, reviews: 39, desc: "Midi skirt with soft pleats that move as you walk.", specs: { Fabric: "Recycled polyester crepe", Length: "Midi" } },
     { id: "oskar", name: "Oskar pleated chino", type: "chino", dept: "Men", cat: "Trousers & skirts", price: 125, colors: [OAT, NAVY, MOSS], sizes: ["28", "30", "32", "34", "36"], rating: 4.6, reviews: 92, desc: "Single-pleat chino with a tapered leg.", specs: { Fabric: "100% organic cotton twill" } },
     { id: "maja", name: "Maja wrap dress", type: "dress", dept: "Women", cat: "Dresses", price: 195, colors: [SAGE, BLACK, RUST], sizes: W, featured: false, isNew: true, rating: 4.7, reviews: 64, desc: "Linen-blend wrap dress with a tie waist and fluttered sleeve.", specs: { Fabric: "55% linen, 45% viscose" } },
     { id: "astrid", name: "Astrid tank dress", type: "dress", dept: "Women", cat: "Dresses", price: 140, colors: [BLACK, OAT], sizes: W, rating: 4.4, reviews: 28, desc: "Ribbed knit tank dress, fitted through the body.", specs: { Fabric: "Organic cotton rib" } }
   ];
   P.forEach(function (p) { p.views = 3; p.badge = p.sale ? "Sale" : p.isNew ? "New" : null; p.points = ["Free shipping over $150", "Free returns within 30 days", "Repairs for life"]; });
+  /* photos for a few products in their first color; other colors and views are drawn */
+  var PHOTO = { bodil: "img/nord-coat.webp", saga: "img/nord-knit.webp", linnea: "img/nord-shirt.webp", frida: "img/nord-trousers.webp" };
   var art = function (p, st) {
     st = st || {};
+    if (PHOTO[p.id] && !st.view && !(st.color > 0)) return '<img src="' + PHOTO[p.id] + '" alt="' + p.name + '" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block">';
     var col = p.colors[st.color || 0].hex;
     return '<div style="width:100%;height:100%;display:grid;place-items:center;background:' + (BG[p.cat] || "#d7e0db") + '"><div style="width:' + (st.thumb ? 86 : 82) + '%">' + Garment.draw(p.type, col, { view: st.view || 0, fabric: st.view === 2 ? p.specs.Fabric : null }) + "</div></div>";
   };

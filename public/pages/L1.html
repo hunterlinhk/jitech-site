@@ -64,7 +64,12 @@ html.wall-paused .step.on .bar{animation-play-state:paused}
 .sec-h a{font-weight:650;border-bottom:1px solid}
 .cats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .cat{position:relative;display:flex;flex-direction:column;justify-content:space-between;aspect-ratio:3/4;padding:20px;background:var(--card);overflow:hidden}
-.cat .art{position:absolute;inset:12% 6% 18%}
+.cat .art{position:absolute;inset:0;--ph:#c9cdf3}
+.cat .art img{transition:transform .8s cubic-bezier(.16,1,.3,1)}
+.cat:hover .art img{transform:scale(1.04)}
+.cat::after{content:"";position:absolute;inset:auto 0 0;height:38%;background:linear-gradient(transparent,rgba(16,23,90,.55));pointer-events:none}
+.cat p{z-index:1;color:#fff!important}
+.cat h3{z-index:1}
 .cat h3{position:relative;font:400 26px/1 var(--head)}
 .cat p{position:relative;font-size:13px;color:var(--muted)}
 .cat:hover .art svg{transform:scale(1.05) rotate(-2deg)}
@@ -163,10 +168,10 @@ html.wall-paused .step.on .bar{animation-play-state:paused}
   <section class="sec"><div class="wrap">
     <div class="sec-h"><h2>Four product families, <i>one factory</i> floor.</h2><a href="#/shop">See all 14 styles</a></div>
     <div class="cats">
-      <a class="cat" href="#/shop?cat=Knits"><h3>Knits</h3><div class="art" data-g="tee|#24324a"></div><p>Tees, polos, sweatshirts · 160–420 gsm</p></a>
-      <a class="cat" href="#/shop?cat=Wovens"><h3>Wovens</h3><div class="art" data-g="shirt|#aab6ec"></div><p>Shirts, chinos, workwear · poplin to twill</p></a>
-      <a class="cat" href="#/shop?cat=Outerwear"><h3>Outerwear</h3><div class="art" data-g="puffer|#3d5a4c"></div><p>Bombers, puffers, coach jackets</p></a>
-      <a class="cat" href="#/shop?cat=Activewear"><h3>Activewear</h3><div class="art" data-g="legging|#2f40e0"></div><p>Leggings, joggers, performance tops</p></a>
+      <a class="cat" href="#/shop?cat=Knits"><h3>Knits</h3><div class="art ph"><img src="img/loom-knits.webp" alt="Folded navy and white T-shirts" loading="lazy"></div><p>Tees, polos, sweatshirts · 160–420 gsm</p></a>
+      <a class="cat" href="#/shop?cat=Wovens"><h3>Wovens</h3><div class="art ph"><img src="img/loom-wovens.webp" alt="An oxford shirt on folded chinos" loading="lazy"></div><p>Shirts, chinos, workwear · poplin to twill</p></a>
+      <a class="cat" href="#/shop?cat=Outerwear"><h3>Outerwear</h3><div class="art ph"><img src="img/loom-outerwear.webp" alt="A navy bomber jacket" loading="lazy"></div><p>Bombers, puffers, coach jackets</p></a>
+      <a class="cat" href="#/shop?cat=Activewear"><h3>Activewear</h3><div class="art ph"><img src="img/loom-active.webp" alt="Blue leggings and a black performance top" loading="lazy"></div><p>Leggings, joggers, performance tops</p></a>
     </div>
   </div></section>
   <section class="sec" style="padding-top:0"><div class="wrap">

@@ -30,9 +30,9 @@ var HERO = [
 // These are stand-ins taken from the concept pages; put your own images in assets/img/services/ and list them here.
 /* A photo for each service ("photo": fills the frame), or, until one exists, a homepage screenshot shown whole ("shot") */
 var SERVICE_IMAGES = [
-  {src:ROOT + "assets/img/shots/B6.jpg", alt:"Website development example", kind:"shot"},
-  {src:ROOT + "assets/img/shots/L3.jpg", alt:"GEO optimization example", kind:"shot"},
-  {src:ROOT + "assets/img/shots/R4.jpg", alt:"Standalone website example", kind:"shot"}
+  {src:ROOT + "assets/img/svc-web.webp", alt:"A laptop showing a manufacturer's website", kind:"photo"},
+  {src:ROOT + "assets/img/svc-geo.webp", alt:"A phone showing an AI answer that recommends a business", kind:"photo"},
+  {src:ROOT + "assets/img/svc-standalone.webp", alt:"A tablet showing a brand's own online shop", kind:"photo"}
 ];
 var WORK = [
   {file:"T1.jpg", variant:3, ratio:1.6, caption:"Wag & Co.", concept:true},

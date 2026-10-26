@@ -87,7 +87,9 @@ body{font-size:15px;background:var(--bg)}
 .procs{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 .proc{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));padding:24px;display:flex;flex-direction:column;gap:10px;min-height:300px}
 .proc::after{content:"";position:absolute;right:-60px;bottom:-80px;width:220px;height:220px;border-radius:50%;background:var(--g,#ff6a13);filter:blur(70px);opacity:.28;pointer-events:none}
-.proc .pa{height:130px}
+.proc .pa{height:auto;aspect-ratio:16/10;border-radius:12px;margin:-8px -8px 6px;--ph:#15171b}
+.proc .pa img{transition:transform .8s cubic-bezier(.16,1,.3,1)}
+.proc:hover .pa img{transform:scale(1.05)}
 .proc h3{font:600 21px/1.1 var(--head);letter-spacing:-.02em}
 .proc p{color:var(--muted);line-height:1.55;font-size:14px}
 .proc .mono{font-size:12px;color:#ffb48a;margin-top:auto}
@@ -181,10 +183,10 @@ body{font-size:15px;background:var(--bg)}
   <section class="sec"><div class="wrap">
     <div class="sec-h"><h2>Four processes under one roof.</h2><p>One supplier, one quality system, one invoice, from the first prototype to repeat production.</p></div>
     <div class="procs">
-      <div class="proc" style="--g:#ff6a13"><div class="pa" data-part="enclosure|#c9ced4"></div><h3>CNC milling</h3><p>3-, 4- and 5-axis milling for housings, brackets and complex prismatic parts.</p><span class="mono">up to 1,200 × 600 × 500 mm</span></div>
-      <div class="proc" style="--g:#3d6dff"><div class="pa" data-part="pin|#b7bcc2"></div><h3>CNC turning</h3><p>Shafts, pins, bushings and threaded parts on Swiss-type and live-tool lathes.</p><span class="mono">Ø2 – Ø300 mm</span></div>
-      <div class="proc" style="--g:#9aa3ad"><div class="pa" data-part="bracket|#8c9298"></div><h3>Sheet metal</h3><p>Laser cutting, bending and welding in steel, stainless and aluminum.</p><span class="mono">0.5 – 12 mm thickness</span></div>
-      <div class="proc" style="--g:#ffc27a"><div class="pa" data-part="gear|#c9a24a"></div><h3>Finishing</h3><p>Anodizing, powder coating, bead blasting, passivation and laser marking.</p><span class="mono">12 finishes in house</span></div>
+      <div class="proc" style="--g:#ff6a13"><div class="pa ph"><img src="img/ferro-machine.webp" alt="A CNC mill cutting aluminum" loading="lazy"></div><h3>CNC milling</h3><p>3-, 4- and 5-axis milling for housings, brackets and complex prismatic parts.</p><span class="mono">up to 1,200 × 600 × 500 mm</span></div>
+      <div class="proc" style="--g:#3d6dff"><div class="pa ph"><img src="img/ferro-turning.webp" alt="A lathe turning a brass shaft" loading="lazy"></div><h3>CNC turning</h3><p>Shafts, pins, bushings and threaded parts on Swiss-type and live-tool lathes.</p><span class="mono">Ø2 – Ø300 mm</span></div>
+      <div class="proc" style="--g:#9aa3ad"><div class="pa ph"><img src="img/ferro-laser.webp" alt="A fiber laser cutting steel brackets" loading="lazy"></div><h3>Sheet metal</h3><p>Laser cutting, bending and welding in steel, stainless and aluminum.</p><span class="mono">0.5 – 12 mm thickness</span></div>
+      <div class="proc" style="--g:#ffc27a"><div class="pa ph"><img src="img/ferro-anodize.webp" alt="Anodized aluminum parts on a rack" loading="lazy"></div><h3>Finishing</h3><p>Anodizing, powder coating, bead blasting, passivation and laser marking.</p><span class="mono">12 finishes in house</span></div>
     </div>
   </div></section>
   <section class="sec" style="padding-top:0"><div class="wrap">
